@@ -29,28 +29,24 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsRequired();
 
             builder.HasMany(d => d.DishIngredients)
-               .WithOne(di => di.Dish)
-               .IsRequired()
-               .HasForeignKey(di => di.DishId)
-               .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(di => di.Dish)
+                .IsRequired()
+                .HasForeignKey(di => di.DishId);
 
             builder.HasMany(d => d.DishCategories)
                 .WithOne(dc => dc.Dish)
                 .IsRequired()
-                .HasForeignKey(dc => dc.DishId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(dc => dc.DishId);
 
             builder.HasMany(d => d.Likes)
                 .WithOne(l => l.Dish)
                 .IsRequired()
-                .HasForeignKey(l => l.DishId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(l => l.DishId);
 
             builder.HasMany(d => d.Favourites)
                 .WithOne(f => f.Dish)
                 .IsRequired()
-                .HasForeignKey(f => f.DishId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(f => f.DishId);
         }
     }
 }

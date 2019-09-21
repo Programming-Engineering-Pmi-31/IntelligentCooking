@@ -1,27 +1,25 @@
-﻿using IntelligentCooking.Core.Entities;
-using IntelligentCooking.DAL.EntityConfigurations;
+﻿using System;
+using IntelligentCooking.Core.Entities;
 using IntelligentCooking.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Context
 {
-    class IntelligentCookingContext : DbContext
+    class IntelligentCookingContext : IdentityDbContext<User>
     {
-        public IntelligentCookingContext():base(GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;"))
+        //WILL BE REFACTORED TO USE CONNECTION STRING FROM CONFIG
+        public IntelligentCookingContext(): base(GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;"))
         {
-
         }
 
-    
         private static DbContextOptions GetOptions(string connectionString)
         {
             return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishCategory> DishCategories { get; set; }
         public DbSet<DishIngredient> DishIngredients { get; set; }
@@ -32,6 +30,7 @@ namespace IntelligentCooking.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.SetConfigurations();
             modelBuilder.Seed();
         }

@@ -51,32 +51,6 @@ namespace IntelligentCooking.DAL.Extensions
                     }
                 );
 
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserId = 1,
-                    Login = "Tom",
-                    Email = "tom@gmail.com",
-                    Password = "tom123",
-                    IsAdmin = true
-                },
-                new User
-                {
-                    UserId = 2,
-                    Login = "Ann",
-                    Email = "ann@gmail.com",
-                    Password = "ann456",
-                    IsAdmin = false
-                },
-                new User
-                {
-                    UserId = 3,
-                    Login = "Rob",
-                    Email = "rob@gmail.com",
-                    Password = "rob789",
-                    IsAdmin = false
-                }
-            );
 
             modelBuilder.Entity<Dish>().HasData(
                 new Dish
@@ -277,61 +251,6 @@ namespace IntelligentCooking.DAL.Extensions
                 }
                 );
 
-            modelBuilder.Entity<Favourite>().HasData(
-                new Favourite
-                {
-                    UserId = 1,
-                    DishId = 1
-                },
-                new Favourite
-                {
-                    UserId = 1,
-                    DishId = 2
-                },
-                new Favourite
-                {
-                    UserId = 2,
-                    DishId = 3
-                },
-                new Favourite
-                {
-                    UserId = 2,
-                    DishId = 4
-                },
-                new Favourite
-                {
-                    UserId = 3,
-                    DishId = 5
-                }
-                );
-
-            modelBuilder.Entity<Like>().HasData(
-                new Like
-                {
-                    UserId = 1,
-                    DishId = 1
-                },
-                new Like
-                {
-                    UserId = 1,
-                    DishId = 2
-                },
-                new Like
-                {
-                    UserId = 2,
-                    DishId = 3
-                },
-                new Like
-                {
-                    UserId = 2,
-                    DishId = 4
-                },
-                new Like
-                {
-                    UserId = 3,
-                    DishId = 5
-                }
-                );
         }
     }
 }

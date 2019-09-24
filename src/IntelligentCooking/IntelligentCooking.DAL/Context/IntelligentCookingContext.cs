@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Context
 {
-    class IntelligentCookingContext : IdentityDbContext<User>
+    class IntelligentCookingContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         //WILL BE REFACTORED TO USE CONNECTION STRING FROM CONFIG
         public IntelligentCookingContext(): base(GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;"))

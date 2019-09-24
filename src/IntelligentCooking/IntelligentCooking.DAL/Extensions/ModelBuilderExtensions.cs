@@ -11,14 +11,14 @@ namespace IntelligentCooking.DAL.Extensions
     {
         public static void SetConfigurations(this ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Category>(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration<DishCategory>(new DishCategoryConfiguration());
-            modelBuilder.ApplyConfiguration<Dish>(new DishConfiguration());
-            modelBuilder.ApplyConfiguration<DishIngredient>(new DishIngredientConfiguration());
-            modelBuilder.ApplyConfiguration<Favourite>(new FavouriteConfiguration());
-            modelBuilder.ApplyConfiguration<Ingredient>(new IngredientConfiguration());
-            modelBuilder.ApplyConfiguration<Like>(new LikeConfiguration());
-            modelBuilder.ApplyConfiguration<User>(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DishCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DishConfiguration());
+            modelBuilder.ApplyConfiguration(new DishIngredientConfiguration());
+            modelBuilder.ApplyConfiguration(new FavouriteConfiguration());
+            modelBuilder.ApplyConfiguration(new IngredientConfiguration());
+            modelBuilder.ApplyConfiguration(new LikeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
 
         public static void Seed(this ModelBuilder modelBuilder)

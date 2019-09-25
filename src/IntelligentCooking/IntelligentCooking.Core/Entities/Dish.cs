@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Entities
 {
-    public class Dish
+    public class Dish: IIdentifiable<int>
     {
-        public int DishId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Recipe { get; set; }

@@ -53,20 +53,20 @@ namespace IntelligentCooking.DAL.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Dishes",
                 columns: table => new
                 {
-                    DishId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 40, nullable: false),
                     ImageUrl = table.Column<string>(nullable: false),
@@ -82,21 +82,21 @@ namespace IntelligentCooking.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dishes", x => x.DishId);
+                    table.PrimaryKey("PK_Dishes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Ingredients",
                 columns: table => new
                 {
-                    IngnredientId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
                     Description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredients", x => x.IngnredientId);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,13 +219,13 @@ namespace IntelligentCooking.DAL.Migrations
                         name: "FK_DishCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DishCategories_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "DishId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -243,7 +243,7 @@ namespace IntelligentCooking.DAL.Migrations
                         name: "FK_Favourites_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "DishId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Favourites_AspNetUsers_UserId",
@@ -267,7 +267,7 @@ namespace IntelligentCooking.DAL.Migrations
                         name: "FK_Likes_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "DishId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Likes_AspNetUsers_UserId",
@@ -292,19 +292,19 @@ namespace IntelligentCooking.DAL.Migrations
                         name: "FK_DishIngredients_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "DishId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DishIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
                         principalTable: "Ingredients",
-                        principalColumn: "IngnredientId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "CategoryId", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
                     { 1, "sweets" },
@@ -316,7 +316,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Dishes",
-                columns: new[] { "DishId", "Calories", "Carbohydrates", "Description", "Fats", "ImageUrl", "Name", "Proteins", "Recipe", "Servings", "Stars", "Time" },
+                columns: new[] { "Id", "Calories", "Carbohydrates", "Description", "Fats", "ImageUrl", "Name", "Proteins", "Recipe", "Servings", "Stars", "Time" },
                 values: new object[,]
                 {
                     { 4, null, null, "My all-time favorite Butternut Squash Soup recipe!  It’s super-easy to make, naturally gluten-free and vegan, and SO incredibly cozy and delicious.  Stovetop, Crock-Pot and Instant Pot instructions included below.", null, "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg", "Butternut squash soup", null, "Combine your ingredients (minus the coconut milk) in a slow cooker*.  Roughly diced — don’t spend time perfectly chopping all of your ingredients.  Feel free to use a large (6-quart) slow cooker or a small (3.5- to 4-quart) slow cooker. Cook until tender.  Generally about 6-8 hours on low, or 3-4 hours on high.  Then remove and discard the sage and add in the coconut milk. Blend.  Either use an immersion blender to puree the soup until smooth.  Or you can transfer the soup in two batches to a traditional blender and puree it there.  (Just be extremely careful blending hot liquids; you do not want the blender to be too full.) Taste and season.  Add extra salt, pepper and/or cayenne if needed, to taste. Serve and enjoy!  Garnished with any of your favorite toppings.", 7, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(3000) },
@@ -328,7 +328,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Ingredients",
-                columns: new[] { "IngnredientId", "Description", "Name" },
+                columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
                     { 9, "", "vanilla extract" },

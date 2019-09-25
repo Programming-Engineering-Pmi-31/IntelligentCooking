@@ -8,17 +8,15 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Context
 {
-    class IntelligentCookingContext : IdentityDbContext<User, IdentityRole<int>, int>
+    public class IntelligentCookingContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         //WILL BE REFACTORED TO USE CONNECTION STRING FROM CONFIG
-        public IntelligentCookingContext(): base(GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;"))
-        {
-        }
+        public IntelligentCookingContext() : base(
+            GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;")) {}
 
-        private static DbContextOptions GetOptions(string connectionString)
-        {
-            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
-        }
+        private static DbContextOptions GetOptions(string connectionString) =>
+            SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString)
+                .Options;
 
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishCategory> DishCategories { get; set; }

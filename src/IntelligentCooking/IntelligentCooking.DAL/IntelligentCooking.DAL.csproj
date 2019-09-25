@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-    <Folder Include="UnitsOfWork\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

@@ -15,6 +15,8 @@ namespace IntelligentCooking.DAL.EntityConfigurations
 
             builder.Property(di => di.Amount)
                 .IsRequired();
+
+            builder.Ignore(x => x.Id);
         }
     }
 }

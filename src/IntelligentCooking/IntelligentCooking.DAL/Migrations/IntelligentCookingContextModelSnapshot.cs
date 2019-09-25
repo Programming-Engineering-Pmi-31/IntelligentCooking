@@ -21,7 +21,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             modelBuilder.Entity("IntelligentCooking.Core.Entities.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,7 +29,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -39,34 +39,34 @@ namespace IntelligentCooking.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = 1,
+                            Id = 1,
                             Name = "sweets"
                         },
                         new
                         {
-                            CategoryId = 2,
+                            Id = 2,
                             Name = "soup"
                         },
                         new
                         {
-                            CategoryId = 3,
+                            Id = 3,
                             Name = "Italian"
                         },
                         new
                         {
-                            CategoryId = 4,
+                            Id = 4,
                             Name = "Thai"
                         },
                         new
                         {
-                            CategoryId = 5,
+                            Id = 5,
                             Name = "breakfast"
                         });
                 });
 
             modelBuilder.Entity("IntelligentCooking.Core.Entities.Dish", b =>
                 {
-                    b.Property<int>("DishId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -97,7 +97,7 @@ namespace IntelligentCooking.DAL.Migrations
 
                     b.Property<DateTime>("Time");
 
-                    b.HasKey("DishId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -107,7 +107,7 @@ namespace IntelligentCooking.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            DishId = 1,
+                            Id = 1,
                             Description = "This classic buttermilk pancakes recipe is easy to make and yields the most delicious, fluffy, homemade pancakes.  See notes above for possible ingredient add-ins.",
                             ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
                             Name = "Buttermilk pancakes",
@@ -118,7 +118,7 @@ namespace IntelligentCooking.DAL.Migrations
                         },
                         new
                         {
-                            DishId = 2,
+                            Id = 2,
                             Description = "This Thai Chicken Wild Rice recipe is full of the best fresh and creamy curry flavors, and it’s easy to make in the Instant Pot, Crock-Pot or on the stovetop.",
                             ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Thai-Chicken-Wild-Rice-Soup-Recipe-1.jpg",
                             Name = "Thai Chicken Wild Rice",
@@ -129,7 +129,7 @@ namespace IntelligentCooking.DAL.Migrations
                         },
                         new
                         {
-                            DishId = 3,
+                            Id = 3,
                             Description = "This hearty Broccoli Chicken Casserole recipe is made with your choice of pasta, tender chicken and broccoli, and the most delicious creamy cheddar mushroom sauce.  See notes above for possible ingredient variations too.",
                             ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/08/Healthy-Broccoli-Chicken-Casserole-Recipe-7.jpg",
                             Name = "Broccoli Chicken Casserole",
@@ -140,7 +140,7 @@ namespace IntelligentCooking.DAL.Migrations
                         },
                         new
                         {
-                            DishId = 4,
+                            Id = 4,
                             Description = "My all-time favorite Butternut Squash Soup recipe!  It’s super-easy to make, naturally gluten-free and vegan, and SO incredibly cozy and delicious.  Stovetop, Crock-Pot and Instant Pot instructions included below.",
                             ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg",
                             Name = "Butternut squash soup",
@@ -151,7 +151,7 @@ namespace IntelligentCooking.DAL.Migrations
                         },
                         new
                         {
-                            DishId = 5,
+                            Id = 5,
                             Description = "These healthy pumpkin muffins are naturally gluten-free, sweetened with maple syrup, quick and easy to make, and so perfecty pumpkin-y.",
                             ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2018/09/Healthy-Pumpkin-Muffins-Recipe-Gluten-Free-Vegan-2.jpg",
                             Name = "Pumpkin muffins",
@@ -267,7 +267,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             modelBuilder.Entity("IntelligentCooking.Core.Entities.Favourite", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<int>("DishId");
 
@@ -280,7 +280,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             modelBuilder.Entity("IntelligentCooking.Core.Entities.Ingredient", b =>
                 {
-                    b.Property<int>("IngnredientId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -291,7 +291,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(30);
 
-                    b.HasKey("IngnredientId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -301,61 +301,61 @@ namespace IntelligentCooking.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            IngnredientId = 1,
+                            Id = 1,
                             Description = "all-purpose",
                             Name = "flour"
                         },
                         new
                         {
-                            IngnredientId = 2,
+                            Id = 2,
                             Description = "",
                             Name = "sugar"
                         },
                         new
                         {
-                            IngnredientId = 3,
+                            Id = 3,
                             Description = "",
                             Name = "baking powder"
                         },
                         new
                         {
-                            IngnredientId = 4,
+                            Id = 4,
                             Description = "",
                             Name = "baking soda"
                         },
                         new
                         {
-                            IngnredientId = 5,
+                            Id = 5,
                             Description = "",
                             Name = "sea salt"
                         },
                         new
                         {
-                            IngnredientId = 6,
+                            Id = 6,
                             Description = "at room temperature",
                             Name = "buttermilk"
                         },
                         new
                         {
-                            IngnredientId = 7,
+                            Id = 7,
                             Description = "melted and cooled to room temperature, plus more for cooking",
                             Name = "unsalted butter"
                         },
                         new
                         {
-                            IngnredientId = 8,
+                            Id = 8,
                             Description = "slightly beaten, at room temperature",
                             Name = "eggs"
                         },
                         new
                         {
-                            IngnredientId = 9,
+                            Id = 9,
                             Description = "",
                             Name = "vanilla extract"
                         },
                         new
                         {
-                            IngnredientId = 10,
+                            Id = 10,
                             Description = "for serving",
                             Name = "maple syrup"
                         });
@@ -363,7 +363,7 @@ namespace IntelligentCooking.DAL.Migrations
 
             modelBuilder.Entity("IntelligentCooking.Core.Entities.Like", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<int>("DishId");
 
@@ -374,10 +374,55 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.RoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
             modelBuilder.Entity("IntelligentCooking.Core.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount");
 
@@ -425,31 +470,7 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -459,28 +480,7 @@ namespace IntelligentCooking.DAL.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -489,7 +489,7 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserLogin", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -497,8 +497,7 @@ namespace IntelligentCooking.DAL.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -507,11 +506,11 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserRole", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
-                    b.Property<string>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -520,9 +519,9 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserToken", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -587,15 +586,15 @@ namespace IntelligentCooking.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.RoleClaim", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("IntelligentCooking.Core.Entities.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserClaim", b =>
                 {
                     b.HasOne("IntelligentCooking.Core.Entities.User")
                         .WithMany()
@@ -603,7 +602,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserLogin", b =>
                 {
                     b.HasOne("IntelligentCooking.Core.Entities.User")
                         .WithMany()
@@ -611,9 +610,9 @@ namespace IntelligentCooking.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserRole", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("IntelligentCooking.Core.Entities.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -624,7 +623,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("IntelligentCooking.Core.Entities.UserToken", b =>
                 {
                     b.HasOne("IntelligentCooking.Core.Entities.User")
                         .WithMany()

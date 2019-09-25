@@ -11,7 +11,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Dish> builder)
         {
-            builder.HasKey(d => d.DishId);
+            builder.HasKey(d => d.Id);
 
             builder.HasIndex(d => d.Name).IsUnique();
 

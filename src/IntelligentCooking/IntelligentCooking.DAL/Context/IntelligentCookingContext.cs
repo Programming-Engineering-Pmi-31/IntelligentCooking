@@ -10,13 +10,9 @@ namespace IntelligentCooking.DAL.Context
 {
     public class IntelligentCookingContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
-        //WILL BE REFACTORED TO USE CONNECTION STRING FROM CONFIG
-        public IntelligentCookingContext() : base(
-            GetOptions(@"Server=localhost\SQLEXPRESS;Database=IntelligentCooking;Trusted_Connection=True;")) {}
-
-        private static DbContextOptions GetOptions(string connectionString) =>
-            SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString)
-                .Options;
+        public IntelligentCookingContext(DbContextOptions<IntelligentCookingContext> options): base(options)
+        {
+        }
 
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishCategory> DishCategories { get; set; }

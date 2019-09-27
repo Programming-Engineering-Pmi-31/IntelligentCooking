@@ -13,6 +13,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
 
         private readonly IntelligentCookingContext _context;
 
+        //TODO Think about passing repos into ctor
         public IntelligentCookingUnitOfWork(
             IntelligentCookingContext context,
             IRepository<Dish, int> dishes,

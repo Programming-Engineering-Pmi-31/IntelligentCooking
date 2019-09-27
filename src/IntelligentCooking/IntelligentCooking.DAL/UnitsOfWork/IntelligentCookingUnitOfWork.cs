@@ -4,6 +4,7 @@ using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.Repositories;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using IntelligentCooking.DAL.Context;
+using IntelligentCooking.DAL.Repositories;
 
 namespace IntelligentCooking.DAL.UnitsOfWork
 {
@@ -13,35 +14,22 @@ namespace IntelligentCooking.DAL.UnitsOfWork
 
         private readonly IntelligentCookingContext _context;
 
-        //TODO Think about passing repos into ctor
-        public IntelligentCookingUnitOfWork(
-            IntelligentCookingContext context,
-            IRepository<Dish, int> dishes,
-            IRepository<DishCategory, (int DishId, int CategoryId)> dishCategories,
-            IRepository<DishIngredient, (int DishId, int IngredientId)> dishIngredients,
-            IRepository<Favourite, (int UserId, int DishId)> favourites,
-            IRepository<Like, (int UserId, int DishId)> likes,
-            IRepository<User, int> users,
-            IRepository<Role, int> roles,
-            IRepository<UserRole, (int UserId, int RoleId)> userRoles,
-            IRepository<UserToken, (int UserId, string LoginProvider, string Name)> userTokens,
-            IRepository<UserLogin, (string LoginProvider, string ProviderKey)> userLogins,
-            IRepository<UserClaim, int> userClaims,
-            IRepository<RoleClaim, int> roleClaims)
+        public IntelligentCookingUnitOfWork(IntelligentCookingContext context)
         {
             _context = context;
-            Dishes = dishes;
-            DishCategories = dishCategories;
-            DishIngredients = dishIngredients;
-            Favourites = favourites;
-            Likes = likes;
-            Users = users;
-            Roles = roles;
-            UserRoles = userRoles;
-            UserTokens = userTokens;
-            UserLogins = userLogins;
-            UserClaims = userClaims;
-            RoleClaims = roleClaims;
+            Categories = new Repository<Category, int>(_context);
+            Dishes = new Repository<Dish, int>(_context);
+            DishCategories = new Repository<DishCategory, (int DishId, int CategoryId)>(_context);
+            DishIngredients = new Repository<DishIngredient, (int DishId, int IngredientId)>(_context);
+            Favourites = new Repository<Favourite, (int UserId, int DishId)>(_context);
+            Likes = new Repository<Like, (int UserId, int DishId)>(_context);
+            Users = new Repository<User, int>(_context);
+            Roles = new Repository<Role, int>(_context);
+            UserRoles = new Repository<UserRole, (int UserId, int RoleId)>(_context);
+            UserTokens = new Repository<UserToken, (int UserId, string LoginProvider, string Name)>(_context);
+            UserLogins = new Repository<UserLogin, (string LoginProvider, string ProviderKey)>(_context);
+            UserClaims = new Repository<UserClaim, int>(_context);
+            RoleClaims = new Repository<RoleClaim, int>(_context);
         }
 
         public IRepository<Category, int> Categories { get; }

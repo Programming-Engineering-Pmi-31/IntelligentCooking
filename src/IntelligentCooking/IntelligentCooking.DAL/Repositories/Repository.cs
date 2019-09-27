@@ -15,7 +15,7 @@ namespace IntelligentCooking.DAL.Repositories
     {
         protected readonly IntelligentCookingContext Context;
 
-        protected Repository(IntelligentCookingContext context) => Context = context;
+        public Repository(IntelligentCookingContext context) => Context = context;
 
         public async Task<TEntity> FindAsync(TKey key, params Expression<Func<TEntity, object>>[] includeProperties)
         {

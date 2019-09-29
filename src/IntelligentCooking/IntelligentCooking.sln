@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.Core", "IntelligentCooking.Core\IntelligentCooking.Core.csproj", "{80CE6BCD-900E-4B34-947E-B385585B1B27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Core", "IntelligentCooking.Core\IntelligentCooking.Core.csproj", "{80CE6BCD-900E-4B34-947E-B385585B1B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.Tests", "IntelligentCooking.Tests\IntelligentCooking.Tests.csproj", "{5D3BB315-C4A7-4183-92CB-C2777C1744B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3BB315-C4A7-4183-92CB-C2777C1744B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3BB315-C4A7-4183-92CB-C2777C1744B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3BB315-C4A7-4183-92CB-C2777C1744B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3BB315-C4A7-4183-92CB-C2777C1744B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

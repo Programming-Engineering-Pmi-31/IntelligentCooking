@@ -22,7 +22,14 @@ namespace IntelligentCooking.DAL.Context
         public DbSet<Like> Likes { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    modelBuilder.SetConfigurations();
+        //    modelBuilder.Seed();
+        //}
+
+        public new void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.SetConfigurations();

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
     {
         protected readonly IntelligentCookingContext Context;
 

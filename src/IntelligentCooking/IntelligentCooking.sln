@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.Core", "IntelligentCooking.Core\IntelligentCooking.Core.csproj", "{80CE6BCD-900E-4B34-947E-B385585B1B27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Core", "IntelligentCooking.Core\IntelligentCooking.Core.csproj", "{80CE6BCD-900E-4B34-947E-B385585B1B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

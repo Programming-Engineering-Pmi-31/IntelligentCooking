@@ -33,6 +33,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         }
 
         public IRepository<Category, int> Categories { get; }
+        public IRepository<Ingredient, int> Ingredients { get; set; }
         public IRepository<Dish, int> Dishes { get; }
         public IRepository<DishCategory, (int DishId, int CategoryId)> DishCategories { get; }
         public IRepository<DishIngredient, (int DishId, int IngredientId)> DishIngredients { get; }

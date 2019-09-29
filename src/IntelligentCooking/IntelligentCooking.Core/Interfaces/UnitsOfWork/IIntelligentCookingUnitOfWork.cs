@@ -9,6 +9,7 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
     public interface IIntelligentCookingUnitOfWork: IDisposable
     {
         IRepository<Category, int> Categories { get; }
+        IRepository<Ingredient, int> Ingredients { get; }
         IRepository<Dish, int> Dishes { get; }
         IRepository<DishCategory, (int DishId, int CategoryId)> DishCategories { get; }
         IRepository<DishIngredient, (int DishId, int IngredientId)> DishIngredients { get; }

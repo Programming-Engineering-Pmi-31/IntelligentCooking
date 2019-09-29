@@ -18,6 +18,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         {
             _context = context;
             Categories = new Repository<Category, int>(_context);
+            Ingredients = new Repository<Ingredient, int>(_context);
             Dishes = new Repository<Dish, int>(_context);
             DishCategories = new Repository<DishCategory, (int DishId, int CategoryId)>(_context);
             DishIngredients = new Repository<DishIngredient, (int DishId, int IngredientId)>(_context);

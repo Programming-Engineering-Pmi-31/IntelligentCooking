@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Tests", "IntelligentCooking.Tests\IntelligentCooking.Tests.csproj", "{BF2BA8F0-101D-4488-9862-32188E60AEDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF2BA8F0-101D-4488-9862-32188E60AEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2BA8F0-101D-4488-9862-32188E60AEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2BA8F0-101D-4488-9862-32188E60AEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2BA8F0-101D-4488-9862-32188E60AEDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

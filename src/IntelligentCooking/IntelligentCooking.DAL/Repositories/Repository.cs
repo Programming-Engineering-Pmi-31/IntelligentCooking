@@ -13,7 +13,7 @@ namespace IntelligentCooking.DAL.Repositories
 {
     //TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
     //AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
-    class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
     {
         protected readonly IntelligentCookingContext Context;
 

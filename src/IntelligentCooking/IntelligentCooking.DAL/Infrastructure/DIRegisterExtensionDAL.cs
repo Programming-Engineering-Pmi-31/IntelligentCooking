@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class DIRegisterExtension
+    public static class DIRegisterExtensionDAL
     {
         //TODO Find way to register all repo dependencies like Add<IRepository<,>, Repository<,>>
         public static void AddDataLayerDependecies(this IServiceCollection services, string connectionString)

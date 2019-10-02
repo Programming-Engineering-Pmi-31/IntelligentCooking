@@ -1,0 +1,72 @@
+{
+  "name": "intelligentcooking",
+  "version": "1.0.0",
+  "description": "IntelligentCooking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "node_modules/.bin/webpack-dev-server --inline --mode development",
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server"
+  },
+  "browserslist": [
+    "last 10 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "watch": true,
+  "watchOptions": {
+    "aggregateTimeout": 300
+  },
+  "author": "Daniel Sadovskiy",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0",
+    "redux-devtools-extension": "^2.13.8",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "font-awesome": "^4.7.0",
+    "i": "^0.3.6",
+    "lodash": "^4.17.15",
+    "npm": "^6.11.3",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.0",
+    "react-slick": "^0.25.2",
+    "react-star-ratings": "^2.3.0",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1"
+  }
+}

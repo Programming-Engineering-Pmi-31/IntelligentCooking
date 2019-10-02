@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InelligentCooking.BLL", "InelligentCooking.BLL\InelligentCooking.BLL.csproj", "{A425D130-862F-419C-914A-A4B4C4A761F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.Web", "IntelligentCooking.Web\IntelligentCooking.Web.csproj", "{DAB92567-635B-4B86-8D74-4AC4C6C2067C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A425D130-862F-419C-914A-A4B4C4A761F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A425D130-862F-419C-914A-A4B4C4A761F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A425D130-862F-419C-914A-A4B4C4A761F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A425D130-862F-419C-914A-A4B4C4A761F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB92567-635B-4B86-8D74-4AC4C6C2067C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB92567-635B-4B86-8D74-4AC4C6C2067C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB92567-635B-4B86-8D74-4AC4C6C2067C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB92567-635B-4B86-8D74-4AC4C6C2067C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

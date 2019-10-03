@@ -10,6 +10,7 @@ namespace InelligentCooking.BLL.Infrastructure
         {
             services.AddDataLayerDependecies(connectionString);
             services.AddScoped<IDishService, DishService>();
+            services.AddScoped<IImageService, CloudinaryService>();
         }
     }
 }

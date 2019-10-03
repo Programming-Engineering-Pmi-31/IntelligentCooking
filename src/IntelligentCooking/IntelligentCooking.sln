@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.DAL", "IntelligentCooking.DAL\IntelligentCooking.DAL.csproj", "{451CB19B-CF9B-4CDC-A5A2-BC573CD82B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InelligentCooking.BLL", "InelligentCooking.BLL\InelligentCooking.BLL.csproj", "{A425D130-862F-419C-914A-A4B4C4A761F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InelligentCooking.BLL", "InelligentCooking.BLL\InelligentCooking.BLL.csproj", "{A425D130-862F-419C-914A-A4B4C4A761F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentCooking.Web", "IntelligentCooking.Web\IntelligentCooking.Web.csproj", "{143396F6-EF32-4372-9FCF-683A17C15F9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelligentCooking.Web", "IntelligentCooking.Web\IntelligentCooking.Web.csproj", "{143396F6-EF32-4372-9FCF-683A17C15F9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,9 +12,9 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
         void Remove(TEntity item);
         void RemoveRange(IEnumerable<TEntity> items);
         Task<TEntity> FindAsync(TKey key, params Expression<Func<TEntity, object>>[] includeProperties);
-        Task<TEntity> GetOne(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
-        Task<IEnumerable<TEntity>> Get(
+        Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> predicate = null,
             int? skip = null,
             int? take = null,

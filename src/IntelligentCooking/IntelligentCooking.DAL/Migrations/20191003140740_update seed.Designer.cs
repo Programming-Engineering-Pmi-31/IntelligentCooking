@@ -4,14 +4,16 @@ using IntelligentCooking.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IntelligentCooking.DAL.Migrations
 {
     [DbContext(typeof(IntelligentCookingContext))]
-    partial class IntelligentCookingContextModelSnapshot : ModelSnapshot
+    [Migration("20191003140740_update seed")]
+    partial class updateseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,15 +116,7 @@ namespace IntelligentCooking.DAL.Migrations
 
                     b.HasData(
                         new { CategoryId = 1, DishId = 1 },
-                        new { CategoryId = 5, DishId = 1 },
-                        new { CategoryId = 5, DishId = 2 },
-                        new { CategoryId = 5, DishId = 3 },
-                        new { CategoryId = 5, DishId = 4 },
-                        new { CategoryId = 5, DishId = 5 },
-                        new { CategoryId = 5, DishId = 6 },
-                        new { CategoryId = 5, DishId = 7 },
-                        new { CategoryId = 5, DishId = 8 },
-                        new { CategoryId = 5, DishId = 9 }
+                        new { CategoryId = 5, DishId = 1 }
                     );
                 });
 
@@ -151,15 +145,7 @@ namespace IntelligentCooking.DAL.Migrations
                         new { DishId = 1, IngredientId = 7, Amount = "4 tablespoons" },
                         new { DishId = 1, IngredientId = 8, Amount = "2 large" },
                         new { DishId = 1, IngredientId = 9, Amount = "1 teaspoon" },
-                        new { DishId = 1, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 2, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 3, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 4, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 5, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 6, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 7, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 8, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 9, IngredientId = 10, Amount = "as mush as you want" }
+                        new { DishId = 1, IngredientId = 10, Amount = "as mush as you want" }
                     );
                 });
 

@@ -27,12 +27,12 @@ namespace IntelligentCooking.DAL.Extensions
                     new Category
                     {
                         Id = 1,
-                        Name = "sweets"
+                        Name = "Sweets"
                     },
                     new Category
                     {
                         Id = 2,
-                        Name = "soup"
+                        Name = "Soup"
                     },
                     new Category
                     {
@@ -47,7 +47,17 @@ namespace IntelligentCooking.DAL.Extensions
                     new Category
                     {
                         Id = 5,
-                        Name = "breakfast"
+                        Name = "Breakfast"
+                    },
+                    new Category
+                    {
+                        Id = 6,
+                        Name = "Quick and Easy"
+                    },
+                    new Category
+                    {
+                        Id = 7,
+                        Name = "Vegetarian"
                     }
                 );
 
@@ -61,9 +71,13 @@ namespace IntelligentCooking.DAL.Extensions
                     Recipe = @"Whisk together the dry ingredients.  Flour, sugar, baking powder, baking soda, and salt.Whisk together the wet ingredients.In a separate medium bowl — buttermilk, melted butter, eggs and vanilla.Combine.Pour the wet ingredients over the dry and whisk until just combined.  (Don’t overmix, it’s ok for the batter to be a bit lumpy!) Let the batter sit at room temperature for 10 minutes to thicken up.Prepare the skillet or griddle.Preheat a griddle pan or large non - stick skillet over medium - high heat, or an electric griddle to 350°F.Cook the pancakes.Grease the griddle or skillet with a generous pat of butter.* Pour the batter in 1 / 2 * -cup dollops on the hot griddle — as many as will comfortably fit with room to flip the pancakes.Cook the pancakes until bubbles begin to pop on the top and the edges are set, about 3 minutes.Use a spatula to flip and cook for another 2 to 3 minutes, until golden brown.Transfer the pancakes to a plate and continue making pancakes until the batter is gone.Serve warm.  Serve the pancakes stacked high with plenty of maple syrup and extra butter, if desired.",
                     Time = new DateTime(2100),
                     Servings = 7,
-                    Stars = 1,
+                    Stars = 4,
                     Description = "This classic buttermilk pancakes recipe is easy to make and yields the most delicious, " +
-                    "fluffy, homemade pancakes.  See notes above for possible ingredient add-ins."
+                    "fluffy, homemade pancakes.  See notes above for possible ingredient add-ins.",
+                    Calories = 400,
+                    Fats = 1,
+                    Proteins = 32,
+                    Carbohydrates = 32
                 },
                 new Dish
                 {
@@ -75,7 +89,11 @@ namespace IntelligentCooking.DAL.Extensions
                     Servings = 7,
                     Stars = 1,
                     Description = "This Thai Chicken Wild Rice recipe is full of the best fresh and creamy curry flavors, and " +
-                    "it’s easy to make in the Instant Pot, Crock-Pot or on the stovetop."
+                    "it’s easy to make in the Instant Pot, Crock-Pot or on the stovetop.",
+                    Calories = 255,
+                    Fats = 10,
+                    Proteins = 8,
+                    Carbohydrates = 15
                 },
                 new Dish
                 {
@@ -86,7 +104,11 @@ namespace IntelligentCooking.DAL.Extensions
                     Time = new DateTime(3600),
                     Servings = 7,
                     Stars = 1,
-                    Description = "This hearty Broccoli Chicken Casserole recipe is made with your choice of pasta, tender chicken and broccoli, and the most delicious creamy cheddar mushroom sauce.  See notes above for possible ingredient variations too."
+                    Description = "This hearty Broccoli Chicken Casserole recipe is made with your choice of pasta, tender chicken and broccoli, and the most delicious creamy cheddar mushroom sauce.  See notes above for possible ingredient variations too.",
+                    Calories = 199,
+                    Fats = 7,
+                    Proteins = 9,
+                    Carbohydrates = 10
                 },
                 new Dish
                 {
@@ -97,7 +119,11 @@ namespace IntelligentCooking.DAL.Extensions
                     Time = new DateTime(3000),
                     Servings = 7,
                     Stars = 1,
-                    Description = "My all-time favorite Butternut Squash Soup recipe!  It’s super-easy to make, naturally gluten-free and vegan, and SO incredibly cozy and delicious.  Stovetop, Crock-Pot and Instant Pot instructions included below."
+                    Description = "My all-time favorite Butternut Squash Soup recipe!  It’s super-easy to make, naturally gluten-free and vegan, and SO incredibly cozy and delicious.  Stovetop, Crock-Pot and Instant Pot instructions included below.",
+                    Calories = 234,
+                    Fats = 12,
+                    Proteins = 20,
+                    Carbohydrates = 13
                 },
                 new Dish
                 {
@@ -108,7 +134,71 @@ namespace IntelligentCooking.DAL.Extensions
                     Time = new DateTime(1800),
                     Servings = 12,
                     Stars = 1,
-                    Description = "These healthy pumpkin muffins are naturally gluten-free, sweetened with maple syrup, quick and easy to make, and so perfecty pumpkin-y."
+                    Description = "These healthy pumpkin muffins are naturally gluten-free, sweetened with maple syrup, quick and easy to make, and so perfecty pumpkin-y.",
+                    Calories = 378,
+                    Fats = 10,
+                    Proteins = 12,
+                    Carbohydrates = 15
+                },
+                new Dish
+                {
+                    Id = 6,
+                    Name = "Veggie quesadillas",
+                    ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg",
+                    Recipe = @"Heat 1 tablespoon olive oil over medium-high heat in a large non-stick sauté pan.  Add sweet potato and sauté for 5-6 minutes, stirring occasionally, until cooked through.  Transfer to a separate plate and set aside. Add the remaining 1 tablespoon oil to the pan.  Add the veggies and jalapeño, and sauté for 4-5 minutes.  Stir in the cooked sweet potato, black beans, cumin, chili powder, a generous pinch of salt and black pepper, and sauté for 2 more minutes.  Taste and add more salt, pepper and/or cumin if needed.  Transfer the mixture to a large bowl and set aside.  Rinse (or just wipe off) the sauté pan until it is clean. Return the sauté pan to the stove, and reduce heat to medium.  Place a tortilla* in the center of the pan and immediately sprinkle your desired amount of cheese evenly over the surface of the tortilla.  Add a few large spoonfuls (about 1 cup) of the veggie mixture on one half of the tortilla, then sprinkle on some cilantro.  Fold the other side of the tortilla over to create a half moon.  Continue cooking for another 30 seconds or so, or until the bottom of the tortilla is crisp and golden.  (Just lift it up and take a peek to see when it’s ready to go.)  Then carefully flip the tortilla over and cook it for an additional 30-60 seconds on the second side. Transfer to a serving plate*, slice into triangles, then repeat with the remaining ingredients. Serve warm, along with your favorite salsa, guacamole and/or sour cream for dipping.",
+                    Time = new DateTime(2400),
+                    Servings = 7,
+                    Stars = 1,
+                    Description = "These Easy Veggie Quesadillas are 100% customizable with whatever veggies you have on hand or happen to love most.  See notes above for possible ingredient variations!",
+                    Calories = 268,
+                    Fats = 13,
+                    Proteins = 18,
+                    Carbohydrates = 16
+                },
+                new Dish
+                {
+                    Id = 7,
+                    Name = "Roasted Broccoli and Farro Bowls",
+                    ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/07/Roasted-Broccoli-Chickpea-and-Farro-Bowls-Recipe-2-2.jpg",
+                    Recipe = @"Roast the broccoli.  I detailed how to do this in yesterday’s post.  Basically, toss in oil, season with S&P and roast over high heat! Cook the farro.  On the stovetop, in veggie stock (instead of water) for extra flavor. Make the dressing.  Whisk all of the ingredients together in a small bowl (or shake together in a mason jar) until combined. Toss everything together.  Then in a large bowl, combine the broccoli, farro, arugula, chickpeas, almonds and dressing.  Toss to combine. Serve or refrigerate for later.  Then serve it up immediately, or transfer the salad to a sealed container and refrigerate for up to 3 days.",
+                    Time = new DateTime(1800),
+                    Servings = 12,
+                    Stars = 1,
+                    Description = "The beauty of this salad is that it keeps really well in the fridge, so feel free to prep it in advance if you’d like! ",
+                    Calories = 345,
+                    Fats = 13,
+                    Proteins = 18,
+                    Carbohydrates = 15
+                },
+                new Dish
+                {
+                    Id = 8,
+                    Name = "Apple Crisp",
+                    ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Easy-Apple-Crisp-Recipe-1-3.jpg",
+                    Recipe = @"Make the filling. Toss together the apples, lemon juice, brown sugar, flour and cinnamon until combined.  Then spread everything out in an even layer in a 9 x 13-inch baking dish. Make the topping.  Stir together the oats, flour, brown sugar, pecans, cinnamon and salt until combined.  Then drizzle with the melted butter and toss together until the dry ingredients are moistened, yet still nice and clumpy (not over-mixed). Bake. Sprinkle the topping over the apples, then pop the pan in the oven and bake for about 40-50 minutes, or until the filling is bubbly and the topping is nice and crisp. Serve.  Dish it up while the apple crisp is nice and warm, topped with a generous scoop of vanilla ice cream",
+                    Time = new DateTime(1800),
+                    Servings = 12,
+                    Stars = 1,
+                    Description = "This easy apple crisp (apple crumble) recipe is made with a warm cinnamon apple filling and an irresistible buttery crunchy crumble topping.  Plus this no-fuss version takes less than 20 minutes to prep — no apple peeling required!",
+                    Calories = 390,
+                    Fats = 14,
+                    Proteins = 19,
+                    Carbohydrates = 15
+                },
+                new Dish
+                {
+                    Id = 9,
+                    Name = "Thai Basil Beef Noodle Stir-Fry",
+                    ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg",
+                    Recipe = @"Prep the sauce. Whisk the sauce ingredients together in a small bowl or measuring cup until combined. Prep the noodles.  Cook the noodles according to package instructions until they are al dente.  Then drain and set aside until ready to use. Sear the beef.  Heat some cooking oil in a large sauté pan or wok over medium-high heat.  Cook the beef briefly until it is browned on both sides.  Then transfer it to a separate (clean) plate, and return the pan to the heat. Cook the veggies.  Give the veggies a quick sauté until they are cooked through. Combine everything together.  Then add the cooked noodles, sauce, beef, and Thai basil to the pan, and toss until everything is coated evenly with the sauce. Serve warm.  Serve immediately while the stir-fry is nice and hot, garnished with any of your desired toppings.",
+                    Time = new DateTime(1800),
+                    Servings = 12,
+                    Stars = 1,
+                    Description = "This Thai Basil Beef Noodle Stir-Fry recipe is easy to make and tossed with the best savory Thai basil sauce.  Feel free to sub in chicken, pork, shrimp or crispy tofu in place of the beef if you would like!",
+                    Calories = 390,
+                    Fats = 15,
+                    Proteins = 17,
+                    Carbohydrates = 18
                 }
                 );
 
@@ -185,6 +275,48 @@ namespace IntelligentCooking.DAL.Extensions
                 {
                     DishId = 1,
                     CategoryId = 5
+                },
+                //fake data
+
+                new DishCategory
+                {
+                    DishId = 2,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 3,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 4,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 5,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 6,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 7,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 8,
+                    CategoryId = 5
+                },
+                new DishCategory
+                {
+                    DishId = 9,
+                    CategoryId = 5
                 }
                 );
 
@@ -248,7 +380,60 @@ namespace IntelligentCooking.DAL.Extensions
                     DishId = 1,
                     IngredientId = 10,
                     Amount = "as mush as you want"
+                },
+                //fake data
+                new DishIngredient
+                {
+                    DishId = 2,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 3,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 4,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 5,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 6,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 7,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 8,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
+                },
+                new DishIngredient
+                {
+                    DishId = 9,
+                    IngredientId = 10,
+                    Amount = "as mush as you want"
                 }
+                );
+
+            modelBuilder.Entity<Like>().HasData(
+                
                 );
 
         }

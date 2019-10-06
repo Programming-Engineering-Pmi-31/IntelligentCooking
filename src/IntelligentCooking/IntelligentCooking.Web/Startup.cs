@@ -27,7 +27,7 @@ namespace IntelligentCooking.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
-            services.AddBllLayerDependecies("Data Source=.\\SQLEXPRESS;Initial Catalog=IntelligentCooking;Integrated Security=True");
+            services.AddBllLayerDependecies(Configuration["ConnectionStrings:IntelligentCookingDb"]);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -48,7 +48,7 @@ namespace IntelligentCooking.DAL.Repositories
         }
 
 
-        public async Task<TEntity> GetOne(
+        public async Task<TEntity> GetOneAsync(
             Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties)
         {
@@ -56,7 +56,7 @@ namespace IntelligentCooking.DAL.Repositories
                 .FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TEntity>> Get(
+        public async Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> predicate = null,
             int? skip = null,
             int? take = null,

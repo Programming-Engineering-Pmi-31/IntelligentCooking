@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InelligentCooking.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntelligentCooking.Web.Controllers
@@ -10,7 +11,13 @@ namespace IntelligentCooking.Web.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        private readonly IImageService _imageService;
+
+        public ValuesController(IImageService imageService)
+        {
+            _imageService = imageService;
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {

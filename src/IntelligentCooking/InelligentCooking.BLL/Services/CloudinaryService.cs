@@ -8,21 +8,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace InelligentCooking.BLL.Services
 {
-    public class CloudinaryService: IImageService
+    public class CloudinaryService : IImageService
     {
         private readonly Account _cloudinaryAccount;
 
-        public CloudinaryService(IConfiguration configuration)
-        {
+        public CloudinaryService(IConfiguration configuration) =>
             _cloudinaryAccount = new Account(
-                cloud: configuration["CloudinaryCredentials:Cloud"],
-                apiKey: configuration["CloudinaryCredentials:ApiKey"],
-                apiSecret: configuration["CloudinaryCredentials:Secret"]);
-        }
+                configuration["CloudinaryCredentials:Cloud"],
+                configuration["CloudinaryCredentials:ApiKey"],
+                configuration["CloudinaryCredentials:Secret"]);
 
         public async Task<string> UploadImageAsync(IFormFile file)
         {
-            if (!IsImage(file))
+            if(!IsImage(file))
             {
                 return null;
             }
@@ -39,17 +37,34 @@ namespace InelligentCooking.BLL.Services
             var res = await UploadImageAsync(uploadParams);
 
             return res.SecureUri.ToString();
-
         }
 
         private static bool IsImage(IFormFile file)
         {
-            if(!string.Equals(file.ContentType, "image/jpg", StringComparison.OrdinalIgnoreCase) &&
-               !string.Equals(file.ContentType, "image/jpeg", StringComparison.OrdinalIgnoreCase) &&
-               !string.Equals(file.ContentType, "image/pjpeg", StringComparison.OrdinalIgnoreCase) &&
-               !string.Equals(file.ContentType, "image/gif", StringComparison.OrdinalIgnoreCase) &&
-               !string.Equals(file.ContentType, "image/x-png", StringComparison.OrdinalIgnoreCase) &&
-               !string.Equals(file.ContentType, "image/png", StringComparison.OrdinalIgnoreCase))
+            if(!string.Equals(
+                   file.ContentType,
+                   "image/jpg",
+                   StringComparison.OrdinalIgnoreCase)
+               && !string.Equals(
+                   file.ContentType,
+                   "image/jpeg",
+                   StringComparison.OrdinalIgnoreCase)
+               && !string.Equals(
+                   file.ContentType,
+                   "image/pjpeg",
+                   StringComparison.OrdinalIgnoreCase)
+               && !string.Equals(
+                   file.ContentType,
+                   "image/gif",
+                   StringComparison.OrdinalIgnoreCase)
+               && !string.Equals(
+                   file.ContentType,
+                   "image/x-png",
+                   StringComparison.OrdinalIgnoreCase)
+               && !string.Equals(
+                   file.ContentType,
+                   "image/png",
+                   StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }

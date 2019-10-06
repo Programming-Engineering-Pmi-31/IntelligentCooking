@@ -9,25 +9,23 @@ using System.Threading.Tasks;
 
 namespace InelligentCooking.BLL.Services
 {
-    public class IngredientService: IIngredientService
+    public class IngredientService : IIngredientService
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
 
-        public IngredientService(IIntelligentCookingUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public IngredientService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
         public async Task<IEnumerable<IngredientDto>> GetIngredients()
         {
-            var ingredients = await _unitOfWork.Ingredients.Get();
+            var ingredients = await _unitOfWork.Ingredients.GetAsync();
 
-            var ingredientsInfo = ingredients.Select(c => new IngredientDto
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToList();
-
+            var ingredientsInfo = ingredients.Select(
+                    c => new IngredientDto
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                .ToList();
 
 
             return ingredientsInfo;

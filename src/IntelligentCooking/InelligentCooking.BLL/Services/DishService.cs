@@ -10,37 +10,41 @@ using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
 {
-    public class DishService: IDishService
+    public class DishService : IDishService
     {
-
         private IIntelligentCookingUnitOfWork _unitOfWork;
 
-        public DishService(IIntelligentCookingUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public DishService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
-            var dishes = await _unitOfWork.Dishes.Get();
+            var dishes = await _unitOfWork.Dishes.GetAsync();
 
             var dishPreviews = new List<DishPreviewDto>();
 
-            foreach (var d in dishes)
+            foreach(var d in dishes)
             {
                 var tempDishPreviewDto = new DishPreviewDto()
                 {
                     Id = d.Id,
                     Name = d.Name,
                     ImageUrl = d.ImageUrl,
-                    Ingredients = (await _unitOfWork.DishIngredients.Get(di => di.DishId == d.Id, null, null, di => di.Ingredient))
-                    .Select(di => di.Ingredient)
-                    .Select(i => new IngredientDto { Id = i.Id, Name = i.Name }),
-                    Categories = (await _unitOfWork.DishCategories.Get(dc => dc.DishId == d.Id, null, null, dc => dc.Category))
-                    .Select(dc => dc.Category)
-                    .Select(c => new CategoryDto { Id = c.Id, Name = c.Name }),
+                    Ingredients = (await _unitOfWork.DishIngredients.GetAsync(
+                            di => di.DishId == d.Id,
+                            null,
+                            null,
+                            di => di.Ingredient))
+                        .Select(di => di.Ingredient)
+                        .Select(i => new IngredientDto {Id = i.Id, Name = i.Name}),
+                    Categories = (await _unitOfWork.DishCategories.GetAsync(
+                            dc => dc.DishId == d.Id,
+                            null,
+                            null,
+                            dc => dc.Category))
+                        .Select(dc => dc.Category)
+                        .Select(c => new CategoryDto {Id = c.Id, Name = c.Name}),
                     Rating = d.Stars,
-                    Likes = (await _unitOfWork.Likes.Get()).Count(l => l.DishId == d.Id),
+                    Likes = (await _unitOfWork.Likes.GetAsync()).Count(l => l.DishId == d.Id),
                     Time = d.Time,
                     Calories = d.Calories,
                     Servings = d.Servings,
@@ -48,8 +52,9 @@ namespace InelligentCooking.BLL.Services
                     Carbohydrates = d.Carbohydrates,
                     Fats = d.Fats
                 };
+
                 dishPreviews.Add(tempDishPreviewDto);
-            }          
+            }
 
             return dishPreviews;
         }

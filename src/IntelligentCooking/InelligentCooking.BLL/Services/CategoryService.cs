@@ -13,21 +13,19 @@ namespace InelligentCooking.BLL.Services
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
 
-        public CategoryService(IIntelligentCookingUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public CategoryService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
         public async Task<IEnumerable<CategoryDto>> GetCategories()
         {
-            var categories = await _unitOfWork.Categories.Get();
+            var categories = await _unitOfWork.Categories.GetAsync();
 
-            var categoriesInfo = categories.Select(c => new CategoryDto
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToList();
-            
+            var categoriesInfo = categories.Select(
+                    c => new CategoryDto
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                .ToList();
 
 
             return categoriesInfo;

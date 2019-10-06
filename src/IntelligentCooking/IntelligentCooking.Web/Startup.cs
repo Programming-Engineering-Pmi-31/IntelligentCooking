@@ -44,9 +44,11 @@ namespace IntelligentCooking.Web
                 app.UseHsts();
             }
 
+
+            app.UseCors("Default");
+
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseCors("Default");
         }
     }
 }

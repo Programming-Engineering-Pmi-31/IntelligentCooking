@@ -9,13 +9,12 @@ namespace IntelligentCooking.Web.Infrastructure.Extensions
 {
     public static class StartupExtensions
     {
-        public static void ConfigureCors(this IServiceCollection services, Startup startup)
+        public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
             {
                 options.AddPolicy("Default", policy =>
                 {
-                    var origins = startup.Configuration.GetSection("CorsOptions").GetSection("AllowedOrigins").Get<string[]>();
                     policy.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();

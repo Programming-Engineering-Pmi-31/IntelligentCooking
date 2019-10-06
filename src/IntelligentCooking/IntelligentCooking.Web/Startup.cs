@@ -30,7 +30,7 @@ namespace IntelligentCooking.Web
 
             services.AddBllLayerDependecies(Configuration["ConnectionStrings:IntelligentCookingDb"]);
 
-            services.ConfigureCors(this);
+            services.ConfigureCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -46,6 +46,7 @@ namespace IntelligentCooking.Web
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors("Default");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InelligentCooking.BLL.Infrastructure;
+using IntelligentCooking.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,8 @@ namespace IntelligentCooking.Web
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddBllLayerDependecies(Configuration["ConnectionStrings:IntelligentCookingDb"]);
+
+            services.ConfigureCors(this);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -60,6 +60,7 @@
     "bootstrap": "^4.3.1",
     "express-json-file-crud": "0.0.5",
     "font-awesome": "^4.7.0",
+    "form-data": "^2.5.1",
     "i": "^0.3.6",
     "lodash": "^4.17.15",
     "npm": "^6.11.3",

@@ -9,5 +9,7 @@ namespace InelligentCooking.BLL.Interfaces
     public interface IDishService
     {
         Task<IEnumerable<DishPreviewDto>> GetDishesInfo();
+
+        Task AddDish(AddDishDto addDish);
     }
 }

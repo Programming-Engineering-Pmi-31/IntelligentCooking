@@ -13,8 +13,13 @@ namespace InelligentCooking.BLL.Services
     public class DishService : IDishService
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
+        private IImageService _imageService;
 
-        public DishService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        public DishService(IIntelligentCookingUnitOfWork unitOfWork, IImageService imageService)
+        {
+            _unitOfWork = unitOfWork ;
+            _imageService = imageService;
+        } 
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
@@ -57,6 +62,51 @@ namespace InelligentCooking.BLL.Services
             }
 
             return dishPreviews;
+        }
+
+        public async Task AddDish(AddDishDto addDish)
+        {
+            var ingredients = new List<DishIngredient>();
+            var categories = new List<DishCategory>();
+
+            foreach (var i in addDish.Ingredients)
+            {
+                ingredients.Add(new DishIngredient()
+                {
+                    DishId = addDish.Id,
+                    IngredientId = i
+                });
+            }
+
+            foreach (var c in addDish.Categories)
+            {
+                categories.Add(new DishCategory()
+                {
+                    DishId = addDish.Id,
+                    CategoryId = c
+                });
+            }
+
+            var dish = new Dish
+            {
+                Id = addDish.Id,
+                Name = addDish.Name,
+                ImageUrl = await _imageService.UploadImageAsync(addDish.Image),
+                Recipe = addDish.Recipe,
+                Time = addDish.Time,
+                Servings = addDish.Servings,
+                Stars = addDish.Rating,
+                Proteins = addDish.Proteins,
+                Fats = addDish.Fats,
+                Carbohydrates = addDish.Carbohydrates,
+                Calories = addDish.Calories,
+                Description = addDish.Description,
+                DishIngredients = ingredients,
+                DishCategories = categories
+            };
+
+            _unitOfWork.Dishes.Add(dish);
+            await _unitOfWork.Commit();
         }
     }
 }

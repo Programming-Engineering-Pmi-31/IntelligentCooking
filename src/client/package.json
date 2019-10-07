@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "node_modules/.bin/webpack-dev-server --inline --mode development",
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "mock:api": "json-server --watch dist/testdishes.json --port 4000"
   },
   "browserslist": [
     "last 10 version",
@@ -23,6 +24,8 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.1",
@@ -55,6 +58,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "express-json-file-crud": "0.0.5",
     "font-awesome": "^4.7.0",
     "i": "^0.3.6",
     "lodash": "^4.17.15",
@@ -62,6 +66,7 @@
     "react-bootstrap": "^1.0.0-beta.12",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.0",
+    "react-select": "^3.0.8",
     "react-slick": "^0.25.2",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.4",

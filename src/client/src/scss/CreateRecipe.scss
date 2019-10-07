@@ -1,0 +1,100 @@
+.form{
+  font-family: 'Open Sans Condensed', arial, sans;
+  width: 80%;
+  padding: 30px;
+  background: #FFFFFF;
+  margin: 20px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+  h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+  }
+  div{
+    position: relative;
+  }
+  input,textarea,select{
+    z-index: 10;
+    transition: all 0.4s;
+    position: relative;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    font: 16px Arial, Helvetica, sans-serif;
+    margin-bottom: 25px;
+    &:focus + label{
+      margin-top: -16px;
+      font-size: 14px;
+    }
+  }
+  textarea {
+    resize:none;
+    overflow: hidden;
+  }
+}
+
+.label{
+  user-select: none;
+  position: absolute;
+  top: 0;
+  line-height: 12px;
+  font-size: 18px;
+  font-family: 'inconsolata', monospace;
+  color: black;
+  text-transform: uppercase;
+  display: block;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+
+}
+.form__selector {
+  margin: 40px 0 20px 0;
+  label {
+    margin-top: -20px;
+  }
+}
+.not__empty{
+  background: red;
+}
+.form input[type="button"],
+.form input[type="submit"]{
+  -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+  box-shadow: inset 0px 1px 0px 0px #45D6D6;
+  background-color: #2CBBBB;
+  border: 1px solid #27A0A0;
+  display: inline-block;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 14px;
+  padding: 8px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.form input[type="button"]:hover,
+.form input[type="submit"]:hover {
+  background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+  background-color:#34CACA;
+}
+.input__flex{
+  display: flex;
+  justify-content: space-between;
+  div{
+    width: 30%;
+    position: relative;
+  }
+}
+

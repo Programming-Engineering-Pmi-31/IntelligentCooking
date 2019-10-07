@@ -9,10 +9,10 @@ import AllRecipes from "../containers/AllRecipes";
 
 class App extends PureComponent  {
     componentDidMount() {
-        const { setDishes } = this.props;
+        const { setRecipes } = this.props;
         axios.get('/dishes.json')
             .then(response => {
-                setDishes(response.data)
+                setRecipes(response.data)
             })
 
     }

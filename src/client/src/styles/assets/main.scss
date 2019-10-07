@@ -7,6 +7,9 @@ html {
 	font-size: $mainFontSize;
 	color: $mainFontColor;
   height: 100%;
+  button{
+    background: #fff;
+  }
   @media screen and (max-width: $desktopWidth) {
 		font-size: 16px;
   }
@@ -16,6 +19,7 @@ html {
   @media screen and (max-width: $phoneWidth) {
 		font-size: 14px;
   }
+
 }
 
 body {
@@ -26,7 +30,7 @@ body {
   font-weight: $mainFontWeight;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $danger-color;
+  background: #C0C4CC;
 }
 
 *, *:before, *:after { box-sizing: border-box; }

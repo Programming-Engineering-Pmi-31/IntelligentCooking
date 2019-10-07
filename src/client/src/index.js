@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import createStore from "./store"
 import MainPage from "./containers/MainPage"
+import CreateRecipe from "./containers/CreateRecipe"
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import "@fortawesome/free-regular-svg-icons"
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -14,7 +15,8 @@ const store = createStore();
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route path="/" component={MainPage} />
+            <Route path="/create" component={CreateRecipe} />
+            <Route exact path="/" component={MainPage} />
         </Router>
     </Provider>,
     document.getElementById('root')

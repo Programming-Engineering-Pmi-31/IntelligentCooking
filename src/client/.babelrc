@@ -3,14 +3,5 @@
     "@babel/preset-env",
     "@babel/preset-react"
   ],
-  // "plugins": [
-  //   [
-  //     "react-css-modules",
-  //     // {
-  //     //   "filetypes": {
-  //     //   "syntax": "postcss-scss"
-  //     //   }
-  //     // }
-  //   ]
-  // ]
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }

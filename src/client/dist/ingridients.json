@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "name": "potato",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi nam neque quod sit totam."
+  },
+  {
+    "id": 1,
+    "name": "carrot",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi nam neque quod sit totam."
+  },
+  {
+    "id": 2,
+    "name": "banana",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi nam neque quod sit totam."
+  },
+  {
+    "id": 3,
+    "name": "apple",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi nam neque quod sit totam."
+  },
+  {
+    "id": 4,
+    "name": "ananas",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi nam neque quod sit totam."
+  }
+]

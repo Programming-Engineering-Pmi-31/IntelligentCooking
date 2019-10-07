@@ -1,7 +1,7 @@
 import React from 'react';
 import basicStyles from '../styles/assets/main.scss'
 import logo from '../img/logo.png'
-import Slider from "react-slick";
+import { Link } from "react-router-dom"
 import styles from '../scss/Header.scss'
 const Header = React.memo(({dishes}) => {
     return (
@@ -12,8 +12,9 @@ const Header = React.memo(({dishes}) => {
                         <li><button>category</button></li>
                         <li><button>search</button></li>
                         <li><button>likes</button></li>
-                        <li><button>create</button></li>
+                        <li><Link to="/create">create</Link></li>
                         <li><button>log</button></li>
+
                     </ul>
                 </nav>
             </div>

@@ -9,18 +9,18 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: "index-bundle.js"
   },
-  devServer: {
-    publicPath: "/",
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 9000
-  },
+  devServer: {contentBase: './dist',port: 8081, historyApiFallback: true},
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['@babel/plugin-proposal-class-properties', '@babel/transform-runtime'],
+          },
+        },
       },
       {
         test: /\.scss$/,

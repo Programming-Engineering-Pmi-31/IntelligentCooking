@@ -1,5 +1,6 @@
 ﻿using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Interfaces;
+using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,18 @@ namespace InelligentCooking.BLL.Services
 
 
             return categoriesInfo;
+        }
+
+        public async Task AddCategory(AddCategoryDto addCategory)
+        {
+            var category = new Category
+            {
+                Name = addCategory.Name
+            };
+
+            _unitOfWork.Categories.Add(category);
+
+            await _unitOfWork.Commit();
         }
     }
 }

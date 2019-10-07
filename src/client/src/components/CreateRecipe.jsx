@@ -258,7 +258,7 @@ class CreateRecipe extends Component {
     createProduct = (obj) =>{
         console.log(obj)
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        axios.post("https://localhost:5001/api/category",obj)
+        axios.post("http://localhost:11701/api/category",{name:obj})
             .then(res=>console.log(res))
     }
     // createProduct = (product) =>{

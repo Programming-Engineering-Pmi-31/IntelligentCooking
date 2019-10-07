@@ -25,5 +25,11 @@ namespace IntelligentCooking.Web.Controllers
         {
             return await _categoryService.GetCategories();
         }
+
+        [HttpPost]
+        public async Task AddDish([FromBody] AddCategoryDto addCategory)
+        {
+            await _categoryService.AddCategory(addCategory);
+        }
     }
 }

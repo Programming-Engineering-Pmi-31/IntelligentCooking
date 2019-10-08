@@ -10,7 +10,7 @@ import AllRecipes from "../containers/AllRecipes";
 class App extends PureComponent  {
     componentDidMount() {
         const { setRecipes } = this.props;
-        axios.get('/dishes.json')
+        axios.get('https://localhost:5001/api/Dish')
             .then(response => {
                 setRecipes(response.data)
             })

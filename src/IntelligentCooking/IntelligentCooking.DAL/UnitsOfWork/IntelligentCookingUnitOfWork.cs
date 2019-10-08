@@ -17,9 +17,9 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         public IntelligentCookingUnitOfWork(IntelligentCookingContext context)
         {
             _context = context;
-            Categories = new Repository<Category, int>(_context);
-            Ingredients = new Repository<Ingredient, int>(_context);
-            Dishes = new Repository<Dish, int>(_context);
+            Categories = new CategoryRepository(_context);
+            Ingredients = new IngredientRepository(_context);
+            Dishes = new DishRepository(_context);
             DishCategories = new Repository<DishCategory, (int DishId, int CategoryId)>(_context);
             DishIngredients = new Repository<DishIngredient, (int DishId, int IngredientId)>(_context);
             Favourites = new Repository<Favourite, (int UserId, int DishId)>(_context);
@@ -33,9 +33,9 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             RoleClaims = new Repository<RoleClaim, int>(_context);
         }
 
-        public IRepository<Category, int> Categories { get; }
-        public IRepository<Ingredient, int> Ingredients { get; set; }
-        public IRepository<Dish, int> Dishes { get; }
+        public ICategoryRepository Categories { get; }
+        public IIngredientRepository Ingredients { get; }
+        public IDishRepository Dishes { get; }
         public IRepository<DishCategory, (int DishId, int CategoryId)> DishCategories { get; }
         public IRepository<DishIngredient, (int DishId, int IngredientId)> DishIngredients { get; }
         public IRepository<Favourite, (int UserId, int DishId)> Favourites { get; }
@@ -48,7 +48,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         public IRepository<UserClaim, int> UserClaims { get; }
         public IRepository<RoleClaim, int> RoleClaims { get; }
 
-        public async Task Commit()
+        public async Task CommitAsync()
         {
             await _context.SaveChangesAsync();
         }

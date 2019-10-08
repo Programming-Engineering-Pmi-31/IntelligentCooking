@@ -23,45 +23,37 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
-            var dishes = await _unitOfWork.Dishes.GetAsync();
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes();
 
-            var dishPreviews = new List<DishPreviewDto>();
-
-            foreach(var d in dishes)
-            {
-                var tempDishPreviewDto = new DishPreviewDto()
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    ImageUrl = d.ImageUrl,
-                    Ingredients = (await _unitOfWork.DishIngredients.GetAsync(
-                            di => di.DishId == d.Id,
-                            null,
-                            null,
-                            di => di.Ingredient))
-                        .Select(di => di.Ingredient)
-                        .Select(i => new IngredientDto {Id = i.Id, Name = i.Name}),
-                    Categories = (await _unitOfWork.DishCategories.GetAsync(
-                            dc => dc.DishId == d.Id,
-                            null,
-                            null,
-                            dc => dc.Category))
-                        .Select(dc => dc.Category)
-                        .Select(c => new CategoryDto {Id = c.Id, Name = c.Name}),
-                    Rating = d.Stars,
-                    Likes = (await _unitOfWork.Likes.GetAsync()).Count(l => l.DishId == d.Id),
-                    Time = d.Time,
-                    Calories = d.Calories,
-                    Servings = d.Servings,
-                    Proteins = d.Proteins,
-                    Carbohydrates = d.Carbohydrates,
-                    Fats = d.Fats
-                };
-
-                dishPreviews.Add(tempDishPreviewDto);
-            }
-
-            return dishPreviews;
+            return dishes.Select(
+                    d => new DishPreviewDto
+                    {
+                        Id = d.Id,
+                        Name = d.Name,
+                        ImageUrl = d.ImageUrl,
+                        Ingredients = d.DishIngredients.Select(
+                            di => new IngredientDto
+                            {
+                                Id = di.IngredientId,
+                                Name = di.Ingredient.Name
+                            }),
+                        Categories = d.DishCategories.Select(
+                            dc => new CategoryDto
+                            {
+                                Id = dc.CategoryId,
+                                Name = dc.Category.Name,
+                                ImageUrl = dc.Category.ImageUrl
+                            }),
+                        Rating = d.Stars,
+                        Likes = d.Likes.Count,
+                        Time = d.Time,
+                        Calories = d.Calories,
+                        Servings = d.Servings,
+                        Proteins = d.Proteins,
+                        Carbohydrates = d.Carbohydrates,
+                        Fats = d.Fats
+                    })
+                .ToArray();
         }
 
         public async Task AddDish(AddDishDto addDish)
@@ -83,7 +75,8 @@ namespace InelligentCooking.BLL.Services
             var dishEntity = _unitOfWork.Dishes.Add(dish);
 
 
-            var dishIngredients = addDish.Ingredients.Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+            var dishIngredients = addDish.Ingredients
+                .Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
                 .Select(
                     x =>
                         new DishIngredient
@@ -98,7 +91,7 @@ namespace InelligentCooking.BLL.Services
             var dishCategories = addDish.Categories.Select(x => new DishCategory() {CategoryId = x, DishId = dishEntity.Id});
             _unitOfWork.DishCategories.AddRange(dishCategories);
 
-            await _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
 {
     public interface IIntelligentCookingUnitOfWork: IDisposable
     {
-        IRepository<Category, int> Categories { get; }
-        IRepository<Ingredient, int> Ingredients { get; }
-        IRepository<Dish, int> Dishes { get; }
+        ICategoryRepository Categories { get; }
+        IIngredientRepository Ingredients { get; }
+        IDishRepository Dishes { get; }
         IRepository<DishCategory, (int DishId, int CategoryId)> DishCategories { get; }
         IRepository<DishIngredient, (int DishId, int IngredientId)> DishIngredients { get; }
         IRepository<Favourite, (int UserId, int DishId)> Favourites { get; }
@@ -23,6 +23,6 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
         IRepository<UserClaim, int> UserClaims { get; }
         IRepository<RoleClaim, int> RoleClaims { get; }
 
-        Task Commit();
+        Task CommitAsync();
     }
 }

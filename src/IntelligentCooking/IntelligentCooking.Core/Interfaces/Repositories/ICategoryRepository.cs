@@ -4,9 +4,8 @@ using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IDishRepository
+    public interface ICategoryRepository
     {
-        Dish Add(Dish dish);
-        Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes();
+        Task<IEnumerable<Category>> GetAsync();
     }
 }

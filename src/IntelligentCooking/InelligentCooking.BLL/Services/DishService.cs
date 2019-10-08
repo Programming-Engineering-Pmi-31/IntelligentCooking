@@ -1,11 +1,10 @@
 ﻿using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InelligentCooking.BLL.Infrastructure;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using System.Linq;
+using AutoMapper;
 using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
@@ -14,66 +13,33 @@ namespace InelligentCooking.BLL.Services
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
         private IImageService _imageService;
+        private readonly IMapper _mapper;
 
-        public DishService(IIntelligentCookingUnitOfWork unitOfWork, IImageService imageService)
+        public DishService(
+            IIntelligentCookingUnitOfWork unitOfWork,
+            IImageService imageService,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _imageService = imageService;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
             var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes();
 
-            return dishes.Select(
-                    d => new DishPreviewDto
-                    {
-                        Id = d.Id,
-                        Name = d.Name,
-                        ImageUrl = d.ImageUrl,
-                        Ingredients = d.DishIngredients.Select(
-                            di => new IngredientDto
-                            {
-                                Id = di.IngredientId,
-                                Name = di.Ingredient.Name
-                            }),
-                        Categories = d.DishCategories.Select(
-                            dc => new CategoryDto
-                            {
-                                Id = dc.CategoryId,
-                                Name = dc.Category.Name,
-                                ImageUrl = dc.Category.ImageUrl
-                            }),
-                        Rating = d.Stars,
-                        Likes = d.Likes.Count,
-                        Time = d.Time,
-                        Calories = d.Calories,
-                        Servings = d.Servings,
-                        Proteins = d.Proteins,
-                        Carbohydrates = d.Carbohydrates,
-                        Fats = d.Fats
-                    })
+            return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();
         }
 
         public async Task AddDish(AddDishDto addDish)
         {
-            var dish = new Dish
-            {
-                Name = addDish.Title,
-                ImageUrl = await _imageService.UploadImageAsync(addDish.Img),
-                Recipe = addDish.Recipe,
-                Time = addDish.Time,
-                Servings = addDish.Servings,
-                Proteins = addDish.Proteins,
-                Fats = addDish.Fats,
-                Carbohydrates = addDish.Carbs,
-                Calories = addDish.Cals,
-                Description = addDish.Description,
-            };
+            var dish = _mapper.Map<AddDishDto, Dish>(addDish);
+
+            dish.ImageUrl = await _imageService.UploadImageAsync(addDish.Img);
 
             var dishEntity = _unitOfWork.Dishes.Add(dish);
-
 
             var dishIngredients = addDish.Ingredients
                 .Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})

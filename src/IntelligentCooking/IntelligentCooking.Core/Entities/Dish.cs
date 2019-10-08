@@ -14,6 +14,7 @@ namespace IntelligentCooking.Core.Entities
             DishCategories = new HashSet<DishCategory>();
             Likes = new HashSet<Like>();
         }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }

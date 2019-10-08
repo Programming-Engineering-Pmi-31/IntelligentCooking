@@ -19,6 +19,9 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(30);
 
+            builder.Property(c => c.ImageUrl)
+                .IsRequired();
+
             builder.HasMany(c => c.DishCategories)
                 .WithOne(dc => dc.Category)
                 .IsRequired()

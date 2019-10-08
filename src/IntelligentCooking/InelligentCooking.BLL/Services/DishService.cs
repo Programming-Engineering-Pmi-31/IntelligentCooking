@@ -17,9 +17,9 @@ namespace InelligentCooking.BLL.Services
 
         public DishService(IIntelligentCookingUnitOfWork unitOfWork, IImageService imageService)
         {
-            _unitOfWork = unitOfWork ;
+            _unitOfWork = unitOfWork;
             _imageService = imageService;
-        } 
+        }
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
@@ -68,9 +68,8 @@ namespace InelligentCooking.BLL.Services
         {
             var dish = new Dish
             {
-                Id = addDish.Id,
                 Name = addDish.Title,
-                ImageUrl = await _imageService.UploadImageAsync(addDish.Image),
+                ImageUrl = await _imageService.UploadImageAsync(addDish.Img),
                 Recipe = addDish.Recipe,
                 Time = addDish.Time,
                 Servings = addDish.Servings,
@@ -81,26 +80,23 @@ namespace InelligentCooking.BLL.Services
                 Description = addDish.Description,
             };
 
-            _unitOfWork.Dishes.Add(dish);
+            var dishEntity = _unitOfWork.Dishes.Add(dish);
 
 
-            foreach (var i in addDish.Ingredients)
-            {
-                _unitOfWork.DishIngredients.Add(new DishIngredient
-                {
-                    DishId = addDish.Id,
-                    IngredientId = i
-                });
-            }
+            var dishIngredients = addDish.Ingredients.Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+                .Select(
+                    x =>
+                        new DishIngredient
+                        {
+                            DishId = dishEntity.Id,
+                            IngredientId = x.IngredientId,
+                            Amount = x.Amount
+                        });
 
-            foreach (var c in addDish.Categories)
-            {
-                _unitOfWork.DishCategories.Add(new DishCategory
-                {
-                    DishId = addDish.Id,
-                    CategoryId = c
-                });
-            }
+            _unitOfWork.DishIngredients.AddRange(dishIngredients);
+
+            var dishCategories = addDish.Categories.Select(x => new DishCategory() {CategoryId = x, DishId = dishEntity.Id});
+            _unitOfWork.DishCategories.AddRange(dishCategories);
 
             await _unitOfWork.Commit();
         }

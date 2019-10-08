@@ -23,7 +23,8 @@ namespace InelligentCooking.BLL.Services
                     c => new CategoryDto
                     {
                         Id = c.Id,
-                        Name = c.Name
+                        Name = c.Name,
+                        ImageUrl = c.ImageUrl
                     })
                 .ToList();
 

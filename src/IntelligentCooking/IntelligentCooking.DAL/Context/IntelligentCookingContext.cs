@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Context
 {
-    public class IntelligentCookingContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+    public class IntelligentCookingContext
+        : IdentityDbContext<User, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>,
+            IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
-        public IntelligentCookingContext(DbContextOptions<IntelligentCookingContext> options): base(options)
-        {
-        }
+        public IntelligentCookingContext(DbContextOptions<IntelligentCookingContext> options) : base(options) {}
 
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<DishCategory> DishCategories { get; set; }

@@ -7,14 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class DishRepository: NewRepository, IDishRepository
+    public class DishRepository: Repository<Dish>, IDishRepository
     {
         public DishRepository(IntelligentCookingContext context) : base(context) {}
-
-        public Dish Add(Dish dish)
-        {
-            return Context.Dishes.Add(dish).Entity;
-        }
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes()
         {

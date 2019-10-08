@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 
+//TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
+//AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
 namespace IntelligentCooking.Web
 {
     public class Startup

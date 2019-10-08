@@ -5,7 +5,7 @@ using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Entities
 {
-    public class Ingredient: IIdentifiable<int>
+    public class Ingredient
     {
         public Ingredient()
         {

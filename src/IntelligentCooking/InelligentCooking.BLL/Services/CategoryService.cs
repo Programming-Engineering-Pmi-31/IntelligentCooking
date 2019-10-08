@@ -19,7 +19,7 @@ namespace InelligentCooking.BLL.Services
         {
             var categories = await _unitOfWork.Categories.GetAsync();
 
-            var categoriesInfo = categories.Select(
+            return categories.Select(
                     c => new CategoryDto
                     {
                         Id = c.Id,
@@ -27,9 +27,6 @@ namespace InelligentCooking.BLL.Services
                         ImageUrl = c.ImageUrl
                     })
                 .ToList();
-
-
-            return categoriesInfo;
         }
     }
 }

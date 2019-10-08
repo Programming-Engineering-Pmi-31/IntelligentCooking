@@ -7,13 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class IngredientRepository: NewRepository, IIngredientRepository
+    public class IngredientRepository: Repository<Ingredient>, IIngredientRepository
     {
         public IngredientRepository(IntelligentCookingContext context) : base(context) {}
-
-        public async Task<IEnumerable<Ingredient>> GetAsync()
-        {
-            return await Context.Ingredients.ToListAsync();
-        }
     }
 }

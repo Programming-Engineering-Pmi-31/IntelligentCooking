@@ -5,7 +5,7 @@ using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Entities
 {
-    public class Category: IIdentifiable<int>
+    public class Category
     {
         public Category()
         {

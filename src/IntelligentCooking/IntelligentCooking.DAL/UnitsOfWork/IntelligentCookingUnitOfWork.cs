@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.Repositories;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using IntelligentCooking.DAL.Context;
@@ -20,33 +19,34 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             Categories = new CategoryRepository(_context);
             Ingredients = new IngredientRepository(_context);
             Dishes = new DishRepository(_context);
-            DishCategories = new Repository<DishCategory, (int DishId, int CategoryId)>(_context);
-            DishIngredients = new Repository<DishIngredient, (int DishId, int IngredientId)>(_context);
-            Favourites = new Repository<Favourite, (int UserId, int DishId)>(_context);
-            Likes = new Repository<Like, (int UserId, int DishId)>(_context);
-            Users = new Repository<User, int>(_context);
-            Roles = new Repository<Role, int>(_context);
-            UserRoles = new Repository<UserRole, (int UserId, int RoleId)>(_context);
-            UserTokens = new Repository<UserToken, (int UserId, string LoginProvider, string Name)>(_context);
-            UserLogins = new Repository<UserLogin, (string LoginProvider, string ProviderKey)>(_context);
-            UserClaims = new Repository<UserClaim, int>(_context);
-            RoleClaims = new Repository<RoleClaim, int>(_context);
+            DishCategories = new DishCategoryRepository(_context);
+            DishIngredients = new DishIngredientRepository(_context);
+            Favourites = new FavouriteRepository(_context);
+            Likes = new LikeRepository(_context);
+            Users = new UserRepository(_context);
+            Roles = new RoleRepository(_context);
+            UserRoles = new UserRoleRepository(_context);
+            UserTokens = new UserTokenRepository(_context);
+            UserLogins = new UserLoginRepository(_context);
+            UserClaims = new UserClaimRepository(_context);
+            RoleClaims = new RoleClaimRepository(_context);
         }
 
         public ICategoryRepository Categories { get; }
         public IIngredientRepository Ingredients { get; }
         public IDishRepository Dishes { get; }
-        public IRepository<DishCategory, (int DishId, int CategoryId)> DishCategories { get; }
-        public IRepository<DishIngredient, (int DishId, int IngredientId)> DishIngredients { get; }
-        public IRepository<Favourite, (int UserId, int DishId)> Favourites { get; }
-        public IRepository<Like, (int UserId, int DishId)> Likes { get; }
-        public IRepository<User, int> Users { get; }
-        public IRepository<Role, int> Roles { get; }
-        public IRepository<UserRole, (int UserId, int RoleId)> UserRoles { get; }
-        public IRepository<UserToken, (int UserId, string LoginProvider, string Name)> UserTokens { get; }
-        public IRepository<UserLogin, (string LoginProvider, string ProviderKey)> UserLogins { get; }
-        public IRepository<UserClaim, int> UserClaims { get; }
-        public IRepository<RoleClaim, int> RoleClaims { get; }
+        public IDishCategoryRepository DishCategories { get; }
+        public IDishIngredientRepository DishIngredients { get; }
+        public IFavouriteRepository Favourites { get; }
+        public ILikeRepository Likes { get; }
+        public IUserRepository Users { get; }
+        public IRoleRepository Roles { get; }
+        public IUserRoleRepository UserRoles { get; }
+        public IUserTokenRepository UserTokens { get; }
+        public IUserLoginRepository UserLogins { get; }
+        public IUserClaimRepository UserClaims { get; }
+        public IRoleClaimRepository RoleClaims { get; }
+
 
         public async Task CommitAsync()
         {

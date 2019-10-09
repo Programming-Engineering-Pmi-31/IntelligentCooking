@@ -62,7 +62,7 @@ class CreateRecipe extends Component {
         }
         axios({
             method: 'POST',
-            url: 'https://localhost:5001/api/Dish',
+            url: 'https://localhost:44335/api/Dish',
             data: Object.assign(formData,obj)
         })
         console.log(formData)

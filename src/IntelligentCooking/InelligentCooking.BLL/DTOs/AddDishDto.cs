@@ -10,7 +10,7 @@ namespace InelligentCooking.BLL.DTOs
         public string Title { get; set; }
         public IFormFile Img { get; set; }
         public string Recipe { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
         public int Servings { get; set; }
         public double? Proteins { get; set; }
         public double? Fats { get; set; }

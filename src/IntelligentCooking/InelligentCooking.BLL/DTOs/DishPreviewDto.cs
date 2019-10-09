@@ -11,7 +11,7 @@ namespace InelligentCooking.BLL.DTOs
         public string ImageUrl { get; set; }
         public int Rating { get; set; }
         public int Likes { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
         public int? Calories { get; set; }
         public int Servings { get; set; }
         public double? Proteins { get; set; }

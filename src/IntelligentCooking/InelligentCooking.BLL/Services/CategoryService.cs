@@ -31,16 +31,5 @@ namespace InelligentCooking.BLL.Services
                 .ToList();
         }
 
-        public async Task AddCategory(AddCategoryDto addCategory)
-        {
-            var category = new Category
-            {
-                Name = addCategory.Name
-            };
-
-            _unitOfWork.Categories.Add(category);
-
-            await _unitOfWork.Commit();
-        }
     }
 }

@@ -58,12 +58,23 @@ class CreateRecipe extends Component {
     createProduct = (obj) =>{
         const formData = new FormData();
         for(let val in obj){
+            if(val !== 'ingredients' && val !== 'categories' && val !== 'ingredientAmounts')
             formData.append(val, obj[val])
         }
+
+        for(let [i, val] of obj.ingredients.entries())
+            formData.append(`ingredients[${i}]`, val)
+            
+        for(let [i, val] of obj.categories.entries())
+            formData.append(`categories[${i}]`, val)
+        
+        for(let [i, val] of obj.ingredientAmounts.entries())
+            formData.append(`ingredientAmounts[${i}]`, val)
+
         axios({
             method: 'POST',
             url: 'https://localhost:44335/api/Dish',
-            data: Object.assign(formData,obj)
+            data: formData
         })
         console.log(formData)
     }

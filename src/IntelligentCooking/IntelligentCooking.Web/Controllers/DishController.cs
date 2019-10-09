@@ -7,6 +7,7 @@ using InelligentCooking.BLL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
+using IntelligentCooking.Web.Infrastructure.ModelBinders;
 
 namespace IntelligentCooking.Web.Controllers
 {
@@ -28,7 +29,7 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpPost]
-        public async Task AddDish([FromForm] AddDishDto addDish)
+        public async Task AddDish([FromForm]AddDishDto addDish)
         {
             await _dishService.AddDish(addDish);
         }

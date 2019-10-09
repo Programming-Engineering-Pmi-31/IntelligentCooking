@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
 import * as dishesActions from "../actions/dishes"
+import * as categoriesActions from "../actions/categories"
 import * as sortActions from "../actions/sort"
 import AllRecipes from '../components/AllRecipes'
 import { bindActionCreators } from 'redux';
+
 import orderBy from "lodash/orderBy";
 
 
@@ -20,6 +22,7 @@ const sortBy = (dishes, sortedItem) => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    ...bindActionCreators(categoriesActions,dispatch),
     ...bindActionCreators(dishesActions, dispatch),
     ...bindActionCreators(sortActions, dispatch)
 })

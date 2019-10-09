@@ -90,11 +90,19 @@
   background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
   background-color:#34CACA;
 }
-.input__flex{
+.energy__inputs{
   display: flex;
   justify-content: space-between;
   div{
-    width: 30%;
+    width: 20%;
+    position: relative;
+  }
+}
+.additional_info{
+  display: flex;
+  justify-content: space-between;
+  div{
+    width: 45%;
     position: relative;
   }
 }
@@ -123,4 +131,14 @@
   input{
     margin: 12px 0;
   }
+}
+.home__btn{
+  position: fixed !important;
+  top: 5%;
+  left: 3%;
+  svg{
+    font-size: 30px;
+    color: $light-red !important;
+  }
+
 }

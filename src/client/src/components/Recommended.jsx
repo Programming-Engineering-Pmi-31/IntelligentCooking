@@ -3,8 +3,13 @@ import styles from "../scss/Recommended.scss";
 import Slider from "react-slick";
 
 class Recommended extends React.PureComponent {
+    componentDidMount() {
+        const {setRecipes} = this.props;
+        setRecipes();
+    }
     render() {
         const {dishes} = this.props;
+
         const settings = {
             className: "slider variable-width",
             infinite: true,
@@ -25,8 +30,8 @@ class Recommended extends React.PureComponent {
                 if (indexes.indexOf(randomIndex) == -1) {
                     indexes.push(randomIndex);
                     sliderItems.push(<div style={{width:500}} className={styles.slider__item} key={dishes[randomIndex].id}>
-                        <img src={dishes[randomIndex].img} alt=""/>
-                        <p >{`cals: ${dishes[randomIndex].cals} time: ${dishes[randomIndex].time}`}</p>
+                        <img src={dishes[randomIndex].imageUrl} alt=""/>
+                        <p >{`cals: ${dishes[randomIndex].calories} time: ${dishes[randomIndex].time}`}</p>
                         <div></div>
                     </div>)
                 }

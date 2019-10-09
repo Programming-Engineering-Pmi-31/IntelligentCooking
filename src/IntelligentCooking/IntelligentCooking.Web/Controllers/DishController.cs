@@ -7,7 +7,6 @@ using InelligentCooking.BLL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
-using IntelligentCooking.Web.Infrastructure.ModelBinders;
 
 namespace IntelligentCooking.Web.Controllers
 {

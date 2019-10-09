@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\ModelBinders\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

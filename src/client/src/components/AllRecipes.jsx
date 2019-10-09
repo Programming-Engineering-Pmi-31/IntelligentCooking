@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from "../scss/AllRecipes.scss"
 import StarRatings from 'react-star-ratings';
+import Loader from 'react-loader-spinner';
+import { usePromiseTracker } from "react-promise-tracker";
 
 const AllRecipes = React.memo(({dishes,sortBy}) => {
-    console.log(dishes);
+    const { promiseInProgress } = usePromiseTracker();
+    console.log(promiseInProgress)
     return(
 
         <div>
@@ -12,15 +15,15 @@ const AllRecipes = React.memo(({dishes,sortBy}) => {
                 <li><button onClick={()=>sortBy('popular')}>Most Popular</button></li>
                 <li><button onClick={()=>sortBy('lowesttime')}>Lowest Time</button></li>
                 <li><button onClick={()=>sortBy('lowestcals')}>Lowest cals</button></li></ul>
-            <ul className={styles.cards}>
+            {promiseInProgress === true ? <LoadingIndicator/> :  <ul className={styles.cards}>
                 {dishes.map(item => (
                     <li key={item.id} className={styles.cards__item}>
                         <div className={styles.card}>
                             <div className={styles.card__image}>
-                                <img src={item.img} alt={item.title}/>
+                                <img src={item.imageUrl} alt={item.name}/>
                             </div>
                             <div className={styles.card__content}>
-                                <div className={styles.card__title}>{item.title}</div>
+                                <div className={styles.card__title}>{item.name}</div>
                                 <div className={styles.rating__info}>
                                     <span>
                                     <StarRatings
@@ -29,18 +32,30 @@ const AllRecipes = React.memo(({dishes,sortBy}) => {
                                         starSpacing="3px"/>
                                 </span>
                                     <span>{item.likes}</span>
-                                    <span>{item.cals}</span>
+                                    <span>{item.calories}</span>
                                     <span>{item.time}</span>
                                 </div>
-
-
                             </div>
                         </div>
                     </li>
                 ))}
 
-            </ul>
+            </ul>}
         </div>
     )
 });
+const LoadingIndicator = ()=> {
+    return (
+    <div style={{
+        width: "100%",
+        height: "100",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }}
+    >
+        <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+    </div>
+    )
+};
 export default AllRecipes;

@@ -3,8 +3,10 @@ import styles from "../scss/CreateRecipe.scss"
 import axios from 'axios'
 import Select from 'react-select';
 import classNames from  'classnames'
-import _ from 'lodash/isUndefined'
-import diff from "redux-logger/src/diff";
+import Textarea from 'react-textarea-autosize';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 class CreateRecipe extends Component {
     state = {
         name:"",
@@ -155,7 +157,7 @@ class CreateRecipe extends Component {
                         <label className={styles.label}>Ingredients</label>
                     </div>
                     <div>
-                        {this.state.ingredients ?
+                        {this.state.ingredients.length ?
                             <table className={styles.ingredient__table}>
                                 <thead>
                                 <tr>
@@ -178,7 +180,7 @@ class CreateRecipe extends Component {
                             </table> : null
                         }
                     </div>
-                    <div className={styles.input__flex}>
+                    <div className={styles.energy__inputs}>
                         <div>
                             <Input name="proteins" type="number" handler={this.valueChange}/>
                             <label className={styles.label}>Proteins</label>
@@ -191,18 +193,20 @@ class CreateRecipe extends Component {
                             <Input name="fats" type="number" handler={this.valueChange}/>
                             <label className={styles.label}>Fats</label>
                         </div>
+                        <div>
+                            <Input name="cals" type="number" handler={this.valueChange}/>
+                            <label className={styles.label}>Cals</label>
+                        </div>
                     </div>
-                    <div>
-                        <Input name="cals" type="number" handler={this.valueChange}/>
-                        <label className={styles.label}>Cals</label>
-                    </div>
-                    <div>
-                        <Input name="servings" type="number" handler={this.valueChange}/>
-                        <label className={styles.label}>Servings</label>
-                    </div>
-                    <div>
-                        <Input name="time" type="time" handler={this.valueChange}/>
-                        <label className={styles.label}>Time</label>
+                    <div className={styles.additional_info}>
+                        <div>
+                            <Input name="servings" type="number" handler={this.valueChange}/>
+                            <label className={styles.label}>Servings</label>
+                        </div>
+                        <div>
+                            <Input name="time" type="time" handler={this.valueChange}/>
+                            <label className={styles.label}>Time</label>
+                        </div>
                     </div>
                     <div>
                         <TextArea name="recipe" handler={this.valueChange}/>
@@ -213,6 +217,9 @@ class CreateRecipe extends Component {
                     </div>
                     <input type="button"   onClick={()=>this.createProduct(obj)} value="Send Message"/>
                 </form>
+                <div className={styles.home__btn}>
+                    <Link to={'/'}><FontAwesomeIcon icon={faHome} /></Link>
+                </div>
             </div>
         )
     }
@@ -248,7 +255,7 @@ class TextArea extends Component{
         let inputClass = classNames({
             [styles.input__active]: this.state.length > 0,
         });
-        return <textarea className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
+        return <Textarea className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
     }
 };
 export default CreateRecipe;

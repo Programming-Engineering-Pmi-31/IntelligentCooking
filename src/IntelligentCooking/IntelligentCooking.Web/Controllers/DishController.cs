@@ -28,9 +28,9 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpPost]
-        public async Task AddDish([FromForm]AddDishDto addDish)
+        public async Task<DishPreviewDto> AddDish([FromForm]AddDishDto addDish)
         {
-            await _dishService.AddDish(addDish);
+            return await _dishService.AddDish(addDish);
         }
     }
 }

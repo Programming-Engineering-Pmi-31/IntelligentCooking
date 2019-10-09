@@ -33,7 +33,7 @@ namespace InelligentCooking.BLL.Services
                 .ToArray();
         }
 
-        public async Task AddDish(AddDishDto addDish)
+        public async Task<DishPreviewDto> AddDish(AddDishDto addDish)
         {
             var dish = _mapper.Map<AddDishDto, Dish>(addDish);
 
@@ -58,6 +58,8 @@ namespace InelligentCooking.BLL.Services
             _unitOfWork.DishCategories.AddRange(dishCategories);
 
             await _unitOfWork.CommitAsync();
+
+            return _mapper.Map<Dish, DishPreviewDto>(dishEntity);
         }
     }
 }

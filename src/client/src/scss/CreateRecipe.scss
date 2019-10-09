@@ -37,7 +37,8 @@
     }
   }
   textarea {
-    resize:none;
+    min-height: 40px;
+    resize: vertical;
     overflow: hidden;
   }
 }
@@ -97,4 +98,29 @@
     position: relative;
   }
 }
+.input__active + label{
+  margin-top: -16px;
+  font-size: 14px;
+}
+.ingredient__table{
+  margin-bottom: 40px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+  th,td{
+    text-align: center;
+    &:nth-child(1){
+      width: 5%;
+    }
+    &:nth-child(2){
+      width: 25%;
+    }
+    &:nth-child(3){
+      width: 70%;
+    }
+  }
 
+  input{
+    margin: 12px 0;
+  }
+}

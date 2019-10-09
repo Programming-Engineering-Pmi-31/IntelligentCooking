@@ -2,14 +2,18 @@ import React,{Component} from 'react';
 import styles from "../scss/CreateRecipe.scss"
 import axios from 'axios'
 import Select from 'react-select';
+import classNames from  'classnames'
+import _ from 'lodash/isUndefined'
+import diff from "redux-logger/src/diff";
 class CreateRecipe extends Component {
     state = {
         name:"",
-        categories:[],
+        categories:null,
         description:"",
         img:0,
         time:"",
-        ingridients:[],
+        ingredients:[],
+        ingredientAmounts:{},
         servings:0,
         proteins:0,
         carbs :0,
@@ -26,23 +30,36 @@ class CreateRecipe extends Component {
             { categories: category }
         );
     };
-    ingridientsChange = ingridient => {
-        console.log(ingridient);
-        this.setState(
-            { ingridients:ingridient}
+    ingredientsChange = ingredient => {
+        ingredient == null? ingredient = [] : ingredient
+        let difference =  this.state.ingredients.filter(x => !ingredient.includes(x));
+        console.log('Removed: ', difference);
+        this.setState(prevState=>(
+            {
+                ingredients: ingredient,
+                ingredientAmounts:{
+                    [difference.value]: undefined
+                }
+
+            })
         );
+
     };
+    ingredientsRecipeChange = event => {
+        const { name, value } = event.target;
+        this.setState( prevState=>({
+            ingredientAmounts: {
+                ...prevState.ingredientAmounts,
+                [name]:value
+            }
+        }))
+    }
 
     createProduct = (obj) =>{
         const formData = new FormData();
-        formData.append(
-            'img',
-            this.state.img
-        )
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
+        for(let val in obj){
+            formData.append(val, obj[val])
         }
-
         axios({
             method: 'POST',
             url: 'https://localhost:5001/api/Dish',
@@ -50,61 +67,10 @@ class CreateRecipe extends Component {
         })
         console.log(formData)
     }
-    // createProduct = (product) =>{
-    //     const formData = new FormData()
-    //     formData.append(
-    //         'image',
-    //         this.state.image,
-    //         this.state.image.name)
-    //     console.log(formData);
-    //     return fetch(`http://localhost:4000/dishes`, {
-    //         method: 'POST',
-    //         body: JSON.stringify(
-    //             {
-    //                 title:this.state.name,
-    //                 img: this.state.image,
-    //                 description: this.state.description,
-    //                 rating:0,
-    //                 likes:0,
-    //                 ingridients: this.state.ingridients,
-    //                 categories:this.state.categories,
-    //                 recipe:this.state.recipe,
-    //                 time:this.state.time,
-    //                 cals:this.state.calories,
-    //                 servings:this.state.servings,
-    //                 fats:this.state.fats,
-    //                 proteins:this.state.proteins,
-    //                 carbs:this.state.carbohydrates
-    //             }
-    //         ),
-    //         headers: {
-    //             'content-type': "application/json"
-    //         }
-    //     }).then(res=>res.json())
-    // }
     fileChangedHandler = e => {
         this.setState({ img: e.target.files[0] })
     }
-    // createDish = () =>{
-    //     axios.post('/dishes.json', qs.stringify(){
-    //         id:13,
-    //         title:this.state.name,
-    //         img: this.state.img,
-    //         description: this.state.description,
-    //         rating:0,
-    //         likes:0,
-    //         recipe:this.state.recipe,
-    //         time:this.state.time,
-    //         cals:this.state.calories,
-    //         servings:this.state.servings,
-    //         fats:this.state.fats,
-    //         proteins:this.state.proteins,
-    //         carbs:this.state.carbohydrates
-    //     })
-    //         .then(function (response) {
-    //             console.log(response);
-    //         })
-    // }
+
     valueChange = (event) => {
         const { name, value,type } = event.target;
         console.log(name,value)
@@ -113,30 +79,21 @@ class CreateRecipe extends Component {
         }));
     };
     componentDidMount() {
-        const {setIngridients,setCategories} = this.props;
-        setIngridients();
+        const {setIngredients,setCategories} = this.props;
+        setIngredients();
         setCategories();
     }
 
-
-    // const [recipe,changeRecipe] = useState({
-    //     "name":"",
-    //     "categories":[],
-    //     "description":"",
-    //     "image":"",
-    //     "ingridients":[],
-    //     "protein":0,
-    //     "carbs":0,
-    //     "fat":0,
-    //     "recipe":""
-    // })
     render() {
+        let catToSend;
+        {this.state.categories ? catToSend = this.state.categories.map(item=>item.value) : catToSend = []}
         let obj = {
             title:this.state.name,
             img: this.state.img,
             description: this.state.description,
-            ingridients: [],
-            categories:[],
+            ingredients: Object.values(this.state.ingredients).map(e => e.value),
+            ingredientAmounts: Object.values(this.state.ingredientAmounts).filter(e => e != undefined),
+            categories:catToSend,
             recipe:this.state.recipe,
             time:this.state.time,
             cals:this.state.cals,
@@ -146,22 +103,21 @@ class CreateRecipe extends Component {
             carbs:this.state.carbs
         };
         console.log(obj);
-        const options = []
-        let ingridientsOptions = [];
+        let ingredientsOptions = [];
         let categoriesOptions = [];
-        const {ingridients,categories} = this.props;
-        ingridients.map(item => ingridientsOptions.push({value:item.id, label:item.name}))
-        categories.map(item => categoriesOptions.push({value:item.id, label:item.name}))
+        const {ingredientsList,categoriesList} = this.props;
+        ingredientsList.map(item => ingredientsOptions.push({value:item.id, label:item.name}))
+        categoriesList.map(item => categoriesOptions.push({value:item.id, label:item.name}))
         return (
             <div className={styles.form}>
                 <h2>Create new recipe</h2>
                 <form>
                     <div>
-                        <input name="name" id='name-input' onChange={this.valueChange} type="text"/>
+                        <Input name="name" type="text" handler={this.valueChange}/>
                         <label className={styles.label}>Name</label>
                     </div>
                     <div>
-                        <input name="description" id='name-input' onChange={this.valueChange} type="text"/>
+                        <Input name="description" type="text" handler={this.valueChange}/>
                         <label className={styles.label}>Description</label>
                     </div>
                     <div className={styles.form__selector}>
@@ -170,6 +126,7 @@ class CreateRecipe extends Component {
                             onChange={this.categoriesChange}
                             options={categoriesOptions}
                             isMulti={true}
+
                         />
                         <label className={styles.label}>Category</label>
                     </div>
@@ -179,42 +136,69 @@ class CreateRecipe extends Component {
                     </div>
                     <div className={styles.form__selector}>
                         <Select
-                            value={this.state.ingridients}
-                            onChange={this.ingridientsChange}
-                            options={ingridientsOptions}
+                            value={this.state.ingredients}
+                            onChange={this.ingredientsChange.bind(this)}
+                            options={ingredientsOptions}
                             isMulti={true}
                         />
-                        <label className={styles.label}>Ingridients</label>
+                        <label className={styles.label}>Ingredients</label>
+                    </div>
+                    <div>
+                        {this.state.ingredients ?
+                            <table className={styles.ingredient__table}>
+                                <thead>
+                                <tr>
+                                    <th>&#8470;</th>
+                                    <th>Ingredient</th>
+                                    <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.state.ingredients.map((item, index) => (
+                                    <tr key={this.state.ingredients[this.state.ingredients.length-1-index].value}>
+                                        <td>{index+ 1}</td>
+                                        <td>{this.state.ingredients[this.state.ingredients.length-1-index].label}</td>
+                                        <td><input type="text"
+                                                   name={this.state.ingredients[this.state.ingredients.length-1-index].value}
+                                                   onChange={this.ingredientsRecipeChange}/>
+                                        </td>
+                                    </tr>))}
+                                </tbody>
+                            </table> : null
+                        }
                     </div>
                     <div className={styles.input__flex}>
                         <div>
-                            <input name="proteins" id='name-input' onChange={this.valueChange} type="number"/>
+                            <Input name="proteins" type="number" handler={this.valueChange}/>
                             <label className={styles.label}>Proteins</label>
                         </div>
                         <div>
-                            <input name="carbs" id='name-input' onChange={this.valueChange} type="number"/>
+                            <Input name="carbs" type="number" handler={this.valueChange}/>
                             <label className={styles.label}>Carbs</label>
                         </div>
                         <div>
-                            <input name="fats" id='name-input' onChange={this.valueChange} type="number"/>
+                            <Input name="fats" type="number" handler={this.valueChange}/>
                             <label className={styles.label}>Fats</label>
                         </div>
                     </div>
                     <div>
-                        <input name="cals" id='name-input' onChange={this.valueChange} type="number"/>
+                        <Input name="cals" type="number" handler={this.valueChange}/>
                         <label className={styles.label}>Cals</label>
                     </div>
                     <div>
-                        <input name="servings" id='name-input' onChange={this.valueChange} type="number"/>
+                        <Input name="servings" type="number" handler={this.valueChange}/>
                         <label className={styles.label}>Servings</label>
                     </div>
                     <div>
-                        <input name="time" id='name-input' onChange={this.valueChange}  type="time"/>
+                        <Input name="time" type="time" handler={this.valueChange}/>
                         <label className={styles.label}>Time</label>
                     </div>
                     <div>
-                        <textarea name="recipe" onChange={this.valueChange}></textarea>
+                        <TextArea name="recipe" handler={this.valueChange}/>
                         <label className={styles.label}>Recipe</label>
+                    </div>
+                    <div>
+
                     </div>
                     <input type="button"   onClick={()=>this.createProduct(obj)} value="Send Message"/>
                 </form>
@@ -222,4 +206,38 @@ class CreateRecipe extends Component {
         )
     }
 }
+class Input extends Component{
+    state = {
+        length: 0
+    }
+    valueChange = (event) => {
+        const {value} = event.target;
+        this.setState({
+            length: value.length
+        })
+    };
+    render () {
+        let inputClass = classNames({
+            [styles.input__active]: this.state.length > 0,
+        });
+        return <input className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
+    }
+};
+class TextArea extends Component{
+    state = {
+        length: 0
+    }
+    valueChange = (event) => {
+        const {value} = event.target;
+        this.setState({
+            length: value.length
+        })
+    };
+    render () {
+        let inputClass = classNames({
+            [styles.input__active]: this.state.length > 0,
+        });
+        return <textarea className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
+    }
+};
 export default CreateRecipe;

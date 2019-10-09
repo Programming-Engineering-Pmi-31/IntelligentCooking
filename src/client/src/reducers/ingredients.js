@@ -1,12 +1,12 @@
 const initialState = {
-    ingridients: []
+    ingredients: []
 };
-export const ingridients = (state = initialState, action) => {
+export const ingredients = (state = initialState, action) => {
     switch (action.type) {
-        case "SET_INGRIDIENTS":
+        case "SET_INGREDIENTS":
             return{
                 ...state,
-                ingridients: action.payload
+                ingredients: action.payload
             }
 
         default:

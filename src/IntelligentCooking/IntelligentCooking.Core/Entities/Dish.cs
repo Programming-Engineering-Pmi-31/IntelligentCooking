@@ -5,8 +5,16 @@ using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Entities
 {
-    public class Dish: IIdentifiable<int>
+    public class Dish
     {
+        public Dish()
+        {
+            Favourites = new HashSet<Favourite>();
+            DishIngredients = new HashSet<DishIngredient>();
+            DishCategories = new HashSet<DishCategory>();
+            Likes = new HashSet<Like>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }

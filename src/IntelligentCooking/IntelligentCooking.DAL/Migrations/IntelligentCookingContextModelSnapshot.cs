@@ -25,6 +25,9 @@ namespace IntelligentCooking.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired();
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30);
@@ -37,13 +40,13 @@ namespace IntelligentCooking.DAL.Migrations
                     b.ToTable("Categories");
 
                     b.HasData(
-                        new { Id = 1, Name = "Sweets" },
-                        new { Id = 2, Name = "Soup" },
-                        new { Id = 3, Name = "Italian" },
-                        new { Id = 4, Name = "Thai" },
-                        new { Id = 5, Name = "Breakfast" },
-                        new { Id = 6, Name = "Quick and Easy" },
-                        new { Id = 7, Name = "Vegetarian" }
+                        new { Id = 1, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Sweets" },
+                        new { Id = 2, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Soup" },
+                        new { Id = 3, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Italian" },
+                        new { Id = 4, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Thai" },
+                        new { Id = 5, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Breakfast" },
+                        new { Id = 6, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Quick and Easy" },
+                        new { Id = 7, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg", Name = "Vegetarian" }
                     );
                 });
 

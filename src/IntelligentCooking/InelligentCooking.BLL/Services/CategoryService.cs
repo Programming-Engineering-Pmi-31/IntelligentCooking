@@ -7,29 +7,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
 {
     public class CategoryService : ICategoryService
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CategoryService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        public CategoryService(IIntelligentCookingUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
         public async Task<IEnumerable<CategoryDto>> GetCategories()
         {
             var categories = await _unitOfWork.Categories.GetAsync();
 
-            var categoriesInfo = categories.Select(
-                    c => new CategoryDto
-                    {
-                        Id = c.Id,
-                        Name = c.Name
-                    })
+            return categories.Select(_mapper.Map<Category, CategoryDto>)
                 .ToList();
-
-
-            return categoriesInfo;
         }
 
         public async Task AddCategory(AddCategoryDto addCategory)

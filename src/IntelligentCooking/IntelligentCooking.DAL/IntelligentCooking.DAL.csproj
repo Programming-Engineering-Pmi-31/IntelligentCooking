@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IntelligentCooking.Core\IntelligentCooking.Core.csproj" />
   </ItemGroup>
 

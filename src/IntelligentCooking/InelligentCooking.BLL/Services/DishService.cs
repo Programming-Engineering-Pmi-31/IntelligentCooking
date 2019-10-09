@@ -1,11 +1,10 @@
 ﻿using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InelligentCooking.BLL.Infrastructure;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using System.Linq;
+using AutoMapper;
 using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
@@ -14,95 +13,51 @@ namespace InelligentCooking.BLL.Services
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
         private IImageService _imageService;
+        private readonly IMapper _mapper;
 
-        public DishService(IIntelligentCookingUnitOfWork unitOfWork, IImageService imageService)
+        public DishService(
+            IIntelligentCookingUnitOfWork unitOfWork,
+            IImageService imageService,
+            IMapper mapper)
         {
-            _unitOfWork = unitOfWork ;
+            _unitOfWork = unitOfWork;
             _imageService = imageService;
-        } 
+            _mapper = mapper;
+        }
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
         {
-            var dishes = await _unitOfWork.Dishes.GetAsync();
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes();
 
-            var dishPreviews = new List<DishPreviewDto>();
-
-            foreach(var d in dishes)
-            {
-                var tempDishPreviewDto = new DishPreviewDto()
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    ImageUrl = d.ImageUrl,
-                    Ingredients = (await _unitOfWork.DishIngredients.GetAsync(
-                            di => di.DishId == d.Id,
-                            null,
-                            null,
-                            di => di.Ingredient))
-                        .Select(di => di.Ingredient)
-                        .Select(i => new IngredientDto {Id = i.Id, Name = i.Name}),
-                    Categories = (await _unitOfWork.DishCategories.GetAsync(
-                            dc => dc.DishId == d.Id,
-                            null,
-                            null,
-                            dc => dc.Category))
-                        .Select(dc => dc.Category)
-                        .Select(c => new CategoryDto {Id = c.Id, Name = c.Name}),
-                    Rating = d.Stars,
-                    Likes = (await _unitOfWork.Likes.GetAsync()).Count(l => l.DishId == d.Id),
-                    Time = d.Time,
-                    Calories = d.Calories,
-                    Servings = d.Servings,
-                    Proteins = d.Proteins,
-                    Carbohydrates = d.Carbohydrates,
-                    Fats = d.Fats
-                };
-
-                dishPreviews.Add(tempDishPreviewDto);
-            }
-
-            return dishPreviews;
+            return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
+                .ToArray();
         }
 
         public async Task AddDish(AddDishDto addDish)
         {
-            var dish = new Dish
-            {
-                Id = addDish.Id,
-                Name = addDish.Title,
-                ImageUrl = await _imageService.UploadImageAsync(addDish.Image),
-                Recipe = addDish.Recipe,
-                Time = addDish.Time,
-                Servings = addDish.Servings,
-                Proteins = addDish.Proteins,
-                Fats = addDish.Fats,
-                Carbohydrates = addDish.Carbs,
-                Calories = addDish.Cals,
-                Description = addDish.Description,
-            };
+            var dish = _mapper.Map<AddDishDto, Dish>(addDish);
 
-            _unitOfWork.Dishes.Add(dish);
+            dish.ImageUrl = await _imageService.UploadImageAsync(addDish.Img);
 
+            var dishEntity = _unitOfWork.Dishes.Add(dish);
 
-            foreach (var i in addDish.Ingredients)
-            {
-                _unitOfWork.DishIngredients.Add(new DishIngredient
-                {
-                    DishId = addDish.Id,
-                    IngredientId = i
-                });
-            }
+            var dishIngredients = addDish.Ingredients
+                .Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+                .Select(
+                    x =>
+                        new DishIngredient
+                        {
+                            DishId = dishEntity.Id,
+                            IngredientId = x.IngredientId,
+                            Amount = x.Amount
+                        });
 
-            foreach (var c in addDish.Categories)
-            {
-                _unitOfWork.DishCategories.Add(new DishCategory
-                {
-                    DishId = addDish.Id,
-                    CategoryId = c
-                });
-            }
+            _unitOfWork.DishIngredients.AddRange(dishIngredients);
 
-            await _unitOfWork.Commit();
+            var dishCategories = addDish.Categories.Select(x => new DishCategory() {CategoryId = x, DishId = dishEntity.Id});
+            _unitOfWork.DishCategories.AddRange(dishCategories);
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

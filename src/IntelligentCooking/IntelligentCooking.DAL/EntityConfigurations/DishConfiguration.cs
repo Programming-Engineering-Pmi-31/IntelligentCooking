@@ -25,6 +25,9 @@ namespace IntelligentCooking.DAL.EntityConfigurations
             builder.Property(d => d.Recipe)
                 .IsRequired();
 
+            builder.Property(d => d.Time)
+                .IsRequired();
+
             builder.Property(d => d.Description)
                 .IsRequired();
 

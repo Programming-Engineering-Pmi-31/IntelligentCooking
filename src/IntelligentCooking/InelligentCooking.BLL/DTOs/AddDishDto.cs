@@ -7,9 +7,8 @@ namespace InelligentCooking.BLL.DTOs
 {
     public class AddDishDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile Img { get; set; }
         public string Recipe { get; set; }
         public DateTime Time { get; set; }
         public int Servings { get; set; }
@@ -20,6 +19,7 @@ namespace InelligentCooking.BLL.DTOs
         public string Description { get; set; }
 
         public IEnumerable<int> Ingredients { get; set; }
+        public IEnumerable<string> IngredientAmounts { get; set; }
         public IEnumerable<int> Categories { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using InelligentCooking.BLL.Interfaces;
+﻿using System;
+using AutoMapper;
+using InelligentCooking.BLL.Interfaces;
 using InelligentCooking.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +15,8 @@ namespace InelligentCooking.BLL.Infrastructure
             services.AddScoped<IImageService, CloudinaryService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IIngredientService, IngredientService>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }

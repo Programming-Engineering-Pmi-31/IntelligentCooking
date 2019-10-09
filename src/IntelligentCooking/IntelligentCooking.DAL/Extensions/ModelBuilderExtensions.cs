@@ -27,37 +27,44 @@ namespace IntelligentCooking.DAL.Extensions
                     new Category
                     {
                         Id = 1,
-                        Name = "Sweets"
+                        Name = "Sweets",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 2,
-                        Name = "Soup"
+                        Name = "Soup",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 3,
-                        Name = "Italian"
+                        Name = "Italian",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 4,
-                        Name = "Thai"
+                        Name = "Thai",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 5,
-                        Name = "Breakfast"
+                        Name = "Breakfast",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 6,
-                        Name = "Quick and Easy"
+                        Name = "Quick and Easy",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     },
                     new Category
                     {
                         Id = 7,
-                        Name = "Vegetarian"
+                        Name = "Vegetarian",
+                        ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
                     }
                 );
 

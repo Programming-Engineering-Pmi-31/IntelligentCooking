@@ -1,261 +1,319 @@
-import React,{Component} from 'react';
-import styles from "../scss/CreateRecipe.scss"
-import axios from 'axios'
+import React, { Component } from 'react';
+import axios from 'axios';
 import Select from 'react-select';
-import classNames from  'classnames'
+import classNames from 'classnames';
 import Textarea from 'react-textarea-autosize';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Link} from 'react-router-dom'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import styles from '../scss/CreateRecipe.scss';
+
 class CreateRecipe extends Component {
     state = {
-        name:"",
-        categories:null,
-        description:"",
-        img:0,
-        time:"",
-        ingredients:[],
-        ingredientAmounts:{},
-        servings:0,
-        proteins:0,
-        carbs :0,
-        fats:0,
+        name: '',
+        categories: null,
+        description: '',
+        img: 0,
+        time: '',
+        ingredients: [],
+        ingredientAmounts: {},
+        servings: 0,
+        proteins: 0,
+        carbs: 0,
+        fats: 0,
         cals: 0,
-        recipe:"",
-        likes:0,
-
+        recipe: '',
     };
 
-    categoriesChange = category => {
-        console.log(category);
-        this.setState(
-            { categories: category }
-        );
-    };
-    ingredientsChange = ingredient => {
-        ingredient == null? ingredient = [] : ingredient
-        let difference =  this.state.ingredients.filter(x => !ingredient.includes(x));
-        console.log('Removed: ', difference);
-        this.setState(prevState=>(
-            {
-                ingredients: ingredient,
-                ingredientAmounts:{
-                    [difference.value]: undefined
-                }
-
-            })
-        );
-
-    };
-    ingredientsRecipeChange = event => {
-        const { name, value } = event.target;
-        this.setState( prevState=>({
-            ingredientAmounts: {
-                ...prevState.ingredientAmounts,
-                [name]:value
-            }
-        }))
-    }
-
-    createProduct = (obj) =>{
-        const formData = new FormData();
-        for(let val in obj){
-            if(val !== 'ingredients' && val !== 'categories' && val !== 'ingredientAmounts')
-            formData.append(val, obj[val])
-        }
-
-        for(let [i, val] of obj.ingredients.entries())
-            formData.append(`ingredients[${i}]`, val)
-            
-        for(let [i, val] of obj.categories.entries())
-            formData.append(`categories[${i}]`, val)
-        
-        for(let [i, val] of obj.ingredientAmounts.entries())
-            formData.append(`ingredientAmounts[${i}]`, val)
-
-        axios({
-            method: 'POST',
-            url: 'https://localhost:44335/api/Dish',
-            data: formData
-        })
-        console.log(formData)
-    }
-    fileChangedHandler = e => {
-        this.setState({ img: e.target.files[0] })
-    }
-
-    valueChange = (event) => {
-        const { name, value,type } = event.target;
-        console.log(name,value)
-        this.setState((prevState) => ({
-            [name]: type === 'number' ? parseFloat(value) : value
-        }));
-    };
     componentDidMount() {
-        const {setIngredients,setCategories} = this.props;
+        const { setIngredients, setCategories } = this.props;
         setIngredients();
         setCategories();
     }
 
+    categoriesChange = category => {
+        console.log(category);
+        this.setState({ categories: category });
+    };
+
+    ingredientsChange = ingredient => {
+        const { ingredients } = this.state;
+        ingredient == null ? (ingredient = []) : ingredient;
+        const difference = ingredients.filter(x => !ingredient.includes(x));
+        console.log('Removed: ', difference);
+        this.setState(prevState => ({
+            ingredients: ingredient,
+            ingredientAmounts: {
+                [difference.value]: undefined,
+            },
+        }));
+    };
+
+    ingredientsRecipeChange = event => {
+        const { name, value } = event.target;
+        this.setState(prevState => ({
+            ingredientAmounts: {
+                ...prevState.ingredientAmounts,
+                [name]: value,
+            },
+        }));
+    };
+
+    // createProduct = obj => {
+    //     const formData = new FormData();
+    //     for (const val in obj) {
+    //         if (val !== 'ingredients' && val !== 'categories' && val !== 'ingredientAmounts')
+    //             formData.append(val, obj[val]);
+    //     }
+    //
+    //     for (const [i, val] of obj.ingredients.entries()) formData.append(`ingredients[${i}]`, val);
+    //
+    //     for (const [i, val] of obj.categories.entries()) formData.append(`categories[${i}]`, val);
+    //
+    //     for (const [i, val] of obj.ingredientAmounts.entries())
+    //         formData.append(`ingredientAmounts[${i}]`, val);
+    //
+    //     axios({
+    //         method: 'POST',
+    //         url: 'https://localhost:44335/api/Dish',
+    //         data: formData,
+    //     });
+    //     console.log(formData);
+    // };
+
+    fileChangedHandler = e => {
+        this.setState({ img: e.target.files[0] });
+    };
+
+    valueChange = event => {
+        const { name, value, type } = event.target;
+        console.log(name, value);
+        this.setState(prevState => ({
+            [name]: type === 'number' ? parseFloat(value) : value,
+        }));
+    };
+
     render() {
+        const {
+            categories,
+            name,
+            img,
+            description,
+            ingredients,
+            ingredientAmounts,
+            recipe,
+            time,
+            cals,
+            carbs,
+            servings,
+            fats,
+            proteins,
+        } = this.state;
+        const { ingredientsList, categoriesList, createProduct } = this.props;
         let catToSend;
-        {this.state.categories ? catToSend = this.state.categories.map(item=>item.value) : catToSend = []}
-        let obj = {
-            title:this.state.name,
-            img: this.state.img,
-            description: this.state.description,
-            ingredients: Object.values(this.state.ingredients).map(e => e.value),
-            ingredientAmounts: Object.values(this.state.ingredientAmounts).filter(e => e != undefined),
-            categories:catToSend,
-            recipe:this.state.recipe,
-            time:this.state.time,
-            cals:this.state.cals,
-            servings:this.state.servings,
-            fats:this.state.fats,
-            proteins:this.state.proteins,
-            carbs:this.state.carbs
+        {
+            categories ? (catToSend = categories.map(item => item.value)) : (catToSend = []);
+        }
+        const obj = {
+            title: name,
+            img: img,
+            description: description,
+            ingredients: Object.values(ingredients).map(e => e.value),
+            ingredientAmounts: Object.values(ingredientAmounts).filter(e => e !== undefined),
+            categories: catToSend,
+            recipe: recipe,
+            time: time,
+            cals: cals,
+            servings: servings,
+            fats: fats,
+            proteins: proteins,
+            carbs: carbs,
         };
         console.log(obj);
-        let ingredientsOptions = [];
-        let categoriesOptions = [];
-        const {ingredientsList,categoriesList} = this.props;
-        ingredientsList.map(item => ingredientsOptions.push({value:item.id, label:item.name}))
-        categoriesList.map(item => categoriesOptions.push({value:item.id, label:item.name}))
+        const ingredientsOptions = [];
+        const categoriesOptions = [];
+
+        ingredientsList.map(item => ingredientsOptions.push({ value: item.id, label: item.name }));
+        categoriesList.map(item => categoriesOptions.push({ value: item.id, label: item.name }));
         return (
             <div className={styles.form}>
                 <h2>Create new recipe</h2>
                 <form>
                     <div>
-                        <Input name="name" type="text" handler={this.valueChange}/>
+                        <Input name="name" type="text" handler={this.valueChange} />
                         <label className={styles.label}>Name</label>
                     </div>
                     <div>
-                        <Input name="description" type="text" handler={this.valueChange}/>
+                        <Input name="description" type="text" handler={this.valueChange} />
                         <label className={styles.label}>Description</label>
                     </div>
                     <div className={styles.form__selector}>
                         <Select
-                            value={this.state.categories}
+                            value={categories}
                             onChange={this.categoriesChange}
                             options={categoriesOptions}
-                            isMulti={true}
-
+                            isMulti
                         />
                         <label className={styles.label}>Category</label>
                     </div>
-                    <div>
-                        <input name="img" id='name-input' onChange={this.fileChangedHandler} type="file"/>
-                        <label className={styles.label}>Image URL</label>
+                    <div className={styles.input_img__block}>
+                        <Input
+                            name="img"
+                            id="img_input"
+                            handler={this.fileChangedHandler}
+                            type="file"
+                        />
+                        <label className={styles.label__img}>Image URL</label>
                     </div>
                     <div className={styles.form__selector}>
                         <Select
-                            value={this.state.ingredients}
-                            onChange={this.ingredientsChange.bind(this)}
+                            value={ingredients}
+                            onChange={this.ingredientsChange}
                             options={ingredientsOptions}
-                            isMulti={true}
+                            isMulti
                         />
                         <label className={styles.label}>Ingredients</label>
                     </div>
                     <div>
-                        {this.state.ingredients.length ?
+                        {ingredients.length ? (
                             <table className={styles.ingredient__table}>
                                 <thead>
-                                <tr>
-                                    <th>&#8470;</th>
-                                    <th>Ingredient</th>
-                                    <th>Amount</th>
-                                </tr>
+                                    <tr>
+                                        <th>&#8470;</th>
+                                        <th>Ingredient</th>
+                                        <th>Amount</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.ingredients.map((item, index) => (
-                                    <tr key={this.state.ingredients[this.state.ingredients.length-1-index].value}>
-                                        <td>{index+ 1}</td>
-                                        <td>{this.state.ingredients[this.state.ingredients.length-1-index].label}</td>
-                                        <td><input type="text"
-                                                   name={this.state.ingredients[this.state.ingredients.length-1-index].value}
-                                                   onChange={this.ingredientsRecipeChange}/>
-                                        </td>
-                                    </tr>))}
+                                    {ingredients.map((item, index) => (
+                                        <tr key={ingredients[ingredients.length - 1 - index].value}>
+                                            <td>{index + 1}</td>
+                                            <td>
+                                                {ingredients[ingredients.length - 1 - index].label}
+                                            </td>
+                                            <td>
+                                                <Input
+                                                    type="text"
+                                                    name={
+                                                        ingredients[ingredients.length - 1 - index]
+                                                            .value
+                                                    }
+                                                    handler={this.ingredientsRecipeChange}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
-                            </table> : null
-                        }
+                            </table>
+                        ) : null}
                     </div>
                     <div className={styles.energy__inputs}>
                         <div>
-                            <Input name="proteins" type="number" handler={this.valueChange}/>
+                            <Input name="proteins" type="number" handler={this.valueChange} />
                             <label className={styles.label}>Proteins</label>
                         </div>
                         <div>
-                            <Input name="carbs" type="number" handler={this.valueChange}/>
+                            <Input name="carbs" type="number" handler={this.valueChange} />
                             <label className={styles.label}>Carbs</label>
                         </div>
                         <div>
-                            <Input name="fats" type="number" handler={this.valueChange}/>
+                            <Input name="fats" type="number" handler={this.valueChange} />
                             <label className={styles.label}>Fats</label>
                         </div>
                         <div>
-                            <Input name="cals" type="number" handler={this.valueChange}/>
+                            <Input name="cals" type="number" handler={this.valueChange} />
                             <label className={styles.label}>Cals</label>
                         </div>
                     </div>
                     <div className={styles.additional_info}>
                         <div>
-                            <Input name="servings" type="number" handler={this.valueChange}/>
+                            <Input name="servings" type="number" handler={this.valueChange} />
                             <label className={styles.label}>Servings</label>
                         </div>
                         <div>
-                            <Input name="time" type="time" handler={this.valueChange}/>
+                            <Input name="time" type="time" handler={this.valueChange} />
                             <label className={styles.label}>Time</label>
                         </div>
                     </div>
                     <div>
-                        <TextArea name="recipe" handler={this.valueChange}/>
+                        <TextArea name="recipe" handler={this.valueChange} />
                         <label className={styles.label}>Recipe</label>
                     </div>
-                    <div>
-
-                    </div>
-                    <input type="button"   onClick={()=>this.createProduct(obj)} value="Send Message"/>
+                    <input
+                        type="button"
+                        onClick={() => () => createProduct(obj)}
+                        value="Send Message"
+                    />
                 </form>
                 <div className={styles.home__btn}>
-                    <Link to={'/'}><FontAwesomeIcon icon={faHome} /></Link>
+                    <Link to="/">
+                        <FontAwesomeIcon icon={faHome} />
+                    </Link>
                 </div>
             </div>
-        )
+        );
     }
 }
-class Input extends Component{
+class Input extends Component {
     state = {
-        length: 0
-    }
-    valueChange = (event) => {
-        const {value} = event.target;
-        this.setState({
-            length: value.length
-        })
+        length: 0,
     };
-    render () {
-        let inputClass = classNames({
-            [styles.input__active]: this.state.length > 0,
+
+    valueChange = event => {
+        const { value } = event.target;
+        this.setState({
+            length: value.length,
         });
-        return <input className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
+    };
+
+    render() {
+        const { length } = this.state;
+        const { name, handler, type } = this.props;
+        const inputClass = classNames({
+            [styles.input__active]: length > 0,
+        });
+        return (
+            <input
+                className={inputClass}
+                name={name}
+                onChange={e => {
+                    this.valueChange(e);
+                    handler(e);
+                }}
+                type={type}
+            />
+        );
     }
-};
-class TextArea extends Component{
+}
+class TextArea extends Component {
     state = {
-        length: 0
-    }
-    valueChange = (event) => {
-        const {value} = event.target;
-        this.setState({
-            length: value.length
-        })
+        length: 0,
     };
-    render () {
-        let inputClass = classNames({
-            [styles.input__active]: this.state.length > 0,
+
+    valueChange = event => {
+        const { value } = event.target;
+        this.setState({
+            length: value.length,
         });
-        return <Textarea className={inputClass} name={this.props.name} onChange={(e)=>{this.valueChange(e);this.props.handler(e)}}  type={this.props.type}/>
+    };
+
+    render() {
+        const { length } = this.state;
+        const { name, handler, type } = this.props;
+        const inputClass = classNames({
+            [styles.input__active]: length > 0,
+        });
+        return (
+            <Textarea
+                className={inputClass}
+                name={name}
+                onChange={e => {
+                    this.valueChange(e);
+                    handler(e);
+                }}
+                type={type}
+            />
+        );
     }
-};
+}
 export default CreateRecipe;

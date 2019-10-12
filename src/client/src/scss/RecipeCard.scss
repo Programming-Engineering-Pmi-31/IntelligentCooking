@@ -1,0 +1,62 @@
+.form {
+  text-align: center;
+  font-family: 'Open Sans Condensed', arial, sans;
+  position: relative;
+  width: 90%;
+  padding: 30px;
+  background: #FFFFFF;
+  margin: 20px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  .recipe__info{
+    display: flex;
+    & > div{
+      width: 50%;
+    }
+    .recipe__name{
+      font-family: 'inconsolata', monospace;
+      text-transform: uppercase;
+    }
+
+    .recipe__photo{
+      min-height: 500px;
+      width: auto;
+    }
+
+    .recipe__aditional_info{
+      position: relative;
+      width: 80%;
+      height: 480px;
+      border: 2px solid rgba(0,0,0,0.15);
+      border-radius: 5px;
+      margin: 30px auto;
+    }
+    .clock__icon{
+      font-size: 25px;
+      position: absolute;
+      padding: 5px;
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      top: -10px;
+      right: -10px;
+    }
+    ul{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    li{
+      margin: 10px 0;
+      width: 33.33%;
+    }
+    p{
+      margin: 3px;
+    }
+
+  }
+  .recipe{
+    width: 100%;
+  }
+}

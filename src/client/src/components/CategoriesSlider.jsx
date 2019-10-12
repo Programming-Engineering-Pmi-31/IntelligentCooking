@@ -1,37 +1,32 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios'
-import styles from "../scss/CategoriesSlider.scss"
-import Slider from "react-slick";
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import Slider from 'react-slick';
+import styles from '../scss/CategoriesSlider.scss';
 
-class CategoriesSlider extends PureComponent  {
-    componentDidMount() {
-        const { setCategories } = this.props;
-        setCategories();
-
-    }
+class CategoriesSlider extends PureComponent {
     render() {
         const settings = {
             infinite: true,
             speed: 500,
             slidesToShow: 6,
-            slidesToScroll: 1
+            slidesToScroll: 1,
         };
-        let {categories} = this.props;
-        let categoriesItems = [];
-        categories.forEach((item,index) => {
-            categoriesItems.push(<div className={styles.categories__slider} key={categories[index].id}>
-                <img src={categories[index].imageUrl} alt=""/>
-                <p >{categories[index].name}</p>
-            </div>)
-        })
+        const { categories } = this.props;
+        const categoriesItems = [];
+        categories.forEach((item, index) => {
+            categoriesItems.push(
+                <div className={styles.categories__slider} key={categories[index].id}>
+                    <img src={categories[index].imageUrl} alt="" />
+                    <p>{categories[index].name}</p>
+                </div>,
+            );
+        });
         return (
             <div>
                 <p>hello</p>
-                <Slider {...settings}>
-                    {categoriesItems}
-                </Slider>
+                <Slider {...settings}>{categoriesItems}</Slider>
             </div>
-
         );
     }
 }

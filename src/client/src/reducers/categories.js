@@ -1,6 +1,6 @@
-const initialState = {
+export const initialState = {
     isLoading: true,
-    categories: []
+    categories: [],
 };
 export const categories = (state = initialState, action) => {
     switch (action.type) {
@@ -8,9 +8,9 @@ export const categories = (state = initialState, action) => {
             return {
                 ...state,
                 categories: action.payload,
-                isLoading: false
+                isLoading: false,
             };
         default:
             return state;
     }
-}
+};

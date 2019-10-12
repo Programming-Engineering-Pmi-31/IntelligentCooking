@@ -4,6 +4,7 @@
   transition: all 0.3s;
   img{
     filter: brightness(100%);
+    min-height: 400px;
     filter: saturate(130%);
   }
   div{

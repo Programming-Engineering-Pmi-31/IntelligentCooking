@@ -1,5 +1,6 @@
 .form{
   font-family: 'Open Sans Condensed', arial, sans;
+  position: relative;
   width: 80%;
   padding: 30px;
   background: #FFFFFF;
@@ -21,6 +22,7 @@
     position: relative;
   }
   input,textarea,select{
+    color:transparent;
     z-index: 10;
     transition: all 0.4s;
     position: relative;
@@ -102,13 +104,41 @@
   display: flex;
   justify-content: space-between;
   div{
-    width: 45%;
+    width: 47%;
     position: relative;
   }
 }
-.input__active + label{
-  margin-top: -16px;
-  font-size: 14px;
+
+.input__active{
+  color:#000 !important;
+  &:focus{
+    color:#000;
+  }
+  & + label{
+    margin-top: -16px;
+    font-size: 14px;
+  }
+
+}
+.input_img__block{
+  margin-top: 30px;
+  input{
+    color:#000;
+  }
+}
+.label__img{
+  font-family: 'inconsolata', monospace;
+  text-transform: uppercase;
+  position: absolute;
+  margin-top: -25px;
+  top: 0;
+  font-size: 18px;
+}
+.time__input input{
+  color:transparent;
+  &:focus{
+    color:#000;
+  }
 }
 .ingredient__table{
   margin-bottom: 40px;
@@ -133,9 +163,9 @@
   }
 }
 .home__btn{
-  position: fixed !important;
-  top: 5%;
-  left: 3%;
+  position: absolute !important;
+  top: 3%;
+  right: 3%;
   svg{
     font-size: 30px;
     color: $light-red !important;

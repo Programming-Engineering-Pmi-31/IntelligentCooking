@@ -11,5 +11,7 @@ namespace InelligentCooking.BLL.Interfaces
         Task<IEnumerable<DishPreviewDto>> GetDishesInfo();
 
         Task<DishPreviewDto> AddDish(AddDishDto addDish);
+
+        Task<DishDto> GetDishById(int id);
     }
 }

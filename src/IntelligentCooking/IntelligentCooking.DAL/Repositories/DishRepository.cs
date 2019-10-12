@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.Repositories;
@@ -18,6 +19,16 @@ namespace IntelligentCooking.DAL.Repositories
                 .Include(d => d.DishCategories)
                 .ThenInclude(d => d.Category)
                 .ToListAsync();
+        }
+
+        public async Task<Dish> FindAsync(int id)
+        {
+            return await Context.Dishes.Include(d => d.DishIngredients)
+                .ThenInclude(di => di.Ingredient)
+                .Include(d => d.DishCategories)
+                .ThenInclude(d => d.Category)
+                .Include(d => d.Likes)
+                .FirstOrDefaultAsync(d => d.Id == id);
         }
     }
 }

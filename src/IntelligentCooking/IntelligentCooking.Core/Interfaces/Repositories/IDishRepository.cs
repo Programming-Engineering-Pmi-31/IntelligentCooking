@@ -8,5 +8,6 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
     {
         Dish Add(Dish dish);
         Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes();
+        Task<Dish> FindAsync(int id);
     }
 }

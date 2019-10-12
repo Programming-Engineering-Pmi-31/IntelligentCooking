@@ -28,6 +28,11 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ForMember(d => d.Time, opt => opt.MapFrom(x => DateTime.ParseExact(x.Time, "HH:mm", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.Calories, opt => opt.MapFrom(x => x.Cals));
 
+            CreateMap<Dish, DishDto>()
+                .ForMember(d => d.Ingredients, opt => opt.MapFrom(x => x.DishIngredients))
+                .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToShortTimeString()))
+                .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count));
         }
     }
 }

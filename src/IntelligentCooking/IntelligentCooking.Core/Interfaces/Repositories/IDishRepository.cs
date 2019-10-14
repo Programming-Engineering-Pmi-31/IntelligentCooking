@@ -7,6 +7,6 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
     public interface IDishRepository
     {
         Dish Add(Dish dish);
-        Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes();
+        Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes(int? skip, int? take, bool byTime, bool byCalories);
     }
 }

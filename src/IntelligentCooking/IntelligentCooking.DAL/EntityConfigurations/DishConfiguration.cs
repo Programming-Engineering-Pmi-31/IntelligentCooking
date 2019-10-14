@@ -17,10 +17,9 @@ namespace IntelligentCooking.DAL.EntityConfigurations
 
             builder.Property(d => d.Name)                
                 .IsRequired()
-                .HasMaxLength(40);                
+                .HasMaxLength(40);
 
-            builder.Property(d => d.ImageUrl)
-                .IsRequired();
+            builder.Ignore(d => d.ImageUrl);
 
             builder.Property(d => d.Recipe)
                 .IsRequired();
@@ -30,6 +29,11 @@ namespace IntelligentCooking.DAL.EntityConfigurations
 
             builder.Property(d => d.Description)
                 .IsRequired();
+
+            builder.HasMany(d => d.Images)
+                .WithOne(i => i.Dish)
+                .IsRequired()
+                .HasForeignKey(d => d.DishId);
 
             builder.HasMany(d => d.DishIngredients)
                 .WithOne(di => di.Dish)

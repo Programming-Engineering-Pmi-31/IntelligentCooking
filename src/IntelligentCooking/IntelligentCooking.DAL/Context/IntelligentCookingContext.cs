@@ -21,6 +21,7 @@ namespace IntelligentCooking.DAL.Context
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

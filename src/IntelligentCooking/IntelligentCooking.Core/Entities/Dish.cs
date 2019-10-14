@@ -13,6 +13,7 @@ namespace IntelligentCooking.Core.Entities
             DishIngredients = new HashSet<DishIngredient>();
             DishCategories = new HashSet<DishCategory>();
             Likes = new HashSet<Like>();
+            Images = new HashSet<Image>();
         }
 
         public int Id { get; set; }
@@ -28,6 +29,7 @@ namespace IntelligentCooking.Core.Entities
         public int? Calories { get; set; }
         public string Description { get; set; }
 
+        public ICollection<Image> Images { get; set; }
         public ICollection<DishIngredient> DishIngredients { get; set; }
         public ICollection<DishCategory> DishCategories { get; set; }
         public ICollection<Like> Likes { get; set; }

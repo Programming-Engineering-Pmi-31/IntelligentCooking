@@ -25,9 +25,9 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo()
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(PaginationDto pagination, SortingDto sortingDto)
         {
-            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes();
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes(pagination.Skip, pagination.Take, sortingDto.ByTime, sortingDto.ByCalories);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();

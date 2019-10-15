@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using AutoMapper;
 using InelligentCooking.BLL.DTOs;
 using IntelligentCooking.Core.Entities;
@@ -14,7 +15,8 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ForMember(d => d.Ingredients, opt => opt.MapFrom(x => x.DishIngredients))
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
                 .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToShortTimeString()))
-                .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count));
+                .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count))
+                .ForMember(d => d.ImageUrl, opt => opt.MapFrom(x => x.Images.FirstOrDefault(z => z.Priority == 1).Url));
 
             CreateMap<AddDishDto, Dish>()
                 .ForMember(d => d.Favourites, opt => opt.Ignore())

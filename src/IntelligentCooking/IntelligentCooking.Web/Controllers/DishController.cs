@@ -22,9 +22,9 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(PaginationDto pagination, SortingDto sortingDto)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(MainGetDishDto getDishDto)
         {
-            return await _dishService.GetDishesInfo(pagination, sortingDto);
+            return await _dishService.GetDishesInfo(getDishDto);
         }
 
         [HttpPost]

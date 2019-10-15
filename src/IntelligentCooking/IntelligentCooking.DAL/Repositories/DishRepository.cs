@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.Repositories;
 using IntelligentCooking.DAL.Context;
+using IntelligentCooking.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
@@ -14,27 +15,36 @@ namespace IntelligentCooking.DAL.Repositories
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikes(int? skip, int? take, bool byTime, bool byCalories)
         {
-            var dishes = Context.Dishes.Include(d => d.DishIngredients)
-                    .ThenInclude(di => di.Ingredient)
-                    .Include(d => d.DishCategories)
-                    .ThenInclude(d => d.Category);
+            var dishes = Context.Dishes.IncludeMainPageProps();
+
+            if(skip.HasValue && take.HasValue)
+            {
+                dishes = dishes.Paginate(skip.Value, take.Value);
+            }
 
             if (byTime)
             {
-                dishes.OrderBy(d => d.Time);
-            }
-            else if (byCalories)
-            {
-                dishes.OrderBy(d => d.Calories);
+                dishes = dishes.OrderBy(d => d.Time);
             }
 
-            if (skip != null && take != null)
+            if (byCalories)
             {
-                dishes.Skip(skip.Value)
-                    .Take(take.Value);
+                dishes = dishes.OrderBy(d => d.Calories);
             }
 
             return await dishes.ToListAsync();
+        }
+    }
+
+    static class DishQueriesExtentions
+    {
+        public static IQueryable<Dish> IncludeMainPageProps(this IQueryable<Dish> query)
+        {
+            return query.Include(d => d.DishIngredients)
+                .ThenInclude(di => di.Ingredient)
+                .Include(d => d.DishCategories)
+                .ThenInclude(d => d.Category)
+                .Include(d => d.Images);
         }
     }
 }

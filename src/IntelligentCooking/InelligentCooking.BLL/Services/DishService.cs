@@ -25,9 +25,13 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(PaginationDto pagination, SortingDto sortingDto)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(MainGetDishDto getDish)
         {
-            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes(pagination.Skip, pagination.Take, sortingDto.ByTime, sortingDto.ByCalories);
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes(
+                getDish.Skip,
+                getDish.Take,
+                getDish.ByTime,
+                getDish.ByCalories);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();
@@ -37,9 +41,12 @@ namespace InelligentCooking.BLL.Services
         {
             var dish = _mapper.Map<AddDishDto, Dish>(addDish);
 
-            dish.ImageUrl = await _imageService.UploadImageAsync(addDish.Img);
-
             var dishEntity = _unitOfWork.Dishes.Add(dish);
+
+            var priority = 0;
+            dish.Images = (await _imageService.UploadRangeAsync(addDish.Imgages)).Select(
+                    url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
+                .ToList();
 
             var dishIngredients = addDish.Ingredients
                 .Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})

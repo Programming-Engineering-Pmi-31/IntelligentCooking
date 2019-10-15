@@ -7,19 +7,18 @@ using System.Text;
 
 namespace IntelligentCooking.DAL.EntityConfigurations
 {
-    public class DishConfiguration: IEntityTypeConfiguration<Dish>
+    public class DishConfiguration : IEntityTypeConfiguration<Dish>
     {
         public void Configure(EntityTypeBuilder<Dish> builder)
         {
             builder.HasKey(d => d.Id);
 
-            builder.HasIndex(d => d.Name).IsUnique();
+            builder.HasIndex(d => d.Name)
+                .IsUnique();
 
-            builder.Property(d => d.Name)                
+            builder.Property(d => d.Name)
                 .IsRequired()
                 .HasMaxLength(40);
-
-            builder.Ignore(d => d.ImageUrl);
 
             builder.Property(d => d.Recipe)
                 .IsRequired();

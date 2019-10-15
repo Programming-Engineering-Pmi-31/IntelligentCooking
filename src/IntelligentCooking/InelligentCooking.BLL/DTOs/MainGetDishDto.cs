@@ -4,8 +4,10 @@ using System.Text;
 
 namespace InelligentCooking.BLL.DTOs
 {
-    public class SortingDto
+    public class MainGetDishDto
     {
+        public int Skip { get; set; }
+        public int Take { get; set; }
         public bool ByTime { get; set; }
         public bool ByCalories { get; set; }
     }

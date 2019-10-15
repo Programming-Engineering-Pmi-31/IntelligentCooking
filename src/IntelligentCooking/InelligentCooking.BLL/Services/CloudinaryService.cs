@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
@@ -25,7 +27,6 @@ namespace InelligentCooking.BLL.Services
                 return null;
             }
 
-
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(file.FileName, file.OpenReadStream()),
@@ -39,6 +40,8 @@ namespace InelligentCooking.BLL.Services
             return res.SecureUri.ToString();
         }
 
+
+        //Move to validation
         private static bool IsImage(IFormFile file)
         {
             if(!string.Equals(
@@ -78,6 +81,18 @@ namespace InelligentCooking.BLL.Services
 
             return Task.Factory.StartNew(
                 () => cloudinary.Upload(@params));
+        }
+
+        public async Task<IEnumerable<string>> UploadRangeAsync(IEnumerable<IFormFile> files)
+        {
+            var urls = new List<string>();
+
+            foreach(var file in files)
+            {
+                urls.Add(await UploadImageAsync(file));
+            }
+
+            return urls;
         }
     }
 }

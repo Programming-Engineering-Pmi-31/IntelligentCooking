@@ -68,5 +68,12 @@ namespace InelligentCooking.BLL.Services
 
             return _mapper.Map<Dish, DishPreviewDto>(dishEntity);
         }
+
+        public async Task<DishDto> GetDishById(int id)
+        {
+            var dish = await _unitOfWork.Dishes.FindAsync(id);
+
+            return _mapper.Map<Dish, DishDto>(dish);
+        }
     }
 }

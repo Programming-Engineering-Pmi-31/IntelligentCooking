@@ -32,5 +32,11 @@ namespace IntelligentCooking.Web.Controllers
         {
             return await _dishService.AddDish(addDish);
         }
+
+        [HttpGet("{id}")]
+        public async Task<DishDto> GetDishById(int id)
+        {
+            return await _dishService.GetDishById(id);
+        }
     }
 }

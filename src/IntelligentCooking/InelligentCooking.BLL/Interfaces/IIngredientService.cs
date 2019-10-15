@@ -8,6 +8,6 @@ namespace InelligentCooking.BLL.Interfaces
 {
     public interface IIngredientService
     {
-        Task<IEnumerable<IngredientDto>> GetIngredients();
+        Task<IEnumerable<IngredientDto>> GetIngredientsAsync();
     }
 }

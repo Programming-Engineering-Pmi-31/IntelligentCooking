@@ -24,19 +24,19 @@ namespace IntelligentCooking.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(MainGetDishDto getDishDto)
         {
-            return await _dishService.GetDishesInfo(getDishDto);
+            return await _dishService.GetDishesInfoAsync(getDishDto);
         }
 
         [HttpPost]
         public async Task<DishPreviewDto> AddDish([FromForm]AddDishDto addDish)
         {
-            return await _dishService.AddDish(addDish);
+            return await _dishService.AddDishAsync(addDish);
         }
 
         [HttpGet("{id}")]
         public async Task<DishDto> GetDishById(int id)
         {
-            return await _dishService.GetDishById(id);
+            return await _dishService.FindByIdAsync(id);
         }
     }
 }

@@ -8,6 +8,6 @@ namespace InelligentCooking.BLL.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDto>> GetCategories();
+        Task<IEnumerable<CategoryDto>> GetCategoriesAsync();
     }
 }

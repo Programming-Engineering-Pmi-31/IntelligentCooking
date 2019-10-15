@@ -23,7 +23,7 @@ namespace IntelligentCooking.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<IngredientDto>> GetIngredients()
         {
-            return await _ingredientService.GetIngredients();
+            return await _ingredientService.GetIngredientsAsync();
         }
     }
 }

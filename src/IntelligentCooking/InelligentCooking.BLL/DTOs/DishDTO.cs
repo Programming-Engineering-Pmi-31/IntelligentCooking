@@ -8,7 +8,6 @@ namespace InelligentCooking.BLL.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string ImageUrl { get; set; }
         public string Recipe { get; set; }
         public int Rating { get; set; }
         public int Likes { get; set; }
@@ -20,6 +19,7 @@ namespace InelligentCooking.BLL.DTOs
         public double? Carbohydrates { get; set; }
         public string Description { get; set; }
 
+        public IEnumerable<ImageDto> Images { get; set; }
         public IEnumerable<IngredientDto> Ingredients { get; set; }
         public IEnumerable<CategoryDto> Categories { get; set; }
     }

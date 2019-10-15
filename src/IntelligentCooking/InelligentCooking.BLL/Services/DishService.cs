@@ -25,7 +25,7 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo(MainGetDishDto getDish)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(MainGetDishDto getDish)
         {
             var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes(
                 getDish.Skip,
@@ -37,7 +37,7 @@ namespace InelligentCooking.BLL.Services
                 .ToArray();
         }
 
-        public async Task<DishPreviewDto> AddDish(AddDishDto addDish)
+        public async Task<DishPreviewDto> AddDishAsync(AddDishDto addDish)
         {
             var dish = _mapper.Map<AddDishDto, Dish>(addDish);
 
@@ -69,7 +69,7 @@ namespace InelligentCooking.BLL.Services
             return _mapper.Map<Dish, DishPreviewDto>(dishEntity);
         }
 
-        public async Task<DishDto> GetDishById(int id)
+        public async Task<DishDto> FindByIdAsync(int id)
         {
             var dish = await _unitOfWork.Dishes.FindAsync(id);
 

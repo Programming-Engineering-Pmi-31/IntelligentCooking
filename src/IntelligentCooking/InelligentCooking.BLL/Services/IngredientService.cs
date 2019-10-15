@@ -6,25 +6,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
 {
     public class IngredientService : IIngredientService
     {
         private IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public IngredientService(IIntelligentCookingUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        public IngredientService(IIntelligentCookingUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
-        public async Task<IEnumerable<IngredientDto>> GetIngredients()
+        public async Task<IEnumerable<IngredientDto>> GetIngredientsAsync()
         {
             var ingredients = await _unitOfWork.Ingredients.GetAsync();
 
-            var ingredientsInfo = ingredients.Select(
-                    c => new IngredientDto
-                    {
-                        Id = c.Id,
-                        Name = c.Name
-                    })
+            var ingredientsInfo = ingredients
+                .Select(_mapper.Map<Ingredient, IngredientDto>)
                 .ToList();
 
 

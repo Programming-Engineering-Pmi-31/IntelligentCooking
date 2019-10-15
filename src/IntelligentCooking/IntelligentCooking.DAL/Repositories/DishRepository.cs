@@ -34,6 +34,14 @@ namespace IntelligentCooking.DAL.Repositories
 
             return await dishes.ToListAsync();
         }
+
+        public async Task<Dish> FindAsync(int id)
+        {
+            return await Context.Dishes
+                .IncludeMainPageProps()
+                .Include(d => d.Likes)
+                .FirstOrDefaultAsync(d => d.Id == id);
+        }
     }
 
     static class DishQueriesExtentions
@@ -45,16 +53,6 @@ namespace IntelligentCooking.DAL.Repositories
                 .Include(d => d.DishCategories)
                 .ThenInclude(d => d.Category)
                 .Include(d => d.Images);
-        }
-
-        public async Task<Dish> FindAsync(int id)
-        {
-            return await Context.Dishes.Include(d => d.DishIngredients)
-                .ThenInclude(di => di.Ingredient)
-                .Include(d => d.DishCategories)
-                .ThenInclude(d => d.Category)
-                .Include(d => d.Likes)
-                .FirstOrDefaultAsync(d => d.Id == id);
         }
     }
 }

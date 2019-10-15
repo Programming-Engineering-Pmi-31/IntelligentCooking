@@ -23,7 +23,7 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetCategories()
+        public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _unitOfWork.Categories.GetAsync();
 

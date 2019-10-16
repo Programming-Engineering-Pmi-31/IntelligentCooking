@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { InfiniteLoader } from 'react-window-infinite-loader';
+import { List } from 'react-virtualized';
 import StarRatings from 'react-star-ratings';
 import Loader from 'react-loader-spinner';
 import { usePromiseTracker } from 'react-promise-tracker';
@@ -8,6 +10,21 @@ import styles from '../scss/AllRecipes.scss';
 const AllRecipes = React.memo(({ dishes, sortBy }) => {
     const { promiseInProgress } = usePromiseTracker();
     console.log(promiseInProgress);
+
+    const renderRow = item => {
+        return (
+            <div key={item.id} className="row">
+                <div className="image">
+                    <img src={item.image} alt="" />
+                </div>
+                <div className="content">
+                    <div>{item.name}</div>
+                    <div>{item.text}</div>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div>
             <ul className={styles.filters}>
@@ -35,62 +52,64 @@ const AllRecipes = React.memo(({ dishes, sortBy }) => {
             {promiseInProgress === true ? (
                 <LoadingIndicator />
             ) : (
-                <ul className={styles.cards}>
-                    {dishes.map((item, index) => (
-                        <Link key={item.id} to={`recipe/${index}`}>
-                            <li className={styles.cards__item}>
-                                <div className={styles.card}>
-                                    <div className={styles.image__container}>
-                                        <img
-                                            className={styles.card__image}
-                                            src={item.imageUrl}
-                                            alt={item.name}
-                                        />
-                                    </div>
-                                    <div className={styles.card__content}>
-                                        <div className={styles.card__title}>{item.name}</div>
-                                        <div className={styles.rating__info}>
-                                            <span>
-                                                <StarRatings
-                                                    rating={item.rating}
-                                                    starDimension="20px"
-                                                    starSpacing="3px"
-                                                />
-                                            </span>
-                                            <span>{item.likes}</span>
+                <List height={300} itemSize={200}>
+                    <ul className={styles.cards}>
+                        {dishes.map((item, index) => (
+                            <li key={item.id} className={styles.cards__item}>
+                                <Link to={`recipe/${index}`}>
+                                    <div className={styles.card}>
+                                        <div className={styles.image__container}>
+                                            <img
+                                                className={styles.card__image}
+                                                src={item.imageUrl}
+                                                alt={item.name}
+                                            />
                                         </div>
-                                        <div className={styles.card__aditional}>
-                                            <span>
-                                                proteins:
-                                                {item.proteins}
-                                            </span>
-                                            <span>
-                                                carbs:
-                                                {item.carbohydrates}
-                                            </span>
-                                            <span>
-                                                fats:
-                                                {item.fats}
-                                            </span>
-                                            <span>
-                                                cals:
-                                                {item.calories}
-                                            </span>
-                                            <span>
-                                                servings:
-                                                {item.servings}
-                                            </span>
-                                            <span>
-                                                time:
-                                                {item.time}
-                                            </span>
+                                        <div className={styles.card__content}>
+                                            <div className={styles.card__title}>{item.name}</div>
+                                            <div className={styles.rating__info}>
+                                                <span>
+                                                    <StarRatings
+                                                        rating={item.rating}
+                                                        starDimension="20px"
+                                                        starSpacing="3px"
+                                                    />
+                                                </span>
+                                                <span>{item.likes}</span>
+                                            </div>
+                                            <div className={styles.card__aditional}>
+                                                <span>
+                                                    proteins:
+                                                    {item.proteins}
+                                                </span>
+                                                <span>
+                                                    carbs:
+                                                    {item.carbohydrates}
+                                                </span>
+                                                <span>
+                                                    fats:
+                                                    {item.fats}
+                                                </span>
+                                                <span>
+                                                    cals:
+                                                    {item.calories}
+                                                </span>
+                                                <span>
+                                                    servings:
+                                                    {item.servings}
+                                                </span>
+                                                <span>
+                                                    time:
+                                                    {item.time}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </li>
-                        </Link>
-                    ))}
-                </ul>
+                        ))}
+                    </ul>
+                </List>
             )}
         </div>
     );

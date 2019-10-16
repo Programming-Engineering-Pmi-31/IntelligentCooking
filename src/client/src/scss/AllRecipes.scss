@@ -81,6 +81,7 @@
   transition: all 0.5s cubic-bezier(.43,.41,.22,.91);
 }
 .card__title {
+  white-space: nowrap;
   font-size: 0.8rem;
   font-weight: 300;
   letter-spacing: 2px;

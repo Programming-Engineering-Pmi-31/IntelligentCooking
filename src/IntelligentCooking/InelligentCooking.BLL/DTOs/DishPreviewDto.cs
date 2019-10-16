@@ -18,7 +18,6 @@ namespace InelligentCooking.BLL.DTOs
         public double? Fats { get; set; }
         public double? Carbohydrates { get; set; }
 
-        public IEnumerable<IngredientDto> Ingredients { get; set; }
-        public IEnumerable<CategoryDto> Categories { get; set; }
+        public IEnumerable<int> Categories { get; set; }
     }
 }

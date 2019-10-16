@@ -18,7 +18,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route path="/recipe/cre" component={RecipeCard} />
+                <Route path="/recipe/:id" component={RecipeCard} />
                 <Route path="/create" component={CreateRecipe} />
                 <Route exact path="/" component={MainPage} />
             </Switch>

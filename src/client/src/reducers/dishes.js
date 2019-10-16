@@ -6,7 +6,10 @@ const initialState = {
 export const dishes = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_RECIPE':
-            return {};
+            return {
+                ...state,
+                dishes: [...state.dishes, action.payload],
+            };
 
         case 'SET_RECIPES':
             return {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Select from 'react-select';
 import classNames from 'classnames';
 import Textarea from 'react-textarea-autosize';
@@ -7,13 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import styles from '../scss/CreateRecipe.scss';
+import { Previews } from './Dropzone';
 
 class CreateRecipe extends Component {
     state = {
         name: '',
         categories: null,
         description: '',
-        img: 0,
+        img: [],
         time: '',
         ingredients: [],
         ingredientAmounts: {},
@@ -59,38 +59,24 @@ class CreateRecipe extends Component {
         }));
     };
 
-    // createProduct = obj => {
-    //     const formData = new FormData();
-    //     for (const val in obj) {
-    //         if (val !== 'ingredients' && val !== 'categories' && val !== 'ingredientAmounts')
-    //             formData.append(val, obj[val]);
-    //     }
-    //
-    //     for (const [i, val] of obj.ingredients.entries()) formData.append(`ingredients[${i}]`, val);
-    //
-    //     for (const [i, val] of obj.categories.entries()) formData.append(`categories[${i}]`, val);
-    //
-    //     for (const [i, val] of obj.ingredientAmounts.entries())
-    //         formData.append(`ingredientAmounts[${i}]`, val);
-    //
-    //     axios({
-    //         method: 'POST',
-    //         url: 'https://localhost:44335/api/Dish',
-    //         data: formData,
-    //     });
-    //     console.log(formData);
+    // fileChangedHandler = e => {
+    //     const {files,id} = e.target;
+    //     this.setState({ img: [`${id}`]: files[0] });
     // };
-
-    fileChangedHandler = e => {
-        this.setState({ img: e.target.files[0] });
-    };
 
     valueChange = event => {
         const { name, value, type } = event.target;
         console.log(name, value);
         this.setState(prevState => ({
+            ...prevState,
             [name]: type === 'number' ? parseFloat(value) : value,
         }));
+    };
+
+    imageChange = images => {
+        this.setState({
+            img: images,
+        });
     };
 
     render() {
@@ -116,7 +102,7 @@ class CreateRecipe extends Component {
         }
         const obj = {
             title: name,
-            img: img,
+            img: Object.values(img).filter(e => e !== undefined),
             description: description,
             ingredients: Object.values(ingredients).map(e => e.value),
             ingredientAmounts: Object.values(ingredientAmounts).filter(e => e !== undefined),
@@ -157,13 +143,8 @@ class CreateRecipe extends Component {
                         <label className={styles.label}>Category</label>
                     </div>
                     <div className={styles.input_img__block}>
-                        <Input
-                            name="img"
-                            id="img_input"
-                            handler={this.fileChangedHandler}
-                            type="file"
-                        />
-                        <label className={styles.label__img}>Image URL</label>
+                        <Previews valueChange={this.imageChange} />
+                        <label className={styles.label__img}>Images</label>
                     </div>
                     <div className={styles.form__selector}>
                         <Select
@@ -241,10 +222,13 @@ class CreateRecipe extends Component {
                     </div>
                     <input
                         type="button"
-                        onClick={() => () => createProduct(obj)}
+                        onClick={() => {
+                            createProduct(obj);
+                        }}
                         value="Send Message"
                     />
                 </form>
+
                 <div className={styles.home__btn}>
                     <Link to="/">
                         <FontAwesomeIcon icon={faHome} />

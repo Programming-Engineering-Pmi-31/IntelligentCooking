@@ -9,7 +9,7 @@ class Recommended extends Component {
 
     componentDidMount() {
         const { setRecipes } = this.props;
-        setRecipes();
+        setRecipes(0,8);
     }
 
     shouldComponentUpdate(nextProps, nextState) {

@@ -6,9 +6,9 @@ namespace InelligentCooking.BLL.DTOs
 {
     public class MainGetDishDto
     {
-        public int Skip { get; set; }
-        public int Take { get; set; }
-        public bool ByTime { get; set; }
-        public bool ByCalories { get; set; }
+        public int? Skip { get; set; }
+        public int? Take { get; set; }
+        public bool ByTime { get; set; } = false;
+        public bool ByCalories { get; set; } = false;
     }
 }

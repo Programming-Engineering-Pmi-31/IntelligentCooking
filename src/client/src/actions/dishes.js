@@ -22,8 +22,10 @@ export const createProduct = obj => dispatch => {
         )
             formData.append(val, obj[val]);
     }
-    for (const [i, val] of obj.img.entries())
-        if (val !== null) formData.append(`imgages[${i}]`, val);
+    for (const [i, val] of obj.img.entries()){
+        console.log(val);
+        if (val !== null) formData.append(`images`, val);
+    }
 
     for (const [i, val] of obj.ingredients.entries()) formData.append(`ingredients[${i}]`, val);
 

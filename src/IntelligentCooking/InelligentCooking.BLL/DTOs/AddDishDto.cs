@@ -17,7 +17,7 @@ namespace InelligentCooking.BLL.DTOs
         public int? Cals { get; set; }
         public string Description { get; set; }
 
-        public IEnumerable<IFormFile> Imgages { get; set; }
+        public IEnumerable<IFormFile> Images { get; set; }
         public IEnumerable<int> Ingredients { get; set; }
         public IEnumerable<string> IngredientAmounts { get; set; }
         public IEnumerable<int> Categories { get; set; }

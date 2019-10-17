@@ -23,6 +23,7 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ForMember(d => d.Id, opt => opt.Ignore())
                 .ForMember(d => d.DishIngredients, opt => opt.Ignore())
                 .ForMember(d => d.DishCategories, opt => opt.Ignore())
+                .ForMember(d => d.Images, opt => opt.Ignore())
                 .ForMember(d => d.Stars, opt => opt.MapFrom(x => 0))
                 .ForMember(d => d.Name, opt => opt.MapFrom(x => x.Title))
                 .ForMember(d => d.Carbohydrates, opt => opt.MapFrom(x => x.Carbs))

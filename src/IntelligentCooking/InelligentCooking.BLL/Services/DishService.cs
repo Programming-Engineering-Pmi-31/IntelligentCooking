@@ -44,7 +44,7 @@ namespace InelligentCooking.BLL.Services
             var dishEntity = _unitOfWork.Dishes.Add(dish);
 
             var priority = 0;
-            dish.Images = (await _imageService.UploadRangeAsync(addDish.Imgages)).Select(
+            dish.Images = (await _imageService.UploadRangeAsync(addDish.Images)).Select(
                     url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
                 .ToList();
 

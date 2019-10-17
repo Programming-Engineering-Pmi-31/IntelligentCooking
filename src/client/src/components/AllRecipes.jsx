@@ -1,15 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { InfiniteLoader, List } from 'react-virtualized';
-import StarRatings from 'react-star-ratings';
+import React, { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
+import { debounce } from 'lodash';
 import { usePromiseTracker } from 'react-promise-tracker';
 import styles from '../scss/AllRecipes.scss';
 import 'react-virtualized/styles.css';
+import { DishItem } from './DishItem';
 
 const AllRecipes = React.memo(({ setRecipes, dishes, sortBy }) => {
     const { promiseInProgress } = usePromiseTracker();
+    const [skip, setSkip] = useState(6);
     console.log(promiseInProgress);
+    useEffect(() => {
+        window.onscroll = debounce(() => {
+            if (document.documentElement.scrollHeight - 6000 < document.documentElement.scrollTop) {
+                setRecipes(skip, 8);
+                setSkip(skip + 8);
+                console.log('skip');
+            }
+        }, 30);
+    }, [setRecipes, skip]);
 
     return (
         <div>
@@ -35,64 +44,15 @@ const AllRecipes = React.memo(({ setRecipes, dishes, sortBy }) => {
                     </button>
                 </li>
             </ul>
-            {promiseInProgress === true ? (
-                <LoadingIndicator />
-            ) : (
-                <ul className={styles.cards}>
-                    {dishes.map(item => (
-                        <li key={item.id} className={styles.cards__item}>
-                            <div className={styles.card}>
-                                <div className={styles.image__container}>
-                                    <img
-                                        className={styles.card__image}
-                                        src={item.imageUrl}
-                                        alt={item.name}
-                                    />
-                                </div>
-                                <div className={styles.card__content}>
-                                    <div className={styles.card__title}>{item.name}</div>
-                                    <div className={styles.rating__info}>
-                                        <span>
-                                            <StarRatings
-                                                rating={item.rating}
-                                                starDimension="20px"
-                                                starSpacing="3px"
-                                            />
-                                        </span>
-                                        <span>{item.likes}</span>
-                                    </div>
-                                    <div className={styles.card__aditional}>
-                                        <span>
-                                            proteins:
-                                            {item.proteins}
-                                        </span>
-                                        <span>
-                                            carbs:
-                                            {item.carbohydrates}
-                                        </span>
-                                        <span>
-                                            fats:
-                                            {item.fats}
-                                        </span>
-                                        <span>
-                                            cals:
-                                            {item.calories}
-                                        </span>
-                                        <span>
-                                            servings:
-                                            {item.servings}
-                                        </span>
-                                        <span>
-                                            time:
-                                            {item.time}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            {/* {promiseInProgress === true ? ( */}
+            {/*    <LoadingIndicator /> */}
+            {/* ) : ( */}
+            <ul className={styles.cards}>
+                {dishes.map((item, index) => (
+                    <DishItem key={index} item={item} />
+                ))}
+            </ul>
+            {/* )} */}
         </div>
     );
 });

@@ -1,5 +1,5 @@
 const initialState = {
-    isLoading: true,
+    isLoading: false,
     dishes: [],
     sortedItem: 'all',
 };
@@ -14,8 +14,8 @@ export const dishes = (state = initialState, action) => {
         case 'SET_RECIPES':
             return {
                 ...state,
-                dishes: action.payload,
-                isLoading: false,
+                dishes: [...state.dishes, ...action.payload],
+                isLoading: true,
             };
         default:
             return state;

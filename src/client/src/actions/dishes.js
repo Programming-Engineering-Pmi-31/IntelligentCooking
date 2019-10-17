@@ -4,7 +4,9 @@ import { trackPromise } from 'react-promise-tracker';
 export const setRecipes = (skip, take) => dispatch => {
     trackPromise(
         axios
-            .get('https://localhost:44335/api/Dish', { params: { skip: skip, take: take } })
+            .get('https://localhost:44335/api/Dish', {
+                params: { skip: skip, take: take, byCalories: false },
+            })
             .then(res => {
                 dispatch({ type: 'SET_RECIPES', payload: res.data });
             }),

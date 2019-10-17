@@ -5,7 +5,6 @@ import styles from '../scss/AllRecipes.scss';
 export class DishItem extends PureComponent {
     render() {
         const { item } = this.props;
-        console.log(item);
         return (
             <li key={item.id} className={styles.cards__item}>
                 <div className={styles.card}>

@@ -9,13 +9,11 @@ import { DishItem } from './DishItem';
 const AllRecipes = React.memo(({ setRecipes, dishes, sortBy }) => {
     const { promiseInProgress } = usePromiseTracker();
     const [skip, setSkip] = useState(6);
-    console.log(promiseInProgress);
     useEffect(() => {
         window.onscroll = debounce(() => {
             if (document.documentElement.scrollHeight - 6000 < document.documentElement.scrollTop) {
                 setRecipes(skip, 8);
                 setSkip(skip + 8);
-                console.log('skip');
             }
         }, 30);
     }, [setRecipes, skip]);

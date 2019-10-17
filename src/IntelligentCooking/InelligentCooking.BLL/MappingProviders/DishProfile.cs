@@ -12,8 +12,7 @@ namespace InelligentCooking.BLL.MappingProviders
         public DishProfile()
         {
             CreateMap<Dish, DishPreviewDto>()
-                .ForMember(d => d.Ingredients, opt => opt.MapFrom(x => x.DishIngredients))
-                .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
+                .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories.Select(y=>y.CategoryId)))
                 .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToShortTimeString()))
                 .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count))
                 .ForMember(d => d.ImageUrl, opt => opt.MapFrom(x => x.Images.FirstOrDefault(z => z.Priority == 1).Url));

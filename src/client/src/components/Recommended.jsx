@@ -8,8 +8,8 @@ class Recommended extends Component {
     };
 
     componentDidMount() {
-        const { setRecipes } = this.props;
-        setRecipes(0, 8);
+        // const { setRecipes } = this.props;
+        // setRecipes(0, 8);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -42,7 +42,7 @@ class Recommended extends Component {
             let randomIndex;
             while (indexes.length < 6) {
                 randomIndex = Math.floor(Math.random() * dishes.length);
-                if (indexes.indexOf(randomIndex) == -1) {
+                if (indexes.indexOf(randomIndex) === -1) {
                     indexes.push(randomIndex);
                     sliderItems.push(
                         <div

@@ -85,10 +85,28 @@
 }
 .card__title {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 0.8rem;
   font-weight: 300;
   letter-spacing: 2px;
   &:hover{
     cursor: pointer;
+  }
+}
+.loadMore {
+  margin: 20px auto 40px;
+  display: block;
+  text-align: center;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  color: rgb(0,0,238);
+  border: 1px solid #000;
+  transition: all 0.1s ease-in-out;
+  &:hover{
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.75);
   }
 }

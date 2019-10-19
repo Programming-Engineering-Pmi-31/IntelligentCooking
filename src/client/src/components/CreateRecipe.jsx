@@ -27,8 +27,8 @@ class CreateRecipe extends Component {
 
     componentDidMount() {
         const { setIngredients, setCategories } = this.props;
-        setIngredients();
-        setCategories();
+        if (!this.props.ingredientsList) setIngredients();
+        if (!this.props.categoriesList) setCategories();
     }
 
     categoriesChange = category => {
@@ -59,14 +59,8 @@ class CreateRecipe extends Component {
         }));
     };
 
-    // fileChangedHandler = e => {
-    //     const {files,id} = e.target;
-    //     this.setState({ img: [`${id}`]: files[0] });
-    // };
-
     valueChange = event => {
         const { name, value, type } = event.target;
-        console.log(name, value);
         this.setState(prevState => ({
             ...prevState,
             [name]: type === 'number' ? parseFloat(value) : value,
@@ -115,7 +109,6 @@ class CreateRecipe extends Component {
             proteins: proteins,
             carbs: carbs,
         };
-        console.log(obj);
         const ingredientsOptions = [];
         const categoriesOptions = [];
 

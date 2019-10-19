@@ -19,6 +19,7 @@
         }
     },
     "rules": {
+        "react/jsx-one-expression-per-line": 0,
         "no-plusplus": 0,
         "react-hooks/rules-of-hooks": 2, // Перевіряє правила хуків
         "react-hooks/exhaustive-deps": 1,

@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import styles from '../scss/CategoriesSlider.scss';
 

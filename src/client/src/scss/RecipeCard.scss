@@ -11,8 +11,11 @@
   -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   .recipe__info{
     display: flex;
-    & > div{
-      width: 50%;
+    & > div:nth-child(1){
+      width: 40%;
+    }
+    & > div:nth-child(2){
+      width: 60%;
     }
     .recipe__name{
       font-family: 'inconsolata', monospace;
@@ -20,13 +23,14 @@
     }
 
     .recipe__photo{
-      min-height: 500px;
-      width: auto;
+      min-height: 615px;
+      max-height: 615px;
+      //width: auto;
     }
 
     .recipe__aditional_info{
       position: relative;
-      width: 80%;
+      width: 90%;
       height: 480px;
       border: 2px solid rgba(0,0,0,0.15);
       border-radius: 5px;
@@ -48,8 +52,11 @@
       flex-wrap: wrap;
     }
     li{
-      margin: 10px 0;
-      width: 33.33%;
+      margin: 0px 0;
+      width: 48.0%;
+      white-space: nowrap;
+      text-align: center;
+      margin-left: 5px;
     }
     p{
       margin: 3px;
@@ -57,6 +64,10 @@
 
   }
   .recipe{
+    text-align: left;
     width: 100%;
+  }
+  .rating__info path{
+
   }
 }

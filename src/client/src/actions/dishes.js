@@ -2,15 +2,20 @@ import axios from 'axios';
 import { trackPromise } from 'react-promise-tracker';
 
 export const setRecipes = (skip, take) => dispatch => {
-    trackPromise(
-        axios
-            .get('https://localhost:44335/api/Dish', {
-                params: { skip: skip, take: take, byCalories: false },
-            })
-            .then(res => {
-                dispatch({ type: 'SET_RECIPES', payload: res.data });
-            }),
-    );
+    dispatch({ type: 'SET_RECIPES_REQUEST' });
+    axios
+        .get('https://localhost:44335/api/Dish', {
+            params: { skip: skip, take: take, byCalories: false },
+        })
+        .then(res => {
+            dispatch({ type: 'SET_RECIPES_SUCCESS', payload: res.data });
+        });
+};
+
+export const getRecipe = id => dispatch => {
+    axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
+        dispatch({ type: 'GET_RECIPE', payload: res.data });
+    });
 };
 
 export const createProduct = obj => dispatch => {
@@ -24,9 +29,9 @@ export const createProduct = obj => dispatch => {
         )
             formData.append(val, obj[val]);
     }
-    for (const [i, val] of obj.img.entries()){
+    for (const [i, val] of obj.img.entries()) {
         console.log(val);
-        if (val !== null) formData.append(`images`, val);
+        if (val !== null) formData.append('images', val);
     }
 
     for (const [i, val] of obj.ingredients.entries()) formData.append(`ingredients[${i}]`, val);

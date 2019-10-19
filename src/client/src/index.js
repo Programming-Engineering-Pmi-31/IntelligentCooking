@@ -9,6 +9,7 @@ import MainPage from './containers/MainPage';
 import CreateRecipe from './containers/CreateRecipe';
 import RecipeCard from './containers/RecipeCard';
 import './script';
+import NoMatch from './components/NotFound';
 
 library.add(faHeart);
 
@@ -21,6 +22,7 @@ ReactDOM.render(
                 <Route path="/recipe/:id" component={RecipeCard} />
                 <Route path="/create" component={CreateRecipe} />
                 <Route exact path="/" component={MainPage} />
+                <Route component={NoMatch} />
             </Switch>
         </Router>
     </Provider>,

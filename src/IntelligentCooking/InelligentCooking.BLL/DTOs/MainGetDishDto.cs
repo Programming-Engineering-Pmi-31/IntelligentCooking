@@ -8,7 +8,5 @@ namespace InelligentCooking.BLL.DTOs
     {
         public int? Skip { get; set; }
         public int? Take { get; set; }
-        public bool ByTime { get; set; } = false;
-        public bool ByCalories { get; set; } = false;
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class IngredientRepository: Repository<Ingredient>, IIngredientRepository
+    public class IngredientRepository: Repository<Ingredient, int>, IIngredientRepository
     {
         public IngredientRepository(IntelligentCookingContext context) : base(context) {}
     }

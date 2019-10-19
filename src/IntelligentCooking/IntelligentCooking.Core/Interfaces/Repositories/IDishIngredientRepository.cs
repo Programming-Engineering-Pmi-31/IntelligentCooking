@@ -3,8 +3,7 @@ using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IDishIngredientRepository
+    public interface IDishIngredientRepository: IRepository<DishIngredient, (int DishId, int IngredientId)>
     {
-        void AddRange(IEnumerable<DishIngredient> dishIngredients);
     }
 }

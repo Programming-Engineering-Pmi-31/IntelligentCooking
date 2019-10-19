@@ -4,8 +4,7 @@ using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IIngredientRepository
+    public interface IIngredientRepository: IRepository<Ingredient, int>
     {
-        Task<IEnumerable<Ingredient>> GetAsync();
     }
 }

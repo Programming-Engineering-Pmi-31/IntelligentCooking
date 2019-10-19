@@ -14,12 +14,6 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
         IFavouriteRepository Favourites { get; }
         ILikeRepository Likes { get; }
         IUserRepository Users { get; }
-        IRoleRepository Roles { get; }
-        IUserRoleRepository UserRoles { get; }
-        IUserTokenRepository UserTokens { get; }
-        IUserLoginRepository UserLogins { get; }
-        IUserClaimRepository UserClaims { get; }
-        IRoleClaimRepository RoleClaims { get; }
 
         Task CommitAsync();
     }

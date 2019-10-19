@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository : Repository<Category, int>, ICategoryRepository
     {
         public CategoryRepository(IntelligentCookingContext context) : base(context) { }
     }

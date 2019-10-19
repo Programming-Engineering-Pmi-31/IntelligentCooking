@@ -27,11 +27,9 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(MainGetDishDto getDish)
         {
-            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikes(
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(
                 getDish.Skip,
-                getDish.Take,
-                getDish.ByTime,
-                getDish.ByCalories);
+                getDish.Take);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();

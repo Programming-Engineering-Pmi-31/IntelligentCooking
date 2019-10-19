@@ -4,7 +4,7 @@ using IntelligentCooking.DAL.Context;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class DishIngredientRepository: Repository<DishIngredient>, IDishIngredientRepository
+    public class DishIngredientRepository: Repository<DishIngredient, (int DishId, int IngredientId)>, IDishIngredientRepository
     {
         public DishIngredientRepository(IntelligentCookingContext context) : base(context) {}
     }

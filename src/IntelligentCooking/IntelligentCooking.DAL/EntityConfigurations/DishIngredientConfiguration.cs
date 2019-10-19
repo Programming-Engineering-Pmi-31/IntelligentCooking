@@ -13,6 +13,8 @@ namespace IntelligentCooking.DAL.EntityConfigurations
         {
             builder.HasKey(di => new { di.DishId, di.IngredientId });
 
+            builder.Ignore(dc => dc.Id);
+
             builder.Property(di => di.Amount)
                 .IsRequired();
 

@@ -12,6 +12,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
         public void Configure(EntityTypeBuilder<Favourite> builder)
         {
             builder.HasKey(f => new { f.UserId, f.DishId });
+            builder.Ignore(dc => dc.Id);
         }
     }
 }

@@ -7,5 +7,7 @@ namespace IntelligentCooking.DAL.Repositories
     public class DishCategoryRepository: Repository<DishCategory>, IDishCategoryRepository
     {
         public DishCategoryRepository(IntelligentCookingContext context) : base(context) {}
+
+
     }
 }

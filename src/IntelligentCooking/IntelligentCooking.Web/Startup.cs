@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 
 //TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
 //AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
@@ -30,8 +31,11 @@ namespace IntelligentCooking.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My Api", Version = "v1 " });
+            });
             services.AddBllLayerDependecies(Configuration["ConnectionStrings:IntelligentCookingDb"]);
-
             services.ConfigureCors();
         }
 
@@ -46,8 +50,13 @@ namespace IntelligentCooking.Web
                 app.UseHsts();
             }
 
-
             app.UseCors("Default");
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Api V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();

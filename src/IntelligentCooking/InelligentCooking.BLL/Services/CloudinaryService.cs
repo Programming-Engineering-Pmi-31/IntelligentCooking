@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using InelligentCooking.BLL.Interfaces;
+using InelligentCooking.BLL.Settings;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace InelligentCooking.BLL.Services
 {
@@ -14,11 +14,14 @@ namespace InelligentCooking.BLL.Services
     {
         private readonly Account _cloudinaryAccount;
 
-        public CloudinaryService(IConfiguration configuration) =>
+        public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
+        {
+            var settings = cloudinarySettings.Value;
             _cloudinaryAccount = new Account(
-                configuration["CloudinaryCredentials:Cloud"],
-                configuration["CloudinaryCredentials:ApiKey"],
-                configuration["CloudinaryCredentials:Secret"]);
+                settings.Cloud,
+                settings.ApiKey,
+                settings.Secret);
+        }
 
         public async Task<string> UploadImageAsync(IFormFile file)
         {

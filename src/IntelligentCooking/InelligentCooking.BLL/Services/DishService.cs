@@ -11,8 +11,8 @@ namespace InelligentCooking.BLL.Services
 {
     public class DishService : IDishService
     {
-        private IIntelligentCookingUnitOfWork _unitOfWork;
-        private IImageService _imageService;
+        private readonly IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
 
         public DishService(
@@ -25,11 +25,9 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(MainGetDishDto getDish)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(int? skip, int? take)
         {
-            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(
-                getDish.Skip,
-                getDish.Take);
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(skip, take);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();
@@ -41,7 +39,7 @@ namespace InelligentCooking.BLL.Services
 
             var dishEntity = _unitOfWork.Dishes.Add(dish);
 
-            var priority = 0;
+            var priority = 1;
             dish.Images = (await _imageService.UploadRangeAsync(addDish.Images)).Select(
                     url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
                 .ToList();

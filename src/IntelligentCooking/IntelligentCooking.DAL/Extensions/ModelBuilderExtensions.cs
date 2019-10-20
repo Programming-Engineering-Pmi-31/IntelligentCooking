@@ -2,8 +2,6 @@
 using IntelligentCooking.DAL.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IntelligentCooking.DAL.Extensions
 {

@@ -1,8 +1,6 @@
-﻿using System;
-using IntelligentCooking.Core.Entities;
+﻿using IntelligentCooking.Core.Entities;
 using IntelligentCooking.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 

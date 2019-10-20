@@ -1,12 +1,7 @@
-﻿using System;
-using IntelligentCooking.Core.Entities;
-using IntelligentCooking.Core.Interfaces.Repositories;
-using IntelligentCooking.Core.Interfaces.UnitsOfWork;
+﻿using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using IntelligentCooking.DAL.Context;
-using IntelligentCooking.DAL.Repositories;
 using IntelligentCooking.DAL.UnitsOfWork;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

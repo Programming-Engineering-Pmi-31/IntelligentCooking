@@ -2,19 +2,16 @@
 using InelligentCooking.BLL.Interfaces;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
 {
     public class CategoryService : ICategoryService
     {
-        private IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly IIntelligentCookingUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public CategoryService(IIntelligentCookingUnitOfWork unitOfWork, IMapper mapper)

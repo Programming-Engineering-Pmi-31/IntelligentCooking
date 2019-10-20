@@ -1,14 +1,12 @@
 ﻿using InelligentCooking.BLL.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InelligentCooking.BLL.Interfaces
 {
     public interface IDishService
     {
-        Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(MainGetDishDto getDish);
+        Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(int? skip, int? take);
 
         Task<DishDto> AddDishAsync(AddDishDto addDish);
 

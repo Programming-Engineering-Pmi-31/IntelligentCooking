@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\ModelBinders\" />
+    <Folder Include="Models\ResponseModels\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -19,5 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\InelligentCooking.BLL\InelligentCooking.BLL.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties settings_4cloudinary_3settings_1json__JsonSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
 
 </Project>

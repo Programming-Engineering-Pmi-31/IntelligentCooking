@@ -1,10 +1,8 @@
 ﻿using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Interfaces;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using IntelligentCooking.Core.Entities;
@@ -13,7 +11,7 @@ namespace InelligentCooking.BLL.Services
 {
     public class IngredientService : IIngredientService
     {
-        private IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly IIntelligentCookingUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public IngredientService(IIntelligentCookingUnitOfWork unitOfWork, IMapper mapper)

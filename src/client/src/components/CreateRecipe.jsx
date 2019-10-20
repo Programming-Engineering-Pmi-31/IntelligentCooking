@@ -3,7 +3,7 @@ import Select from 'react-select';
 import classNames from 'classnames';
 import Textarea from 'react-textarea-autosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import styles from '../scss/CreateRecipe.scss';
 import { Previews } from './Dropzone';
@@ -26,9 +26,10 @@ class CreateRecipe extends Component {
     };
 
     componentDidMount() {
-        const { setIngredients, setCategories } = this.props;
-        if (!this.props.ingredientsList) setIngredients();
-        if (!this.props.categoriesList) setCategories();
+        console.log("create did mount");
+        const { setIngredients, setCategories, ingredientsList, categoriesList } = this.props;
+        if (!ingredientsList.length) setIngredients();
+        if (!categoriesList.length) setCategories();
     }
 
     categoriesChange = category => {
@@ -74,6 +75,7 @@ class CreateRecipe extends Component {
     };
 
     render() {
+        console.log("create render");
         const {
             categories,
             name,
@@ -216,7 +218,9 @@ class CreateRecipe extends Component {
                     <input
                         type="button"
                         onClick={() => {
-                            createProduct(obj);
+                            createProduct(obj).then(res =>
+                                this.props.history.push(`/recipe/${res.data.id}`)
+                            );
                         }}
                         value="Send Message"
                     />
@@ -293,4 +297,4 @@ class TextArea extends Component {
         );
     }
 }
-export default CreateRecipe;
+export default withRouter(CreateRecipe);

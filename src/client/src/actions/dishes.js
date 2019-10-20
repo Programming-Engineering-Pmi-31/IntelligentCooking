@@ -1,6 +1,11 @@
 import axios from 'axios';
-import { trackPromise } from 'react-promise-tracker';
 
+export const setRecipesEmpty = () => dispatch => {
+    dispatch({ type: 'SET_RECIPES_EMPTY' });
+};
+export const setExactRecipeEmpty = () => dispatch => {
+    dispatch({ type: 'SET_EXACT_RECIPE_EMPTY' });
+};
 export const setRecipes = (skip, take) => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
     axios
@@ -9,6 +14,7 @@ export const setRecipes = (skip, take) => dispatch => {
         })
         .then(res => {
             dispatch({ type: 'SET_RECIPES_SUCCESS', payload: res.data });
+            if (res.data.length === 0) dispatch({ type: 'NO_MORE_ITEMS' });
         });
 };
 
@@ -41,12 +47,12 @@ export const createProduct = obj => dispatch => {
     for (const [i, val] of obj.ingredientAmounts.entries())
         formData.append(`ingredientAmounts[${i}]`, val);
 
-    axios({
+    return axios({
         method: 'POST',
         url: 'https://localhost:44335/api/Dish',
         data: formData,
     }).then(res => {
         dispatch({ type: 'ADD_RECIPE', payload: res.data });
-        console.log(res);
+        return res;
     });
 };

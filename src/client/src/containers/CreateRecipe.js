@@ -10,9 +10,10 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(categoriesAcrions, dispatch),
     ...bindActionCreators(dishesActions, dispatch),
 });
-const mapStateToProps = ({ ingredients, categories }) => ({
+const mapStateToProps = ({ ingredients, categories, dishes }) => ({
     ingredientsList: ingredients.ingredients,
     categoriesList: categories.categories,
+    soloDish: dishes.soloDish,
 });
 
 export default connect(

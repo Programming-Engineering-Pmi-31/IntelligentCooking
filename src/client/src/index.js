@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import createStore from './store';
@@ -11,18 +12,19 @@ import RecipeCard from './containers/RecipeCard';
 import './script';
 import NoMatch from './components/NotFound';
 
+const history = createBrowserHistory();
 library.add(faHeart);
 
 const store = createStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             <Switch>
                 <Route path="/recipe/:id" component={RecipeCard} />
-                <Route path="/create" component={CreateRecipe} />
+                <Route exact path="/create" component={CreateRecipe} />
                 <Route exact path="/" component={MainPage} />
-                <Route component={NoMatch} />
+                <Route path="*" component={NoMatch} />
             </Switch>
         </Router>
     </Provider>,

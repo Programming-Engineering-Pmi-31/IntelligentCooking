@@ -8,11 +8,15 @@ import AllRecipes from '../containers/AllRecipes';
 
 class App extends PureComponent {
     componentDidMount() {
-        const { setCategories } = this.props;
-        setCategories();
+        console.log("main did mount");
+        const { setCategories, categories } = this.props;
+        if (!categories.length) {
+            setCategories();
+        }
     }
 
     render() {
+        console.log("main render");
         return (
             <div className={styles.container}>
                 <Header />

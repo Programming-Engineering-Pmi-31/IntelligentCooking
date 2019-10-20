@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from '../scss/Dropzone.scss';
 
-export const Previews = props => {
+export const Previews = React.memo(props => {
     const [files, setFiles] = useState({});
     const [currentDragFile, setDragFile] = useState(null);
     const [currentDragIndex, setDraggedIndex] = useState(null);
@@ -121,4 +121,4 @@ export const Previews = props => {
             </div>
         </section>
     );
-};
+});

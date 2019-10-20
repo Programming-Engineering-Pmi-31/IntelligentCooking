@@ -27,6 +27,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = ({ dishes, sort }) => ({
     dishes: sortBy(dishes.dishes, sort.sortedItem),
     isLoading: dishes.isLoading,
+    firstLoad: dishes.firstLoad,
+    noItems: dishes.noItems,
 });
 export default connect(
     mapStateToProps,

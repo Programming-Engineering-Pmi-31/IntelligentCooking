@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import styles from '../scss/Recommended.scss';
 
@@ -6,11 +7,6 @@ class Recommended extends Component {
     state = {
         shouldUpdate: true,
     };
-
-    componentDidMount() {
-        // const { setRecipes } = this.props;
-        // setRecipes(0, 8);
-    }
 
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.shouldUpdate;
@@ -31,9 +27,12 @@ class Recommended extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 3000,
+            autoplaySpeed: 2000,
             variableWidth: true,
-            arrows: false,
+            draggable: false,
+            swipeToSlide: false,
+            touchMove: false,
+            arrows: true,
         };
         const sliderItems = [];
         const indexes = [];
@@ -45,15 +44,16 @@ class Recommended extends Component {
                 if (indexes.indexOf(randomIndex) === -1) {
                     indexes.push(randomIndex);
                     sliderItems.push(
-                        <div
-                            style={{ width: 500 }}
-                            className={styles.slider__item}
-                            key={dishes[randomIndex].id}
-                        >
-                            <img src={dishes[randomIndex].imageUrl} alt="" />
-                            <p>{`cals: ${dishes[randomIndex].calories} time: ${dishes[randomIndex].time}`}</p>
-                            <div />
-                        </div>,
+                        <Link to={`/recipe/${dishes[randomIndex].id}`} key={dishes[randomIndex].id}>
+                            <div
+                                style={{ width: 500 }}
+                                className={styles.slider__item}
+                            >
+                                <img src={dishes[randomIndex].imageUrl} alt="" />
+                                <p>{`cals: ${dishes[randomIndex].calories} time: ${dishes[randomIndex].time}`}</p>
+                                <div />
+                            </div>
+                        </Link>,
                     );
                 }
             }

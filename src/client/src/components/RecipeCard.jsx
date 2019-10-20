@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import styles from '../scss/RecipeCard.scss';
 
-const RecipeCard = React.memo(({ getRecipe, match, dishes }) => {
+const RecipeCard = React.memo(({ getRecipe, match, dishes, setExactRecipeEmpty }) => {
     const {
         name,
         recipe,
@@ -20,14 +23,18 @@ const RecipeCard = React.memo(({ getRecipe, match, dishes }) => {
         description,
         categories,
         images,
-    } = dishes.dishes;
+    } = dishes.soloDish;
     useEffect(() => {
-        getRecipe(match.params.id);
-    }, [getRecipe, match.params.id]);
-    if (dishes.dishes.images) {
-        console.log(dishes.dishes);
-    }
+        console.log("recipe card  did mount");
+        if (!dishes.soloDish.length) {
+            getRecipe(match.params.id);
+        }
+        return () =>{
+            setExactRecipeEmpty();
+        }
+    }, []);
 
+    console.log("recipe card render");
     return (
         <div>
             {images && (
@@ -35,7 +42,7 @@ const RecipeCard = React.memo(({ getRecipe, match, dishes }) => {
                     <div className={styles.recipe__info}>
                         <div>
                             <img
-                                src={images[0].url}
+                                src={images.filter(e => e.priority === 1)[0].url}
                                 alt="Recipe"
                                 className={styles.recipe__photo}
                             />
@@ -90,10 +97,15 @@ const RecipeCard = React.memo(({ getRecipe, match, dishes }) => {
                         </div>
                     </div>
                     <div className={styles.recipe}>{recipe}</div>
+                    <div className={styles.home__btn}>
+                        <Link to='/'>
+                            <FontAwesomeIcon icon={faHome} />
+                        </Link>
+                    </div>
                 </div>
             )}
         </div>
     );
 });
 
-export default RecipeCard;
+export default withRouter(RecipeCard);

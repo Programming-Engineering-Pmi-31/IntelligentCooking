@@ -24,12 +24,6 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             Favourites = new FavouriteRepository(_context);
             Likes = new LikeRepository(_context);
             Users = new UserRepository(_context);
-            Roles = new RoleRepository(_context);
-            UserRoles = new UserRoleRepository(_context);
-            UserTokens = new UserTokenRepository(_context);
-            UserLogins = new UserLoginRepository(_context);
-            UserClaims = new UserClaimRepository(_context);
-            RoleClaims = new RoleClaimRepository(_context);
         }
 
         public ICategoryRepository Categories { get; }
@@ -40,13 +34,6 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         public IFavouriteRepository Favourites { get; }
         public ILikeRepository Likes { get; }
         public IUserRepository Users { get; }
-        public IRoleRepository Roles { get; }
-        public IUserRoleRepository UserRoles { get; }
-        public IUserTokenRepository UserTokens { get; }
-        public IUserLoginRepository UserLogins { get; }
-        public IUserClaimRepository UserClaims { get; }
-        public IRoleClaimRepository RoleClaims { get; }
-
 
         public async Task CommitAsync()
         {

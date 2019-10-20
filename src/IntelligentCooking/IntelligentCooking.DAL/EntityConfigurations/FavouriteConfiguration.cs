@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using IntelligentCooking.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IntelligentCooking.DAL.EntityConfigurations
 {
@@ -12,6 +9,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
         public void Configure(EntityTypeBuilder<Favourite> builder)
         {
             builder.HasKey(f => new { f.UserId, f.DishId });
+            builder.Ignore(dc => dc.Id);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
         public void Configure(EntityTypeBuilder<Image> builder) 
         {
             builder.HasKey(i => new { i.DishId, i.Priority });
+            builder.Ignore(i => i.Id);
         }
     }
 }

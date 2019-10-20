@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using InelligentCooking.BLL.Settings;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace IntelligentCooking.Web.Infrastructure.Extensions
 {
@@ -22,5 +20,16 @@ namespace IntelligentCooking.Web.Infrastructure.Extensions
             });
         }
 
+        public static void ConfigureMvcFeatures(this IServiceCollection services)
+        {
+            services.AddMvc()
+                .SetCompatibilityVersion(version: CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+        }
+
+        public static void GetSettings(this IServiceCollection services, Startup startup)
+        {
+            services.Configure<CloudinarySettings>(startup.Configuration.GetSection("CloudinaryCredentials"));
+        }
     }
 }

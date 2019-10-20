@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using InelligentCooking.BLL.DTOs;
-using InelligentCooking.BLL.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
+using IntelligentCooking.Web.Models.RequestModels;
 
 namespace IntelligentCooking.Web.Controllers
 {
@@ -22,9 +19,9 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo([FromQuery] MainGetDishDto getDishDto = null)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo([FromQuery] GetDishRequest getDishRequest)
         {
-            return await _dishService.GetDishesInfoAsync(getDishDto);
+            return await _dishService.GetDishesInfoAsync(getDishRequest.Skip, getDishRequest.Take);
         }
 
         [HttpPost]

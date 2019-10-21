@@ -14,6 +14,7 @@ const mapStateToProps = ({ ingredients, categories, dishes }) => ({
     ingredientsList: ingredients.ingredients,
     categoriesList: categories.categories,
     soloDish: dishes.soloDish,
+    skip: dishes.skip,
 });
 
 export default connect(

@@ -6,13 +6,13 @@ const initialState = {
     error: false,
     soloDish: [],
     firstLoad: false,
+    skip: 0,
 };
 export const dishes = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_RECIPE':
             return {
                 ...state,
-                dishes: [...state.dishes, action.payload],
                 soloDish: action.payload,
             };
         case 'GET_RECIPE':
@@ -30,6 +30,7 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 soloDish: [],
+                noItems: false,
             };
         case 'NO_MORE_ITEMS':
             return {
@@ -41,7 +42,13 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
-
+        case 'SET_RECIPE_SUCCESS':
+            return {
+                ...state,
+                dishes: [...state.dishes, action.payload],
+                skip: state.skip + 1,
+                noItems: false,
+            };
         case 'SET_RECIPES_SUCCESS':
             return {
                 ...state,
@@ -49,6 +56,7 @@ export const dishes = (state = initialState, action) => {
                 isLoading: false,
                 firstLoad: true,
                 noItems: false,
+                skip: state.skip + 8,
             };
         default:
             return state;

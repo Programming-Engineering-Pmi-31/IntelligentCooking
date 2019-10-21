@@ -6,6 +6,17 @@ export const setRecipesEmpty = () => dispatch => {
 export const setExactRecipeEmpty = () => dispatch => {
     dispatch({ type: 'SET_EXACT_RECIPE_EMPTY' });
 };
+
+export const setRecipe = skip => dispatch => {
+    dispatch({ type: 'SET_RECIPES_REQUEST' });
+    axios
+        .get('https://localhost:44335/api/Dish', {
+            params: { skip: skip, take: 1, byCalories: false },
+        })
+        .then(res => {
+            dispatch({ type: 'SET_RECIPE_SUCCESS', payload: res.data });
+        });
+};
 export const setRecipes = (skip, take) => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
     axios

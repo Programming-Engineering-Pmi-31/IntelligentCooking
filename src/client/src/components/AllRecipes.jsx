@@ -6,18 +6,14 @@ import 'react-virtualized/styles.css';
 import { DishItem } from './DishItem';
 
 const AllRecipes = React.memo(
-    ({ setRecipes, setRecipesEmpty, dishes, sortBy, isLoading, firstLoad, noItems }) => {
-        const [skip, setSkip] = useState(0);
+    ({ setRecipes, setRecipesEmpty, dishes, sortBy, isLoading, firstLoad, noItems, skip }) => {
         const load = 8;
         const [count, setCount] = useState(0);
         useEffect(() => {
-            if (!dishes.length && !firstLoad) {
-                setRecipes(skip, load);
-                setSkip(skip + load);
-            }
-            return () => {
-                setRecipesEmpty();
-            };
+            setRecipes(skip, load);
+            // return () => {
+            //     setRecipesEmpty();
+            // };
         }, []);
         useEffect(() => {
             window.onscroll = () => {
@@ -25,20 +21,18 @@ const AllRecipes = React.memo(
                     !isLoading &&
                     document.documentElement.scrollHeight - 1250 <
                         document.documentElement.scrollTop &&
-                    count < 3
+                    count < 1
                 ) {
                     setCount(count + 1);
-                    setRecipes(skip, 4);
-                    setSkip(skip + 4);
+                    setRecipes(skip, 8);
                 }
             };
             return () => {
                 window.onscroll = null;
             };
-        }, [dishes, skip, count, isLoading, noItems,firstLoad]);
+        }, [dishes, skip, count, isLoading, noItems, firstLoad ]);
         const handleLoadMore = () => {
-            setSkip(skip + load);
-            setRecipes(skip, load);
+            setRecipes(skip, 8);
         };
         return (
             <div>
@@ -66,11 +60,11 @@ const AllRecipes = React.memo(
                 </ul>
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
-                        <DishItem key={item.id} item={item} />
+                        <DishItem key={`${item.id}_dish`} item={item} />
                     ))}
                 </ul>
                 {isLoading ? <LoadingIndicator /> : null}
-                {count === 3 && !isLoading ? (
+                {count === 1 && !isLoading ? (
                     <LoadMore handler={handleLoadMore} noItems={noItems} />
                 ) : null}
             </div>

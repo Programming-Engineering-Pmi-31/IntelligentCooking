@@ -91,7 +91,7 @@ class CreateRecipe extends Component {
             fats,
             proteins,
         } = this.state;
-        const { ingredientsList, categoriesList, createProduct } = this.props;
+        const { ingredientsList, categoriesList, createProduct, setRecipe, skip } = this.props;
         let catToSend;
         {
             categories ? (catToSend = categories.map(item => item.value)) : (catToSend = []);
@@ -218,8 +218,10 @@ class CreateRecipe extends Component {
                     <input
                         type="button"
                         onClick={() => {
-                            createProduct(obj).then(res =>
-                                this.props.history.push(`/recipe/${res.data.id}`)
+                            createProduct(obj).then(res => {
+                                    this.props.history.push(`/recipe/${res.data.id}`);
+                                    setRecipe(skip);
+                                }
                             );
                         }}
                         value="Send Message"

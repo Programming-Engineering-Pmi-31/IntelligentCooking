@@ -1,11 +1,13 @@
-﻿using InelligentCooking.BLL.DTOs;
-using InelligentCooking.BLL.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using IntelligentCooking.Core.Interfaces.UnitsOfWork;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
+using InelligentCooking.BLL.DTOs;
+using InelligentCooking.BLL.Infrastructure.Exceptions;
+using InelligentCooking.BLL.Interfaces;
 using IntelligentCooking.Core.Entities;
+using IntelligentCooking.Core.Interfaces.UnitsOfWork;
+using IntelligentCooking.Web.Models.RequestModels;
 
 namespace InelligentCooking.BLL.Services
 {
@@ -25,9 +27,9 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(int? skip, int? take)
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(GetDishRequest getDish)
         {
-            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(skip, take);
+            var dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();
@@ -35,13 +37,16 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<DishDto> AddDishAsync(AddDishDto addDish)
         {
-            var dish = _mapper.Map<AddDishDto, Dish>(addDish);
+            if(await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
+            {
+                ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
+            }
 
-            var dishEntity = _unitOfWork.Dishes.Add(dish);
+            var dishEntity = _unitOfWork.Dishes.Add(_mapper.Map<AddDishDto, Dish>(addDish));
 
             var priority = 1;
-            dish.Images = (await _imageService.UploadRangeAsync(addDish.Images)).Select(
-                    url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
+            dishEntity.Images = (await _imageService.UploadRangeAsync(addDish.Images))
+                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
                 .ToList();
 
             var dishIngredients = addDish.Ingredients
@@ -57,7 +62,10 @@ namespace InelligentCooking.BLL.Services
 
             _unitOfWork.DishIngredients.AddRange(dishIngredients);
 
-            var dishCategories = addDish.Categories.Select(x => new DishCategory() {CategoryId = x, DishId = dishEntity.Id});
+            var dishCategories = addDish.Categories.Select(
+                x => new DishCategory
+                    {CategoryId = x, DishId = dishEntity.Id});
+
             _unitOfWork.DishCategories.AddRange(dishCategories);
 
             await _unitOfWork.CommitAsync();
@@ -68,6 +76,11 @@ namespace InelligentCooking.BLL.Services
         public async Task<DishDto> FindByIdAsync(int id)
         {
             var dish = await _unitOfWork.Dishes.FindAsync(id);
+
+            if(dish == null)
+            {
+                ExceptionHandler.NotFound(nameof(Dish));
+            }
 
             return _mapper.Map<Dish, DishDto>(dish);
         }

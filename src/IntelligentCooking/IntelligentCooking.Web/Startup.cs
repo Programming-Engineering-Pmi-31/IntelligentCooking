@@ -29,6 +29,7 @@ namespace IntelligentCooking.Web
             services.GetSettings(this);
             services.ConfigureMvcFeatures();
 
+
             services.AddSwaggerGen(
                 c => c.SwaggerDoc("v1", new Info {Title = "My Api", Version = "v1 "}));
 

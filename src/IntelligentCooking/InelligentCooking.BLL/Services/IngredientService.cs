@@ -28,7 +28,6 @@ namespace InelligentCooking.BLL.Services
                 .Select(_mapper.Map<Ingredient, IngredientDto>)
                 .ToList();
 
-
             return ingredientsInfo;
         }
     }

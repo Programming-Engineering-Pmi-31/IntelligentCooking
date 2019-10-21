@@ -31,6 +31,11 @@ namespace IntelligentCooking.DAL.Repositories
             return await dishes.ToListAsync();
         }
 
+        public async Task<Dish> GetByNameAsync(string name)
+        {
+            return await Context.Dishes.FirstOrDefaultAsync(x => x.Name.Equals(name));
+        }
+
         public override async Task<Dish> FindAsync(int id)
         {
             return await Context.Dishes

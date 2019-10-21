@@ -21,10 +21,10 @@ namespace IntelligentCooking.Core.Entities
         public DateTime Time { get; set; }
         public int Servings { get; set; }
         public int Stars { get; set; }
-        public double? Proteins { get; set; }
-        public double? Fats { get; set; }
-        public double? Carbohydrates { get; set; }
-        public int? Calories { get; set; }
+        public double Proteins { get; set; }
+        public double Fats { get; set; }
+        public double Carbohydrates { get; set; }
+        public double Calories { get; set; }
         public string Description { get; set; }
 
         public ICollection<Image> Images { get; set; }

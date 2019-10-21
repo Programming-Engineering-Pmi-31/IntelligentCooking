@@ -21,10 +21,6 @@ namespace InelligentCooking.BLL.Infrastructure.Extensions
                     StringComparison.OrdinalIgnoreCase)
                 && !string.Equals(
                     file.ContentType,
-                    "image/gif",
-                    StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(
-                    file.ContentType,
                     "image/x-png",
                     StringComparison.OrdinalIgnoreCase)
                 && !string.Equals(

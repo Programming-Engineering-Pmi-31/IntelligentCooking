@@ -37,7 +37,7 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<DishDto> AddDishAsync(AddDishDto addDish)
         {
-            if(await _unitOfWork.Dishes.GetByNameAsync(addDish.Title) != null)
+            if(await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }

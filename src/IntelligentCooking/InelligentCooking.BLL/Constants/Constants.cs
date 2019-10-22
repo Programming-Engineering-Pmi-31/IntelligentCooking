@@ -22,6 +22,11 @@
             return $"{property} must not be negative value";
         }
 
+        public static string WrongPasswordErrorMessage()
+        {
+            return $"Given password is not valid for current user";
+        }
+
         public static string TimeRegExp => @"\d\d:\d\d";
     }
 }

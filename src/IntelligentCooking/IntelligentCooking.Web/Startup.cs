@@ -1,4 +1,5 @@
-﻿using InelligentCooking.BLL.Infrastructure;
+﻿using System.Collections.Generic;
+using InelligentCooking.BLL.Infrastructure;
 using IntelligentCooking.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,8 +17,9 @@ namespace IntelligentCooking.Web
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath: env.ContentRootPath)
-                .AddJsonFile("Settings/cloudinary_settings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("Settings/cloudinary_settings.json", false, true)
+                .AddJsonFile("Settings/jwt_settings.json", false, true)
+                .AddJsonFile("appsettings.json", false, true);
 
             Configuration = configuration.Build();
         }
@@ -25,14 +27,11 @@ namespace IntelligentCooking.Web
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
+        { 
             services.GetSettings(this);
             services.ConfigureMvcFeatures();
-
-
-            services.AddSwaggerGen(
-                c => c.SwaggerDoc("v1", new Info {Title = "My Api", Version = "v1 "}));
-
+            services.ConfigureAuth(Configuration["JwtSettings:Secret"]);
+            services.ConfigureSwagger();
             services.AddBllDependecies(Configuration.GetConnectionString("IntelligentCookingDb"));
             services.ConfigureCors();
         }
@@ -47,6 +46,8 @@ namespace IntelligentCooking.Web
             {
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
 
             app.UseCors("Default");
             app.UseSwagger();

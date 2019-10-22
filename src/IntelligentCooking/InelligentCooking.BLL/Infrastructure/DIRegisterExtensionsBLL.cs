@@ -8,7 +8,7 @@ namespace InelligentCooking.BLL.Infrastructure
 {
     public static class DIRegisterExtensionsBLL
     {
-        public static void AddBllLayerDependecies(this IServiceCollection services, string connectionString)
+        public static void AddBllDependecies(this IServiceCollection services, string connectionString)
         {
             services.AddDataLayerDependecies(connectionString);
             services.AddScoped<IDishService, DishService>();

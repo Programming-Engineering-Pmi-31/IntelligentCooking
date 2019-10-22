@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using InelligentCooking.BLL.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
@@ -31,9 +30,9 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<DishDto> GetDishById(int id)
+        public async Task<IActionResult> GetDishById(int id)
         {
-            return await _dishService.FindByIdAsync(id);
+            return Ok(await _dishService.FindByIdAsync(id));
         }
     }
 }

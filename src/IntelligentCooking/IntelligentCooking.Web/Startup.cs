@@ -33,7 +33,7 @@ namespace IntelligentCooking.Web
             services.AddSwaggerGen(
                 c => c.SwaggerDoc("v1", new Info {Title = "My Api", Version = "v1 "}));
 
-            services.AddBllLayerDependecies(Configuration.GetConnectionString("IntelligentCookingDb"));
+            services.AddBllDependecies(Configuration.GetConnectionString("IntelligentCookingDb"));
             services.ConfigureCors();
         }
 

@@ -58,6 +58,7 @@ namespace IntelligentCooking.Web.Infrastructure.Extensions
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = true,
+                ClockSkew = TimeSpan.FromMinutes(0)
             };
 
             services.AddSingleton(tokenValidationParameters);

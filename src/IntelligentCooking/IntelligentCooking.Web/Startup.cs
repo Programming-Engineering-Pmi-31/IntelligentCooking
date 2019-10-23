@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using InelligentCooking.BLL.Infrastructure;
+using InelligentCooking.BLL.Settings;
 using IntelligentCooking.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
 //TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
@@ -13,6 +15,7 @@ namespace IntelligentCooking.Web
 {
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var configuration = new ConfigurationBuilder()

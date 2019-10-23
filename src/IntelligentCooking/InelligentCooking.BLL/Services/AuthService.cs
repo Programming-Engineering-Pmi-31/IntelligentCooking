@@ -23,17 +23,20 @@ namespace InelligentCooking.BLL.Services
         private readonly UserManager<User> _userManager;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly IIntelligentCookingUnitOfWork _unitOfWork;
+        private readonly ITokenService _tokenService;
         private readonly JwtSettings _jwtSettings;
 
         public AuthService(
             UserManager<User> userManager,
             IOptions<JwtSettings> jwtOptions,
             TokenValidationParameters tokenValidationParameters,
-            IIntelligentCookingUnitOfWork unitOfWork)
+            IIntelligentCookingUnitOfWork unitOfWork,
+            ITokenService tokenService)
         {
             _userManager = userManager;
             _tokenValidationParameters = tokenValidationParameters;
             _unitOfWork = unitOfWork;
+            _tokenService = tokenService;
             _jwtSettings = jwtOptions.Value;
         }
 
@@ -76,18 +79,13 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<AuthResponse> RefreshTokenAsync(RefreshTokenRequest refreshTokenRequest)
         {
-            var validatedToken = GetPrincipalFromToken(refreshTokenRequest.Token);
+            var validatedToken = _tokenService.GetPrincipalFromToken(refreshTokenRequest.Token);
 
-            var expiryDateUnix = long.Parse(
+            var expiryDateUtc = UnixTimeStampToDateTime(
                 validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Exp)
                     .Value);
 
-            var expiryDateUtc = new DateTime(
-                TimeSpan.FromSeconds(expiryDateUnix)
-                    .Ticks,
-                DateTimeKind.Utc);
-
-            if(expiryDateUtc > DateTime.UtcNow)
+            if (expiryDateUtc > DateTime.UtcNow)
             {
                 ExceptionHandler.TokenNotExpired();
             }
@@ -97,91 +95,57 @@ namespace InelligentCooking.BLL.Services
 
             var storedRefreshToken = await _unitOfWork.RefreshTokens.FindAsync(refreshTokenRequest.RefreshToken);
 
-            if(storedRefreshToken == null || DateTime.UtcNow > storedRefreshToken.ExpirationDate || storedRefreshToken.IsInvalidated || storedRefreshToken.IsUsed || storedRefreshToken.JwtId != jti)
+            if(storedRefreshToken == null
+               || DateTime.UtcNow > storedRefreshToken.ExpirationDate
+               || storedRefreshToken.IsInvalidated
+               || storedRefreshToken.IsUsed
+               || storedRefreshToken.JwtId != jti)
             {
                 ExceptionHandler.InvalidTokenException();
             }
 
             storedRefreshToken.IsUsed = true;
-            await _unitOfWork.CommitAsync();
 
             var user = await _userManager.FindByIdAsync(
                 validatedToken.Claims.Single(x => x.Type == "id")
                     .Value);
 
-            var tokenResult = await GenerateUserToken(user);
+            await _unitOfWork.CommitAsync();
 
-            return tokenResult;
-        }
-
-        private ClaimsPrincipal GetPrincipalFromToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var securityToken);
-
-            if(!IsJwtWithValidSecurityAlgorithm(securityToken))
-            {
-                ExceptionHandler.InvalidTokenException();
-            }
-
-            return principal;
-        }
-
-        private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken) =>
-            validatedToken is JwtSecurityToken jwtSecurityToken
-            && jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
-
-        private string GenerateRefreshToken()
-        {
-            var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
+            return await GenerateUserToken(user);
         }
 
         private async Task<AuthResponse> GenerateUserToken(User user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(
-                    new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                        new Claim(JwtRegisteredClaimNames.Jti, $"{Guid.NewGuid()}"),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                        new Claim("id", $"{user.Id}")
-                    }),
-                Expires = DateTime.UtcNow.Add(_jwtSettings.LifeTime),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            var refreshToken = new RefreshToken
-            {
-                Token = GenerateRefreshToken(),
-                JwtId = token.Id,
-                UserId = user.Id,
-                CreationDate = DateTime.UtcNow,
-                ExpirationDate = DateTime.UtcNow.AddMonths(6), //GET FROM CONFIGURATION
-
-            };
+            var jwtToken = _tokenService.GenerateJwtToken(user);
+            var refreshToken = _tokenService.GenerateRefreshToken(jwtToken);
 
             _unitOfWork.RefreshTokens.Add(refreshToken);
             await _unitOfWork.CommitAsync();
 
             return new AuthResponse
             {
-                Token = tokenHandler.WriteToken(token),
+                Token = jwtToken,
                 RefreshToken = refreshToken.Token
             };
+        }
+
+        private static DateTime UnixTimeStampToDateTime(string unixTimeStamp)
+        {
+            var dtDateTime = new DateTime(
+                1970,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                DateTimeKind.Utc);
+
+            dtDateTime = dtDateTime.AddSeconds(long.Parse(unixTimeStamp))
+                .ToUniversalTime();
+
+            return dtDateTime;
         }
     }
 }

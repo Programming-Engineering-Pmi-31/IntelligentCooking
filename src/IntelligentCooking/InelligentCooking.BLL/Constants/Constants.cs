@@ -17,14 +17,19 @@
             return $"{collection1} and {collection2} must be of same length";
         }
 
-        public static string PropNotNegativeErrorMessage(string property)
-        {
-            return $"{property} must not be negative value";
-        }
-
         public static string WrongPasswordErrorMessage()
         {
             return $"Given password is not valid for current user";
+        }
+
+        public static string TokenNotExpiredErrorMessage()
+        {
+            return $"Token has not expired yet";
+        }
+
+        public static string InvalidTokenErrorMessage()
+        {
+            return $"Invalid token";
         }
 
         public static string TimeRegExp => @"\d\d:\d\d";

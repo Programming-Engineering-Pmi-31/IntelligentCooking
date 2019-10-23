@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace InelligentCooking.BLL.Infrastructure.Exceptions
 {
@@ -17,12 +19,22 @@ namespace InelligentCooking.BLL.Infrastructure.Exceptions
 
         public static void RegistrationException(IEnumerable<IdentityError> errors)
         {
-            throw new RegistrationException(errors);
+            throw new ValidationException(errors.Select(e => e.Description));
         }
 
-        public static void LoginFailedException()
+        public static void InvalidPasswordException()
         {
-            throw new LoginFailedException(Constants.Constants.WrongPasswordErrorMessage());
+            throw new ValidationException(new[] {Constants.Constants.WrongPasswordErrorMessage()});
+        }
+
+        public static void TokenNotExpired()
+        {
+            throw new ValidationException(new[] { Constants.Constants.TokenNotExpiredErrorMessage()});
+        }
+
+        public static void InvalidTokenException()
+        {
+            throw new SecurityTokenException(Constants.Constants.InvalidTokenErrorMessage());
         }
     }
 }

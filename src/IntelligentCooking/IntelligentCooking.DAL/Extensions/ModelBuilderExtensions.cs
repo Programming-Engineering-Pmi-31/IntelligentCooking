@@ -18,6 +18,7 @@ namespace IntelligentCooking.DAL.Extensions
             modelBuilder.ApplyConfiguration(new LikeConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
+            modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
         }
 
         public static void Seed(this ModelBuilder modelBuilder)

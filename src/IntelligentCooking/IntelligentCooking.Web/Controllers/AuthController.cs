@@ -27,5 +27,11 @@ namespace IntelligentCooking.Web.Controllers
         {
             return Ok(await _authService.LoginAsync(loginRequest));
         }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshTokenAsync(RefreshTokenRequest refreshTokenRequest)
+        {
+            return Ok(await _authService.RefreshTokenAsync(refreshTokenRequest));
+        }
     }
 }

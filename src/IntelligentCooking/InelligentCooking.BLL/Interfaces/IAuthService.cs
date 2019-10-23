@@ -8,5 +8,6 @@ namespace InelligentCooking.BLL.Interfaces
     {
         Task<AuthResponse> RegisterAsync(UserRegistrationRequest registrationRequest);
         Task<AuthResponse> LoginAsync(UserLoginRequest loginRequest);
+        Task<AuthResponse> RefreshTokenAsync(RefreshTokenRequest refreshTokenRequest);
     }
 }

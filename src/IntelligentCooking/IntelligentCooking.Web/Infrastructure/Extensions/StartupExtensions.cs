@@ -51,23 +51,29 @@ namespace IntelligentCooking.Web.Infrastructure.Extensions
 
         public static void ConfigureAuth(this IServiceCollection services, string secret)
         {
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; //?
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+            };
+
+            services.AddSingleton(tokenValidationParameters);
+
+            services.AddAuthentication(
+                    options =>
                     {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidateLifetime = true,
-                    };
-                });
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; //?
+                    })
+                .AddJwtBearer(
+                    options =>
+                    {
+                        options.TokenValidationParameters = tokenValidationParameters;
+                    });
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)
@@ -75,7 +81,7 @@ namespace IntelligentCooking.Web.Infrastructure.Extensions
             services.AddSwaggerGen(
                 c =>
                 {
-                    c.SwaggerDoc("v1", new Info { Title = "My Api", Version = "v1 " });
+                    c.SwaggerDoc("v1", new Info {Title = "My Api", Version = "v1 "});
                     var security = new Dictionary<string, IEnumerable<string>>
                     {
                         {"Bearer", new string[0]}

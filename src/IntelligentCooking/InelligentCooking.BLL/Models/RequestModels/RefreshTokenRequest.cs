@@ -1,6 +1,6 @@
-﻿namespace InelligentCooking.BLL.Models.ResponseModels
+﻿namespace IntelligentCooking.Web.Models.RequestModels
 {
-    public class AuthResponse
+    public class RefreshTokenRequest
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }

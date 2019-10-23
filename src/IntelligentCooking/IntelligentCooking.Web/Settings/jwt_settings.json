@@ -1,5 +1,6 @@
 {
   "JwtSettings": {
-    "Secret": "XgxdIEmrufHC47wXxtgNBOZfejr076QF"
+    "Secret": "XgxdIEmrufHC47wXxtgNBOZfejr076QF",
+    "LifeTime": "00:00:30" 
   }
 }

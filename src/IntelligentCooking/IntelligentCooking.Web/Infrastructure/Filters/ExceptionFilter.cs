@@ -19,14 +19,11 @@ namespace IntelligentCooking.Web.Infrastructure.Filters
                 case DublicateObjectException ex: 
                     context.Result = new ConflictObjectResult(ex.Message);
                     break;
-                case RegistrationException ex:
+                case ValidationException ex:
                     context.Result = new BadRequestObjectResult(ex.Data);
                     break;
-                case LoginFailedException ex:
+                case Exception ex:
                     context.Result = new BadRequestObjectResult(ex.Message);
-                    break;
-                default:
-                    context.Result = new BadRequestResult();
                     break;
             }
 

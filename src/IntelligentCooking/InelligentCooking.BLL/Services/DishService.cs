@@ -84,5 +84,17 @@ namespace InelligentCooking.BLL.Services
 
             return _mapper.Map<Dish, DishDto>(dish);
         }
+
+        public async Task RemoveByIdAsync(int id)
+        {
+            var dish = await _unitOfWork.Dishes.FindAsync(id);
+
+            if (dish == null)
+            {
+                ExceptionHandler.NotFound(nameof(Dish));
+            }
+
+            _unitOfWork.Dishes.Remove(dish);
+        }
     }
 }

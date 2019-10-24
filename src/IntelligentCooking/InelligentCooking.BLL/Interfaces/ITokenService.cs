@@ -1,9 +1,5 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using IntelligentCooking.Core.Entities;
-using IntelligentCooking.Web.Models.RequestModels;
-using Microsoft.IdentityModel.Tokens;
 
 namespace InelligentCooking.BLL.Interfaces
 {

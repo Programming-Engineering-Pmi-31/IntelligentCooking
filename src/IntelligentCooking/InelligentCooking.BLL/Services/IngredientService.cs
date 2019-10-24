@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using IntelligentCooking.Core.Entities;
+using InelligentCooking.BLL.Infrastructure.Exceptions;
 
 namespace InelligentCooking.BLL.Services
 {
@@ -29,6 +30,20 @@ namespace InelligentCooking.BLL.Services
                 .ToList();
 
             return ingredientsInfo;
+        }
+
+        public async Task<IngredientDto> AddIngredientAsync(AddIngredientDto addIngredient)
+        {
+            if (await _unitOfWork.Categories.GetByNameAsync(addIngredient.Name) != null)
+            {
+                ExceptionHandler.DublicateObject(nameof(Ingredient), nameof(Ingredient.Name));
+            }
+
+            var ingredientEntity = _unitOfWork.Ingredients.Add(_mapper.Map<AddIngredientDto, Ingredient>(addIngredient));
+
+            await _unitOfWork.CommitAsync();
+
+            return _mapper.Map<Ingredient, IngredientDto>(ingredientEntity);
         }
     }
 }

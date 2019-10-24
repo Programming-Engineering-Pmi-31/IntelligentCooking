@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -22,6 +23,12 @@ namespace IntelligentCooking.Web.Controllers
         public async Task<IActionResult> GetCategories()
         {
             return Ok(await _categoryService.GetCategoriesAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategory([FromForm]AddCategoryDto addCategory)
+        {
+            return Ok(await _categoryService.AddCategoryAsync(addCategory));
         }
     }
 }

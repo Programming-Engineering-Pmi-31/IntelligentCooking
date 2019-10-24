@@ -4,15 +4,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
 using InelligentCooking.BLL.Interfaces;
-using InelligentCooking.BLL.Models.ResponseModels;
 using InelligentCooking.BLL.Settings;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
-using IntelligentCooking.DAL.UnitsOfWork;
-using IntelligentCooking.Web.Models.RequestModels;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

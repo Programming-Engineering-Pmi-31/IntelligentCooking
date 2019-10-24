@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using IntelligentCooking.Core.Entities;
+﻿using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {

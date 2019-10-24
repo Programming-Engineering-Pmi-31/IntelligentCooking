@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using InelligentCooking.BLL.Infrastructure;
-using InelligentCooking.BLL.Settings;
-using IntelligentCooking.Web.Infrastructure.Extensions;
+﻿using IntelligentCooking.Web.Infrastructure.Extensions;
+using IntelligentCooking.Web.Infrastructure.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
 
 //TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
 //AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
@@ -30,13 +26,13 @@ namespace IntelligentCooking.Web
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        { 
-            services.GetSettings(this);
-            services.ConfigureMvcFeatures();
-            services.ConfigureAuth(Configuration["JwtSettings:Secret"]);
-            services.ConfigureSwagger();
-            services.AddBllDependecies(Configuration.GetConnectionString("IntelligentCookingDb"));
-            services.ConfigureCors();
+        {
+            services.Install(new OptionsInstaller(), Configuration);
+            services.Install(new AuthInstaller(), Configuration);
+            services.Install(new MvcInstaller(), Configuration);
+            services.Install(new CorsInstaller(), Configuration);
+            services.Install(new BLLInstaller(), Configuration);
+            services.Install(new SwaggerInstaller(), Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.Services
 {

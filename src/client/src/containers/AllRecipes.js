@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import orderпше By from 'lodash/orderBy';
+import orderBy from 'lodash/orderBy';
 import * as dishesActions from '../actions/dishes';
 import * as categoriesActions from '../actions/categories';
 import * as sortActions from '../actions/sort';

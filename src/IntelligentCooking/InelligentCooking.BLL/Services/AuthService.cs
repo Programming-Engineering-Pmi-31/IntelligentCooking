@@ -114,7 +114,7 @@ namespace InelligentCooking.BLL.Services
 
         private async Task<AuthResponse> GenerateUserToken(User user)
         {
-            var jwtToken = _tokenService.GenerateJwtToken(user);
+            var jwtToken = await _tokenService.GenerateJwtToken(user);
             var refreshToken = _tokenService.GenerateRefreshToken(jwtToken);
 
             _unitOfWork.RefreshTokens.Add(refreshToken);

@@ -28,7 +28,16 @@ namespace IntelligentCooking.BLL.Tests
             Mock<IIntelligentCookingUnitOfWork> mockUnitOfWork = new Mock<IIntelligentCookingUnitOfWork>();
 
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(m => m.Map<Category, CategoryDto>(It.IsAny<Category>())).Returns(new CategoryDto());
+            mapperMock.Setup(m => m.Map<Category, CategoryDto>(It.IsAny<Category>())).Returns((Category c) =>
+            {
+                return new CategoryDto()
+                {
+                    Id = c.Id,
+                    ImageUrl = c.ImageUrl,
+                    Name = c.Name
+                };
+            }
+            );
 
 
             var categories = new List<Category>
@@ -53,7 +62,14 @@ namespace IntelligentCooking.BLL.Tests
             Mock<IIntelligentCookingUnitOfWork> mockUnitOfWork = new Mock<IIntelligentCookingUnitOfWork>();
 
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(m => m.Map<Ingredient, IngredientDto>(It.IsAny<Ingredient>())).Returns(new IngredientDto());
+            mapperMock.Setup(m => m.Map<Ingredient, IngredientDto>(It.IsAny<Ingredient>())).Returns((Ingredient i) =>
+            {
+                return new IngredientDto()
+                {
+                    Id = i.Id,
+                    Name = i.Name
+                };
+            });
 
 
             var ingredients = new List<Ingredient>
@@ -78,7 +94,19 @@ namespace IntelligentCooking.BLL.Tests
             Mock<IIntelligentCookingUnitOfWork> mockUnitOfWork = new Mock<IIntelligentCookingUnitOfWork>();
 
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(m => m.Map<Dish, DishDto>(It.IsAny<Dish>())).Returns(new DishDto());
+            mapperMock.Setup(m => m.Map<Dish, DishDto>(It.IsAny<Dish>())).Returns((Dish d) =>
+            {
+                return new DishDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Recipe = d.Recipe,
+                    Servings = d.Servings,
+                    Rating = d.Stars,
+                    Description = d.Description
+                };
+            }
+            );
 
             Mock<IImageService> mockImageService = new Mock<IImageService>();
 
@@ -104,7 +132,19 @@ namespace IntelligentCooking.BLL.Tests
             Mock<IIntelligentCookingUnitOfWork> mockUnitOfWork = new Mock<IIntelligentCookingUnitOfWork>();          
 
             var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(m => m.Map<Dish, DishDto>(It.IsAny<Dish>())).Returns(new DishDto());
+            mapperMock.Setup(m => m.Map<Dish, DishDto>(It.IsAny<Dish>())).Returns((Dish d) =>
+            {
+                return new DishDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Recipe = d.Recipe,
+                    Servings = d.Servings,
+                    Rating = d.Stars,
+                    Description = d.Description
+                };
+            }
+            );
 
             Mock<IImageService> mockImageService = new Mock<IImageService>();
 

@@ -1,0 +1,7 @@
+{
+  "JwtSettings": {
+    "Secret": "XgxdIEmrufHC47wXxtgNBOZfejr076QF",
+    "JwtTokenLifetime": "4230:00:00",
+    "RefreshTokenLifetime":  "00:15:00" 
+  }
+}

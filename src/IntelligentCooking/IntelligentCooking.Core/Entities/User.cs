@@ -8,5 +8,6 @@ namespace IntelligentCooking.Core.Entities
     {
         public ICollection<Like> Likes { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
+        public ICollection<RefreshToken> RefreshTokens { get; set; }
     }
 }

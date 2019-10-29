@@ -10,11 +10,11 @@ namespace InelligentCooking.BLL.DTOs
         public int Rating { get; set; }
         public int Likes { get; set; }
         public string Time { get; set; }
-        public int? Calories { get; set; }
         public int Servings { get; set; }
-        public double? Proteins { get; set; }
-        public double? Fats { get; set; }
-        public double? Carbohydrates { get; set; }
+        public double Calories { get; set; }
+        public double Proteins { get; set; }
+        public double Fats { get; set; }
+        public double Carbohydrates { get; set; }
         public string Description { get; set; }
 
         public IEnumerable<ImageDto> Images { get; set; }

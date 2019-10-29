@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using InelligentCooking.BLL.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
@@ -19,21 +18,21 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfo([FromQuery] GetDishRequest getDishRequest)
+        public async Task<IActionResult> GetDishesInfo([FromQuery] GetDishRequest getDishRequest)
         {
-            return await _dishService.GetDishesInfoAsync(getDishRequest.Skip, getDishRequest.Take);
+            return Ok(await _dishService.GetDishesInfoAsync(getDishRequest));
         }
 
         [HttpPost]
-        public async Task<DishDto> AddDish([FromForm]AddDishDto addDish)
+        public async Task<IActionResult> AddDish([FromForm]AddDishDto addDish)
         {
-            return await _dishService.AddDishAsync(addDish);
+            return Ok(await _dishService.AddDishAsync(addDish));
         }
 
         [HttpGet("{id}")]
-        public async Task<DishDto> GetDishById(int id)
+        public async Task<IActionResult> GetDishById(int id)
         {
-            return await _dishService.FindByIdAsync(id);
+            return Ok(await _dishService.FindByIdAsync(id));
         }
     }
 }

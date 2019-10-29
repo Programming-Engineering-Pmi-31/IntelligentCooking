@@ -14,6 +14,7 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
         IFavouriteRepository Favourites { get; }
         ILikeRepository Likes { get; }
         IUserRepository Users { get; }
+        IRefreshTokenRepository RefreshTokens { get; }
 
         Task CommitAsync();
     }

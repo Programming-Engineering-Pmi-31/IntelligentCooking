@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using InelligentCooking.BLL.DTOs;
+﻿using System.Threading.Tasks;
 using InelligentCooking.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +16,9 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<IngredientDto>> GetIngredients()
+        public async Task<IActionResult> GetIngredients()
         {
-            return await _ingredientService.GetIngredientsAsync();
+            return Ok(await _ingredientService.GetIngredientsAsync());
         }
     }
 }

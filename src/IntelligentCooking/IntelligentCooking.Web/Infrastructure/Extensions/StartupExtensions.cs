@@ -1,35 +1,14 @@
-﻿using InelligentCooking.BLL.Settings;
-using Microsoft.AspNetCore.Mvc;
+﻿using IntelligentCooking.Web.Infrastructure.Installers;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
 
 namespace IntelligentCooking.Web.Infrastructure.Extensions
 {
     public static class StartupExtensions
     {
-        public static void ConfigureCors(this IServiceCollection services)
+        public static void Install(this IServiceCollection services, IInstaller installer, IConfiguration configuration)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Default", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
-        }
-
-        public static void ConfigureMvcFeatures(this IServiceCollection services)
-        {
-            services.AddMvc()
-                .SetCompatibilityVersion(version: CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
-        }
-
-        public static void GetSettings(this IServiceCollection services, Startup startup)
-        {
-            services.Configure<CloudinarySettings>(startup.Configuration.GetSection("CloudinaryCredentials"));
+            installer.InstallServices(services, configuration);
         }
     }
 }

@@ -17,6 +17,11 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .WithOne(f => f.User)
                 .HasForeignKey(f => f.UserId)
                 .IsRequired();
+
+            builder.HasMany(u => u.RefreshTokens)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId)
+                .IsRequired();
         }        
     }
 }

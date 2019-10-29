@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using InelligentCooking.BLL.DTOs;
+﻿using System.Threading.Tasks;
 using InelligentCooking.BLL.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntelligentCooking.Web.Controllers
@@ -17,10 +17,11 @@ namespace IntelligentCooking.Web.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
-        public async Task<IEnumerable<CategoryDto>> GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            return await _categoryService.GetCategoriesAsync();
+            return Ok(await _categoryService.GetCategoriesAsync());
         }
     }
 }

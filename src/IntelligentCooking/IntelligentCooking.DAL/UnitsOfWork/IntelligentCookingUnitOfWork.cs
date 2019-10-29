@@ -24,6 +24,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             Favourites = new FavouriteRepository(_context);
             Likes = new LikeRepository(_context);
             Users = new UserRepository(_context);
+            RefreshTokens = new RefreshTokenRespository(_context);
         }
 
         public ICategoryRepository Categories { get; }
@@ -34,6 +35,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         public IFavouriteRepository Favourites { get; }
         public ILikeRepository Likes { get; }
         public IUserRepository Users { get; }
+        public IRefreshTokenRepository RefreshTokens { get; }
 
         public async Task CommitAsync()
         {

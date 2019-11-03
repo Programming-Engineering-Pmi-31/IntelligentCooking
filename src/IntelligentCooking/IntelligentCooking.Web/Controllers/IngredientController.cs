@@ -27,5 +27,13 @@ namespace IntelligentCooking.Web.Controllers
         {
             return Ok(await _ingredientService.AddIngredientAsync(addIngredient));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> RemoveIngredientById(int id)
+        {
+            await _ingredientService.RemoveIngredientByIdAsync(id);
+
+            return Ok();
+        }
     }
 }

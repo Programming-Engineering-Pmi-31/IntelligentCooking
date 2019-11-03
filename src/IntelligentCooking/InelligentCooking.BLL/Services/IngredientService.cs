@@ -45,5 +45,17 @@ namespace InelligentCooking.BLL.Services
 
             return _mapper.Map<Ingredient, IngredientDto>(ingredientEntity);
         }
+
+        public async Task RemoveIngredientByIdAsync(int id)
+        {
+            var ingredient = await _unitOfWork.Ingredients.FindAsync(id);
+
+            if (ingredient == null)
+            {
+                ExceptionHandler.NotFound(nameof(Ingredient));
+            }
+
+            _unitOfWork.Ingredients.Remove(ingredient);
+        }
     }
 }

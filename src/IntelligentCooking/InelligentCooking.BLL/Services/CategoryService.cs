@@ -49,5 +49,17 @@ namespace InelligentCooking.BLL.Services
 
             return _mapper.Map<Category, CategoryDto>(categoryEntity);
         }
+
+        public async Task RemoveCategoryByIdAsync(int id)
+        {
+            var category = await _unitOfWork.Categories.FindAsync(id);
+
+            if (category == null)
+            {
+                ExceptionHandler.NotFound(nameof(Category));
+            }
+
+            _unitOfWork.Categories.Remove(category);
+        }
     }
 }

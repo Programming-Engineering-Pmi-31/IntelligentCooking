@@ -12,5 +12,7 @@ namespace InelligentCooking.BLL.Interfaces
         Task<DishDto> AddDishAsync(AddDishDto addDish);
 
         Task<DishDto> FindByIdAsync(int id);
+
+        Task RemoveDishByIdAsync(int id);
     }
 }

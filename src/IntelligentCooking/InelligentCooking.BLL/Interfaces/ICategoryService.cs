@@ -9,5 +9,7 @@ namespace InelligentCooking.BLL.Interfaces
         Task<IEnumerable<CategoryDto>> GetCategoriesAsync();
 
         Task<CategoryDto> AddCategoryAsync(AddCategoryDto addCategory);
+
+        Task RemoveCategoryByIdAsync(int id);
     }
 }

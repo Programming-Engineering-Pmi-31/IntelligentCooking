@@ -34,5 +34,13 @@ namespace IntelligentCooking.Web.Controllers
         {
             return Ok(await _dishService.FindByIdAsync(id));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> RemoveDishById(int id)
+        {
+            await _dishService.RemoveDishByIdAsync(id);
+
+            return Ok();
+        }
     }
 }

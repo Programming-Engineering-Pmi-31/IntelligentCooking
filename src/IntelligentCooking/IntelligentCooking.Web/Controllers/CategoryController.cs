@@ -30,5 +30,13 @@ namespace IntelligentCooking.Web.Controllers
         {
             return Ok(await _categoryService.AddCategoryAsync(addCategory));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> RemoveCategoryById(int id)
+        {
+            await _categoryService.RemoveCategoryByIdAsync(id);
+
+            return Ok();
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace InelligentCooking.BLL.Interfaces
         Task<IEnumerable<IngredientDto>> GetIngredientsAsync();
 
         Task<IngredientDto> AddIngredientAsync(AddIngredientDto addIngredient);
+
+        Task RemoveIngredientByIdAsync(int id);
     }
 }

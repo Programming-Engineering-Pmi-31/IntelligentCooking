@@ -32,21 +32,17 @@ namespace InelligentCooking.BLL.Services
         {
             IEnumerable<Dish> dishes = null;
 
-            if (getDish.SortingProperty.HasValue && getDish.IsAscending.HasValue)
+            switch (getDish.SortingProperty)
             {
-                switch (getDish.SortingProperty)
-                {
-                    case (SortBy.Calories):
-                        dishes = await _unitOfWork.Dishes.SortDishes(d => d.Calories, getDish.IsAscending, getDish.Skip, getDish.Take);
-                        break;
-                    case (SortBy.Time):
-                        dishes = await _unitOfWork.Dishes.SortDishes(d => d.Time, getDish.IsAscending, getDish.Skip, getDish.Take);
-                        break;
-                }
-            }
-            else
-            {
-                dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
+                case (null):
+                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
+                    break;
+                case (SortingCriteria.Calories):
+                    dishes = await _unitOfWork.Dishes.SortDishes(d => d.Calories, getDish.IsAscending, getDish.Skip, getDish.Take);
+                    break;
+                case (SortingCriteria.Time):
+                    dishes = await _unitOfWork.Dishes.SortDishes(d => d.Time, getDish.IsAscending, getDish.Skip, getDish.Take);
+                    break;
             }
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)

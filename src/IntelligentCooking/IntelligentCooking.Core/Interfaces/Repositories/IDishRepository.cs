@@ -10,6 +10,6 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take);
         Task<Dish> GetByNameAsync(string name);
-        Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool? ascending, int? skip, int? take);
+        Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take);
     }
 }

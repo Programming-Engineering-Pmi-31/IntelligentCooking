@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InelligentCooking.BLL.Models.Enums
 {
-    public enum SortBy
+    public enum SortingCriteria
     {
         Time,
         Calories

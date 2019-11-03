@@ -6,7 +6,7 @@ namespace IntelligentCooking.Web.Models.RequestModels
     {
         public int? Skip { get; set; }
         public int? Take { get; set; }
-        public SortBy? SortingProperty { get; set; }
-        public bool? IsAscending { get; set; }
+        public SortingCriteria? SortingProperty { get; set; }
+        public bool IsAscending { get; set; } = true;
     }
 }

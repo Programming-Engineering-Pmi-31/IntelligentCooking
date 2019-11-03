@@ -38,11 +38,11 @@ namespace IntelligentCooking.DAL.Repositories
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public async Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool? ascending, int? skip, int? take)
+        public async Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take)
         {
             var dishes = GetAllDishes();
 
-            dishes = ascending.Value ? dishes.OrderBy(filter) : dishes.OrderByDescending(filter);
+            dishes = ascending ? dishes.OrderBy(filter) : dishes.OrderByDescending(filter);
 
             if (skip.HasValue && take.HasValue)
             {

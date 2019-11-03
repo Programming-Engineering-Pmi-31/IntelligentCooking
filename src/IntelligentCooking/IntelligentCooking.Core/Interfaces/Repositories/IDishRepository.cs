@@ -8,8 +8,7 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
 {
     public interface IDishRepository: IRepository<Dish, int>
     {
-        Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take);
-        Task<Dish> GetByNameAsync(string name);
-        Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take);
+        Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take);
+        Task<Dish> GetByNameAsync(string name);        
     }
 }

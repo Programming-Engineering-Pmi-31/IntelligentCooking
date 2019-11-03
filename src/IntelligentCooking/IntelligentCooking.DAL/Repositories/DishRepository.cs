@@ -15,11 +15,19 @@ namespace IntelligentCooking.DAL.Repositories
     {
         public DishRepository(IntelligentCookingContext context) : base(context) { }
 
-        public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take)
+        public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take)
         {
-            var dishes = GetAllDishes();
+            var dishes = Context.Dishes
+                 .Include(d => d.DishIngredients)
+                 .ThenInclude(di => di.Ingredient)
+                 .Include(d => d.DishCategories)
+                 .ThenInclude(d => d.Category)
+                 .Include(d => d.Images)
+                 .AsQueryable();
 
-            if(skip.HasValue && take.HasValue)
+            dishes = ascending ? dishes.OrderBy(filter) : dishes.OrderByDescending(filter);
+
+            if (skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }
@@ -34,33 +42,14 @@ namespace IntelligentCooking.DAL.Repositories
 
         public override async Task<Dish> FindAsync(int id)
         {
-            return await GetAllDishes()
+            return await Context.Dishes
+                .Include(d => d.DishIngredients)
+                .ThenInclude(di => di.Ingredient)
+                .Include(d => d.DishCategories)
+                .ThenInclude(d => d.Category)
+                .Include(d => d.Images)
+                .Include(d => d.Likes)
                 .FirstOrDefaultAsync(d => d.Id == id);
-        }
-
-        public async Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> filter, bool ascending, int? skip, int? take)
-        {
-            var dishes = GetAllDishes();
-
-            dishes = ascending ? dishes.OrderBy(filter) : dishes.OrderByDescending(filter);
-
-            if (skip.HasValue && take.HasValue)
-            {
-                dishes = dishes.Paginate(skip.Value, take.Value);
-            }
-
-            return await dishes.ToListAsync();
-        }
-
-        private IQueryable<Dish> GetAllDishes()
-        {
-            return Context.Dishes
-                 .Include(d => d.DishIngredients)
-                 .ThenInclude(di => di.Ingredient)
-                 .Include(d => d.DishCategories)
-                 .ThenInclude(d => d.Category)
-                 .Include(d => d.Images)
-                 .AsQueryable();
         }
     }
 }

@@ -35,13 +35,13 @@ namespace InelligentCooking.BLL.Services
             switch (getDish.SortingProperty)
             {
                 case (null):
-                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
+                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(d => d.Id, true, getDish.Skip, getDish.Take);
                     break;
                 case (SortingCriteria.Calories):
-                    dishes = await _unitOfWork.Dishes.SortDishes(d => d.Calories, getDish.IsAscending, getDish.Skip, getDish.Take);
+                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(d => d.Calories, getDish.IsAscending, getDish.Skip, getDish.Take);
                     break;
                 case (SortingCriteria.Time):
-                    dishes = await _unitOfWork.Dishes.SortDishes(d => d.Time, getDish.IsAscending, getDish.Skip, getDish.Take);
+                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(d => d.Time, getDish.IsAscending, getDish.Skip, getDish.Take);
                     break;
             }
 

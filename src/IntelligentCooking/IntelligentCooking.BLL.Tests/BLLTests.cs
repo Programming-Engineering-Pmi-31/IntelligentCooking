@@ -54,6 +54,7 @@ namespace IntelligentCooking.BLL.Tests
             var result = categoryService.GetCategoriesAsync();
 
             Assert.Equal(3, result.Result.Count());
+
         }
 
         [Fact]

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.Repositories;
@@ -15,15 +17,23 @@ namespace IntelligentCooking.DAL.Repositories
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take)
         {
-            var dishes = Context.Dishes
-                .Include(d => d.DishIngredients)
-                .ThenInclude(di => di.Ingredient)
-                .Include(d => d.DishCategories)
-                .ThenInclude(d => d.Category)
-                .Include(d => d.Images)
-                .AsQueryable();
+            var dishes = GetAllDishes();           
 
-            if(skip.HasValue && take.HasValue)
+            if (skip.HasValue && take.HasValue)
+            {
+                dishes = dishes.Paginate(skip.Value, take.Value);
+            }
+
+            return await dishes.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> predicate, bool? ascending, int? skip, int? take)
+        {
+            var dishes = GetAllDishes();
+
+            dishes = ascending.Value ? dishes.OrderBy(predicate) : dishes.OrderByDescending(predicate);
+
+            if (skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }
@@ -46,6 +56,17 @@ namespace IntelligentCooking.DAL.Repositories
                 .Include(d => d.Images)
                 .Include(d => d.Likes)
                 .FirstOrDefaultAsync(d => d.Id == id);
+        }   
+
+        private IQueryable<Dish> GetAllDishes()
+        {
+            return Context.Dishes
+                 .Include(d => d.DishIngredients)
+                 .ThenInclude(di => di.Ingredient)
+                 .Include(d => d.DishCategories)
+                 .ThenInclude(d => d.Category)
+                 .Include(d => d.Images)
+                 .AsQueryable();
         }
     }
 }

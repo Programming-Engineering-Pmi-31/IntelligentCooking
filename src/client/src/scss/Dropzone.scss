@@ -15,7 +15,6 @@
   width: 100%;
 }
 .upload__thumb{
-  z-index: 100000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,10 +23,6 @@
   width: 30%;
   height: 200px;
   background: #30C9C9;
-  &:nth-child(1)::before{
-    content:"main photo";
-    top:0;
-  }
   p{
     font-size: 100px;
     position: absolute;
@@ -54,6 +49,7 @@
   input{
     line-height: 0;
     font-size: 0;
+    border: none;
     color:transparent;
     position: absolute;
     width: 100%;

@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
+import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 import StarRatings from 'react-star-ratings';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../scss/AllRecipes.scss';
 
-export class DishItem extends PureComponent {
+class DishItem extends PureComponent {
     render() {
-        const { item } = this.props;
+        const { item, updateRecipeRequest } = this.props;
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>
@@ -59,9 +61,19 @@ export class DishItem extends PureComponent {
                                 </span>
                             </div>
                         </div>
+                        <div className={styles.editPanel}>
+                            <button onClick={(e) => {e.preventDefault(); updateRecipeRequest();
+                            this.props.history.push(`/recipe/${item.id}/edit`); }}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button onClick={(e) => {e.preventDefault(); alert(3)}}>
+                                <FontAwesomeIcon icon={faTimes} />
+                            </button>
+                        </div>
                     </div>
                 </Link>
             </li>
         );
     }
 }
+export default withRouter(DishItem);

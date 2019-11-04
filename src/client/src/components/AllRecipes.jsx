@@ -3,17 +3,14 @@ import Loader from 'react-loader-spinner';
 import classNames from 'classnames';
 import styles from '../scss/AllRecipes.scss';
 import 'react-virtualized/styles.css';
-import { DishItem } from './DishItem';
+import DishItem from './DishItem';
 
 const AllRecipes = React.memo(
-    ({ setRecipes, setRecipesEmpty, dishes, sortBy, isLoading, firstLoad, noItems, skip }) => {
+    ({ setRecipes, setRecipesEmpty, dishes, sortBy, isLoading, firstLoad, noItems, skip,updateRecipeRequest}) => {
         const load = 8;
         const [count, setCount] = useState(0);
         useEffect(() => {
             setRecipes(skip, load);
-            // return () => {
-            //     setRecipesEmpty();
-            // };
         }, []);
         useEffect(() => {
             window.onscroll = () => {
@@ -60,7 +57,7 @@ const AllRecipes = React.memo(
                 </ul>
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
-                        <DishItem key={`${item.id}_dish`} item={item} />
+                        <DishItem key={`${item.id}_dish`} item={item} updateRecipeRequest={updateRecipeRequest} />
                     ))}
                 </ul>
                 {isLoading ? <LoadingIndicator /> : null}

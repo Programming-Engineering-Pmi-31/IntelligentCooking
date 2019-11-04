@@ -6,6 +6,9 @@ export const setRecipesEmpty = () => dispatch => {
 export const setExactRecipeEmpty = () => dispatch => {
     dispatch({ type: 'SET_EXACT_RECIPE_EMPTY' });
 };
+export const updateRecipeRequest = id => dispatch => {
+    dispatch({ type: 'UPDATE_RECIPE_REQUEST' });
+};
 
 export const setRecipe = skip => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
@@ -30,8 +33,9 @@ export const setRecipes = (skip, take) => dispatch => {
 };
 
 export const getRecipe = id => dispatch => {
-    axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
+    return axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
         dispatch({ type: 'GET_RECIPE', payload: res.data });
+        return res.data;
     });
 };
 

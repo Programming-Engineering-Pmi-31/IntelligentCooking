@@ -1,5 +1,6 @@
 const initialState = {
     isLoading: false,
+    isEditing: false,
     dishes: [],
     noItems: false,
     sortedItem: 'all',
@@ -31,6 +32,16 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 soloDish: [],
                 noItems: false,
+            };
+        case 'UPDATE_RECIPE_REQUEST':
+            return {
+                ...state,
+                isEditing: true,
+            };
+        case 'UPDATE_RECIPE_SUCCESS':
+            return {
+                ...state,
+                isEditing: false,
             };
         case 'NO_MORE_ITEMS':
             return {

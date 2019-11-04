@@ -4,11 +4,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
 using InelligentCooking.BLL.Interfaces;
 using InelligentCooking.BLL.Settings;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -18,23 +20,28 @@ namespace InelligentCooking.BLL.Services
     {
         private readonly IIntelligentCookingUnitOfWork _unitOfWork;
         private readonly TokenValidationParameters _tokenValidationParameters;
+        private readonly UserManager<User> _userManager;
         private readonly JwtSettings _jwtSettings;
 
         public TokenService(
             IIntelligentCookingUnitOfWork unitOfWork,
             IOptions<JwtSettings> jwtOptions,
-            TokenValidationParameters tokenValidationParameters)
+            TokenValidationParameters tokenValidationParameters,
+            UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _tokenValidationParameters = tokenValidationParameters;
+            _userManager = userManager;
             _jwtSettings = jwtOptions.Value;
         }
 
        
-        public string GenerateJwtToken(User user)
+        public async Task<string> GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
+
+            var userClaims = await _userManager.GetClaimsAsync(user);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -45,6 +52,7 @@ namespace InelligentCooking.BLL.Services
                         new Claim(JwtRegisteredClaimNames.Jti, $"{Guid.NewGuid()}"),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                        new Claim(ClaimTypes.Role, userClaims.First(c=>c.Type == ClaimTypes.Role)?.Value),
                         new Claim("id", $"{user.Id}")
                     }),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.JwtTokenLifetime),

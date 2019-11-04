@@ -17,7 +17,7 @@ namespace IntelligentCooking.DAL.Repositories
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take)
         {
-            var dishes = GetAllDishes();           
+            var dishes = GetWithMainPageProps();           
 
             if (skip.HasValue && take.HasValue)
             {
@@ -27,11 +27,11 @@ namespace IntelligentCooking.DAL.Repositories
             return await dishes.ToListAsync();
         }
 
-        public async Task<IEnumerable<Dish>> SortDishes<T>(Expression<Func<Dish, T>> predicate, bool? ascending, int? skip, int? take)
+        public async Task<IEnumerable<Dish>> GetSortedDishesAsync<T>(Expression<Func<Dish, T>> predicate, bool ascending, int? skip, int? take)
         {
-            var dishes = GetAllDishes();
+            var dishes = GetWithMainPageProps();
 
-            dishes = ascending.Value ? dishes.OrderBy(predicate) : dishes.OrderByDescending(predicate);
+            dishes = ascending ? dishes.OrderBy(predicate) : dishes.OrderByDescending(predicate);
 
             if (skip.HasValue && take.HasValue)
             {
@@ -58,7 +58,7 @@ namespace IntelligentCooking.DAL.Repositories
                 .FirstOrDefaultAsync(d => d.Id == id);
         }   
 
-        private IQueryable<Dish> GetAllDishes()
+        private IQueryable<Dish> GetWithMainPageProps()
         {
             return Context.Dishes
                  .Include(d => d.DishIngredients)

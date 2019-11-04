@@ -35,7 +35,7 @@ namespace IntelligentCooking.Web.Controllers
             return Ok(await _dishService.FindByIdAsync(id));
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDish([FromRoute]int id, [FromForm]AddDishDto addDish)
         {
             return Ok(await _dishService.UpdateDishAsync(id, addDish));

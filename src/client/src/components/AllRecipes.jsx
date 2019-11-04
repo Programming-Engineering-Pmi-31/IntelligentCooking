@@ -6,22 +6,22 @@ import 'react-virtualized/styles.css';
 import DishItem from './DishItem';
 
 const AllRecipes = React.memo(
-    ({ setRecipes, setRecipesEmpty, dishes, sortBy, isLoading, firstLoad, noItems, skip,updateRecipeRequest}) => {
+    ({ setRecipes, count , isAscending, sortingCriteria, dishes,setSort, sortBy, isLoading,
+         firstLoad, noItems, skip,updateRecipeRequest}) => {
         const load = 8;
-        const [count, setCount] = useState(0);
         useEffect(() => {
-            setRecipes(skip, load);
-        }, []);
+            console.log("First Load")
+            setRecipes(skip, load, sortingCriteria, isAscending);
+        }, [firstLoad]);
         useEffect(() => {
             window.onscroll = () => {
                 if (
                     !isLoading &&
                     document.documentElement.scrollHeight - 1250 <
                         document.documentElement.scrollTop &&
-                    count < 1
+                    count < 2
                 ) {
-                    setCount(count + 1);
-                    setRecipes(skip, 8);
+                    setRecipes(skip, 8, sortingCriteria, isAscending);
                 }
             };
             return () => {
@@ -29,13 +29,13 @@ const AllRecipes = React.memo(
             };
         }, [dishes, skip, count, isLoading, noItems, firstLoad ]);
         const handleLoadMore = () => {
-            setRecipes(skip, 8);
+            setRecipes(skip, 8, sortingCriteria, isAscending);
         };
         return (
             <div>
                 <ul className={styles.filters}>
                     <li>
-                        <button type="button" onClick={() => sortBy('all')}>
+                        <button type="button" onClick={() => setSort(null, null)}>
                             All recipes
                         </button>
                     </li>
@@ -45,13 +45,18 @@ const AllRecipes = React.memo(
                         </button>
                     </li>
                     <li>
-                        <button type="button" onClick={() => sortBy('lowesttime')}>
+                        <button type="button" onClick={() => setSort('Time', true)}>
                             Lowest Time
                         </button>
                     </li>
                     <li>
-                        <button type="button" onClick={() => sortBy('lowestcals')}>
-                            Lowest cals
+                        <button type="button" onClick={() => setSort('Calories', true)}>
+                            Lowest Cals
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" onClick={() => setSort('Calories', false)}>
+                            Highest Cals
                         </button>
                     </li>
                 </ul>
@@ -61,7 +66,7 @@ const AllRecipes = React.memo(
                     ))}
                 </ul>
                 {isLoading ? <LoadingIndicator /> : null}
-                {count === 1 && !isLoading ? (
+                {count >=2  && !isLoading ? (
                     <LoadMore handler={handleLoadMore} noItems={noItems} />
                 ) : null}
             </div>

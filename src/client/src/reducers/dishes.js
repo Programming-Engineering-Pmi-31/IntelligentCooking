@@ -1,4 +1,6 @@
 const initialState = {
+    sortingCriteria: null,
+    isAscending: null,
     isLoading: false,
     isEditing: false,
     dishes: [],
@@ -8,6 +10,7 @@ const initialState = {
     soloDish: [],
     firstLoad: false,
     skip: 0,
+    count: 0,
 };
 export const dishes = (state = initialState, action) => {
     switch (action.type) {
@@ -48,6 +51,18 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 noItems: true,
             };
+        case 'SET_SORT':
+            return {
+                ...state,
+                dishes: [],
+                firstLoad: false,
+                skip: 0,
+                count: 0,
+                isLoading: false,
+                noItems: false,
+                sortingCriteria: action.payload.criteria,
+                isAscending: action.payload.order,
+            };
         case 'SET_RECIPES_REQUEST':
             return {
                 ...state,
@@ -68,6 +83,7 @@ export const dishes = (state = initialState, action) => {
                 firstLoad: true,
                 noItems: false,
                 skip: state.skip + 8,
+                count: state.count + 1,
             };
         default:
             return state;

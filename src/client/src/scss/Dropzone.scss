@@ -15,6 +15,7 @@
   width: 100%;
 }
 .upload__thumb{
+  z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,6 +48,7 @@
 
   }
   input{
+    z-index: -1;
     line-height: 0;
     font-size: 0;
     border: none;

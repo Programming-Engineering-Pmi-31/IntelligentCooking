@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InelligentCooking.BLL.DTOs
 {
-    public class IngredientDetailedDto
+    public class DetailedIngredientDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

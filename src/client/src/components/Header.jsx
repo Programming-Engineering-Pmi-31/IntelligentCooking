@@ -9,6 +9,7 @@ import google from '../img/google.png';
 import facebook from '../img/facebook.png';
 import instagram from '../img/instagram.png';
 import styles from '../scss/Header.scss';
+import { Register } from './Register';
 
 const customStyles = {
     content: {
@@ -24,7 +25,7 @@ const customStyles = {
     },
 };
 
-const Header = React.memo(({ dishes }) => {
+const Header = React.memo(({ registrateNewUserAPI }) => {
     const [modalIsOpen, toggleModal] = useState(false);
     const openModal = () => {
         toggleModal(true);
@@ -58,43 +59,12 @@ const Header = React.memo(({ dishes }) => {
                     </li>
                 </ul>
             </nav>
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <button className={styles.closeAuth} onClick={closeModal}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </button>
-                <p className={styles.authTitle}> Please sign in</p>
-                <form className={styles.authForm}>
-                    <input placeholder="Login" name="login" type="email" />
-                    <input placeholder="Password" type="password" />
-                    <div>
-                        <ul>
-                            <li>
-                                <button>
-                                <img src={facebook} alt="" />
-                                </button>
-                            </li>
-                            <li>
-                                <button>
-                                    <img src={google} alt="" />
-                                </button>
-                            </li>
-                            <li>
-                                <button>
-                                    <img src={instagram} alt="" />
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <button className={styles.signInBtn} type="submit">
-                        Sign in
-                    </button>
-                </form>
-            </Modal>
+            <Register
+                registrate={registrateNewUserAPI}
+                modalIsOpen={modalIsOpen}
+                customStyles={customStyles}
+                closeModal={closeModal}
+            />
         </div>
     );
 });

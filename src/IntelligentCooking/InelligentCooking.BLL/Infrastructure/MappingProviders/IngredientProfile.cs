@@ -10,6 +10,9 @@ namespace InelligentCooking.BLL.MappingProviders
         {
             CreateMap<Ingredient, IngredientDto>()
                 .ReverseMap();
+
+            CreateMap<AddIngredientDto, Ingredient>()
+                .ReverseMap();
         }
     }
 }

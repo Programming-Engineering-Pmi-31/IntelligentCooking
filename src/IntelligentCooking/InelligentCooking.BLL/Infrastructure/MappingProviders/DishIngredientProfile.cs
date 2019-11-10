@@ -11,6 +11,11 @@ namespace InelligentCooking.BLL.MappingProviders
             CreateMap<DishIngredient, IngredientDto>()
                 .ForMember(i => i.Id, opt => opt.MapFrom(x => x.Ingredient.Id))
                 .ForMember(i => i.Name, opt => opt.MapFrom(x => x.Ingredient.Name));
+
+            CreateMap<DishIngredient, DetailedIngredientDto>()
+                .ForMember(i => i.Id, opt => opt.MapFrom(x => x.Ingredient.Id))
+                .ForMember(i => i.Name, opt => opt.MapFrom(x => x.Ingredient.Name))
+                .ForMember(i => i.Amount, opt => opt.MapFrom(x => x.Amount));
         }
     }
 }

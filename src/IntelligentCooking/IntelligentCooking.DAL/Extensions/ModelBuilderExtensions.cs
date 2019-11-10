@@ -30,49 +30,49 @@ namespace IntelligentCooking.DAL.Extensions
                         Id = 1,
                         Name = "Sweets",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://ukrhealth.net/wp-content/uploads/2018/01/shutterstock_361496144-696x464.jpg"
                     },
                     new Category
                     {
                         Id = 2,
                         Name = "Soup",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg"
                     },
                     new Category
                     {
                         Id = 3,
                         Name = "Italian",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://www.englishclub.com/images/vocabulary/food/italian/italian-food-640.jpg"
                     },
                     new Category
                     {
                         Id = 4,
                         Name = "Thai",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://www.untoldmorsels.com/wp-content/uploads/2018/08/thai-food-culture.jpg"
                     },
                     new Category
                     {
                         Id = 5,
                         Name = "Breakfast",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://olo-images-live.imgix.net/3a/3afe98ddcf4643a0b20c068b2c59f2ce.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=500&h=333&fit=fill&fm=png32&bg=transparent&s=862b0bcde81b3d6190fb8465f031a5cf"
                     },
                     new Category
                     {
                         Id = 6,
                         Name = "Quick and Easy",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg"
                     },
                     new Category
                     {
                         Id = 7,
                         Name = "Vegetarian",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg"
+                            "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968"
                     }
                 );
 
@@ -98,7 +98,7 @@ namespace IntelligentCooking.DAL.Extensions
                     new Dish
                     {
                         Id = 2,
-                        Name = "Thai Chicken Wild Rice",
+                        Name = "Thai Chicken Wild Rice Soup",
                         Recipe =
                             @"Cook the base of the soup. Whichever cooking method you choose, we will simmer the base soup ingredients (chicken, rice, broth, veggies and seasonings) until the rice is cooked and tender. Shred the chicken.Once the rice and chicken are tender,remove the cooked chicken and shred with two forks into bite - sized pieces, then add it back into the soup.  (Or alternately, you’re welcome to just cut the chicken into bite - sized pieces beforehand.) Season.Stir in the coconut milk.Then taste the soup and season with salt, pepper and / or extra Thai red curry paste as needed. Serve warm. Garnished with a squeeze of lime juice and fresh cilantro, plus an extra toppings that sound good.",
                         Time = new DateTime(3600),
@@ -238,56 +238,56 @@ namespace IntelligentCooking.DAL.Extensions
                     {
                         DishId = 2,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Thai-Chicken-Wild-Rice-Soup-Recipe-1.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 3,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/08/Healthy-Broccoli-Chicken-Casserole-Recipe-6-1.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 4,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 5,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2018/09/Healthy-Pumpkin-Muffins-Recipe-Gluten-Free-Vegan-2.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 6,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 7,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/07/Roasted-Broccoli-Chickpea-and-Farro-Bowls-Recipe-2-2.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 8,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Easy-Apple-Crisp-Recipe-1-3.jpg",
                         Priority = 1
                     },
                     new Image
                     {
                         DishId = 9,
                         Url =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg",
                         Priority = 1
                     });
 

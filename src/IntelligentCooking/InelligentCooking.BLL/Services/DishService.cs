@@ -101,24 +101,29 @@ namespace InelligentCooking.BLL.Services
             return _mapper.Map<Dish, DishDto>(dish);
         }
 
-        public async Task<DishDto> UpdateDishAsync(int id, AddDishDto addDish)
+        public async Task<DishDto> UpdateDishAsync(int id, UpdateDishDto updateDish)
         {
-            if (await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
+            if (await _unitOfWork.Dishes.GetByNameAsync(updateDish.Name) != null)
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }
 
             var dishEntity = await _unitOfWork.Dishes.FindAsync(id);
 
-            dishEntity = _mapper.Map<AddDishDto, Dish>(addDish);
+            dishEntity = _mapper.Map<UpdateDishDto, Dish>(updateDish);
 
             var priority = 1;
-            dishEntity.Images = (await _imageService.UploadRangeAsync(addDish.Images))
+            dishEntity.Images = updateDish.ImageUrls
                 .Select(url => new Image { Priority = priority++, DishId = dishEntity.Id, Url = url })
                 .ToList();
 
-            var dishIngredients = addDish.Ingredients
-                .Zip(addDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
+            dishEntity.Images.Union((await _imageService.UploadRangeAsync(updateDish.ImageFiles))
+                .Select(url => new Image { Priority = priority++, DishId = dishEntity.Id, Url = url })
+                .ToList())
+                .ToList();            
+
+            var dishIngredients = updateDish.Ingredients
+                .Zip(updateDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
                 .Select(
                     x =>
                         new DishIngredient
@@ -130,7 +135,7 @@ namespace InelligentCooking.BLL.Services
 
             _unitOfWork.DishIngredients.AddRange(dishIngredients);
 
-            var dishCategories = addDish.Categories.Select(
+            var dishCategories = updateDish.Categories.Select(
                 x => new DishCategory
                 { CategoryId = x, DishId = dishEntity.Id });
 

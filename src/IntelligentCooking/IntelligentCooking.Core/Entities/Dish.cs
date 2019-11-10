@@ -18,7 +18,7 @@ namespace IntelligentCooking.Core.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Recipe { get; set; }
-        public DateTime Time { get; set; }
+        public TimeSpan Time { get; set; }
         public int Servings { get; set; }
         public int Stars { get; set; }
         public double Proteins { get; set; }

@@ -9,7 +9,7 @@ namespace IntelligentCooking.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ControllerBase
     {
         private ICategoryService _categoryService;
@@ -20,7 +20,6 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize()]
         public async Task<IActionResult> GetCategories()
         {
             return Ok(await _categoryService.GetCategoriesAsync());

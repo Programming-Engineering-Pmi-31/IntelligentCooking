@@ -41,6 +41,11 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isEditing: true,
             };
+        case 'DELETE_RECIPE':
+            return {
+                ...state,
+                dishes: state.dishes.filter(item => item.id !== action.payload),
+            };
         case 'UPDATE_RECIPE_SUCCESS':
             return {
                 ...state,

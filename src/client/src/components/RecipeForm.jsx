@@ -34,11 +34,11 @@ class RecipeForm extends Component {
         time: '',
         ingredients: [],
         ingredientAmounts: {},
-        servings: 0,
-        proteins: 0,
-        carbs: 0,
-        fats: 0,
-        cals: 0,
+        servings: null,
+        proteins: null,
+        carbs: null,
+        fats: null,
+        cals: null,
         recipe: '',
     };
 
@@ -158,7 +158,7 @@ class RecipeForm extends Component {
             categories ? (catToSend = categories.map(item => item.value)) : (catToSend = []);
         }
         const obj = {
-            title: name,
+            name: name,
             img: Object.values(img).filter(e => e !== undefined),
             description: description,
             ingredients: Object.values(ingredients).map(e => e.value),

@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { faHome, faTimes } from '@fortawesome/free-solid-svg-icons';
-import Modal from 'react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import basicStyles from '../styles/assets/main.scss';
 import logo from '../img/logo.png';
-import google from '../img/google.png';
-import facebook from '../img/facebook.png';
-import instagram from '../img/instagram.png';
 import styles from '../scss/Header.scss';
 import { Register } from './Register';
+import { Login } from './Login';
 
 const customStyles = {
     content: {
@@ -25,13 +20,20 @@ const customStyles = {
     },
 };
 
-const Header = React.memo(({ registrateNewUserAPI }) => {
-    const [modalIsOpen, toggleModal] = useState(false);
-    const openModal = () => {
-        toggleModal(true);
+const Header = React.memo(({ registrateNewUserAPI, loginUserAPI, isAuth, login }) => {
+    const [registrationModalIsOpen, toggleRegistrationModal] = useState(false);
+    const [loginModalIsOpen, toggleLoginModal] = useState(false);
+    const openRegistrationModal = () => {
+        toggleRegistrationModal(true);
     };
-    const closeModal = () => {
-        toggleModal(false);
+    const closeRegistrationModal = () => {
+        toggleRegistrationModal(false);
+    };
+    const openLoginModal = () => {
+        toggleLoginModal(true);
+    };
+    const closeLoginModal = () => {
+        toggleLoginModal(false);
     };
     return (
         <div className={basicStyles.wrapper}>
@@ -52,18 +54,37 @@ const Header = React.memo(({ registrateNewUserAPI }) => {
                     <li>
                         <Link to="/create">create</Link>
                     </li>
-                    <li>
-                        <button type="button" onClick={openModal}>
-                            log
-                        </button>
-                    </li>
+                    {isAuth ? (
+                        <li>
+                            <p>{login}</p>
+                        </li>
+                    ) : (
+                        <Fragment>
+                            <li>
+                                <button type="button" onClick={openRegistrationModal}>
+                                    register
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" onClick={openLoginModal}>
+                                    log
+                                </button>
+                            </li>
+                        </Fragment>
+                    )}
                 </ul>
             </nav>
             <Register
                 registrate={registrateNewUserAPI}
-                modalIsOpen={modalIsOpen}
+                modalIsOpen={registrationModalIsOpen}
                 customStyles={customStyles}
-                closeModal={closeModal}
+                closeModal={closeRegistrationModal}
+            />
+            <Login
+                login={loginUserAPI}
+                modalIsOpen={loginModalIsOpen}
+                customStyles={customStyles}
+                closeModal={closeLoginModal}
             />
         </div>
     );

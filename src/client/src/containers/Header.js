@@ -8,9 +8,11 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(dishesActions, dispatch),
     ...bindActionCreators(authActions, dispatch),
 });
-const mapStateToProps = ({ dishes }) => ({
+const mapStateToProps = ({ dishes, auth }) => ({
     dishes: dishes.dishes,
     isLoading: dishes.isLoading,
+    isAuth: auth.isAuth,
+    login: auth.unique_name,
 });
 export default connect(
     mapStateToProps,

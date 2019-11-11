@@ -7,7 +7,7 @@ import styles from '../scss/AllRecipes.scss';
 
 class DishItem extends PureComponent {
     render() {
-        const { item, updateRecipeRequest } = this.props;
+        const { item, updateRecipeRequest,deleteRecipe } = this.props;
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>
@@ -66,7 +66,14 @@ class DishItem extends PureComponent {
                             this.props.history.push(`/recipe/${item.id}/edit`); }}>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            <button onClick={(e) => {e.preventDefault(); alert(3)}}>
+                            <button onClick={(e) => {e.preventDefault();
+                            const toDelete = confirm(`Detete item ${item.name}?`);
+                            if(toDelete){
+                                deleteRecipe(item.id);
+                            }
+                            else{
+                                alert("ok");
+                            }}}>
                                 <FontAwesomeIcon icon={faTimes} />
                             </button>
                         </div>

@@ -9,11 +9,16 @@ export const setExactRecipeEmpty = () => dispatch => {
 export const updateRecipeRequest = id => dispatch => {
     dispatch({ type: 'UPDATE_RECIPE_REQUEST' });
 };
+export const deleteRecipe = id => dispatch => {
+    axios.delete(`https://intelligentcookingweb.azurewebsites.net/api/Dish/${id}`).then(res => {
+        dispatch({ type: 'DELETE_RECIPE', payload: id });
+    });
+};
 
 export const setRecipe = skip => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
     axios
-        .get('https://localhost:44335/api/Dish', {
+        .get('https://intelligentcookingweb.azurewebsites.net/api/Dish', {
             params: { skip: skip, take: 1, byCalories: false },
         })
         .then(res => {
@@ -21,13 +26,13 @@ export const setRecipe = skip => dispatch => {
         });
 };
 export const setSort = (criteria, order) => dispatch => {
-    dispatch({ type: 'SET_SORT', payload: { criteria: criteria, order: order}});
-}
+    dispatch({ type: 'SET_SORT', payload: { criteria: criteria, order: order } });
+};
 
 export const setRecipes = (skip, take, criteria, order) => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
     axios
-        .get('https://localhost:44335/api/Dish', {
+        .get('https://intelligentcookingweb.azurewebsites.net/api/Dish', {
             params: { skip: skip, take: take, sortingCriteria: criteria, isAscending: order },
         })
         .then(res => {
@@ -37,7 +42,7 @@ export const setRecipes = (skip, take, criteria, order) => dispatch => {
 };
 
 export const getRecipe = id => dispatch => {
-    return axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
+    return axios.get(`https://intelligentcookingweb.azurewebsites.net/api/Dish/${id}`).then(res => {
         dispatch({ type: 'GET_RECIPE', payload: res.data });
         return res.data;
     });
@@ -68,7 +73,7 @@ export const createProduct = obj => dispatch => {
 
     return axios({
         method: 'POST',
-        url: 'https://localhost:44335/api/Dish',
+        url: 'https://intelligentcookingweb.azurewebsites.net/api/Dish',
         data: formData,
     }).then(res => {
         dispatch({ type: 'ADD_RECIPE', payload: res.data });

@@ -7,12 +7,10 @@ import facebook from '../img/facebook.png';
 import instagram from '../img/instagram.png';
 import styles from '../scss/Header.scss';
 
-export class Register extends PureComponent {
+export class Login extends PureComponent {
     state = {
         email: '',
-        login: '',
         password: '',
-        confirm: '',
     };
 
     componentDidMount() {
@@ -27,16 +25,11 @@ export class Register extends PureComponent {
         }));
     };
 
-    registrateNewUser() {
-        if (this.state.password !== this.state.confirm) {
-            alert('confirm password should be equal two password');
-        } else {
-            this.props.registrate({
-                email: this.state.email,
-                login: this.state.login,
-                password: this.state.password,
-            });
-        }
+    LoginUser() {
+        this.props.login({
+            email: this.state.email,
+            password: this.state.password,
+        });
     }
 
     render() {
@@ -52,7 +45,7 @@ export class Register extends PureComponent {
                 <button className={styles.closeAuth} onClick={closeModal}>
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
-                <p className={styles.authTitle}>Register your account</p>
+                <p className={styles.authTitle}>Login</p>
                 <form className={styles.authForm}>
                     <input
                         placeholder="Email"
@@ -61,20 +54,8 @@ export class Register extends PureComponent {
                         onChange={this.valueChange}
                     />
                     <input
-                        placeholder="Login"
-                        name="login"
-                        type="text"
-                        onChange={this.valueChange}
-                    />
-                    <input
                         placeholder="Password"
                         name="password"
-                        type="password"
-                        onChange={this.valueChange}
-                    />
-                    <input
-                        placeholder="Confirm password"
-                        name="confirm"
                         type="password"
                         onChange={this.valueChange}
                     />
@@ -101,11 +82,11 @@ export class Register extends PureComponent {
                         className={styles.signInBtn}
                         onClick={e => {
                             e.preventDefault();
-                            this.registrateNewUser();
+                            this.LoginUser();
                         }}
                         type="submit"
                     >
-                        Register
+                        Log In
                     </button>
                 </form>
             </Modal>

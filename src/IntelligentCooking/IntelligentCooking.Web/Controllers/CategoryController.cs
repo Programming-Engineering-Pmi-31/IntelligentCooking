@@ -19,7 +19,7 @@ namespace IntelligentCooking.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="User")]
+        [Authorize()]
         public async Task<IActionResult> GetCategories()
         {
             return Ok(await _categoryService.GetCategoriesAsync());

@@ -17,8 +17,17 @@ namespace IntelligentCooking.Web
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath: env.ContentRootPath)
                 .AddJsonFile("Settings/cloudinary_settings.json", false, true)
-                .AddJsonFile("Settings/jwt_settings.json", false, true)
-                .AddJsonFile("appsettings.json", false, true);
+                .AddJsonFile("Settings/jwt_settings.json", false, true);
+
+            if (env.IsDevelopment())
+            {
+                configuration.AddJsonFile("appsettings.json", false, true);
+            }
+
+            if (env.IsProduction())
+            {
+                configuration.AddJsonFile("appsettings.Production.json", false, true);
+            }
 
             Configuration = configuration.Build();
         }

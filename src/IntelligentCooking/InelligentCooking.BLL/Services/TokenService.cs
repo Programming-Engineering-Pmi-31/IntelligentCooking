@@ -52,7 +52,7 @@ namespace InelligentCooking.BLL.Services
                         new Claim(JwtRegisteredClaimNames.Jti, $"{Guid.NewGuid()}"),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                        new Claim(ClaimTypes.Role, userClaims.First(c=>c.Type == ClaimTypes.Role)?.Value),
+                        new Claim(ClaimTypes.Role, userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value ?? "User"),
                         new Claim("id", $"{user.Id}")
                     }),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.JwtTokenLifetime),

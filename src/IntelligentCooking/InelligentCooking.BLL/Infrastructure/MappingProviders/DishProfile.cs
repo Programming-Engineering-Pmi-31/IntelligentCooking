@@ -13,7 +13,7 @@ namespace InelligentCooking.BLL.MappingProviders
         {
             CreateMap<Dish, DishPreviewDto>()
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories.Select(y => y.CategoryId)))
-                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.TotalMinutes))
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString("hh\\:mm")))
                 .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count))
                 .ForMember(
                     d => d.ImageUrl,
@@ -44,7 +44,7 @@ namespace InelligentCooking.BLL.MappingProviders
             CreateMap<Dish, DishDto>()
                 .ForMember(d => d.Ingredients, opt => opt.MapFrom(x => x.DishIngredients))
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
-                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.TotalMinutes))
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString("hh\\:mm")))
                 .ForMember(d => d.Images, opt => opt.MapFrom(x => x.Images))
                 .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count));
         }

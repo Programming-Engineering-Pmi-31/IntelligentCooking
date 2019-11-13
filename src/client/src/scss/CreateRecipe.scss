@@ -63,9 +63,28 @@
 
 }
 .form__selector {
+  display: flex;
+  justify-content: flex-start;
+  div:nth-child(1){
+    width: 95%;
+  }
   margin: 40px 0 20px 0;
   label {
     margin-top: -20px;
+  }
+  .addBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+      cursor: pointer;
+      transform: rotate(90deg);
+    }
+    button{
+      background: transparent;
+    }
   }
 }
 .not__empty{

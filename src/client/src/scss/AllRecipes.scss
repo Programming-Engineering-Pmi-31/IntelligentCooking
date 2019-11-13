@@ -35,6 +35,7 @@
   }
 }
 .card {
+  height: 490px;
   text-align: center;
   position: relative;
   background-color: white;
@@ -54,6 +55,9 @@
     & .card__aditional{
       display: flex;
     }
+    & .editPanel {
+      display: block;
+    }
   }
   .rating__info{
     display: flex;
@@ -72,7 +76,35 @@
       color: #fff;
     }
   }
+  .editPanel{
+    display: none;
+    position: absolute;
+    top: 0%;
+    right: 0;
+    button{
+      width: 30px;
+      color:#000;
+      margin-right: 10px;
+      font-size: 20px;
+      text-align: center;
+      padding: 2px;
+      transition: all 0.2s ease;
+      &:nth-child(1){
+        background: $light-yellow;
+        &:hover{
+          color: #fff;
+        }
+      }
+      &:nth-child(2){
+        background: $light-red;
+        &:hover{
+          color: #fff;
+        }
+      }
 
+    }
+
+  }
 }
 .image__container{
   overflow: hidden;

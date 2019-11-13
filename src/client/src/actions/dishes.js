@@ -6,11 +6,29 @@ export const setRecipesEmpty = () => dispatch => {
 export const setExactRecipeEmpty = () => dispatch => {
     dispatch({ type: 'SET_EXACT_RECIPE_EMPTY' });
 };
-export const setRecipes = (skip, take) => dispatch => {
+export const updateRecipeRequest = id => dispatch => {
+    dispatch({ type: 'UPDATE_RECIPE_REQUEST' });
+};
+
+export const setRecipe = skip => dispatch => {
     dispatch({ type: 'SET_RECIPES_REQUEST' });
     axios
         .get('https://localhost:44335/api/Dish', {
-            params: { skip: skip, take: take, byCalories: false },
+            params: { skip: skip, take: 1, byCalories: false },
+        })
+        .then(res => {
+            dispatch({ type: 'SET_RECIPE_SUCCESS', payload: res.data });
+        });
+};
+export const setSort = (criteria, order) => dispatch => {
+    dispatch({ type: 'SET_SORT', payload: { criteria: criteria, order: order}});
+}
+
+export const setRecipes = (skip, take, criteria, order) => dispatch => {
+    dispatch({ type: 'SET_RECIPES_REQUEST' });
+    axios
+        .get('https://localhost:44335/api/Dish', {
+            params: { skip: skip, take: take, sortingCriteria: criteria, isAscending: order },
         })
         .then(res => {
             dispatch({ type: 'SET_RECIPES_SUCCESS', payload: res.data });
@@ -19,8 +37,9 @@ export const setRecipes = (skip, take) => dispatch => {
 };
 
 export const getRecipe = id => dispatch => {
-    axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
+    return axios.get(`https://localhost:44335/api/Dish/${id}`).then(res => {
         dispatch({ type: 'GET_RECIPE', payload: res.data });
+        return res.data;
     });
 };
 

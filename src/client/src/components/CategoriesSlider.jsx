@@ -22,7 +22,6 @@ class CategoriesSlider extends PureComponent {
         });
         return (
             <div>
-                <p>hello</p>
                 <Slider {...settings}>{categoriesItems}</Slider>
             </div>
         );

@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import styles from '../scss/Recommended.scss';
+import axios from 'axios';
 
 class Recommended extends Component {
-    state = {
-        shouldUpdate: true,
-    };
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state.shouldUpdate;
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        this.setState({
-            shouldUpdate: false,
-        });
-    }
+    // state = {
+    //     recommended: [],
+    // };
+    //
+    // componentDidMount() {
+    //     axios
+    //         .get('https://localhost:44335/api/Dish', {
+    //             params: { skip: 30, take: 6, byCalories: false },
+    //         })
+    //         .then(res => {
+    //             this.setState({
+    //                 recommended: res.data,
+    //             });
+    //         });
+    // }
 
     render() {
         const { dishes } = this.props;
@@ -45,10 +48,7 @@ class Recommended extends Component {
                     indexes.push(randomIndex);
                     sliderItems.push(
                         <Link to={`/recipe/${dishes[randomIndex].id}`} key={dishes[randomIndex].id}>
-                            <div
-                                style={{ width: 500 }}
-                                className={styles.slider__item}
-                            >
+                            <div style={{ width: 500 }} className={styles.slider__item}>
                                 <img src={dishes[randomIndex].imageUrl} alt="" />
                                 <p>{`cals: ${dishes[randomIndex].calories} time: ${dishes[randomIndex].time}`}</p>
                                 <div />
@@ -58,7 +58,11 @@ class Recommended extends Component {
                 }
             }
         }
-        return <Slider {...settings}>{sliderItems}</Slider>;
+        return (
+            <div>
+                <Slider {...settings}>{sliderItems}</Slider>
+            </div>
+        );
     }
 }
 export default Recommended;

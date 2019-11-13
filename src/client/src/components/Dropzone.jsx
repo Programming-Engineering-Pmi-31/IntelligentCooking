@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 import styles from '../scss/Dropzone.scss';
 
 export const Previews = React.memo(props => {
+    const { img } = props;
     const [files, setFiles] = useState({});
     const [currentDragFile, setDragFile] = useState(null);
     const [currentDragIndex, setDraggedIndex] = useState(null);
@@ -11,6 +13,7 @@ export const Previews = React.memo(props => {
     for (let i = 0; i < 6; i++) {
         rows.push(
             <div
+                draggable={!!files[`${i}`]}
                 key={i}
                 className={styles.upload__thumb}
                 onDragStart={e => {
@@ -31,13 +34,23 @@ export const Previews = React.memo(props => {
                 }}
                 index={i}
             >
-                {files[`${i}`] ? (
+                {typeof files[`${i}`] === 'string' && typeof img[`${i}`] === 'string' && (
+                    <img
+                        className={styles.active_img}
+                        src={files[`${i}`]}
+                        alt=""
+                    />
+                )}
+                {typeof files[`${i}`] === 'object' && files[`${i}`] !== null &&  typeof img[`${i}`] === 'object' &&
+                img[`${i}`] !== null && (
                     <img
                         className={styles.active_img}
                         src={URL.createObjectURL(files[`${i}`])}
                         alt=""
                     />
-                ) : null}
+                )}
+
+
                 <p>+</p>
                 <input
                     id={i}
@@ -51,6 +64,7 @@ export const Previews = React.memo(props => {
                             setFiles({ ...files, [`${i}`]: e.target.files[0] });
                             setDraggedIndex(e.target.id);
                             setDragFile(files[e.target.id]);
+                            setDroppedIndex(e.target.id);
                         }
                     }}
                     onDrop={e => {
@@ -100,6 +114,8 @@ export const Previews = React.memo(props => {
                             });
                         } else {
                             console.log(6);
+                            console.log(currentDragFile);
+                            console.log(files[e.target.id])
                             setFiles({
                                 ...files,
                                 [`${currentDragIndex}`]: files[e.target.id],
@@ -112,8 +128,15 @@ export const Previews = React.memo(props => {
         );
     }
     useEffect(() => {
+        if(img.length > 0){
+            img.forEach((value,i)=>  setFiles({
+                ...files,
+                [`${i}`]:value.url,
+            }));
+        }
         props.valueChange(files);
-    }, [files]);
+    }, [files, props]);
+    console.log("img", img);
     return (
         <section className={styles.dropZone}>
             <div>

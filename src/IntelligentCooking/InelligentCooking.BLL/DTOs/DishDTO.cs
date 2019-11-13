@@ -18,7 +18,7 @@ namespace InelligentCooking.BLL.DTOs
         public string Description { get; set; }
 
         public IEnumerable<ImageDto> Images { get; set; }
-        public IEnumerable<IngredientDto> Ingredients { get; set; }
+        public IEnumerable<IngredientDetailedDto> Ingredients { get; set; }
         public IEnumerable<CategoryDto> Categories { get; set; }
     }
 }

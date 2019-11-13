@@ -1,15 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Select from 'react-select';
 import classNames from 'classnames';
 import Textarea from 'react-textarea-autosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, withRouter } from 'react-router-dom';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { faHome, faPlusCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from '../scss/CreateRecipe.scss';
 import { Previews } from './Dropzone';
 
-class CreateRecipe extends Component {
+const customStyles = {
+    content: {
+        top: '30%',
+        left: '40%',
+        width: '40%',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(-25%, -30%)',
+    },
+    overlay: {
+        backgroundColor: '#ffefd5dd',
+    },
+};
+
+class RecipeForm extends Component {
     state = {
+        addIngredientIsOpen: false,
+        addCategoryIsOpen: false,
         name: '',
         categories: null,
         description: '',
@@ -26,14 +43,51 @@ class CreateRecipe extends Component {
     };
 
     componentDidMount() {
-        console.log("create did mount");
-        const { setIngredients, setCategories, ingredientsList, categoriesList } = this.props;
+        const {
+            setIngredients,
+            setCategories,
+            ingredientsList,
+            categoriesList,
+            isEditing,
+            getRecipe,
+            match,
+            soloDish,
+        } = this.props;
+        if (isEditing) {
+            getRecipe(match.params.id).then(res => {
+                this.setState({
+                    name: res.name,
+                    description: res.description,
+                    categories: res.categories.map(e => ({ label: e.name, value: e.id })),
+                    ingredients: res.ingredients.map(e => ({ label: e.name, value: e.id })),
+                    servings: res.servings,
+                    proteins: res.proteins,
+                    carbs: res.carbohydrates,
+                    fats: res.fats,
+                    cals: res.calories,
+                    img: res.images.map(e => ({ url: e.url })),
+                    recipe: res.recipe,
+                    time: res.time,
+                });
+            });
+        }
         if (!ingredientsList.length) setIngredients();
         if (!categoriesList.length) setCategories();
     }
 
+    createIngredientsOpen = () => {
+        this.setState({
+            addIngredientIsOpen: true,
+        });
+    };
+
+    createIngredientsClose = (e) => {
+        this.setState({
+            addIngredientIsOpen: false,
+        });
+    };
+
     categoriesChange = category => {
-        console.log(category);
         this.setState({ categories: category });
     };
 
@@ -75,7 +129,6 @@ class CreateRecipe extends Component {
     };
 
     render() {
-        console.log("create render");
         const {
             categories,
             name,
@@ -91,7 +144,15 @@ class CreateRecipe extends Component {
             fats,
             proteins,
         } = this.state;
-        const { ingredientsList, categoriesList, createProduct } = this.props;
+        const {
+            ingredientsList,
+            categoriesList,
+            createProduct,
+            setRecipe,
+            skip,
+            soloDish,
+        } = this.props;
+
         let catToSend;
         {
             categories ? (catToSend = categories.map(item => item.value)) : (catToSend = []);
@@ -121,35 +182,72 @@ class CreateRecipe extends Component {
                 <h2>Create new recipe</h2>
                 <form>
                     <div>
-                        <Input name="name" type="text" handler={this.valueChange} />
+                        <Input name="name" type="text" value={name} handler={this.valueChange} />
                         <label className={styles.label}>Name</label>
                     </div>
                     <div>
-                        <Input name="description" type="text" handler={this.valueChange} />
+                        <Input
+                            name="description"
+                            type="text"
+                            value={description}
+                            handler={this.valueChange}
+                        />
                         <label className={styles.label}>Description</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <Select
-                            value={categories}
-                            onChange={this.categoriesChange}
-                            options={categoriesOptions}
-                            isMulti
-                        />
-                        <label className={styles.label}>Category</label>
+                        <div>
+                            <Select
+                                value={categories}
+                                onChange={this.categoriesChange}
+                                options={categoriesOptions}
+                                isMulti
+                            />
+                            <label className={styles.label}>Category</label>
+                        </div>
+                        <div className={styles.addBtn}>
+                            <FontAwesomeIcon icon={faPlusCircle} />
+                        </div>
                     </div>
                     <div className={styles.input_img__block}>
-                        <Previews valueChange={this.imageChange} />
+                        <Previews img={img} valueChange={this.imageChange} />
                         <label className={styles.label__img}>Images</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <Select
-                            value={ingredients}
-                            onChange={this.ingredientsChange}
-                            options={ingredientsOptions}
-                            isMulti
-                        />
-                        <label className={styles.label}>Ingredients</label>
+                        <div>
+                            <Select
+                                value={ingredients}
+                                onChange={this.ingredientsChange}
+                                options={ingredientsOptions}
+                                isMulti
+                            />
+                            <label className={styles.label}>Ingredients</label>
+                        </div>
+                        <div className={styles.addBtn}>
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                this.createIngredientsOpen();
+                            }}>
+                                <FontAwesomeIcon icon={faPlusCircle} />
+                            </button>
+                        </div>
                     </div>
+                    <Modal
+                        isOpen={this.state.addIngredientIsOpen}
+                        onRequestClose={this.createIngredientsClose}
+                        houldCloseOnOverlayClick={false}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                    >
+                        <button className={styles.closeAuth} >
+                            <FontAwesomeIcon icon={faTimes} />
+                        </button>
+                        <p className={styles.authTitle}> Please sign in</p>
+                        <form className={styles.authForm}>
+                            <input placeholder="Login" name="login" type="email" />
+                            <input placeholder="Password" type="password" />
+
+                        </form>
+                    </Modal>
                     <div>
                         {ingredients.length ? (
                             <table className={styles.ingredient__table}>
@@ -185,42 +283,73 @@ class CreateRecipe extends Component {
                     </div>
                     <div className={styles.energy__inputs}>
                         <div>
-                            <Input name="proteins" type="number" handler={this.valueChange} />
+                            <Input
+                                name="proteins"
+                                type="number"
+                                value={proteins}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Proteins</label>
                         </div>
                         <div>
-                            <Input name="carbs" type="number" handler={this.valueChange} />
+                            <Input
+                                name="carbs"
+                                type="number"
+                                value={carbs}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Carbs</label>
                         </div>
                         <div>
-                            <Input name="fats" type="number" handler={this.valueChange} />
+                            <Input
+                                name="fats"
+                                type="number"
+                                value={fats}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Fats</label>
                         </div>
                         <div>
-                            <Input name="cals" type="number" handler={this.valueChange} />
+                            <Input
+                                name="cals"
+                                type="number"
+                                value={cals}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Cals</label>
                         </div>
                     </div>
                     <div className={styles.additional_info}>
                         <div>
-                            <Input name="servings" type="number" handler={this.valueChange} />
+                            <Input
+                                name="servings"
+                                type="number"
+                                value={servings}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Servings</label>
                         </div>
                         <div>
-                            <Input name="time" type="time" handler={this.valueChange} />
+                            <Input
+                                name="time"
+                                type="time"
+                                value={time}
+                                handler={this.valueChange}
+                            />
                             <label className={styles.label}>Time</label>
                         </div>
                     </div>
                     <div>
-                        <TextArea name="recipe" handler={this.valueChange} />
+                        <TextArea name="recipe" value={recipe} handler={this.valueChange} />
                         <label className={styles.label}>Recipe</label>
                     </div>
                     <input
                         type="button"
                         onClick={() => {
-                            createProduct(obj).then(res =>
-                                this.props.history.push(`/recipe/${res.data.id}`)
-                            );
+                            createProduct(obj).then(res => {
+                                this.props.history.push(`/recipe/${res.data.id}`);
+                                setRecipe(skip);
+                            });
                         }}
                         value="Send Message"
                     />
@@ -238,17 +367,28 @@ class CreateRecipe extends Component {
 class Input extends Component {
     state = {
         length: 0,
+        value: null,
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.value != null && prevProps.value !== this.props.value) {
+            this.setState({
+                value: this.props.value,
+                length: this.props.value.toString().length,
+            });
+        }
+    }
 
     valueChange = event => {
         const { value } = event.target;
         this.setState({
             length: value.length,
+            value: value,
         });
     };
 
     render() {
-        const { length } = this.state;
+        const { length, value } = this.state;
         const { name, handler, type } = this.props;
         const inputClass = classNames({
             [styles.input__active]: length > 0,
@@ -257,6 +397,7 @@ class Input extends Component {
             <input
                 className={inputClass}
                 name={name}
+                value={this.props.value}
                 onChange={e => {
                     this.valueChange(e);
                     handler(e);
@@ -269,7 +410,17 @@ class Input extends Component {
 class TextArea extends Component {
     state = {
         length: 0,
+        value: null,
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.value != null && prevProps.value !== this.props.value) {
+            this.setState({
+                value: this.props.value,
+                length: this.props.value.toString().length,
+            });
+        }
+    }
 
     valueChange = event => {
         const { value } = event.target;
@@ -284,10 +435,12 @@ class TextArea extends Component {
         const inputClass = classNames({
             [styles.input__active]: length > 0,
         });
+
         return (
             <Textarea
                 className={inputClass}
                 name={name}
+                value={this.props.value}
                 onChange={e => {
                     this.valueChange(e);
                     handler(e);
@@ -297,4 +450,4 @@ class TextArea extends Component {
         );
     }
 }
-export default withRouter(CreateRecipe);
+export default RecipeForm;

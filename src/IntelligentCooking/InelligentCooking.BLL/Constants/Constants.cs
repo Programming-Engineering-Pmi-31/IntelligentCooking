@@ -33,5 +33,6 @@
         }
 
         public static string TimeRegExp => @"\d\d:\d\d";
+        public static string TimeFormat => @"hh\:mm";
     }
 }

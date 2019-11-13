@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { Link ,withRouter} from 'react-router-dom';
+
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import styles from '../scss/RecipeCard.scss';
 
@@ -25,16 +25,16 @@ const RecipeCard = React.memo(({ getRecipe, match, dishes, setExactRecipeEmpty }
         images,
     } = dishes.soloDish;
     useEffect(() => {
-        console.log("recipe card  did mount");
+        console.log('recipe card  did mount');
         if (!dishes.soloDish.length) {
             getRecipe(match.params.id);
         }
-        return () =>{
+        return () => {
             setExactRecipeEmpty();
-        }
+        };
     }, []);
 
-    console.log("recipe card render");
+    console.log('recipe card render');
     return (
         <div>
             {images && (
@@ -81,7 +81,7 @@ const RecipeCard = React.memo(({ getRecipe, match, dishes, setExactRecipeEmpty }
                                             <li key={e.id}>
                                                 <p>
                                                     {' '}
-                                                    {index}. {e.name}{' '}
+                                                    {index+1}. {e.name}{' '}
                                                 </p>
                                             </li>
                                         ))}

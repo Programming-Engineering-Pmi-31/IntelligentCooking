@@ -14,19 +14,28 @@ const sortBy = (_dishes, sortedItem) => {
     }
 };
 describe('reducers dishes  ', () => {
-    it('SET_RECIPES', () => {
+    it('SET_RECIPES_SUCCESS', () => {
         const initialState = {
+            isLoading: false,
             dishes: [],
-            isLoading: true,
+            noItems: false,
+            sortedItem: 'all',
+            error: false,
+            soloDish: [],
+            firstLoad: false,
+            skip: 0,
         };
         const action = {
-            type: 'SET_RECIPES',
+            type: 'SET_RECIPES_SUCCESS',
             payload: [1, 2, 3],
         };
         expect(dishes(initialState, action)).toEqual({
             ...initialState,
+            dishes: [...initialState.dishes, ...action.payload],
             isLoading: false,
-            dishes: action.payload,
+            firstLoad: true,
+            noItems: false,
+            skip: initialState.skip + 8,
         });
     });
 });

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
 import Header from '../containers/Header';
 import Recommended from '../containers/Recommended';
 import CategoriesSlider from '../containers/CategoriesSlider';

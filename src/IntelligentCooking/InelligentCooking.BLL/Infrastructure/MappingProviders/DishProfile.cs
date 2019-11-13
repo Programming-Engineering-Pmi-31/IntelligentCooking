@@ -13,7 +13,7 @@ namespace InelligentCooking.BLL.MappingProviders
         {
             CreateMap<Dish, DishPreviewDto>()
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories.Select(y => y.CategoryId)))
-                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToShortTimeString()))
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString(Constants.Constants.TimeFormat)))
                 .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count))
                 .ForMember(
                     d => d.ImageUrl,
@@ -29,12 +29,22 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ForMember(d => d.DishCategories, opt => opt.Ignore())
                 .ForMember(d => d.Images, opt => opt.Ignore())
                 .ForMember(d => d.Stars, opt => opt.MapFrom(x => 0))
-                .ForMember(d => d.Time, opt => opt.MapFrom(x => DateTime.ParseExact(x.Time, "HH:mm", CultureInfo.InvariantCulture)));
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => TimeSpan.ParseExact(x.Time, Constants.Constants.TimeFormat, CultureInfo.InvariantCulture)));
+
+            CreateMap<UpdateDishDto, Dish>()
+               .ForMember(d => d.Favourites, opt => opt.Ignore())
+               .ForMember(d => d.Likes, opt => opt.Ignore())
+               .ForMember(d => d.Id, opt => opt.Ignore())
+               .ForMember(d => d.DishIngredients, opt => opt.Ignore())
+               .ForMember(d => d.DishCategories, opt => opt.Ignore())
+               .ForMember(d => d.Images, opt => opt.Ignore())
+               .ForMember(d => d.Stars, opt => opt.MapFrom(x => 0))
+               .ForMember(d => d.Time, opt => opt.MapFrom(x => TimeSpan.ParseExact(x.Time, Constants.Constants.TimeFormat, CultureInfo.InvariantCulture)));
 
             CreateMap<Dish, DishDto>()
                 .ForMember(d => d.Ingredients, opt => opt.MapFrom(x => x.DishIngredients))
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
-                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToShortTimeString()))
+                .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString(Constants.Constants.TimeFormat)))
                 .ForMember(d => d.Images, opt => opt.MapFrom(x => x.Images))
                 .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count));
         }

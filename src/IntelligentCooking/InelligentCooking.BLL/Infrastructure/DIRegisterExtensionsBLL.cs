@@ -17,6 +17,7 @@ namespace InelligentCooking.BLL.Infrastructure
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ILikeService, LikeService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

@@ -117,7 +117,9 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<DishDto> UpdateDishAsync(int id, UpdateDishDto updateDish)
         {
-            if (await _unitOfWork.Dishes.GetByNameAsync(updateDish.Name) != null)
+            var currentDish = await _unitOfWork.Dishes.GetByNameAsync(updateDish.Name);
+
+            if (currentDish != null && !currentDish.Name.Equals(updateDish.Name))
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }

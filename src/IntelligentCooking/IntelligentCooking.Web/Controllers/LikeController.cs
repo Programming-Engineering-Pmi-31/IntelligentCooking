@@ -17,12 +17,6 @@ namespace IntelligentCooking.Web.Controllers
             _likeService = likeService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetLikesForDish(int dishId)
-        {
-            return Ok(await _likeService.GetLikesForDishAsync(dishId));
-        }
-
         [HttpPost]
         public async Task<IActionResult> AddLike(AddLikeDto addLikeDto)
         {

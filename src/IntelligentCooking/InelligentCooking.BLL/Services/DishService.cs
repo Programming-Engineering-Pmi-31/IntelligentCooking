@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
+using InelligentCooking.BLL.Infrastructure.Extensions;
 using InelligentCooking.BLL.Interfaces;
 using InelligentCooking.BLL.Models.Enums;
 using IntelligentCooking.Core.Entities;
@@ -34,16 +35,28 @@ namespace InelligentCooking.BLL.Services
         {
             IEnumerable<Dish> dishes = null;
 
-            switch (getDish.SortingCriteria)
+            switch(getDish.SortingCriteria)
             {
-                case (null):
+                case null:
                     dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
                     break;
-                case (SortingCriteria.Calories):
-                    dishes = await _unitOfWork.Dishes.GetSortedDishesAsync(d => d.Calories, getDish.IsAscending, getDish.Skip, getDish.Take);
+
+                case SortingCriteria.Calories:
+                    dishes = await _unitOfWork.Dishes.GetSortedDishesAsync(
+                        d => d.Calories,
+                        getDish.IsAscending,
+                        getDish.Skip,
+                        getDish.Take);
+
                     break;
-                case (SortingCriteria.Time):
-                    dishes = await _unitOfWork.Dishes.GetSortedDishesAsync(d => d.Time, getDish.IsAscending, getDish.Skip, getDish.Take);
+
+                case SortingCriteria.Time:
+                    dishes = await _unitOfWork.Dishes.GetSortedDishesAsync(
+                        d => d.Time,
+                        getDish.IsAscending,
+                        getDish.Skip,
+                        getDish.Take);
+
                     break;
             }
 
@@ -93,7 +106,7 @@ namespace InelligentCooking.BLL.Services
         {
             var dish = await _unitOfWork.Dishes.FindAsync(id);
 
-            if (dish == null)
+            if(dish == null)
             {
                 ExceptionHandler.NotFound(nameof(Dish));
             }
@@ -119,27 +132,27 @@ namespace InelligentCooking.BLL.Services
         {
             var currentDish = await _unitOfWork.Dishes.GetByNameAsync(updateDish.Name);
 
-            if (currentDish != null && !currentDish.Name.Equals(updateDish.Name))
+            if(currentDish != null && !currentDish.Name.Equals(updateDish.Name))
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }
 
             var dishEntity = await _unitOfWork.Dishes.FindAsync(id);
 
-            dishEntity = _mapper.Map<UpdateDishDto, Dish>(updateDish);
+            _mapper.Map(updateDish, dishEntity);
 
             var priority = 1;
             dishEntity.Images = updateDish.ImageUrls
-                .Select(url => new Image { Priority = priority++, DishId = dishEntity.Id, Url = url })
+                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
                 .ToList();
 
-            dishEntity.Images.Union((await _imageService.UploadRangeAsync(updateDish.ImageFiles))
-                .Select(url => new Image { Priority = priority++, DishId = dishEntity.Id, Url = url })
-                .ToList())
-                .ToList();            
+            dishEntity.Images.AddRange(
+                (await _imageService.UploadRangeAsync(updateDish.ImageFiles))
+                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
+                .ToList());
 
             var dishIngredients = updateDish.Ingredients
-                .Zip(updateDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
+                .Zip(updateDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
                 .Select(
                     x =>
                         new DishIngredient
@@ -147,15 +160,17 @@ namespace InelligentCooking.BLL.Services
                             DishId = dishEntity.Id,
                             IngredientId = x.IngredientId,
                             Amount = x.Amount
-                        });
+                        })
+                .ToList();
 
-            _unitOfWork.DishIngredients.AddRange(dishIngredients);
+            dishEntity.DishIngredients = dishIngredients;
 
             var dishCategories = updateDish.Categories.Select(
-                x => new DishCategory
-                { CategoryId = x, DishId = dishEntity.Id });
+                    x => new DishCategory
+                        {CategoryId = x, DishId = dishEntity.Id})
+                .ToList();
 
-            _unitOfWork.DishCategories.AddRange(dishCategories);
+            dishEntity.DishCategories = dishCategories;
 
             await _unitOfWork.CommitAsync();
 

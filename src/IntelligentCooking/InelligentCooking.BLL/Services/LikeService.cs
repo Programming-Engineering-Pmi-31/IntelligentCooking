@@ -18,11 +18,6 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<double> GetLikesForDishAsync(int dishId)
-        {
-            return await _unitOfWork.Likes.AvgForDish(dishId);
-        }
-
         public async Task AddLikesForDishAsync(AddLikeDto addLikeDto, int userId)
         {
             var like = _mapper.Map<Like>(addLikeDto);

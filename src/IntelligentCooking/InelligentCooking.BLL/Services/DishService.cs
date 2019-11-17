@@ -141,15 +141,24 @@ namespace InelligentCooking.BLL.Services
 
             _mapper.Map(updateDish, dishEntity);
 
-            var priority = 1;
-            dishEntity.Images = updateDish.ImageUrls
-                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
-                .ToList();
+            dishEntity.Images = new List<Image>();
 
-            dishEntity.Images.AddRange(
-                (await _imageService.UploadRangeAsync(updateDish.ImageFiles))
-                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
+            if(updateDish.ImageUrls != null)
+                dishEntity.Images.AddRange(updateDish.ImageUrls
+                .Select(img => new Image { Priority = img.Priority, DishId = dishEntity.Id, Url = img.Url })
                 .ToList());
+
+            if(updateDish.ImageFiles != null)
+                foreach(var img in updateDish.ImageFiles)
+                {
+                   dishEntity.Images.Add(
+                   new Image
+                   {
+                       Priority = img.Priority,
+                       DishId = dishEntity.Id,
+                       Url = await _imageService.UploadImageAsync(img.File)
+                   });
+                }
 
             var dishIngredients = updateDish.Ingredients
                 .Zip(updateDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})

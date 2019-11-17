@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InelligentCooking.BLL.Models.RequestModels
+namespace InelligentCooking.BLL.Models
 {
-    public class UpdateImageRequest
+    public class UpdateImageModel
     {
         public int Priority { get; set; }
     }

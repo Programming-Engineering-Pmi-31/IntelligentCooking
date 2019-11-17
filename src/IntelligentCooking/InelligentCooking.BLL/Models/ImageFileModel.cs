@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace InelligentCooking.BLL.Models.RequestModels
+namespace InelligentCooking.BLL.Models
 {
-    public class ImageFileRequest: UpdateImageRequest
+    public class ImageFileModel: UpdateImageModel
     {
         public IFormFile File { get; set; }
     }

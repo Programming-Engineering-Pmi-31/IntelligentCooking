@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InelligentCooking.BLL.Models.RequestModels
+namespace InelligentCooking.BLL.Models
 {
-    public class ImageUrlRequest: UpdateImageRequest
+    public class ImageUrlModel: UpdateImageModel
     {
         public string Url { get; set; }
     }

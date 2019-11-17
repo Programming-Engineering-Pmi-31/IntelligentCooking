@@ -1,4 +1,4 @@
-﻿using InelligentCooking.BLL.Models.RequestModels;
+﻿using InelligentCooking.BLL.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -18,8 +18,8 @@ namespace InelligentCooking.BLL.DTOs
         public double Calories { get; set; }
         public string Description { get; set; }
 
-        public IEnumerable<ImageFileRequest> ImageFiles { get; set; }
-        public IEnumerable<ImageUrlRequest> ImageUrls { get; set; }
+        public IEnumerable<ImageFileModel> ImageFiles { get; set; }
+        public IEnumerable<ImageUrlModel> ImageUrls { get; set; }
         public IEnumerable<int> Ingredients { get; set; }
         public IEnumerable<string> IngredientAmounts { get; set; }
         public IEnumerable<int> Categories { get; set; }

@@ -12,6 +12,8 @@ namespace IntelligentCooking.Core.Interfaces.Repositories
 
         TEntity Add(TEntity item);
 
+        Task<int> CountAsync();
+
         void AddRange(IEnumerable<TEntity> items);
 
         void Remove(TEntity item);

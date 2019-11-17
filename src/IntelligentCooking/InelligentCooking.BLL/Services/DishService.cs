@@ -9,6 +9,7 @@ using InelligentCooking.BLL.Infrastructure.Exceptions;
 using InelligentCooking.BLL.Infrastructure.Extensions;
 using InelligentCooking.BLL.Interfaces;
 using InelligentCooking.BLL.Models.Enums;
+using InelligentCooking.BLL.Models.ResponseModels;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using IntelligentCooking.Web.Models.RequestModels;
@@ -31,7 +32,7 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DishPreviewDto>> GetDishesInfoAsync(GetDishRequest getDish)
+        public async Task<DishPreviewResponse> GetDishesInfoAsync(GetDishRequest getDish)
         {
             IEnumerable<Dish> dishes = null;
 
@@ -60,8 +61,14 @@ namespace InelligentCooking.BLL.Services
                     break;
             }
 
-            return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
+            var dishPrewiews = dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();
+
+            return new DishPreviewResponse()
+            {
+                Dishes = dishPrewiews,
+                Count = await _unitOfWork.Dishes.CountAsync()
+            };
         }
 
         public async Task<DishDto> AddDishAsync(AddDishDto addDish)

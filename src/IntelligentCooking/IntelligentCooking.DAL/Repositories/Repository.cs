@@ -18,6 +18,10 @@ namespace IntelligentCooking.DAL.Repositories
                 .Add(item)
                 .Entity;
 
+        public async Task<int> CountAsync() =>
+            await Context.Set<TEntity>()
+                .CountAsync();
+
         public virtual void AddRange(IEnumerable<TEntity> items)
         {
             Context.Set<TEntity>()

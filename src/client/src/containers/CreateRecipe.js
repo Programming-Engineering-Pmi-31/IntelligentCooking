@@ -16,6 +16,8 @@ const mapStateToProps = ({ ingredients, categories, dishes }) => ({
     soloDish: dishes.soloDish,
     skip: dishes.skip,
     isEditing: dishes.isEditing,
+    sortingCriteria: dishes.sortingCriteria,
+    isAscending: dishes.isAscending,
 });
 
 export default connect(

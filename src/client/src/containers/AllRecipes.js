@@ -33,6 +33,8 @@ const mapStateToProps = ({ dishes, sort }) => ({
     sortingCriteria: dishes.sortingCriteria,
     isAscending: dishes.isAscending,
     count: dishes.count,
+    dishesPages: dishes.dishesPages,
+    dishesToLoad: dishes.dishesToLoad,
 });
 export default connect(
     mapStateToProps,

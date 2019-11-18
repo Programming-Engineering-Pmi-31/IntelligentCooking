@@ -19,7 +19,7 @@ class App extends PureComponent {
         return (
             <div className={styles.container}>
                 <Header />
-                <Recommended />
+                {/*<Recommended />*/}
                 <CategoriesSlider />
                 <AllRecipes />
             </div>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styles from '../scss/Dropzone.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
 export const Previews = React.memo(props => {
     const { img } = props;
@@ -124,6 +126,14 @@ export const Previews = React.memo(props => {
                         }
                     }}
                 />
+                {files[`${i}`]  &&
+                    <button className={styles.deleteImage} onClick={e => {
+                        e.preventDefault();
+                       setFiles({ ...files, [`${i}`]: null })
+                    }}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </button>}
+
             </div>,
         );
     }
@@ -136,7 +146,6 @@ export const Previews = React.memo(props => {
         }
         props.valueChange(files);
     }, [files, props]);
-    console.log("img", img);
     return (
         <section className={styles.dropZone}>
             <div>

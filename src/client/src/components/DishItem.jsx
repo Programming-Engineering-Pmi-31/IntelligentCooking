@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link, withRouter} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 import StarRatings from 'react-star-ratings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,7 @@ import styles from '../scss/AllRecipes.scss';
 
 class DishItem extends PureComponent {
     render() {
-        const { item, updateRecipeRequest,deleteRecipe } = this.props;
+        const { item, updateRecipeRequest, deleteRecipe } = this.props;
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>
@@ -62,18 +62,26 @@ class DishItem extends PureComponent {
                             </div>
                         </div>
                         <div className={styles.editPanel}>
-                            <button onClick={(e) => {e.preventDefault(); updateRecipeRequest();
-                            this.props.history.push(`/recipe/${item.id}/edit`); }}>
+                            <button
+                                onClick={e => {
+                                    e.preventDefault();
+                                    updateRecipeRequest();
+                                    this.props.history.push(`/recipe/${item.id}/edit`);
+                                }}
+                            >
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            <button onClick={(e) => {e.preventDefault();
-                            const toDelete = confirm(`Detete item ${item.name}?`);
-                            if(toDelete){
-                                deleteRecipe(item.id);
-                            }
-                            else{
-                                alert("ok");
-                            }}}>
+                            <button
+                                onClick={e => {
+                                    e.preventDefault();
+                                    const toDelete = confirm(`Detete item ${item.name}?`);
+                                    if (toDelete) {
+                                        deleteRecipe(item.id);
+                                    } else {
+                                        alert('ok');
+                                    }
+                                }}
+                            >
                                 <FontAwesomeIcon icon={faTimes} />
                             </button>
                         </div>

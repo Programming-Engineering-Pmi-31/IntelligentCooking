@@ -11,6 +11,9 @@ const initialState = {
     firstLoad: false,
     skip: 0,
     count: 0,
+    dishesCount: 0,
+    dishesPages: 0,
+    dishesToLoad: 0,
 };
 export const dishes = (state = initialState, action) => {
     switch (action.type) {
@@ -41,9 +44,16 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isEditing: true,
             };
+        case 'UPDATE_RECIPE_FINISH':
+            return {
+                ...state,
+                isEditing: false,
+            };
         case 'DELETE_RECIPE':
             return {
                 ...state,
+                skip: state.skip - 1,
+                dishesCount: state.dishesCount - 1,
                 dishes: state.dishes.filter(item => item.id !== action.payload),
             };
         case 'UPDATE_RECIPE_SUCCESS':
@@ -76,19 +86,28 @@ export const dishes = (state = initialState, action) => {
         case 'SET_RECIPE_SUCCESS':
             return {
                 ...state,
-                dishes: [...state.dishes, action.payload],
+                dishes: [...state.dishes, ...action.payload.dishes],
+                isLoading: false,
+                dishesCount: state.dishesCount + 1,
                 skip: state.skip + 1,
                 noItems: false,
             };
         case 'SET_RECIPES_SUCCESS':
             return {
                 ...state,
-                dishes: [...state.dishes, ...action.payload],
+                dishes: [...state.dishes, ...action.payload.dishes],
                 isLoading: false,
                 firstLoad: true,
                 noItems: false,
-                skip: state.skip + 8,
+                skip: state.skip + action.payload.load,
                 count: state.count + 1,
+            };
+        case 'SET_DISHES_COUNT':
+            return {
+                ...state,
+                dishesCount: action.payload,
+                dishesPages: Math.floor(action.payload / 8),
+                dishesToLoad: action.payload % 8,
             };
         default:
             return state;

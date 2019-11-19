@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using InelligentCooking.BLL.DTOs;
+using InelligentCooking.BLL.Infrastructure;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
 using InelligentCooking.BLL.Infrastructure.Extensions;
 using InelligentCooking.BLL.Interfaces;
@@ -191,6 +192,24 @@ namespace InelligentCooking.BLL.Services
             await _unitOfWork.CommitAsync();
 
             return _mapper.Map<Dish, DishDto>(dishEntity);
+        }
+
+        public async Task<IEnumerable<DishPreviewDto>> GetDishesByIngredients(FilterRequest filterRequest)
+        {
+            var include = await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.IncludeIngredients);
+            var exclude = await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients);
+
+            var dishComparer = GenericEqualityComparer<Dish>.GetEqualityComparer((d1, d2) => d1.Id == d2.Id, d => d.Id);
+            var result = include.Except(exclude, dishComparer)
+                .Where(
+                    res => res.DishIngredients.Select(di => di.IngredientId)
+                               .Intersect(filterRequest.IncludeIngredients)
+                               .Count()
+                           / (double)filterRequest.IncludeIngredients.Count()
+                           >= 0.5);
+
+            return result.Select(_mapper.Map<Dish, DishPreviewDto>)
+                .ToList();
         }
     }
 }

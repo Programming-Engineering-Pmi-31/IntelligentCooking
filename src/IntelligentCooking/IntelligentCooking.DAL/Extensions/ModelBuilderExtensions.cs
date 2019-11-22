@@ -15,7 +15,7 @@ namespace IntelligentCooking.DAL.Extensions
             modelBuilder.ApplyConfiguration(new DishIngredientConfiguration());
             modelBuilder.ApplyConfiguration(new FavouriteConfiguration());
             modelBuilder.ApplyConfiguration(new IngredientConfiguration());
-            modelBuilder.ApplyConfiguration(new LikeConfiguration());
+            modelBuilder.ApplyConfiguration(new RatingConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
             modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
@@ -525,7 +525,7 @@ namespace IntelligentCooking.DAL.Extensions
                     }
                 );
 
-            modelBuilder.Entity<Like>()
+            modelBuilder.Entity<Rating>()
                 .HasData(
                 );
         }

@@ -11,7 +11,7 @@ namespace IntelligentCooking.Core.Entities
             Favourites = new HashSet<Favourite>();
             DishIngredients = new HashSet<DishIngredient>();
             DishCategories = new HashSet<DishCategory>();
-            Likes = new HashSet<Like>();
+            Ratings = new HashSet<Rating>();
             Images = new HashSet<Image>();
         }
 
@@ -30,7 +30,7 @@ namespace IntelligentCooking.Core.Entities
         public ICollection<Image> Images { get; set; }
         public ICollection<DishIngredient> DishIngredients { get; set; }
         public ICollection<DishCategory> DishCategories { get; set; }
-        public ICollection<Like> Likes { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
         public ICollection<Favourite> Favourites { get; set; }
     }
 }

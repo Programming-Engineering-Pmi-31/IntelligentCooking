@@ -39,7 +39,7 @@ namespace InelligentCooking.BLL.Services
             switch(getDish.SortingCriteria)
             {
                 case null:
-                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndLikesAsync(getDish.Skip, getDish.Take);
+                    dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndRatingsAsync(getDish.Skip, getDish.Take);
                     break;
 
                 case SortingCriteria.Calories:

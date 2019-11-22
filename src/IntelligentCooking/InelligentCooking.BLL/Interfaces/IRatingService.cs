@@ -3,8 +3,8 @@ using InelligentCooking.BLL.DTOs;
 
 namespace InelligentCooking.BLL.Interfaces
 {
-    public interface ILikeService
+    public interface IRatingService
     {
-        Task AddLikesForDishAsync(AddLikeDto addLikeDto, int userId);
+        Task AddRatingForDishAsync(AddRatingDto addRatingDto, int userId);
     }
 }

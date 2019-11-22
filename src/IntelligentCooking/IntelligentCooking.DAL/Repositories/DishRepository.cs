@@ -15,7 +15,7 @@ namespace IntelligentCooking.DAL.Repositories
     {
         public DishRepository(IntelligentCookingContext context) : base(context) { }
 
-        public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndLikesAsync(int? skip, int? take)
+        public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndRatingsAsync(int? skip, int? take)
         {
             var dishes = GetWithMainPageProps();           
 
@@ -54,7 +54,7 @@ namespace IntelligentCooking.DAL.Repositories
                 .Include(d => d.DishCategories)
                 .ThenInclude(d => d.Category)
                 .Include(d => d.Images)
-                .Include(d => d.Likes)
+                .Include(d => d.Ratings)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }   
 
@@ -66,6 +66,7 @@ namespace IntelligentCooking.DAL.Repositories
                  .Include(d => d.DishCategories)
                  .ThenInclude(d => d.Category)
                  .Include(d => d.Images)
+                 .Include(d => d.Ratings)
                  .AsQueryable();
         }
     }

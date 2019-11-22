@@ -22,7 +22,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             DishCategories = new DishCategoryRepository(_context);
             DishIngredients = new DishIngredientRepository(_context);
             Favourites = new FavouriteRepository(_context);
-            Likes = new LikeRepository(_context);
+            Ratings = new RatingRepository(_context);
             Users = new UserRepository(_context);
             RefreshTokens = new RefreshTokenRespository(_context);
         }
@@ -33,7 +33,7 @@ namespace IntelligentCooking.DAL.UnitsOfWork
         public IDishCategoryRepository DishCategories { get; }
         public IDishIngredientRepository DishIngredients { get; }
         public IFavouriteRepository Favourites { get; }
-        public ILikeRepository Likes { get; }
+        public IRatingRepository Ratings { get; }
         public IUserRepository Users { get; }
         public IRefreshTokenRepository RefreshTokens { get; }
 

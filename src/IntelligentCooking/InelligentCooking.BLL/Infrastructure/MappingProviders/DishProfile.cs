@@ -14,7 +14,7 @@ namespace InelligentCooking.BLL.MappingProviders
             CreateMap<Dish, DishPreviewDto>()
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories.Select(y => y.CategoryId)))
                 .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString(Constants.Constants.TimeFormat)))
-                .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count))
+                .ForMember(d => d.Rating, opt => opt.MapFrom(x => x.Ratings.Count == 0 ? 0 : x.Ratings.Average(r => r.Rate)))
                 .ForMember(
                     d => d.ImageUrl,
                     opt => opt.MapFrom(
@@ -23,7 +23,7 @@ namespace InelligentCooking.BLL.MappingProviders
 
             CreateMap<AddDishDto, Dish>()
                 .ForMember(d => d.Favourites, opt => opt.Ignore())
-                .ForMember(d => d.Likes, opt => opt.Ignore())
+                .ForMember(d => d.Ratings, opt => opt.Ignore())
                 .ForMember(d => d.Id, opt => opt.Ignore())
                 .ForMember(d => d.DishIngredients, opt => opt.Ignore())
                 .ForMember(d => d.DishCategories, opt => opt.Ignore())
@@ -42,7 +42,7 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ForMember(d => d.Categories, opt => opt.MapFrom(x => x.DishCategories))
                 .ForMember(d => d.Time, opt => opt.MapFrom(x => x.Time.ToString(Constants.Constants.TimeFormat)))
                 .ForMember(d => d.Images, opt => opt.MapFrom(x => x.Images))
-                .ForMember(d => d.Likes, opt => opt.MapFrom(x => x.Likes.Count));
+                .ForMember(d => d.Rating, opt => opt.MapFrom(x => x.Ratings.Count == 0 ? 0 : x.Ratings.Average(r => r.Rate)));
         }
     }
 }

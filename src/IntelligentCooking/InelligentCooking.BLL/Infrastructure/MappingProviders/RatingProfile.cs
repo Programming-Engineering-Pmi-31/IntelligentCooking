@@ -4,11 +4,11 @@ using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.MappingProviders
 {
-    public class LikeProfile : Profile
+    public class RatingProfile : Profile
     {
-        public LikeProfile()
+        public RatingProfile()
         {
-            CreateMap<AddLikeDto, Like>();
+            CreateMap<AddRatingDto, Rating>();
         }
     }
 }

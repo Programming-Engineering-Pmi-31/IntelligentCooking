@@ -1,8 +1,8 @@
 ﻿namespace InelligentCooking.BLL.DTOs
 {
-    public class AddLikeDto
+    public class AddRatingDto
     {
         public int DishId { get; set; }
-        public double Value { get; set; }
+        public double Rate { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface ILikeRepository: IRepository<Like, (int UserId, int DishId)>
+    public interface IRatingRepository: IRepository<Rating, (int UserId, int DishId)>
     {
         Task<double> AvgForDish(int dishId);
     }

@@ -17,7 +17,7 @@ namespace IntelligentCooking.DAL.Context
         public DbSet<DishIngredient> DishIngredients { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Like> Likes { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }

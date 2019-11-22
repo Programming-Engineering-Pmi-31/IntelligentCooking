@@ -41,7 +41,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsRequired()
                 .HasForeignKey(dc => dc.DishId);
 
-            builder.HasMany(d => d.Likes)
+            builder.HasMany(d => d.Ratings)
                 .WithOne(l => l.Dish)
                 .IsRequired()
                 .HasForeignKey(l => l.DishId);

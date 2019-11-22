@@ -8,7 +8,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasMany(u => u.Likes)
+            builder.HasMany(u => u.Ratings)
                 .WithOne(l => l.User)
                 .HasForeignKey(l => l.UserId)
                 .IsRequired();

@@ -7,8 +7,7 @@ namespace InelligentCooking.BLL.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string Recipe { get; set; }
-        public int Rating { get; set; }
-        public int Likes { get; set; }
+        public double Rating { get; set; }
         public string Time { get; set; }
         public int Servings { get; set; }
         public double Calories { get; set; }

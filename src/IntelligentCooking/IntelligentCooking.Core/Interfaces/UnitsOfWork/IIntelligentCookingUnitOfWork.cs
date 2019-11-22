@@ -12,7 +12,7 @@ namespace IntelligentCooking.Core.Interfaces.UnitsOfWork
         IDishCategoryRepository DishCategories { get; }
         IDishIngredientRepository DishIngredients { get; }
         IFavouriteRepository Favourites { get; }
-        ILikeRepository Likes { get; }
+        IRatingRepository Ratings { get; }
         IUserRepository Users { get; }
         IRefreshTokenRepository RefreshTokens { get; }
 

@@ -192,5 +192,13 @@ namespace InelligentCooking.BLL.Services
 
             return _mapper.Map<Dish, DishDto>(dishEntity);
         }
+
+        public async Task<IEnumerable<DishPreviewDto>> GetTopDishesInfoAsync(int amount)
+        {
+            IEnumerable<Dish> dishes = await _unitOfWork.Dishes.GetTop(amount);                     
+
+            return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
+                .ToArray();
+        }
     }
 }

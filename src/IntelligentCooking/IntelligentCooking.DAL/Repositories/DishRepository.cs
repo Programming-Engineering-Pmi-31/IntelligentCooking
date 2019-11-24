@@ -69,5 +69,14 @@ namespace IntelligentCooking.DAL.Repositories
                  .Include(d => d.Ratings)
                  .AsQueryable();
         }
+
+        public async Task<IEnumerable<Dish>> GetTop(int amount)
+        {
+            return await GetWithMainPageProps()                
+                .Where(d => d.Ratings.Count != 0)
+                .OrderByDescending(d => d.Ratings.Average(r => r.Rate))                
+                .Take(amount)
+                .ToListAsync();
+        }
     }
 }

@@ -48,5 +48,11 @@ namespace IntelligentCooking.Web.Controllers
         {
             return Ok(await _dishService.UpdateDishAsync(id, updateDish));
         }
+
+        [HttpGet("top")]
+        public async Task<IActionResult> GetTopDishesInfo([FromForm]int amount)
+        {
+            return Ok(await _dishService.GetTopDishesInfoAsync(amount));
+        }
     }
 }

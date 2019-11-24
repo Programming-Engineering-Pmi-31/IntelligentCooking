@@ -52,10 +52,7 @@ namespace IntelligentCooking.DAL.Repositories
 
         public async Task<IEnumerable<Dish>> GetByIngredientsAsync(IEnumerable<int> ingredientIds)
         {
-            return await Context.Dishes
-                .Include(d => d.DishIngredients)
-                .Include(d => d.DishCategories)
-                .Include(d => d.Images)
+            return await GetWithMainPageProps()
                 .Where(d => d.DishIngredients.Any(di => ingredientIds.Contains(di.IngredientId)))
                 .ToListAsync();
         }

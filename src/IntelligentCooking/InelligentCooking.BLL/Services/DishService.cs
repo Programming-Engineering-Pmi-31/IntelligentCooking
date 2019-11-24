@@ -152,21 +152,26 @@ namespace InelligentCooking.BLL.Services
             dishEntity.Images = new List<Image>();
 
             if(updateDish.ImageUrls != null)
-                dishEntity.Images.AddRange(updateDish.ImageUrls
-                .Select(img => new Image { Priority = img.Priority, DishId = dishEntity.Id, Url = img.Url })
-                .ToList());
+            {
+                dishEntity.Images.AddRange(
+                    updateDish.ImageUrls
+                        .Select(img => new Image {Priority = img.Priority, DishId = dishEntity.Id, Url = img.Url})
+                        .ToList());
+            }
 
             if(updateDish.ImageFiles != null)
+            {
                 foreach(var img in updateDish.ImageFiles)
                 {
-                   dishEntity.Images.Add(
-                   new Image
-                   {
-                       Priority = img.Priority,
-                       DishId = dishEntity.Id,
-                       Url = await _imageService.UploadImageAsync(img.File)
-                   });
+                    dishEntity.Images.Add(
+                        new Image
+                        {
+                            Priority = img.Priority,
+                            DishId = dishEntity.Id,
+                            Url = await _imageService.UploadImageAsync(img.File)
+                        });
                 }
+            }
 
             var dishIngredients = updateDish.Ingredients
                 .Zip(updateDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
@@ -196,19 +201,26 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesByIngredients(FilterRequest filterRequest)
         {
-            var include = await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.IncludeIngredients);
-            var exclude = await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients);
-
             var dishComparer = GenericEqualityComparer<Dish>.GetEqualityComparer((d1, d2) => d1.Id == d2.Id, d => d.Id);
-            var result = include.Except(exclude, dishComparer)
-                .Where(
-                    res => res.DishIngredients.Select(di => di.IngredientId)
-                               .Intersect(filterRequest.IncludeIngredients)
-                               .Count()
-                           / (double)filterRequest.IncludeIngredients.Count()
-                           >= 0.5);
 
-            return result.Select(_mapper.Map<Dish, DishPreviewDto>)
+            var query = (await (filterRequest.IncludeIngredients?.Any() ?? false
+                ? _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.IncludeIngredients)
+                : _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndRatingsAsync(null, null))).AsQueryable();
+
+            query = filterRequest.ExcludeIngredients?.Any() ?? false
+                ? query.Except(await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients), dishComparer): query;
+
+
+            query = filterRequest.IncludeIngredients?.Any() ?? false
+                ? query.Where(
+                        res => res.DishIngredients.Select(di => di.IngredientId)
+                                   .Intersect(filterRequest.IncludeIngredients)
+                                   .Count()
+                               / (double)filterRequest.IncludeIngredients.Count()
+                               >= 0.5)
+                : query;
+
+            return query.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToList();
         }
     }

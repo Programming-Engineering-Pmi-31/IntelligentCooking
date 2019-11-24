@@ -1,9 +1,9 @@
-﻿using IntelligentCooking.Core.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface ICategoryRepository: IRepository<Category, int>
+    public interface ICategoryRepository : IRepository<Category, int>
     {
         Task<Category> GetByNameAsync(string name);
     }

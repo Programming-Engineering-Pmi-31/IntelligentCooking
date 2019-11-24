@@ -29,14 +29,13 @@ namespace InelligentCooking.BLL.Services
                 File = new FileDescription(file.FileName, file.OpenReadStream()),
                 UseFilename = true,
                 UniqueFilename = false,
-                Overwrite = true
+                Overwrite = true,
             };
 
             var res = await UploadImageAsync(uploadParams);
 
             return res.SecureUri.ToString();
         }
-
 
         private Task<ImageUploadResult> UploadImageAsync(ImageUploadParams @params)
         {
@@ -50,7 +49,7 @@ namespace InelligentCooking.BLL.Services
         {
             var urls = new List<string>();
 
-            foreach(var file in files)
+            foreach (var file in files)
             {
                 urls.Add(await UploadImageAsync(file));
             }

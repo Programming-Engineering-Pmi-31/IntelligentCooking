@@ -1,6 +1,6 @@
-﻿using InelligentCooking.BLL.DTOs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Models.ResponseModels;
 using IntelligentCooking.Web.Models.RequestModels;
 
@@ -12,7 +12,7 @@ namespace InelligentCooking.BLL.Interfaces
 
         Task<DishDto> AddDishAsync(AddDishDto addDish);
 
-        Task RemoveDishByIdAsync(int id); 
+        Task RemoveDishByIdAsync(int id);
 
         Task<DishDto> FindByIdAsync(int id);
 

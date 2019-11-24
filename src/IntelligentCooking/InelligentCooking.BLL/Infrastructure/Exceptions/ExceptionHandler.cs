@@ -24,12 +24,12 @@ namespace InelligentCooking.BLL.Infrastructure.Exceptions
 
         public static void InvalidPasswordException()
         {
-            throw new ValidationException(new[] {Constants.Constants.WrongPasswordErrorMessage()});
+            throw new ValidationException(new[] { Constants.Constants.WrongPasswordErrorMessage() });
         }
 
         public static void TokenNotExpired()
         {
-            throw new ValidationException(new[] { Constants.Constants.TokenNotExpiredErrorMessage()});
+            throw new ValidationException(new[] { Constants.Constants.TokenNotExpiredErrorMessage() });
         }
 
         public static void InvalidTokenException()

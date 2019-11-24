@@ -42,12 +42,12 @@ namespace InelligentCooking.BLL.Services
             var newUser = new User
             {
                 Email = registrationRequest.Email,
-                UserName = registrationRequest.UserName
+                UserName = registrationRequest.UserName,
             };
 
             var createdUser = await _userManager.CreateAsync(newUser, registrationRequest.Password);
 
-            if(!createdUser.Succeeded)
+            if (!createdUser.Succeeded)
             {
                 ExceptionHandler.RegistrationException(createdUser.Errors);
             }
@@ -59,14 +59,14 @@ namespace InelligentCooking.BLL.Services
         {
             var user = await _userManager.FindByEmailAsync(loginRequest.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 ExceptionHandler.NotFound(nameof(User));
             }
 
             var userHasValidPassword = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
 
-            if(!userHasValidPassword)
+            if (!userHasValidPassword)
             {
                 ExceptionHandler.InvalidPasswordException();
             }
@@ -92,7 +92,7 @@ namespace InelligentCooking.BLL.Services
 
             var storedRefreshToken = await _unitOfWork.RefreshTokens.FindAsync(refreshTokenRequest.RefreshToken);
 
-            if(storedRefreshToken == null
+            if (storedRefreshToken == null
                || DateTime.UtcNow > storedRefreshToken.ExpirationDate
                || storedRefreshToken.IsInvalidated
                || storedRefreshToken.IsUsed
@@ -123,7 +123,7 @@ namespace InelligentCooking.BLL.Services
             return new AuthResponse
             {
                 Token = jwtToken,
-                RefreshToken = refreshToken.Token
+                RefreshToken = refreshToken.Token,
             };
         }
 

@@ -6,9 +6,9 @@ namespace InelligentCooking.BLL.Infrastructure.Extensions
     {
         public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> data)
         {
-            if(data != null)
+            if (data != null)
             {
-                foreach(var d in data)
+                foreach (var d in data)
                 {
                     collection.Add(d);
                 }

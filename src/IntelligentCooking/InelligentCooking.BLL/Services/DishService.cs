@@ -37,7 +37,7 @@ namespace InelligentCooking.BLL.Services
         {
             IEnumerable<Dish> dishes = null;
 
-            switch(getDish.SortingCriteria)
+            switch (getDish.SortingCriteria)
             {
                 case null:
                     dishes = await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndRatingsAsync(getDish.Skip, getDish.Take);
@@ -68,13 +68,13 @@ namespace InelligentCooking.BLL.Services
             return new DishPreviewResponse()
             {
                 Dishes = dishPrewiews,
-                Count = await _unitOfWork.Dishes.CountAsync()
+                Count = await _unitOfWork.Dishes.CountAsync(),
             };
         }
 
         public async Task<DishDto> AddDishAsync(AddDishDto addDish)
         {
-            if(await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
+            if (await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }
@@ -83,25 +83,25 @@ namespace InelligentCooking.BLL.Services
 
             var priority = 1;
             dishEntity.Images = (await _imageService.UploadRangeAsync(addDish.Images))
-                .Select(url => new Image {Priority = priority++, DishId = dishEntity.Id, Url = url})
+                .Select(url => new Image { Priority = priority++, DishId = dishEntity.Id, Url = url })
                 .ToList();
 
             var dishIngredients = addDish.Ingredients
-                .Zip(addDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+                .Zip(addDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
                 .Select(
                     x =>
                         new DishIngredient
                         {
                             DishId = dishEntity.Id,
                             IngredientId = x.IngredientId,
-                            Amount = x.Amount
+                            Amount = x.Amount,
                         });
 
             _unitOfWork.DishIngredients.AddRange(dishIngredients);
 
             var dishCategories = addDish.Categories.Select(
                 x => new DishCategory
-                    {CategoryId = x, DishId = dishEntity.Id});
+                    { CategoryId = x, DishId = dishEntity.Id });
 
             _unitOfWork.DishCategories.AddRange(dishCategories);
 
@@ -114,7 +114,7 @@ namespace InelligentCooking.BLL.Services
         {
             var dish = await _unitOfWork.Dishes.FindAsync(id);
 
-            if(dish == null)
+            if (dish == null)
             {
                 ExceptionHandler.NotFound(nameof(Dish));
             }
@@ -128,7 +128,7 @@ namespace InelligentCooking.BLL.Services
         {
             var dish = await _unitOfWork.Dishes.FindAsync(id);
 
-            if(dish == null)
+            if (dish == null)
             {
                 ExceptionHandler.NotFound(nameof(Dish));
             }
@@ -140,7 +140,7 @@ namespace InelligentCooking.BLL.Services
         {
             var currentDish = await _unitOfWork.Dishes.GetByNameAsync(updateDish.Name);
 
-            if(currentDish != null && !currentDish.Name.Equals(updateDish.Name))
+            if (currentDish != null && !currentDish.Name.Equals(updateDish.Name))
             {
                 ExceptionHandler.DublicateObject(nameof(Dish), nameof(Dish.Name));
             }
@@ -151,32 +151,36 @@ namespace InelligentCooking.BLL.Services
 
             dishEntity.Images = new List<Image>();
 
-            if(updateDish.ImageUrls != null)
+            if (updateDish.ImageUrls != null)
+            {
                 dishEntity.Images.AddRange(updateDish.ImageUrls
                 .Select(img => new Image { Priority = img.Priority, DishId = dishEntity.Id, Url = img.Url })
                 .ToList());
+            }
 
-            if(updateDish.ImageFiles != null)
-                foreach(var img in updateDish.ImageFiles)
+            if (updateDish.ImageFiles != null)
+            {
+                foreach (var img in updateDish.ImageFiles)
                 {
-                   dishEntity.Images.Add(
-                   new Image
-                   {
-                       Priority = img.Priority,
-                       DishId = dishEntity.Id,
-                       Url = await _imageService.UploadImageAsync(img.File)
-                   });
+                    dishEntity.Images.Add(
+                    new Image
+                    {
+                        Priority = img.Priority,
+                        DishId = dishEntity.Id,
+                        Url = await _imageService.UploadImageAsync(img.File),
+                    });
                 }
+            }
 
             var dishIngredients = updateDish.Ingredients
-                .Zip(updateDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+                .Zip(updateDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
                 .Select(
                     x =>
                         new DishIngredient
                         {
                             DishId = dishEntity.Id,
                             IngredientId = x.IngredientId,
-                            Amount = x.Amount
+                            Amount = x.Amount,
                         })
                 .ToList();
 
@@ -184,7 +188,7 @@ namespace InelligentCooking.BLL.Services
 
             var dishCategories = updateDish.Categories.Select(
                     x => new DishCategory
-                        {CategoryId = x, DishId = dishEntity.Id})
+                        { CategoryId = x, DishId = dishEntity.Id })
                 .ToList();
 
             dishEntity.DishCategories = dishCategories;

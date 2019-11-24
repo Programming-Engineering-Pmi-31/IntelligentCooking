@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IntelligentCooking.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.DAL.EntityConfigurations
 {
-    public class UserConfiguration: IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -22,6 +22,6 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .WithOne(t => t.User)
                 .HasForeignKey(t => t.UserId)
                 .IsRequired();
-        }        
+        }
     }
 }

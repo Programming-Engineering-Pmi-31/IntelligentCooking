@@ -9,9 +9,9 @@ namespace IntelligentCooking.DAL.UnitsOfWork
 {
     public class IntelligentCookingUnitOfWork : IIntelligentCookingUnitOfWork
     {
-        private bool _disposed = false;
-
         private readonly IntelligentCookingContext _context;
+
+        private bool _disposed = false;
 
         public IntelligentCookingUnitOfWork(IntelligentCookingContext context)
         {
@@ -27,14 +27,27 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             RefreshTokens = new RefreshTokenRespository(_context);
         }
 
+        ~IntelligentCookingUnitOfWork()
+        {
+            Dispose(false);
+        }
+
         public ICategoryRepository Categories { get; }
+
         public IIngredientRepository Ingredients { get; }
+
         public IDishRepository Dishes { get; }
+
         public IDishCategoryRepository DishCategories { get; }
+
         public IDishIngredientRepository DishIngredients { get; }
+
         public IFavouriteRepository Favourites { get; }
+
         public IRatingRepository Ratings { get; }
+
         public IUserRepository Users { get; }
+
         public IRefreshTokenRepository RefreshTokens { get; }
 
         public async Task CommitAsync()
@@ -62,11 +75,6 @@ namespace IntelligentCooking.DAL.UnitsOfWork
             }
 
             _disposed = true;
-        }
-
-        ~IntelligentCookingUnitOfWork()
-        {
-            Dispose(false);
         }
     }
 }

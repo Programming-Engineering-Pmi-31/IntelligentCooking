@@ -10,7 +10,7 @@ using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 
 namespace InelligentCooking.BLL.Services
 {
-    public class RatingService: IRatingService
+    public class RatingService : IRatingService
     {
         private readonly IIntelligentCookingUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -35,7 +35,7 @@ namespace InelligentCooking.BLL.Services
 
                 newRating.UserId = userId;
                 _unitOfWork.Ratings.Add(newRating);
-            }           
+            }
 
             await _unitOfWork.CommitAsync();
         }

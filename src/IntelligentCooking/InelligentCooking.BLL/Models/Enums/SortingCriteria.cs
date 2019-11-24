@@ -7,6 +7,6 @@ namespace InelligentCooking.BLL.Models.Enums
     public enum SortingCriteria
     {
         Time,
-        Calories
+        Calories,
     }
 }

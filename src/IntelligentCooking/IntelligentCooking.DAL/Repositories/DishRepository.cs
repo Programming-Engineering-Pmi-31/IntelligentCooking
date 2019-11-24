@@ -13,13 +13,16 @@ namespace IntelligentCooking.DAL.Repositories
 {
     public class DishRepository : Repository<Dish, int>, IDishRepository
     {
-        public DishRepository(IntelligentCookingContext context) : base(context) {}
+        public DishRepository(IntelligentCookingContext context)
+            : base(context)
+        {
+        }
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndRatingsAsync(int? skip, int? take)
         {
             var dishes = GetWithMainPageProps();
 
-            if(skip.HasValue && take.HasValue)
+            if (skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }
@@ -37,7 +40,7 @@ namespace IntelligentCooking.DAL.Repositories
 
             dishes = ascending ? dishes.OrderBy(predicate) : dishes.OrderByDescending(predicate);
 
-            if(skip.HasValue && take.HasValue)
+            if (skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }

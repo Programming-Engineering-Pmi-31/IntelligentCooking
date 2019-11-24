@@ -1,12 +1,12 @@
-﻿using InelligentCooking.BLL.DTOs;
-using InelligentCooking.BLL.Interfaces;
-using IntelligentCooking.Core.Entities;
-using IntelligentCooking.Core.Interfaces.UnitsOfWork;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
+using InelligentCooking.BLL.Interfaces;
+using IntelligentCooking.Core.Entities;
+using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 using Microsoft.AspNetCore.Http;
 
 namespace InelligentCooking.BLL.Services
@@ -31,7 +31,6 @@ namespace InelligentCooking.BLL.Services
             return categories.Select(_mapper.Map<Category, CategoryDto>)
                 .ToList();
         }
-
 
         public async Task<CategoryDto> AddCategoryAsync(AddCategoryDto addCategory)
         {
@@ -62,6 +61,5 @@ namespace InelligentCooking.BLL.Services
 
             await _unitOfWork.CommitAsync();
         }
-
     }
 }

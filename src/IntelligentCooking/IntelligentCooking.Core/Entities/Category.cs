@@ -3,7 +3,7 @@ using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Entities
 {
-    public class Category: IIdentifiable<int>
+    public class Category : IIdentifiable<int>
     {
         public Category()
         {
@@ -11,7 +11,9 @@ namespace IntelligentCooking.Core.Entities
         }
 
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public string ImageUrl { get; set; }
 
         public ICollection<DishCategory> DishCategories { get; set; }

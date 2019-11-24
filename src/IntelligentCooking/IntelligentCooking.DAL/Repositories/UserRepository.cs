@@ -4,8 +4,11 @@ using IntelligentCooking.DAL.Context;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class UserRepository: Repository<User, int>, IUserRepository
+    public class UserRepository : Repository<User, int>, IUserRepository
     {
-        public UserRepository(IntelligentCookingContext context) : base(context) {}
+        public UserRepository(IntelligentCookingContext context)
+            : base(context)
+        {
+        }
     }
 }

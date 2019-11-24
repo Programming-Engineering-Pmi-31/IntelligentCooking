@@ -16,7 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace InelligentCooking.BLL.Services
 {
-    public class TokenService: ITokenService
+    public class TokenService : ITokenService
     {
         private readonly IIntelligentCookingUnitOfWork _unitOfWork;
         private readonly TokenValidationParameters _tokenValidationParameters;
@@ -35,7 +35,6 @@ namespace InelligentCooking.BLL.Services
             _jwtSettings = jwtOptions.Value;
         }
 
-       
         public async Task<string> GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -53,10 +52,10 @@ namespace InelligentCooking.BLL.Services
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
                         new Claim(ClaimTypes.Role, userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value ?? "User"),
-                        new Claim("id", $"{user.Id}")
+                        new Claim("id", $"{user.Id}"),
                     }),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.JwtTokenLifetime),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -77,7 +76,7 @@ namespace InelligentCooking.BLL.Services
                     principal.Claims.Single(x => x.Type == "id")
                         .Value),
                 CreationDate = DateTime.UtcNow,
-                ExpirationDate = DateTime.UtcNow.Add(_jwtSettings.RefreshTokenLifetime)
+                ExpirationDate = DateTime.UtcNow.Add(_jwtSettings.RefreshTokenLifetime),
             };
 
             return refreshToken;
@@ -91,7 +90,7 @@ namespace InelligentCooking.BLL.Services
         {
             var randomNumber = new byte[32];
 
-            using(var rng = RandomNumberGenerator.Create())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
@@ -106,7 +105,7 @@ namespace InelligentCooking.BLL.Services
 
             var principal = tokenHandler.ValidateToken(token, notValidateLifetimeToken, out var securityToken);
 
-            if(!IsJwtWithValidSecurityAlgorithm(securityToken))
+            if (!IsJwtWithValidSecurityAlgorithm(securityToken))
             {
                 ExceptionHandler.InvalidTokenException();
             }

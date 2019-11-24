@@ -2,7 +2,7 @@
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IFavouriteRepository: IRepository<Favourite, (int UserId, int DishId)>
+    public interface IFavouriteRepository : IRepository<Favourite, (int UserId, int DishId)>
     {
     }
 }

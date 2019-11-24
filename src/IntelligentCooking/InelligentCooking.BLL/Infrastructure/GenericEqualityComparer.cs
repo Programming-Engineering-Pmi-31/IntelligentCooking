@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InelligentCooking.BLL.Infrastructure
 {
-    public class GenericEqualityComparer<T>: IEqualityComparer<T>
+    public class GenericEqualityComparer<T> : IEqualityComparer<T>
     {
         private readonly Func<T, T, bool> _eqComparer;
         private readonly Func<T, int> _hashFunc;

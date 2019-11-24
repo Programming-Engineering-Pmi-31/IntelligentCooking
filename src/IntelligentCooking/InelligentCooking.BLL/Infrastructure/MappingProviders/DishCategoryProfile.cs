@@ -4,7 +4,7 @@ using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.MappingProviders
 {
-    public class DishCategoryProfile:Profile
+    public class DishCategoryProfile : Profile
     {
         public DishCategoryProfile()
         {

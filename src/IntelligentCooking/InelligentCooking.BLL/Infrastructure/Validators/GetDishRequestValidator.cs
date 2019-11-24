@@ -3,7 +3,7 @@ using IntelligentCooking.Web.Models.RequestModels;
 
 namespace InelligentCooking.BLL.Infrastructure.Validators
 {
-    public class GetDishRequestValidator: AbstractValidator<GetDishRequest>
+    public class GetDishRequestValidator : AbstractValidator<GetDishRequest>
     {
         public GetDishRequestValidator()
         {

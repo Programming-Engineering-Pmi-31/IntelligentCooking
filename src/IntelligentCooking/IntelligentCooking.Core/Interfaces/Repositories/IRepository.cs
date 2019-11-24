@@ -4,7 +4,8 @@ using IntelligentCooking.Core.Interfaces.Infrastructure;
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IRepository<TEntity, in TKey> where TEntity : class, IIdentifiable<TKey>
+    public interface IRepository<TEntity, in TKey>
+        where TEntity : class, IIdentifiable<TKey>
     {
         Task<TEntity> FindAsync(TKey key);
 

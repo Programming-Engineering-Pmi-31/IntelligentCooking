@@ -2,7 +2,7 @@
 
 namespace IntelligentCooking.Core.Interfaces.Repositories
 {
-    public interface IDishCategoryRepository: IRepository<DishCategory, (int DishId, int CategoryId)>
+    public interface IDishCategoryRepository : IRepository<DishCategory, (int DishId, int CategoryId)>
     {
     }
 }

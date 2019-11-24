@@ -14,7 +14,9 @@ namespace UsedTokenCollector
 {
     public class Startup : FunctionsStartup
     {
-        public Startup() {}
+        public Startup()
+        {
+        }
 
         public override void Configure(IFunctionsHostBuilder builder)
         {

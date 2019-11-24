@@ -64,7 +64,6 @@ namespace InelligentCooking.BLL.Infrastructure.Validators
                 .NotNull()
                 .NotEmpty()
                 .ForEach(x => x.GreaterThanOrEqualTo(0));
-
         }
     }
 }

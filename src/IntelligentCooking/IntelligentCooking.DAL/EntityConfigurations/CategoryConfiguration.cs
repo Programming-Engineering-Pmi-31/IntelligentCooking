@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IntelligentCooking.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.DAL.EntityConfigurations
 {
-    public class CategoryConfiguration: IEntityTypeConfiguration<Category>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
@@ -24,6 +24,6 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsRequired()
                 .HasForeignKey(dc => dc.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
-        }        
+        }
     }
 }

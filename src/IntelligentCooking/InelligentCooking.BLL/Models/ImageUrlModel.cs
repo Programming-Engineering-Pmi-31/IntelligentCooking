@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InelligentCooking.BLL.Models
 {
-    public class ImageUrlModel: UpdateImageModel
+    public class ImageUrlModel : UpdateImageModel
     {
         public string Url { get; set; }
     }

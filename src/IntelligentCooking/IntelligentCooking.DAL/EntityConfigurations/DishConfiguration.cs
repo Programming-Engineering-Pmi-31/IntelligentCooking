@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IntelligentCooking.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using IntelligentCooking.Core.Entities;
 
 namespace IntelligentCooking.DAL.EntityConfigurations
 {

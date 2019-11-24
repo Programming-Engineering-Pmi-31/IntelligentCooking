@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IIdentifiable<TKey>
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
+        where TEntity : class, IIdentifiable<TKey>
     {
         protected readonly IntelligentCookingContext Context;
 

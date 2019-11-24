@@ -1,7 +1,7 @@
-﻿using IntelligentCooking.Core.Entities;
+﻿using System;
+using IntelligentCooking.Core.Entities;
 using IntelligentCooking.DAL.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace IntelligentCooking.DAL.Extensions
 {
@@ -30,52 +30,50 @@ namespace IntelligentCooking.DAL.Extensions
                         Id = 1,
                         Name = "Sweets",
                         ImageUrl =
-                            "https://ukrhealth.net/wp-content/uploads/2018/01/shutterstock_361496144-696x464.jpg"
+                            "https://ukrhealth.net/wp-content/uploads/2018/01/shutterstock_361496144-696x464.jpg",
                     },
                     new Category
                     {
                         Id = 2,
                         Name = "Soup",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg"
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg",
                     },
                     new Category
                     {
                         Id = 3,
                         Name = "Italian",
                         ImageUrl =
-                            "https://www.englishclub.com/images/vocabulary/food/italian/italian-food-640.jpg"
+                            "https://www.englishclub.com/images/vocabulary/food/italian/italian-food-640.jpg",
                     },
                     new Category
                     {
                         Id = 4,
                         Name = "Thai",
                         ImageUrl =
-                            "https://www.untoldmorsels.com/wp-content/uploads/2018/08/thai-food-culture.jpg"
+                            "https://www.untoldmorsels.com/wp-content/uploads/2018/08/thai-food-culture.jpg",
                     },
                     new Category
                     {
                         Id = 5,
                         Name = "Breakfast",
                         ImageUrl =
-                            "https://olo-images-live.imgix.net/3a/3afe98ddcf4643a0b20c068b2c59f2ce.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=500&h=333&fit=fill&fm=png32&bg=transparent&s=862b0bcde81b3d6190fb8465f031a5cf"
+                            "https://olo-images-live.imgix.net/3a/3afe98ddcf4643a0b20c068b2c59f2ce.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=500&h=333&fit=fill&fm=png32&bg=transparent&s=862b0bcde81b3d6190fb8465f031a5cf",
                     },
                     new Category
                     {
                         Id = 6,
                         Name = "Quick and Easy",
                         ImageUrl =
-                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg"
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg",
                     },
                     new Category
                     {
                         Id = 7,
                         Name = "Vegetarian",
                         ImageUrl =
-                            "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968"
-                    }
-                );
-
+                            "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968",
+                    });
 
             modelBuilder.Entity<Dish>()
                 .HasData(
@@ -93,7 +91,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 400,
                         Fats = 1,
                         Proteins = 32,
-                        Carbohydrates = 32
+                        Carbohydrates = 32,
                     },
                     new Dish
                     {
@@ -109,7 +107,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 255,
                         Fats = 10,
                         Proteins = 8,
-                        Carbohydrates = 15
+                        Carbohydrates = 15,
                     },
                     new Dish
                     {
@@ -125,7 +123,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 199,
                         Fats = 7,
                         Proteins = 9,
-                        Carbohydrates = 10
+                        Carbohydrates = 10,
                     },
                     new Dish
                     {
@@ -141,7 +139,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 234,
                         Fats = 12,
                         Proteins = 20,
-                        Carbohydrates = 13
+                        Carbohydrates = 13,
                     },
                     new Dish
                     {
@@ -157,7 +155,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 378,
                         Fats = 10,
                         Proteins = 12,
-                        Carbohydrates = 15
+                        Carbohydrates = 15,
                     },
                     new Dish
                     {
@@ -173,7 +171,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 268,
                         Fats = 13,
                         Proteins = 18,
-                        Carbohydrates = 16
+                        Carbohydrates = 16,
                     },
                     new Dish
                     {
@@ -189,7 +187,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 345,
                         Fats = 13,
                         Proteins = 18,
-                        Carbohydrates = 15
+                        Carbohydrates = 15,
                     },
                     new Dish
                     {
@@ -205,7 +203,7 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 390,
                         Fats = 14,
                         Proteins = 19,
-                        Carbohydrates = 15
+                        Carbohydrates = 15,
                     },
                     new Dish
                     {
@@ -221,9 +219,8 @@ namespace IntelligentCooking.DAL.Extensions
                         Calories = 390,
                         Fats = 15,
                         Proteins = 17,
-                        Carbohydrates = 18
-                    }
-                );
+                        Carbohydrates = 18,
+                    });
 
             modelBuilder.Entity<Image>()
                 .HasData(
@@ -232,63 +229,63 @@ namespace IntelligentCooking.DAL.Extensions
                         DishId = 1,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Perfect-Buttermilk-Pancakes-Recipe-1-1100x1650.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 2,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Thai-Chicken-Wild-Rice-Soup-Recipe-1.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 3,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/08/Healthy-Broccoli-Chicken-Casserole-Recipe-6-1.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 4,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2015/02/The-Best-Butternut-Squash-Soup-Recipe-1.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 5,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2018/09/Healthy-Pumpkin-Muffins-Recipe-Gluten-Free-Vegan-2.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 6,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 7,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/07/Roasted-Broccoli-Chickpea-and-Farro-Bowls-Recipe-2-2.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 8,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Easy-Apple-Crisp-Recipe-1-3.jpg",
-                        Priority = 1
+                        Priority = 1,
                     },
                     new Image
                     {
                         DishId = 9,
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg",
-                        Priority = 1
+                        Priority = 1,
                     });
 
             modelBuilder.Entity<Ingredient>()
@@ -297,119 +294,116 @@ namespace IntelligentCooking.DAL.Extensions
                     {
                         Id = 1,
                         Name = "flour",
-                        Description = "all-purpose"
+                        Description = "all-purpose",
                     },
                     new Ingredient
                     {
                         Id = 2,
                         Name = "sugar",
-                        Description = ""
+                        Description = "",
                     },
                     new Ingredient
                     {
                         Id = 3,
                         Name = "baking powder",
-                        Description = ""
+                        Description = "",
                     },
                     new Ingredient
                     {
                         Id = 4,
                         Name = "baking soda",
-                        Description = ""
+                        Description = "",
                     },
                     new Ingredient
                     {
                         Id = 5,
                         Name = "sea salt",
-                        Description = ""
+                        Description = "",
                     },
                     new Ingredient
                     {
                         Id = 6,
                         Name = "buttermilk",
-                        Description = "at room temperature"
+                        Description = "at room temperature",
                     },
                     new Ingredient
                     {
                         Id = 7,
                         Name = "unsalted butter",
-                        Description = "melted and cooled to room temperature, plus more for cooking"
+                        Description = "melted and cooled to room temperature, plus more for cooking",
                     },
                     new Ingredient
                     {
                         Id = 8,
                         Name = "eggs",
-                        Description = "slightly beaten, at room temperature"
+                        Description = "slightly beaten, at room temperature",
                     },
                     new Ingredient
                     {
                         Id = 9,
                         Name = "vanilla extract",
-                        Description = ""
+                        Description = "",
                     },
                     new Ingredient
                     {
                         Id = 10,
                         Name = "maple syrup",
-                        Description = "for serving"
-                    }
-                );
+                        Description = "for serving",
+                    });
 
             modelBuilder.Entity<DishCategory>()
                 .HasData(
                     new DishCategory
                     {
                         DishId = 1,
-                        CategoryId = 1
+                        CategoryId = 1,
                     },
                     new DishCategory
                     {
                         DishId = 1,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
-
-                    //fake data
+                    // fake data
                     new DishCategory
                     {
                         DishId = 2,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 3,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 4,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 5,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 6,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 7,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 8,
-                        CategoryId = 5
+                        CategoryId = 5,
                     },
                     new DishCategory
                     {
                         DishId = 9,
-                        CategoryId = 5
-                    }
-                );
+                        CategoryId = 5,
+                    });
 
             modelBuilder.Entity<DishIngredient>()
                 .HasData(
@@ -417,117 +411,114 @@ namespace IntelligentCooking.DAL.Extensions
                     {
                         DishId = 1,
                         IngredientId = 1,
-                        Amount = "2 1/2 cups"
+                        Amount = "2 1/2 cups",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 2,
-                        Amount = "2 tablespoons"
+                        Amount = "2 tablespoons",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 3,
-                        Amount = "4 teaspoons"
+                        Amount = "4 teaspoons",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 4,
-                        Amount = "1 teaspoon"
+                        Amount = "1 teaspoon",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 5,
-                        Amount = "3/4 teaspoon"
+                        Amount = "3/4 teaspoon",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 6,
-                        Amount = "3 cups"
+                        Amount = "3 cups",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 7,
-                        Amount = "4 tablespoons"
+                        Amount = "4 tablespoons",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 8,
-                        Amount = "2 large"
+                        Amount = "2 large",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 9,
-                        Amount = "1 teaspoon"
+                        Amount = "1 teaspoon",
                     },
                     new DishIngredient
                     {
                         DishId = 1,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
-
-                    //fake data
+                    // fake data
                     new DishIngredient
                     {
                         DishId = 2,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 3,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 4,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 5,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 6,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 7,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 8,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "as mush as you want",
                     },
                     new DishIngredient
                     {
                         DishId = 9,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
-                    }
-                );
+                        Amount = "as mush as you want",
+                    });
 
             modelBuilder.Entity<Rating>()
-                .HasData(
-                );
+                .HasData();
         }
     }
 }

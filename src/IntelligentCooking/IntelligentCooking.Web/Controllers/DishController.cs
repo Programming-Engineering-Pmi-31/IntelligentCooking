@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using InelligentCooking.BLL.DTOs;
-using Microsoft.AspNetCore.Mvc;
 using InelligentCooking.BLL.Interfaces;
 using IntelligentCooking.Web.Models.RequestModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IntelligentCooking.Web.Controllers
 {

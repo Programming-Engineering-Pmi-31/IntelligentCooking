@@ -15,7 +15,7 @@ namespace IntelligentCooking.Web.Infrastructure.Filters
                 case NotFoundException ex:
                     context.Result = new NotFoundObjectResult(ex.Message);
                     break;
-                case DublicateObjectException ex: 
+                case DublicateObjectException ex:
                     context.Result = new ConflictObjectResult(ex.Message);
                     break;
                 case ValidationException ex:

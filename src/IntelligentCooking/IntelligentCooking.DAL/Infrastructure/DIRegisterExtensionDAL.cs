@@ -24,5 +24,4 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IIntelligentCookingUnitOfWork, IntelligentCookingUnitOfWork>();
         }
     }
-
 }

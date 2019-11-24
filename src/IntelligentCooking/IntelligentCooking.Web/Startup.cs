@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-//TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
-//AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
+// TODO Think over this https://marcin-chwedczuk.github.io/repository-pattern-my-way
+// AND This https://enterprisecraftsmanship.com/posts/specification-pattern-c-implementation/
 namespace IntelligentCooking.Web
 {
     public class Startup
     {
-
         public Startup(IHostingEnvironment env)
         {
             var configuration = new ConfigurationBuilder()
@@ -46,7 +45,7 @@ namespace IntelligentCooking.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

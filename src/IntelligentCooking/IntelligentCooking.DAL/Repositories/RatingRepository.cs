@@ -9,7 +9,10 @@ namespace IntelligentCooking.DAL.Repositories
 {
     public class RatingRepository : Repository<Rating, (int UserId, int DishId)>, IRatingRepository
     {
-        public RatingRepository(IntelligentCookingContext context) : base(context) {}
+        public RatingRepository(IntelligentCookingContext context)
+            : base(context)
+        {
+        }
 
         public async Task<double> AvgForDish(int dishId)
         {
@@ -18,6 +21,5 @@ namespace IntelligentCooking.DAL.Repositories
 
             return count == 0 ? 0 : sum / count;
         }
-            
     }
 }

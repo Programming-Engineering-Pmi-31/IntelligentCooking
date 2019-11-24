@@ -16,7 +16,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace IntelligentCooking.DAL.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace IntelligentCooking.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
-                    ImageUrl = table.Column<string>(nullable: false)
+                    ImageUrl = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -79,7 +79,7 @@ namespace IntelligentCooking.DAL.Migrations
                     Fats = table.Column<double>(nullable: true),
                     Carbohydrates = table.Column<double>(nullable: true),
                     Calories = table.Column<int>(nullable: true),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -93,7 +93,7 @@ namespace IntelligentCooking.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -108,7 +108,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -129,7 +129,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -149,7 +149,7 @@ namespace IntelligentCooking.DAL.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

@@ -9,10 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntelligentCooking.DAL.Repositories
 {
-    public class RefreshTokenRespository: Repository<RefreshToken, string>, IRefreshTokenRepository
+    public class RefreshTokenRespository : Repository<RefreshToken, string>, IRefreshTokenRepository
     {
-        public RefreshTokenRespository(IntelligentCookingContext context) : base(context) {}
-        
+        public RefreshTokenRespository(IntelligentCookingContext context)
+            : base(context)
+        {
+        }
+
         public async Task<IEnumerable<RefreshToken>> GetExpiredTokensAsync()
         {
             return await Context.RefreshTokens.Where(t => t.IsInvalidated || t.IsUsed || t.ExpirationDate < DateTime.UtcNow)

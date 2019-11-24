@@ -1,6 +1,6 @@
-﻿using InelligentCooking.BLL.DTOs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using InelligentCooking.BLL.DTOs;
 
 namespace InelligentCooking.BLL.Interfaces
 {

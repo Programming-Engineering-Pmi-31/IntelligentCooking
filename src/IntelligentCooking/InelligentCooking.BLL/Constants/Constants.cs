@@ -2,6 +2,10 @@
 {
     public static class Constants
     {
+        public static string TimeRegExp => @"\d\d:\d\d";
+
+        public static string TimeFormat => @"hh\:mm";
+
         public static string DublicateObjectErrorMessage(string entity, string property)
         {
             return $"{entity} with specified {property} already exists";
@@ -31,9 +35,5 @@
         {
             return $"Invalid token";
         }
-
-        public static string TimeRegExp => @"\d\d:\d\d";
-
-        public static string TimeFormat => @"hh\:mm";
     }
 }

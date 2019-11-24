@@ -223,5 +223,13 @@ namespace InelligentCooking.BLL.Services
             return query.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToList();
         }
+
+        public async Task<IEnumerable<DishPreviewDto>> GetTopDishesInfoAsync(int amount)
+        {
+            IEnumerable<Dish> dishes = await _unitOfWork.Dishes.GetTop(amount);
+
+            return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
+                .ToArray();
+        }
     }
 }

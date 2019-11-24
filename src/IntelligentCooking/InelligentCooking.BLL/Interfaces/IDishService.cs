@@ -19,5 +19,7 @@ namespace InelligentCooking.BLL.Interfaces
         Task<DishDto> UpdateDishAsync(int id, UpdateDishDto updateDish);
 
         Task<IEnumerable<DishPreviewDto>> GetDishesByIngredients(FilterRequest filterRequest);
+
+        Task<IEnumerable<DishPreviewDto>> GetTopDishesInfoAsync(int amount);
     }
 }

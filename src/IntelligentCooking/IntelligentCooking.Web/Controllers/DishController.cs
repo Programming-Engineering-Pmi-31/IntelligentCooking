@@ -23,6 +23,12 @@ namespace IntelligentCooking.Web.Controllers
             return Ok(await _dishService.GetDishesInfoAsync(getDishRequest));
         }
 
+        [HttpPost("search")]
+        public async Task<IActionResult> GetDishesByIngredients(FilterRequest filterRequest)
+        {
+            return Ok(await _dishService.GetDishesByIngredients(filterRequest));
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddDish([FromForm]AddDishDto addDish)
         {

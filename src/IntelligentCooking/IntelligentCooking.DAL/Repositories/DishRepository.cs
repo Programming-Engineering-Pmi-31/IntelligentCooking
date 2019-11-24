@@ -13,13 +13,13 @@ namespace IntelligentCooking.DAL.Repositories
 {
     public class DishRepository : Repository<Dish, int>, IDishRepository
     {
-        public DishRepository(IntelligentCookingContext context) : base(context) { }
+        public DishRepository(IntelligentCookingContext context) : base(context) {}
 
         public async Task<IEnumerable<Dish>> GetDishesWithIngredientsCategoriesAndRatingsAsync(int? skip, int? take)
         {
-            var dishes = GetWithMainPageProps();           
+            var dishes = GetWithMainPageProps();
 
-            if (skip.HasValue && take.HasValue)
+            if(skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }
@@ -27,13 +27,17 @@ namespace IntelligentCooking.DAL.Repositories
             return await dishes.ToListAsync();
         }
 
-        public async Task<IEnumerable<Dish>> GetSortedDishesAsync<T>(Expression<Func<Dish, T>> predicate, bool ascending, int? skip, int? take)
+        public async Task<IEnumerable<Dish>> GetSortedDishesAsync<T>(
+            Expression<Func<Dish, T>> predicate,
+            bool ascending,
+            int? skip,
+            int? take)
         {
             var dishes = GetWithMainPageProps();
 
             dishes = ascending ? dishes.OrderBy(predicate) : dishes.OrderByDescending(predicate);
 
-            if (skip.HasValue && take.HasValue)
+            if(skip.HasValue && take.HasValue)
             {
                 dishes = dishes.Paginate(skip.Value, take.Value);
             }
@@ -46,6 +50,13 @@ namespace IntelligentCooking.DAL.Repositories
             return await Context.Dishes.FirstOrDefaultAsync(x => x.Name.Equals(name));
         }
 
+        public async Task<IEnumerable<Dish>> GetByIngredientsAsync(IEnumerable<int> ingredientIds)
+        {
+            return await GetWithMainPageProps()
+                .Where(d => d.DishIngredients.Any(di => ingredientIds.Contains(di.IngredientId)))
+                .ToListAsync();
+        }
+
         public override async Task<Dish> FindAsync(int id)
         {
             return await Context.Dishes
@@ -56,7 +67,7 @@ namespace IntelligentCooking.DAL.Repositories
                 .Include(d => d.Images)
                 .Include(d => d.Ratings)
                 .FirstOrDefaultAsync(d => d.Id == id);
-        }   
+        }
 
         private IQueryable<Dish> GetWithMainPageProps()
         {

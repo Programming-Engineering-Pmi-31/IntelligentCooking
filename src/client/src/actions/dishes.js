@@ -24,15 +24,27 @@ export const updateRecipe = (id, obj) => dispatch => {
     const imgFiles = [];
     for (const [i, val] of obj.img.entries()) {
         if (val !== null && typeof val === 'string') {
-            formData.append(`ImageUrls`, { url: val, priority: i+1 });
+            imgUrls.push({ priority: i + 1, value: val });
+            // formData.append(`imageUrls[${i}].Url`, val);
+            // formData.append(`imageUrls[${i}].Priority`, i+1);
         } else if (val !== null && val instanceof File) {
-            formData.append(`ImageFiles`, { file: val, priority: i+1 });
+            imgFiles.push({ priority: i + 1, value: val });
+            // formData.append(`imageFiles[${i}].File`, val);
+            // formData.append(`imageFiles[${i}].Priority`, i+1);
         }
     }
+
+    for (const i in imgUrls) {
+        formData.append(`imageUrls[${i}].Url`, imgUrls[i].value);
+        formData.append(`imageUrls[${i}].Priority`, imgUrls[i].priority);
+    }
+    // formData.append(`ImageUrls[${key}]`, imgUrls[key]);
     //
-    // for (const key in imgUrls) formData.append(`ImageUrls[${key}]`, imgUrls[key]);
-    //
-    // for (const key in imgFiles) formData.append(`ImageFiles[${key}]`, imgFiles[key]);
+    for (const i in imgFiles) {
+        formData.append(`imageFiles[${i}].File`, imgFiles[i].value);
+        formData.append(`imageFiles[${i}].Priority`, imgFiles[i].priority);
+    }
+    // formData.append(`ImageFiles[${key}]`, imgFiles[key]);
 
     for (const [i, val] of obj.ingredients.entries()) formData.append(`ingredients[${i}]`, val);
 
@@ -93,6 +105,61 @@ export const getRecipe = id => dispatch => {
         dispatch({ type: 'GET_RECIPE', payload: res.data });
         return res.data;
     });
+};
+
+export const rateDish = obj => dispatch => {
+    return axios
+        .post(
+            `https://intelligentcookingweb.azurewebsites.net/api/Rating`,
+            {
+                dishId: obj.id,
+                rate: obj.rating,
+            },
+            {
+                headers: { Authorization: `bearer ${obj.token}` },
+            },
+        )
+        .then(res => {
+            console.log(res);
+        })
+        .catch(e => {
+            if (e.response.status === 401) {
+                return axios
+                    .post('https://intelligentcookingweb.azurewebsites.net/api/Auth/refresh', {
+                        token: obj.token,
+                        refreshToken: obj.refreshToken,
+                    })
+                    .then(() => {
+                        axios
+                            .post(
+                                `https://intelligentcookingweb.azurewebsites.net/api/Rating`,
+                                {
+                                    dishId: obj.id,
+                                    rate: obj.rating,
+                                },
+                                {
+                                    headers: { Authorization: `bearer ${obj.token}` },
+                                },
+                            )
+                            .then(res => {
+                                console.log(res);
+                            });
+                    });
+            }
+        });
+};
+
+export const filterByIngredient = obj => dispatch => {
+    dispatch({ type: 'SET_RECIPES_EMPTY' });
+    return axios
+        .post(`https://intelligentcookingweb.azurewebsites.net/api/Dish/search`, {
+            includeIngredients: obj.includeIngredients,
+            excludeIngredients: obj.excludeIngredients,
+        })
+        .then(res => {
+            // console.log(res);
+            dispatch({ type: 'SET_DISHES_BY_FILTER', payload: res.data });
+        });
 };
 
 export const createProduct = obj => dispatch => {

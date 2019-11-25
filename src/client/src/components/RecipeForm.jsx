@@ -55,6 +55,7 @@ class RecipeForm extends PureComponent {
         } = this.props;
         if (isEditing) {
             getRecipe(match.params.id).then(res => {
+                console.log("res",res.images);
                 this.setState({
                     name: res.name,
                     description: res.description,
@@ -72,11 +73,6 @@ class RecipeForm extends PureComponent {
                     img: res.images.map(e => ({ url: e.url })),
                     recipe: res.recipe,
                     time: res.time,
-                    //     `${
-                    //     Math.floor(res.time / 60) < 10
-                    //         ? `0${Math.floor(res.time / 60)}`
-                    //         : Math.floor(res.time / 60)
-                    // }:${res.time % 60 < 10 ? `0${res.time % 60}` : res.time % 60}`,
                 });
             });
         }
@@ -197,11 +193,11 @@ class RecipeForm extends PureComponent {
             categories: catToSend,
             recipe: recipe,
             time: time.toString(),
-            cals: cals,
+            calories: cals,
             servings: servings,
             fats: fats,
             proteins: proteins,
-            carbs: carbs,
+            carbohydrates : carbs,
         };
         const ingredientsOptions = [];
         const categoriesOptions = [];

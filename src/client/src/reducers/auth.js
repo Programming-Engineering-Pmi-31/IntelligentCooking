@@ -3,6 +3,7 @@ export const initialState = {
     email: '',
     unique_name: '',
     role: '',
+    token: '',
 };
 export const auth = (state = initialState, action) => {
     switch (action.type) {
@@ -14,6 +15,19 @@ export const auth = (state = initialState, action) => {
                 role: action.payload.role,
                 isAuth: true,
             };
+        case 'LOGOUT_API':
+            return {
+                ...state,
+                isAuth: false,
+                email: '',
+                unique_name: '',
+                role: '',
+            }
+        case 'SET_TOKEN':
+            return{
+                ...state,
+                token: action.payload,
+            }
         default:
             return state;
     }

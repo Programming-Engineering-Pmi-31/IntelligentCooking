@@ -7,7 +7,8 @@ import DishItem from './DishItem';
 
 const AllRecipes = React.memo(
     ({ setRecipes, count , isAscending, sortingCriteria, dishes,setSort, sortBy, isLoading,
-                firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe, dishesPages, dishesToLoad}) => {
+                firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe, dishesPages, dishesToLoad,
+                isAuth, rateDish, token }) => {
         useEffect(() => {
             if (!firstLoad) {
                 setRecipes(0, 8, sortingCriteria, isAscending);
@@ -67,6 +68,9 @@ const AllRecipes = React.memo(
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
                         <DishItem
+                            token={token}
+                            rateDish={rateDish}
+                            isAuth={isAuth}
                             key={`${item.id}_dish`}
                             item={item}
                             deleteRecipe={deleteRecipe}

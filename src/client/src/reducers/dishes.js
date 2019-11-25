@@ -83,6 +83,11 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
+        case 'SET_DISHES_BY_FILTER':
+            return{
+                ...state,
+                dishes: action.payload,
+            }
         case 'SET_RECIPE_SUCCESS':
             return {
                 ...state,
@@ -109,6 +114,10 @@ export const dishes = (state = initialState, action) => {
                 dishesPages: Math.floor(action.payload / 8),
                 dishesToLoad: action.payload % 8,
             };
+        case 'RATE_DISH':
+            return{
+
+            }
         default:
             return state;
     }

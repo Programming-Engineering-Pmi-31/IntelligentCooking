@@ -15,6 +15,17 @@
             button{
                 width: 100px;
             }
+            &.logName > button:nth-child(2){
+                display: none;
+            }
+            &.logName:hover > button:nth-child(1){
+                display: none;
+            }
+            &.logName:hover > button:nth-child(2){
+                cursor: pointer;
+                display: block;
+            }
+
         }
         img{
             width: 100px;

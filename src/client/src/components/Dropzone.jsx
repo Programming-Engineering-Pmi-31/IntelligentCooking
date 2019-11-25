@@ -137,15 +137,25 @@ export const Previews = React.memo(props => {
             </div>,
         );
     }
+
     useEffect(() => {
-        if(img.length > 0){
-            img.forEach((value,i)=>  setFiles({
-                ...files,
-                [`${i}`]:value.url,
-            }));
+        let newFiles = {};
+        if(img.length > 0) {
+            img.forEach((value, i) => {
+                newFiles = {...newFiles, [`${i}`] : value.url};
+                console.log(newFiles);
+            });
+            setFiles({
+                ...files, ...newFiles
+            });
         }
+        console.log(img);
+
+    }, [img]);
+    useEffect(()=>{
+        console.log(files);
         props.valueChange(files);
-    }, [files, props]);
+    },[files])
     return (
         <section className={styles.dropZone}>
             <div>

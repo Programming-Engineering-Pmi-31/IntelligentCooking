@@ -7,7 +7,7 @@ import styles from '../scss/AllRecipes.scss';
 
 class DishItem extends PureComponent {
     render() {
-        const { item, updateRecipeRequest, deleteRecipe } = this.props;
+        const { item, updateRecipeRequest, deleteRecipe, isAuth, rateDish, token } = this.props;
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>
@@ -22,9 +22,16 @@ class DishItem extends PureComponent {
                         <div className={styles.card__content}>
                             <div className={styles.card__title}>{item.name}</div>
                             <div className={styles.rating__info}>
-                                <span>
+                                <span onClick={e => e.preventDefault()}>
                                     <StarRatings
-                                        changeRating={e => console.log(e)}
+                                        changeRating={e => {
+                                            if(!isAuth){
+                                                alert("You are not authorized !")
+                                            } else {
+                                                rateDish({id: item.id, rating: e,token: token})
+                                            }
+                                            console.log({id: item.id, rating: e});
+                                        }}
                                         starRatedColor="rgb(230, 67, 47)"
                                         starHoverColor="rgb(0,0,200)"
                                         rating={item.rating}

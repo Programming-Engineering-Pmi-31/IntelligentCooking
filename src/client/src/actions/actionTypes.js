@@ -1,0 +1,34 @@
+export const actionTypes = {
+    authTypes: {
+        LOGIN_API: 'LOGIN_API',
+        LOGOUT_API: 'LOGOUT_API',
+        SET_TOKEN: 'SET_TOKEN',
+    },
+    categoriesTypes: {
+        SET_CATEGORIES: 'SET_CATEGORIES',
+    },
+    dishesTypes: {
+        ADD_RECIPE: 'ADD_RECIPE',
+        GET_RECIPE: 'GET_RECIPE',
+        SET_RECIPES_EMPTY: 'SET_RECIPES_EMPTY',
+        SET_EXACT_RECIPE_EMPTY: 'SET_EXACT_RECIPE_EMPTY',
+        UPDATE_RECIPE_REQUEST: 'UPDATE_RECIPE_REQUEST',
+        UPDATE_RECIPE_FINISH: 'UPDATE_RECIPE_FINISH',
+        DELETE_RECIPE: 'DELETE_RECIPE',
+        UPDATE_RECIPE_SUCCESS: 'UPDATE_RECIPE_SUCCESS',
+        NO_MORE_ITEMS: 'NO_MORE_ITEMS',
+        SET_SORT: 'SET_SORT',
+        SET_RECIPES_REQUEST: 'SET_RECIPES_REQUEST',
+        SET_DISHES_BY_FILTER: 'SET_DISHES_BY_FILTER',
+        SET_RECIPE_SUCCESS: 'SET_RECIPE_SUCCESS',
+        SET_RECIPES_SUCCESS: 'SET_RECIPES_SUCCESS',
+        SET_DISHES_COUNT: 'SET_DISHES_COUNT',
+        RATE_DISH: 'RATE_DISH',
+    },
+    ingredientsTypes: {
+        SET_INGREDIENTS: 'SET_INGREDIENTS',
+    },
+    sortTypes: {
+        SORT_BY: 'SORT_BY',
+    },
+};

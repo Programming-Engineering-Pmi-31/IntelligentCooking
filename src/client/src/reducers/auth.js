@@ -1,4 +1,6 @@
-export const initialState = {
+import { actionTypes } from '../actions/actionTypes';
+
+const initialState = {
     isAuth: false,
     email: '',
     unique_name: '',
@@ -7,7 +9,7 @@ export const initialState = {
 };
 export const auth = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN_API':
+        case actionTypes.authTypes.LOGIN_API:
             return {
                 ...state,
                 email: action.payload.email,
@@ -15,19 +17,19 @@ export const auth = (state = initialState, action) => {
                 role: action.payload.role,
                 isAuth: true,
             };
-        case 'LOGOUT_API':
+        case actionTypes.authTypes.LOGOUT_API:
             return {
                 ...state,
                 isAuth: false,
                 email: '',
                 unique_name: '',
                 role: '',
-            }
-        case 'SET_TOKEN':
-            return{
+            };
+        case actionTypes.authTypes.SET_TOKEN:
+            return {
                 ...state,
                 token: action.payload,
-            }
+            };
         default:
             return state;
     }

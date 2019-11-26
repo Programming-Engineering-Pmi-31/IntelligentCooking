@@ -10,7 +10,10 @@ class App extends PureComponent {
     componentDidMount() {
         console.log("main did mount");
         const { setCategories, categories, authorizeWithStorage } = this.props;
-        authorizeWithStorage();
+        if(localStorage.getItem('token')){
+            authorizeWithStorage();
+        }
+        // authorizeWithStorage();
         if (!categories.length) {
             setCategories();
         }

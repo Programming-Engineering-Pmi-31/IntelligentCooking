@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { categoriesAPI } from '../services/services';
 
-export const setCategories = () => dispatch => {
-    axios.get('https://intelligentcookingweb.azurewebsites.net//api/Category').then(res => {
-        dispatch({ type: 'SET_CATEGORIES', payload: res.data });
-    });
+export const setCategories = () => async dispatch => {
+    const categories = await categoriesAPI.getCategories();
+    dispatch({ type: 'SET_CATEGORIES', payload: categories.data });
 };

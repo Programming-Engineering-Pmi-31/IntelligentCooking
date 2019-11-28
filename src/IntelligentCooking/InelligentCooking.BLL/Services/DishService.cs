@@ -207,6 +207,8 @@ namespace InelligentCooking.BLL.Services
                 ? _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.IncludeIngredients)
                 : _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndRatingsAsync(null, null))).AsQueryable();
 
+            query = query.Where(d => d.Name.IndexOf(filterRequest.Name, StringComparison.InvariantCultureIgnoreCase) != -1);
+
             query = filterRequest.ExcludeIngredients?.Any() ?? false
                 ? query.Except(await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients), dishComparer): query;
 

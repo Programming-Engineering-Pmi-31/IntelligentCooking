@@ -174,7 +174,7 @@ namespace InelligentCooking.BLL.Services
             }
 
             var dishIngredients = updateDish.Ingredients
-                .Zip(updateDish.IngredientAmounts, (i, a) => new {IngredientId = i, Amount = a})
+                .Zip(updateDish.IngredientAmounts, (i, a) => new { IngredientId = i, Amount = a })
                 .Select(
                     x =>
                         new DishIngredient
@@ -196,7 +196,7 @@ namespace InelligentCooking.BLL.Services
 
             await _unitOfWork.CommitAsync();
 
-            return _mapper.Map<Dish, DishDto>(dishEntity);
+            return _mapper.Map<Dish, DishDto>(await _unitOfWork.Dishes.FindAsync(id));
         }
 
         public async Task<IEnumerable<DishPreviewDto>> GetDishesByIngredients(FilterRequest filterRequest)

@@ -87,7 +87,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Whisk together the dry ingredients.  Flour, sugar, baking powder, baking soda, and salt.Whisk together the wet ingredients.In a separate medium bowl — buttermilk, melted butter, eggs and vanilla.Combine.Pour the wet ingredients over the dry and whisk until just combined.  (Don’t overmix, it’s ok for the batter to be a bit lumpy!) Let the batter sit at room temperature for 10 minutes to thicken up.Prepare the skillet or griddle.Preheat a griddle pan or large non - stick skillet over medium - high heat, or an electric griddle to 350°F.Cook the pancakes.Grease the griddle or skillet with a generous pat of butter.* Pour the batter in 1 / 2 * -cup dollops on the hot griddle — as many as will comfortably fit with room to flip the pancakes.Cook the pancakes until bubbles begin to pop on the top and the edges are set, about 3 minutes.Use a spatula to flip and cook for another 2 to 3 minutes, until golden brown.Transfer the pancakes to a plate and continue making pancakes until the batter is gone.Serve warm.  Serve the pancakes stacked high with plenty of maple syrup and extra butter, if desired.",
                         Time = new TimeSpan(0, 35, 0),
                         Servings = 7,
-                        Stars = 4,
                         Description = "This classic buttermilk pancakes recipe is easy to make and yields the most delicious, "
                                       + "fluffy, homemade pancakes.  See notes above for possible ingredient add-ins.",
                         Calories = 400,
@@ -103,7 +102,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Cook the base of the soup. Whichever cooking method you choose, we will simmer the base soup ingredients (chicken, rice, broth, veggies and seasonings) until the rice is cooked and tender. Shred the chicken.Once the rice and chicken are tender,remove the cooked chicken and shred with two forks into bite - sized pieces, then add it back into the soup.  (Or alternately, you’re welcome to just cut the chicken into bite - sized pieces beforehand.) Season.Stir in the coconut milk.Then taste the soup and season with salt, pepper and / or extra Thai red curry paste as needed. Serve warm. Garnished with a squeeze of lime juice and fresh cilantro, plus an extra toppings that sound good.",
                         Time = new TimeSpan(0, 35, 0),
                         Servings = 7,
-                        Stars = 1,
                         Description = "This Thai Chicken Wild Rice recipe is full of the best fresh and creamy curry flavors, and "
                                       + "it’s easy to make in the Instant Pot, Crock-Pot or on the stovetop.",
                         Calories = 255,
@@ -119,7 +117,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Cook the pasta and broccoli.  Cook the pasta in a large pot of boiling water (don’t forget to generously salt the water!) until it is al dente.  But — plot twist! — toss the broccoli florets into the water about 1 minute before the pasta is done cooking to give it a quick cook too.  Drain both. Make the mushroom sauce. Meanwhile, we’ll work on the sauce.  Sauté the onion, followed by the mushrooms and garlic in butter (or oil) until softened.  Stir in some flour and let it cook for 1 minute (this will help to thicken the sauce).  Then add in the stock, milk, Dijon, salt and pepper, and cook until the sauce reaches a simmer.  Stir in half of the shredded cheese, taste, and adjust any seasonings as needed. Put everything together.  In a large 9 x 13-inch baking dish, give everything a good toss — the cooked pasta, broccoli, mushroom sauce and chicken — until combined.Bake.  Bake uncovered for 15 minutes.  Then remove pan from the oven, sprinkle the remaining cheddar cheese evenly on top of the casserole, and bake for 10 more minutes or until the cheese is nice and melty. Enjoy! Serve nice and warm, garnished with extra black pepper and/or fresh herbs, if desired.",
                         Time = new TimeSpan(1, 0, 0),
                         Servings = 7,
-                        Stars = 1,
                         Description =
                             "This hearty Broccoli Chicken Casserole recipe is made with your choice of pasta, tender chicken and broccoli, and the most delicious creamy cheddar mushroom sauce.  See notes above for possible ingredient variations too.",
                         Calories = 199,
@@ -135,7 +132,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Combine your ingredients (minus the coconut milk) in a slow cooker*.  Roughly diced — don’t spend time perfectly chopping all of your ingredients.  Feel free to use a large (6-quart) slow cooker or a small (3.5- to 4-quart) slow cooker. Cook until tender.  Generally about 6-8 hours on low, or 3-4 hours on high.  Then remove and discard the sage and add in the coconut milk. Blend.  Either use an immersion blender to puree the soup until smooth.  Or you can transfer the soup in two batches to a traditional blender and puree it there.  (Just be extremely careful blending hot liquids; you do not want the blender to be too full.) Taste and season.  Add extra salt, pepper and/or cayenne if needed, to taste. Serve and enjoy!  Garnished with any of your favorite toppings.",
                         Time = new TimeSpan(0, 50, 0),
                         Servings = 7,
-                        Stars = 1,
                         Description =
                             "My all-time favorite Butternut Squash Soup recipe!  It’s super-easy to make, naturally gluten-free and vegan, and SO incredibly cozy and delicious.  Stovetop, Crock-Pot and Instant Pot instructions included below.",
                         Calories = 234,
@@ -151,7 +147,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Make your oat “flour”: Add your oats to a blender or food processor and pulse until they reach a flour-like consistency. Combine your dry ingredients: Add the pumpkin pie spice, salt and baking soda, and pulse until evenly combined. Whisk together your wet ingredients: In a separate mixing bowl, whisk together the pumpkin, eggs, maple syrup, almond milk and vanilla until evenly combined. Combine the two.  Fold the dry ingredients in with the wet, and use a spatula to stir together until just combined.  (Try not to over-stir.) Fill your muffin cups.  Portion the batter evenly between 12 muffin cups.  (I always like to do this with a large cookie scoop.  You’ll need a heaping scoop of batter for this specific recipe — about 1/3 cup per muffin.)  Then sprinkle with a pinch of turbinado sugar, if you’d like. Bake.  Until a toothpick inserted in the center of a muffin comes out clean, about 15 minutes. Enjoy!  I love these muffins best fresh outta the oven.  But once they have cooled to room temperature, feel free to store them in a sealed container for up to 3 days, or freeze (wrapped tightly in plastic wrap) for up to 3 months.",
                         Time = new TimeSpan(0, 30, 0),
                         Servings = 12,
-                        Stars = 1,
                         Description =
                             "These healthy pumpkin muffins are naturally gluten-free, sweetened with maple syrup, quick and easy to make, and so perfecty pumpkin-y.",
                         Calories = 378,
@@ -167,7 +162,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Heat 1 tablespoon olive oil over medium-high heat in a large non-stick sauté pan.  Add sweet potato and sauté for 5-6 minutes, stirring occasionally, until cooked through.  Transfer to a separate plate and set aside. Add the remaining 1 tablespoon oil to the pan.  Add the veggies and jalapeño, and sauté for 4-5 minutes.  Stir in the cooked sweet potato, black beans, cumin, chili powder, a generous pinch of salt and black pepper, and sauté for 2 more minutes.  Taste and add more salt, pepper and/or cumin if needed.  Transfer the mixture to a large bowl and set aside.  Rinse (or just wipe off) the sauté pan until it is clean. Return the sauté pan to the stove, and reduce heat to medium.  Place a tortilla* in the center of the pan and immediately sprinkle your desired amount of cheese evenly over the surface of the tortilla.  Add a few large spoonfuls (about 1 cup) of the veggie mixture on one half of the tortilla, then sprinkle on some cilantro.  Fold the other side of the tortilla over to create a half moon.  Continue cooking for another 30 seconds or so, or until the bottom of the tortilla is crisp and golden.  (Just lift it up and take a peek to see when it’s ready to go.)  Then carefully flip the tortilla over and cook it for an additional 30-60 seconds on the second side. Transfer to a serving plate*, slice into triangles, then repeat with the remaining ingredients. Serve warm, along with your favorite salsa, guacamole and/or sour cream for dipping.",
                         Time = new TimeSpan(0, 40, 0),
                         Servings = 7,
-                        Stars = 1,
                         Description =
                             "These Easy Veggie Quesadillas are 100% customizable with whatever veggies you have on hand or happen to love most.  See notes above for possible ingredient variations!",
                         Calories = 268,
@@ -183,7 +177,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Roast the broccoli.  I detailed how to do this in yesterday’s post.  Basically, toss in oil, season with S&P and roast over high heat! Cook the farro.  On the stovetop, in veggie stock (instead of water) for extra flavor. Make the dressing.  Whisk all of the ingredients together in a small bowl (or shake together in a mason jar) until combined. Toss everything together.  Then in a large bowl, combine the broccoli, farro, arugula, chickpeas, almonds and dressing.  Toss to combine. Serve or refrigerate for later.  Then serve it up immediately, or transfer the salad to a sealed container and refrigerate for up to 3 days.",
                         Time = new TimeSpan(0, 45, 0),
                         Servings = 12,
-                        Stars = 1,
                         Description =
                             "The beauty of this salad is that it keeps really well in the fridge, so feel free to prep it in advance if you’d like! ",
                         Calories = 345,
@@ -199,7 +192,6 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Make the filling. Toss together the apples, lemon juice, brown sugar, flour and cinnamon until combined.  Then spread everything out in an even layer in a 9 x 13-inch baking dish. Make the topping.  Stir together the oats, flour, brown sugar, pecans, cinnamon and salt until combined.  Then drizzle with the melted butter and toss together until the dry ingredients are moistened, yet still nice and clumpy (not over-mixed). Bake. Sprinkle the topping over the apples, then pop the pan in the oven and bake for about 40-50 minutes, or until the filling is bubbly and the topping is nice and crisp. Serve.  Dish it up while the apple crisp is nice and warm, topped with a generous scoop of vanilla ice cream",
                         Time = new TimeSpan(0, 20, 0),
                         Servings = 12,
-                        Stars = 1,
                         Description =
                             "This easy apple crisp (apple crumble) recipe is made with a warm cinnamon apple filling and an irresistible buttery crunchy crumble topping.  Plus this no-fuss version takes less than 20 minutes to prep — no apple peeling required!",
                         Calories = 390,
@@ -215,13 +207,126 @@ namespace IntelligentCooking.DAL.Extensions
                             @"Prep the sauce. Whisk the sauce ingredients together in a small bowl or measuring cup until combined. Prep the noodles.  Cook the noodles according to package instructions until they are al dente.  Then drain and set aside until ready to use. Sear the beef.  Heat some cooking oil in a large sauté pan or wok over medium-high heat.  Cook the beef briefly until it is browned on both sides.  Then transfer it to a separate (clean) plate, and return the pan to the heat. Cook the veggies.  Give the veggies a quick sauté until they are cooked through. Combine everything together.  Then add the cooked noodles, sauce, beef, and Thai basil to the pan, and toss until everything is coated evenly with the sauce. Serve warm.  Serve immediately while the stir-fry is nice and hot, garnished with any of your desired toppings.",
                         Time = new TimeSpan(1, 0, 0),
                         Servings = 12,
-                        Stars = 1,
                         Description =
                             "This Thai Basil Beef Noodle Stir-Fry recipe is easy to make and tossed with the best savory Thai basil sauce.  Feel free to sub in chicken, pork, shrimp or crispy tofu in place of the beef if you would like!",
                         Calories = 390,
                         Fats = 15,
                         Proteins = 17,
                         Carbohydrates = 18
+                    },
+                    new Dish
+                    {
+                        Id = 10,
+                        Name = "Green Bean Casserole",
+                        Recipe =
+                            @"Preheat oven.  Heat oven to 375°F. Trim, cut and briefly boil the green beans. Heat a large stockpot of water over high-heat until boiling. Meanwhile, trim and cut the green beans.  Then add the beans to the boiling water and cook for 3-5 minutes, depending on how crispy you like your green beans. (Keep in mind that the beans will cook more in the oven, so err on the side of undercooking them to your taste during this step.)  Then use a slotted spoon or large strainer to transfer the beans immediately into a large bowl of ice water, and give them a quick stir.  This will prevent them from cooking longer.  Set aside. Prepare your crispy onion topping.  Melt 1/2 tablespoon butter (or olive oil) in a large sauté pan over medium-high heat.  Add the onion and sauté for 2-3 minutes, stirring occasionally, until the onion is partially cooked but still holds its shape.  (You don’t want the onion to get too soft.)  Transfer the onion to a clean bowl.  Add the remaining 1/2 tablespoon butter to the sauté pan, along with the panko, and stir to combine.  Cook for 2-3 minutes, stirring constantly, until the panko is lightly golden.  Remove from heat, and transfer the panko to the bowl with the onions.  Add in the Parmesan, salt and pepper, and toss the onion mixture until evenly combined.  Set aside. Prepare your mushroom alfredo sauce.  Briefly rinse and dry the sauté pan.  Then return it to the stove.  Melt the butter over medium-high heat. Then add the mushrooms and sauté for 5 minutes, stirring occasionally, until lightly browned and soft.  Add the garlic and sauté for 1-2 more minutes, stirring occasionally, until fragrant.  Stir in the flour and sauté for 1 more minute, stirring occasionally.  Then add in the vegetable stock, and stir until the flour is evenly dissolved.  Add the milk and Parmesan, and stir to combine.  Continue cooking the sauce until it reaches a simmer and thickens.  Then remove from heat, and season with salt and pepper to taste. Put it all together!  Combine the green beans and mushroom alfredo sauce in the stockpot, and stir the green bean mixture until evenly combined.  Transfer to a 9 x 13-inch baking dish, and spread the green bean mixture out in an even layer.  Sprinkle evenly with the crispy onion topping mixture. Bake.  Then bake for about 25 minutes, or until the crispy onion topping is golden and crispy.  (Keep an eye on it so that it does not burn.  If it does start to char, simply lay a piece of aluminum foil on top of the casserole.) Serve warm.  Remove from the oven and serve warm, garnished with extra freshly-cracked black pepper (plus maybe some parsley) if you’d like.",
+                        Time = new TimeSpan(1, 0, 0),
+                        Servings = 10,
+                        Description =
+                            "This easy Green Bean Casserole recipe is made from scratch with lightened-up ingredients, it’s nice and fresh and crispy, and it is full of the absolute best flavors.  Always a crowd fave!",
+                        Calories = 380,
+                        Fats = 16,
+                        Proteins = 13,
+                        Carbohydrates = 14
+                    },
+                    new Dish
+                    {
+                        Id = 11,
+                        Name = "Mulled Wine",
+                        Recipe =
+                            @"Combine all ingredients in a saucepan and heat until the mixture just barely reaches a simmer over medium-high heat.  (Avoid boiling — you don’t want to boil off the alcohol.)  Reduce heat to medium-low, cover, and let the wine simmer for at least 15 minutes or up to 3 hours. Strain, and serve warm with your desired garnishes.",
+                        Time = new TimeSpan(0, 20, 0),
+                        Servings = 5,
+                        Description =
+                            "Homemade mulled wine is incredibly easy to make on the stovetop (or simmer in the slow cooker), it’s easy to customize with your favorite spices and add-ins, and it is SO cozy and delicious.  Perfect for winter and holiday entertaining!",
+                        Calories = 120,
+                        Fats = 0,
+                        Proteins = 2,
+                        Carbohydrates = 10
+                    },
+                    new Dish
+                    {
+                        Id = 12,
+                        Name = "Brussels Sprouts, Cranberry and Quinoa Salad",
+                        Recipe =
+                            @"Make the vinaigrette. In a small bowl, whisk all of the vinaigrette ingredients together until combined.  (Or my preference — combine them in a mason jar, cover, and shake until combined.) Make the salad. Combine the shredded Brussels, cooked quinoa, dried cranberries, chopped pecans and shallot in a large bowl.  Drizzle evenly with the vinaigrette, then tossed until completely combined. Season.  Taste and season the salad with extra salt and pepper, as needed. Serve. Serve immediately, or refrigerate in a sealed container for up to 3 days.",
+                        Time = new TimeSpan(0, 15, 0),
+                        Servings = 5,
+                        Description = "This Brussels Sprouts, Cranberry and Quinoa Salad is super-easy to make with shredded fresh Brussels sprouts and a zippy orange vinaigrette.  It’s also naturally gluten-free and vegan, so that everyone at the table can enjoy it.",
+                        Calories = 345,
+                        Fats = 8,
+                        Proteins = 15,
+                        Carbohydrates = 10
+                    },
+                    new Dish
+                    {
+                        Id = 13,
+                        Name = "Savory Sweet Potato Casserole",
+                        Recipe =
+                            @"Boil the sweet potatoes.  Cut the sweet potatoes into evenly-sized chunks (about 1 inch thick) and boil them in a large stockpot until tender. Prepare the melted butter mixture.  Meanwhile, as the sweet potatoes are boiling, heat the butter, milk, smoked paprika, and sea salt together in a small saucepan or in the microwave until the butter is just melted.  (You want to avoid boiling the milk.) Mash the potatoes.  Drain and briefly pan-dry the sweet potatoes, to remove any excess moisture.  Then, using your preferred kind of potato masher (I recommend this one in general, or this one for extra-smooth), mash the sweet potatoes to your desired consistency.  Pour the melted butter mixture over the potatoes, and fold it in with a wooden spoon or spatula until potatoes have soaked up the liquid.  Taste and season with extra salt, pepper, and/or smoked paprika as needed, to taste. Prepare the walnut topping.  In a separate small bowl, stir together the maple rosemary walnut topping ingredients until evenly combined. Assemble and bake.  Spread the mashed sweet potatoes out in an even layer in a 9×13-inch baking dish, and top evenly with the walnut topping.  Bake for about 20-25 minutes, or until the walnuts are toasted and fragrant (but not burnt). Serve warm.  Then serve warm, garnished with fresh chives, extra black pepper, or any extra toppings that sound good!",
+                        Time = new TimeSpan(0, 35, 0),
+                        Servings = 12,
+                        Description = "This savory sweet potato casserole recipe is made with a creamy garlicky mashed filling, and sprinkled with the most irresistible maple rosemary walnut topping.  It’s also naturally gluten-free and can be made vegan, if you’d like.",
+                        Calories = 450,
+                        Fats = 15,
+                        Proteins = 17,
+                        Carbohydrates = 18
+                    },
+                    new Dish
+                    {
+                        Id = 14,
+                        Name = "Pecan Pie",
+                        Recipe =
+                            @"Blind bake the pie crust. Use parchment paper to line the inside of a chilled unbaked pie crust, then fill the bottom of the crust with pie weights or dried beans.  Bake for 15 minutes. Then remove the pie pan from the oven, carefully lift out the parchment and weights, and set them aside. Prepare the maple sauce: Whisk together three of the eggs, maple syrup, coconut sugar (or brown sugar), bourbon, cornstarch, vanilla, sea salt and ground cinnamon — followed by the melted butter — together in a large bowl until combined. Make the egg wash.  In a separate small bowl, whisk together the remaining one egg and an extra tablespoon or milk (or water) until combined.  Brush the egg wash lightly over the edges of the pie crust, which will help it to bake up nice and golden. Assemble the pie. Arrange the pecans in an even layer in the blind-baked pie crust, then pour the maple sauce evenly over the top of the pecans. Bake.  Bake the pie for 40-50 minutes, or until the top is lightly browned. After the first 20 to 25 minutes of bake time, you are welcome to loosely tent a piece of aluminum foil over the top of the whole pie if the crust or pecans seem to be browning too quickly.  The pie will be ready to go once the top is puffed up into a dome (which will sink to become flat again, once the pie has set and cooled).  Transfer the pie to a wire rack and let it rest until it reaches room temperature. Serve. Slice and serve pie at room temperature (or you can refrigerate and chill the pie, if you prefer).  Cover and store leftover pie at room temperature for 1-2 days or in the refrigerator for 4-5 days.",
+                        Time = new TimeSpan(1, 25, 0),
+                        Servings = 12,
+                        Description = "This homemade pecan pie recipe is naturally sweetened (no corn syrup!), easy to make, and so comforting and delicious!",
+                        Calories = 375,
+                        Fats = 20,
+                        Proteins = 10,
+                        Carbohydrates = 18
+                    },
+                    new Dish
+                    {
+                        Id = 15,
+                        Name = "Tahini Granola",
+                        Recipe =
+                            @"Mix the ingredients. In one bowl, combine the base ingredients (oats and nuts).  In a second bowl, combine the tahini sauce (tahini, honey, coconut oil, vanilla, salt, cardamom, cinnamon and sesame seeds), and heat the mixture slightly until warm but not bubbly.  Pour the tahini sauce over the base ingredients, and stir to combine. Bake. Spread the granola out evenly on a large parchment-covered baking sheet.  Bake for 25 minutes, stirring once halfway through.  Then sprinkle the coconut evenly over the top of the granola (if using), bake for 5-10 more minutes until toasted, and transfer the baking sheet to a wire rack and let it cool completely to room temperature without stirring. Break it up.  At this point, you can break the granola up into your desired size of clumps.  (I love mine extra clumpy!) Serve.  Then serve it immediately or store in an airtight container at room temp for up to 1 month.",
+                        Time = new TimeSpan(0, 40, 0),
+                        Servings = 4,
+                        Description = "This tahini granola recipe is easy to make, perfectly crispy and clustery, and full of the best sweet and savory flavors.",
+                        Calories = 290,
+                        Fats = 10,
+                        Proteins = 18,
+                        Carbohydrates = 10
+                    },
+                    new Dish
+                    {
+                        Id = 16,
+                        Name = "Ranch Mashed Potatoes",
+                        Recipe =
+                            @"Cut the potatoes.  For even cooking, be sure to have them cut into evenly-sized chunks (about 1-inch wide). Boil the potatoes.  The usual method — place the potatoes in a large pot, cover with cold water, bring to a boil, simmer until tender, then drain. Prepare your melted butter mixture.  While the potatoes are cooking, heat the butter, buttermilk, salt and pepper together in the microwave (or a small saucepan) until the butter is just melted.  (You want to avoid boiling the buttermilk.) Pan-dry the potatoes.  Once the potatoes have been drained, immediately return them to the hot stockpot, place it back on the hot burner, and turn the heat down to low.  Using two oven mitts, carefully hold the handles on the stockpot and shake it gently on the burner for about 1 minute.  This step will help cook off some of the remaining steam within the potatoes. Mash the potatoes.  Using your preferred kind of potato masher (I recommend this one in general, or this one for extra-smooth), mash the potatoes to your desired consistency.  Then stir the herbs into the melted butter mixture until combined, then gradually fold the butter mixture and cream cheese into the mashed potatoes.  As always, try not to overmix the potatoes to prevent them from turning gummy. Taste and season.  One final time, taste the potatoes and season with extra salt and pepper as needed.  (I still usually add in quite a bit at this point.) Serve.  Serve warm, garnished with extra chopped herbs if you would like, and dig in!",
+                        Time = new TimeSpan(0, 45, 0),
+                        Servings = 11,
+                        Description = @"100% obsessed with this creamy buttermilk ranch mashed potatoes recipe!  They’re easy to make, perfectly fluffy and creamy, and made with the tastiest fresh herb ranch seasoning.",
+                        Calories = 340,
+                        Fats = 10,
+                        Proteins = 11,
+                        Carbohydrates = 9
+                    },
+                    new Dish
+                    {
+                        Id = 17,
+                        Name = "Instant Pot Mac and Cheese",
+                        Recipe =
+                            @"Prep the pasta. Add the pasta, water, butter, mustard, garlic powder and 1 teaspoon salt to the bowl of an Instant Pot, and briefly stir to combine. Pressure cook. Cover and cook on high pressure for 4 minutes, followed by a quick release. Stir in the cheese. Stir in the milk and cheeses until they have melted into a creamy sauce.  The sauce will continue to thicken as it sits, so if it seems too thin, just let it rest for an extra minute or two.  Season with S&P. Serve warm.  Then serve while the mac and cheese is still nice and warm.  Enjoy!",
+                        Time = new TimeSpan(0, 25, 0),
+                        Servings = 7,
+                        Description = "This Instant Pot Mac and Cheese recipe is super-easy to make with just a few simple ingredients and tastes perfectly creamy and cheesy!",
+                        Calories = 300,
+                        Fats = 10,
+                        Proteins = 8,
+                        Carbohydrates = 15
                     }
                 );
 

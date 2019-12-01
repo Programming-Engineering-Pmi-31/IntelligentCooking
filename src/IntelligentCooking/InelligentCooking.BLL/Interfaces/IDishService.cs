@@ -10,6 +10,8 @@ namespace InelligentCooking.BLL.Interfaces
     {
         Task<DishPreviewResponse> GetDishesInfoAsync(GetDishRequest getDish);
 
+        Task<DishPreviewResponse> GetDishesByCategoryAsync(int categoryId);
+
         Task<DishDto> AddDishAsync(AddDishDto addDish);
 
         Task RemoveDishByIdAsync(int id); 

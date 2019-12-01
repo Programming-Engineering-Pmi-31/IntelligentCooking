@@ -72,6 +72,20 @@ namespace InelligentCooking.BLL.Services
             };
         }
 
+        public async Task<DishPreviewResponse> GetDishesByCategoryAsync(int categoryId)
+        {
+            var dishes = (await _unitOfWork.Dishes.GetDishesWithIngredientsCategoriesAndRatingsAsync(null, null)).Where(
+                    x => x.DishCategories.Any(c => c.CategoryId == categoryId))
+                .ToArray();
+
+            return new DishPreviewResponse()
+            {
+                Dishes = dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
+                    .ToArray(),
+                Count = dishes.Count()
+            };
+        }
+
         public async Task<DishDto> AddDishAsync(AddDishDto addDish)
         {
             if(await _unitOfWork.Dishes.GetByNameAsync(addDish.Name) != null)
@@ -210,16 +224,17 @@ namespace InelligentCooking.BLL.Services
             query = query.Where(d => d.Name.IndexOf(filterRequest.Name, StringComparison.InvariantCultureIgnoreCase) != -1);
 
             query = filterRequest.ExcludeIngredients?.Any() ?? false
-                ? query.Except(await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients), dishComparer): query;
+                ? query.Except(await _unitOfWork.Dishes.GetByIngredientsAsync(filterRequest.ExcludeIngredients), dishComparer)
+                : query;
 
 
             query = filterRequest.IncludeIngredients?.Any() ?? false
                 ? query.Where(
-                        res => res.DishIngredients.Select(di => di.IngredientId)
-                                   .Intersect(filterRequest.IncludeIngredients)
-                                   .Count()
-                               / (double)filterRequest.IncludeIngredients.Count()
-                               >= 0.5)
+                    res => res.DishIngredients.Select(di => di.IngredientId)
+                               .Intersect(filterRequest.IncludeIngredients)
+                               .Count()
+                           / (double)filterRequest.IncludeIngredients.Count()
+                           >= 0.5)
                 : query;
 
             return query.Select(_mapper.Map<Dish, DishPreviewDto>)
@@ -228,7 +243,7 @@ namespace InelligentCooking.BLL.Services
 
         public async Task<IEnumerable<DishPreviewDto>> GetTopDishesInfoAsync(int amount)
         {
-            IEnumerable<Dish> dishes = await _unitOfWork.Dishes.GetTop(amount);
+            var dishes = await _unitOfWork.Dishes.GetTop(amount);
 
             return dishes.Select(_mapper.Map<Dish, DishPreviewDto>)
                 .ToArray();

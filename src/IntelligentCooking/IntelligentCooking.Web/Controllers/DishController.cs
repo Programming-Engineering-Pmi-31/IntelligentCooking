@@ -23,6 +23,12 @@ namespace IntelligentCooking.Web.Controllers
             return Ok(await _dishService.GetDishesInfoAsync(getDishRequest));
         }
 
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetDishesByCategory(int categoryId)
+        {
+            return Ok(await _dishService.GetDishesByCategoryAsync(categoryId));
+        }
+
         [HttpPost("search")]
         public async Task<IActionResult> GetDishesByIngredients(FilterRequest filterRequest)
         {
@@ -39,7 +45,6 @@ namespace IntelligentCooking.Web.Controllers
         public async Task<IActionResult> RemoveDishById(int id)
         {
             await _dishService.RemoveDishByIdAsync(id);
-
             return Ok();
         }
 

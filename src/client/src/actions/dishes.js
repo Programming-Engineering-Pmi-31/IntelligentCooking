@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { actionTypes } from './actionTypes';
-import { dishesApi } from '../services/services';
+import { authApi, dishesApi } from '../services/services';
 
 export const setRecipesEmpty = () => dispatch => {
     dispatch({ type: actionTypes.dishesTypes.SET_RECIPES_EMPTY });
@@ -49,6 +49,7 @@ export const updateRecipe = (id, obj) => async dispatch => {
         formData.append(`ingredientAmounts[${i}]`, val);
     console.log(formData);
     const updatedDish = await dishesApi.updateDish(formData, id);
+    dispatch({ type: actionTypes.dishesTypes.CHANGE_AFTER_UPDATE, payload: updatedDish.data });
     return updatedDish;
 };
 export const updateRecipeFinish = id => dispatch => {
@@ -70,7 +71,10 @@ export const setRecipe = (skip, take, criteria, order) => dispatch => {
         });
 };
 export const setSort = (criteria, order) => dispatch => {
-    dispatch({ type: actionTypes.dishesTypes.SET_SORT, payload: { criteria: criteria, order: order } });
+    dispatch({
+        type: actionTypes.dishesTypes.SET_SORT,
+        payload: { criteria: criteria, order: order },
+    });
 };
 
 export const setRecipes = (skip, take, criteria, order) => async dispatch => {
@@ -89,10 +93,36 @@ export const getRecipe = id => async dispatch => {
     dispatch({ type: actionTypes.dishesTypes.GET_RECIPE, payload: recipe.data });
     return recipe.data;
 };
-
-export const rateDish = ({ id, rating, token, refreshToken }) => async dispatch => {
+export const getRecommended = amount => async dispatch => {
+    const recipes = await dishesApi.getRecommended(amount);
+    dispatch({ type: actionTypes.dishesTypes.GET_RECOMMENDED_DISHES, payload: recipes.data });
+    return recipes.data;
+};
+export const getDishesByCategory = id => async dispatch => {
+    try {
+        dispatch({ type: actionTypes.dishesTypes.GET_DISHES_BY_CATEGORY_REQUEST });
+        const dishes = await dishesApi.getDishesByCategory(id);
+        dispatch({
+            type: actionTypes.dishesTypes.GET_DISHES_BY_CATEGORY_SUCCESS,
+            payload: dishes.data.dishes,
+        });
+        console.log(dishes.data);
+        return dishes.data;
+    } catch {}
+};
+export const rateDish = ({ id, rating, token }) => async dispatch => {
     const ratedDish = await dishesApi.rateDish(id, rating, token);
-    console.log(ratedDish);
+    console.log('rated', ratedDish);
+    if (ratedDish.status === 401) {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const newToken = await authApi.refreshToken(token, refreshToken);
+        if (newToken.status === 200) {
+            localStorage.setItem('token', newToken.data.token);
+            localStorage.setItem('refreshToken', newToken.data.refreshToken);
+            const ratedDish = await dishesApi.rateDish(id, rating, token);
+            console.log(ratedDish);
+        }
+    }
     // .catch(e => {
     //     if (e.response.status === 401) {
     //         return axios
@@ -120,13 +150,14 @@ export const rateDish = ({ id, rating, token, refreshToken }) => async dispatch 
     // });
 };
 
-export const filterByIngredient = ({
-    includeIngredients,
-    excludeIngredients,
-}) => async dispatch => {
+export const searchDish = ({ name, includeIngredients, excludeIngredients }) => async dispatch => {
     dispatch({ type: actionTypes.dishesTypes.SET_RECIPES_EMPTY });
-    const recipes = await dishesApi.filterByIngredients(includeIngredients, excludeIngredients);
-    dispatch({ type: actionTypes.dishesTypes.SET_DISHES_BY_FILTER, payload: recipes.data });
+    const recipes = await dishesApi.searchDish(name, includeIngredients, excludeIngredients);
+    dispatch({ type: actionTypes.dishesTypes.SEARCH_DISHES, payload: recipes.data });
+};
+export const likeDish = (id) => async dispatch => {
+   const likedDish = await dishesApi.likeDish(id);
+   console.log(likedDish);
 };
 
 export const createProduct = obj => async dispatch => {
@@ -154,5 +185,6 @@ export const createProduct = obj => async dispatch => {
 
     const newDish = await dishesApi.createDish(formData);
     dispatch({ type: actionTypes.dishesTypes.ADD_RECIPE, payload: newDish.data });
+    console.log(newDish);
     return newDish;
 };

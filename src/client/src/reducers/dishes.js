@@ -6,6 +6,7 @@ const initialState = {
     isLoading: false,
     isEditing: false,
     dishes: [],
+    recommended: [],
     noItems: false,
     sortedItem: 'all',
     error: false,
@@ -29,6 +30,11 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 soloDish: action.payload,
             };
+        case actionTypes.dishesTypes.GET_RECOMMENDED_DISHES:
+            return {
+                ...state,
+                recommended: action.payload,
+            };
         case actionTypes.dishesTypes.SET_RECIPES_EMPTY:
             return {
                 ...state,
@@ -50,6 +56,13 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 isEditing: false,
+            };
+        case actionTypes.dishesTypes.CHANGE_AFTER_UPDATE:
+            return {
+                ...state,
+                dishes: state.dishes.map((item, i) =>
+                    item.id === action.payload.id ? action.payload : item,
+                ),
             };
         case actionTypes.dishesTypes.DELETE_RECIPE:
             return {
@@ -85,7 +98,7 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
-        case actionTypes.dishesTypes.SET_DISHES_BY_FILTER:
+        case actionTypes.dishesTypes.SEARCH_DISHES:
             return {
                 ...state,
                 dishes: action.payload,
@@ -116,6 +129,11 @@ export const dishes = (state = initialState, action) => {
                 dishesPages: Math.floor(action.payload / 8),
                 dishesToLoad: action.payload % 8,
             };
+        case actionTypes.dishesTypes.GET_DISHES_BY_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                dishes: [...action.payload],
+            }
         case actionTypes.dishesTypes.RATE_DISH:
             return {};
         default:

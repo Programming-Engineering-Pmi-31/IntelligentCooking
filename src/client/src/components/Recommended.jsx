@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import styles from '../scss/Recommended.scss';
-import axios from 'axios';
 
 class Recommended extends Component {
-    // state = {
-    //     recommended: [],
-    // };
-    //
-    // componentDidMount() {
-    //     axios
-    //         .get('https://localhost:44335/api/Dish', {
-    //             params: { skip: 30, take: 6, byCalories: false },
-    //         })
-    //         .then(res => {
-    //             this.setState({
-    //                 recommended: res.data,
-    //             });
-    //         });
-    // }
+    state = {
+        recommended: [],
+    };
+
+    componentDidMount() {
+        const { getRecommended, recommended } = this.props;
+        if (!recommended.length) {
+            getRecommended(6);
+        }
+    }
 
     render() {
-        const { dishes } = this.props;
+        const { recommended } = this.props;
         const settings = {
             className: 'slider variable-width',
             infinite: true,
@@ -39,25 +34,17 @@ class Recommended extends Component {
         };
         const sliderItems = [];
         const indexes = [];
-
-        if (dishes.length > 0) {
-            let randomIndex;
-            while (indexes.length < 6) {
-                randomIndex = Math.floor(Math.random() * dishes.length);
-                if (indexes.indexOf(randomIndex) === -1) {
-                    indexes.push(randomIndex);
-                    sliderItems.push(
-                        <Link to={`/recipe/${dishes[randomIndex].id}`} key={dishes[randomIndex].id}>
-                            <div style={{ width: 500 }} className={styles.slider__item}>
-                                <img src={dishes[randomIndex].imageUrl} alt="" />
-                                <p>{`cals: ${dishes[randomIndex].calories} time: ${dishes[randomIndex].time}`}</p>
-                                <div />
-                            </div>
-                        </Link>,
-                    );
-                }
-            }
-        }
+        recommended.map(item => {
+            sliderItems.push(
+                <Link to={`/recipe/${item.id}`} key={item.id}>
+                    <div style={{ width: 500 }} className={styles.slider__item}>
+                        <img src={item.imageUrl} alt="" />
+                        <p>{`cals: ${item.calories} time: ${item.time}`}</p>
+                        <div />
+                    </div>
+                </Link>,
+            );
+        });
         return (
             <div>
                 <Slider {...settings}>{sliderItems}</Slider>

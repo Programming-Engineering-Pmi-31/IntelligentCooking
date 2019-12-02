@@ -145,3 +145,11 @@
 .unvisible {
   visibility: hidden;
 }
+.heart__btn{
+  background: transparent;
+  font-size: 24px;
+  &:hover svg{
+    color:red
+
+  }
+}

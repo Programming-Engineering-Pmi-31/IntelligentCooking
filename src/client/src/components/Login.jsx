@@ -1,5 +1,5 @@
 import React, { PureComponent, useEffect, useState } from 'react';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import google from '../img/google.png';
@@ -26,19 +26,30 @@ export class Login extends PureComponent {
     };
 
     LoginUser() {
-        this.props.login({
-            email: this.state.email,
-            password: this.state.password,
-        });
+        this.props
+            .login({
+                email: this.state.email,
+                password: this.state.password,
+            })
+            .then(res => {
+                if(this.props.isAuth){
+                    this.props.closeModal();
+                    this.setState({
+                        email: '',
+                        password: '',
+                    })
+                }
+            });
+
     }
 
     render() {
         console.log(this.state);
-        const { modalIsOpen, closeModal, customStyles } = this.props;
+        const { modalIsOpen, closeModal, customStyles,isProccesing } = this.props;
         return (
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                onRequestClose={isProccesing? null : closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
             >
@@ -79,6 +90,7 @@ export class Login extends PureComponent {
                         </ul>
                     </div>
                     <button
+                        disabled={!!isProccesing}
                         className={styles.signInBtn}
                         onClick={e => {
                             e.preventDefault();
@@ -86,7 +98,7 @@ export class Login extends PureComponent {
                         }}
                         type="submit"
                     >
-                        Log In
+                        {isProccesing ? <p><FontAwesomeIcon spin icon={faSpinner}/> Request</p> : <p>Log In</p>}
                     </button>
                 </form>
             </Modal>

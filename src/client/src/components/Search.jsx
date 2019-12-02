@@ -27,13 +27,14 @@ export class Search extends PureComponent {
             [name]: value,
         }));
     };
-    filterByIngredient = () => {
 
-        this.props.filterByIngredient({
+    filterByIngredient = () => {
+        this.props.searchDish({
+            name: this.state.name,
             includeIngredients: this.state.ingredientsInclude.map(e => e.value),
             excludeIngredients: this.state.ingredientsExclude.map(e => e.value),
-        })
-    }
+        });
+    };
 
     comparer = otherArray => {
         return current => {

@@ -7,7 +7,7 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(dishesActions, dispatch),
 });
 const mapStateToProps = ({ dishes }) => ({
-    dishes: dishes.dishes,
+    recommended: dishes.recommended,
 });
 export default connect(
     mapStateToProps,

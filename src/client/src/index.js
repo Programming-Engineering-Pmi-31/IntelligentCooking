@@ -12,6 +12,7 @@ import RecipeCard from './containers/RecipeCard';
 import './script';
 import NoMatch from './components/NotFound';
 import EditRecipe from './containers/EditRecipe';
+import {PrivateRoute} from "./helpers/PrivateRoute";
 
 const history = createBrowserHistory();
 library.add(faHeart);
@@ -22,9 +23,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route path="/recipe/:id/edit" component={EditRecipe} />
+                <PrivateRoute path="/recipe/:id/edit" component={EditRecipe} />
                 <Route path="/recipe/:id" component={RecipeCard} />
-                <Route exact path="/create" component={CreateRecipe} />
+                <PrivateRoute exact path="/create" component={CreateRecipe} />
                 <Route exact path="/" component={MainPage} />
                 <Route path="*" component={NoMatch} />
             </Switch>

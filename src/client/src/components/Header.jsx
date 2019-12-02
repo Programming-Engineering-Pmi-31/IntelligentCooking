@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
+import createHistory from 'history/createBrowserHistory'
 import { Link } from 'react-router-dom';
 import basicStyles from '../styles/assets/main.scss';
 import logo from '../img/logo.png';
@@ -22,11 +23,29 @@ const customStyles = {
 };
 
 const Header = React.memo(
-    ({ registrateNewUserAPI, loginUserAPI, isAuth, login,token, ingredientsList,setIngredients,
-                filterByIngredient, Logout }) => {
+    ({
+        registrateNewUserAPI,
+        loginUserAPI,
+        isAuth,
+        login,
+        token,
+        isProccesing,
+        ingredientsList,
+        setIngredients,
+        searchDish,
+        Logout,
+        from,
+    }) => {
         const [registrationModalIsOpen, toggleRegistrationModal] = useState(false);
         const [loginModalIsOpen, toggleLoginModal] = useState(false);
         const [searchModalIsOpen, toggleSearchModal] = useState(false);
+        useEffect(() => {
+            if (!localStorage.getItem('token') && from !== null) {
+                const history = createHistory();
+                openLoginModal();
+                history.replace({});
+            }
+        }, [from]);
         const openRegistrationModal = () => {
             toggleRegistrationModal(true);
         };
@@ -59,14 +78,20 @@ const Header = React.memo(
                             <button type="button">categories</button>
                         </li>
                         <li>
-                            <button type="button" onClick={openSearchModal}>search</button>
+                            <button type="button" onClick={openSearchModal}>
+                                search
+                            </button>
                         </li>
-                        <li>
-                            <button type="button">likes</button>
-                        </li>
-                        <li>
-                            <Link to="/create">create</Link>
-                        </li>
+                        {isAuth && (
+                            <li>
+                                <button type="button">likes</button>
+                            </li>
+                        )}
+                        {isAuth && (
+                            <li>
+                                <Link to="/create">create</Link>
+                            </li>
+                        )}
                         {isAuth ? (
                             <li className={styles.logName}>
                                 <button>{login}</button>
@@ -89,19 +114,23 @@ const Header = React.memo(
                     </ul>
                 </nav>
                 <Register
+                    isProccesing={isProccesing}
                     registrate={registrateNewUserAPI}
                     modalIsOpen={registrationModalIsOpen}
                     customStyles={customStyles}
                     closeModal={closeRegistrationModal}
                 />
                 <Login
+                    from={from}
+                    isAuth={isAuth}
+                    isProccesing={isProccesing}
                     login={loginUserAPI}
                     modalIsOpen={loginModalIsOpen}
                     customStyles={customStyles}
                     closeModal={closeLoginModal}
                 />
                 <Search
-                    filterByIngredient={filterByIngredient}
+                    searchDish={searchDish}
                     setIngredients={setIngredients}
                     ingredientsList={ingredientsList}
                     login={loginUserAPI}

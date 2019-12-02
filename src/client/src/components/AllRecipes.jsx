@@ -8,19 +8,19 @@ import DishItem from './DishItem';
 const AllRecipes = React.memo(
     ({ setRecipes, count , isAscending, sortingCriteria, dishes,setSort, sortBy, isLoading,
                 firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe, dishesPages, dishesToLoad,
-                isAuth, rateDish, token }) => {
+                isAuth, rateDish, token, likeDish }) => {
         useEffect(() => {
             if (!firstLoad) {
                 setRecipes(0, 8, sortingCriteria, isAscending);
             }
-        }, [sortingCriteria, isAscending]);
+        }, [sortingCriteria, isAscending,firstLoad]);
         useEffect(() => {
             window.onscroll = () => {
                 if (
                     !isLoading &&
                     document.documentElement.scrollHeight - 1250 <
                         document.documentElement.scrollTop &&
-                    count < 2
+                    count < dishesPages
                 ) {
                     setRecipes(8, 8, sortingCriteria, isAscending);
                 }
@@ -68,6 +68,7 @@ const AllRecipes = React.memo(
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
                         <DishItem
+                            likeDish={likeDish}
                             token={token}
                             rateDish={rateDish}
                             isAuth={isAuth}

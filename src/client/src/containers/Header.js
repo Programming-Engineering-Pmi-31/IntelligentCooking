@@ -14,6 +14,7 @@ const mapStateToProps = ({ dishes, auth, ingredients}) => ({
     ingredientsList: ingredients.ingredients,
     dishes: dishes.dishes,
     isLoading: dishes.isLoading,
+    isProccesing: auth.isProccesing,
     isAuth: auth.isAuth,
     login: auth.unique_name,
 });

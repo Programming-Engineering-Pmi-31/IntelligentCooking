@@ -412,9 +412,9 @@ class RecipeForm extends PureComponent {
                             type="button"
                             onClick={() => {
                                 updateRecipe(this.props.match.params.id, obj).then(res => {
-                                    // this.props.history.push(
-                                    //     `/recipe/${this.props.match.params.id}`,
-                                    // );
+                                    this.props.history.push(
+                                        `/recipe/${this.props.match.params.id}`,
+                                    );
                                 });
                             }}
                             value="Update Dish"
@@ -522,6 +522,7 @@ class TextArea extends PureComponent {
                     handler(e);
                 }}
                 type={type}
+
             />
         );
     }

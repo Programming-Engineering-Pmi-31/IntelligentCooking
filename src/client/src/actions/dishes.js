@@ -119,7 +119,7 @@ export const rateDish = ({ id, rating, token }) => async dispatch => {
         if (newToken.status === 200) {
             localStorage.setItem('token', newToken.data.token);
             localStorage.setItem('refreshToken', newToken.data.refreshToken);
-            const ratedDish = await dishesApi.rateDish(id, rating, token);
+            const ratedDish = await dishesApi.rateDish(id, rating, newToken.data.token);
             console.log(ratedDish);
         }
     }

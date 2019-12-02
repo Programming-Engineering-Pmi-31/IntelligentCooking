@@ -110,7 +110,8 @@ export const getDishesByCategory = id => async dispatch => {
         return dishes.data;
     } catch {}
 };
-export const rateDish = ({ id, rating, token }) => async dispatch => {
+export const rateDish = ({ id, rating }) => async dispatch => {
+    const token = localStorage.getItem('token');
     const ratedDish = await dishesApi.rateDish(id, rating, token);
     console.log('rated', ratedDish);
     if (ratedDish.status === 401) {
@@ -158,6 +159,16 @@ export const searchDish = ({ name, includeIngredients, excludeIngredients }) => 
 export const likeDish = (id) => async dispatch => {
    const likedDish = await dishesApi.likeDish(id);
    console.log(likedDish);
+    if (likedDish.status === 401) {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const newToken = await authApi.refreshToken(token, refreshToken);
+        if (newToken.status === 200) {
+            localStorage.setItem('token', newToken.data.token);
+            localStorage.setItem('refreshToken', newToken.data.refreshToken);
+            const ratedDish = await dishesApi.rateDish(id, rating, newToken.data.token);
+            console.log(ratedDish);
+        }
+    }
 };
 
 export const createProduct = obj => async dispatch => {

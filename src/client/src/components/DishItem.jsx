@@ -29,7 +29,7 @@ class DishItem extends PureComponent {
                                             if (!isAuth) {
                                                 alert('You are not authorized !');
                                             } else {
-                                                rateDish({ id: item.id, rating: e, token: token});
+                                                rateDish({ id: item.id, rating: e});
                                             }
                                             console.log({ id: item.id, rating: e });
                                         }}

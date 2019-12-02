@@ -68,7 +68,8 @@ const dishesApi = {
                     headers: { Authorization: `bearer ${token}` },
                 },
             )
-            .then(res => res);
+            .then(res => res)
+            .catch(e => e.response);
     },
 };
 

@@ -25,9 +25,11 @@ namespace InelligentCooking.BLL.Services
         public async Task<RateResponse> AddRatingForDishAsync(AddRatingDto addRatingDto, int userId)
         {
             var rating = await _unitOfWork.Ratings.FindAsync((userId, addRatingDto.DishId));
+            double oldRate = 0;
 
             if (rating != null)
             {
+                oldRate = addRatingDto.Rate;
                 rating.Rate = addRatingDto.Rate;
             }
             else
@@ -43,7 +45,7 @@ namespace InelligentCooking.BLL.Services
             return new RateResponse()
             {
                 IsNewRate = rating == null,
-                OldRate = rating?.Rate ?? 0
+                OldRate = oldRate
             };
         }
     }

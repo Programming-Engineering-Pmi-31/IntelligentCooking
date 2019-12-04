@@ -42,7 +42,8 @@ namespace InelligentCooking.BLL.Services
 
             return new RateResponse()
             {
-                IsNewRate = rating == null
+                IsNewRate = rating == null,
+                OldRate = rating?.Rate ?? 0
             };
         }
     }

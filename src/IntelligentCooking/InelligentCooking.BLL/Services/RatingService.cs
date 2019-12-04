@@ -5,6 +5,7 @@ using AutoMapper;
 using InelligentCooking.BLL.DTOs;
 using InelligentCooking.BLL.Infrastructure.Exceptions;
 using InelligentCooking.BLL.Interfaces;
+using InelligentCooking.BLL.Models.ResponseModels;
 using IntelligentCooking.Core.Entities;
 using IntelligentCooking.Core.Interfaces.UnitsOfWork;
 
@@ -21,7 +22,7 @@ namespace InelligentCooking.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task AddRatingForDishAsync(AddRatingDto addRatingDto, int userId)
+        public async Task<RateResponse> AddRatingForDishAsync(AddRatingDto addRatingDto, int userId)
         {
             var rating = await _unitOfWork.Ratings.FindAsync((userId, addRatingDto.DishId));
 
@@ -38,6 +39,11 @@ namespace InelligentCooking.BLL.Services
             }           
 
             await _unitOfWork.CommitAsync();
+
+            return new RateResponse()
+            {
+                IsNewRate = rating == null
+            };
         }
     }
 }

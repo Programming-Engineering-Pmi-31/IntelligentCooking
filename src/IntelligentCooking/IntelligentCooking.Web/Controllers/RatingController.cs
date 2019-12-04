@@ -23,8 +23,7 @@ namespace IntelligentCooking.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRating(AddRatingDto addRatingDto)
         {
-            await _ratingService.AddRatingForDishAsync(addRatingDto, this.GetContactId());
-            return Ok();
+            return Ok(await _ratingService.AddRatingForDishAsync(addRatingDto, this.GetContactId()));
         }
     }
 }

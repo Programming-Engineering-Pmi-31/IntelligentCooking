@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using IntelligentCooking.Core.Entities;
 
@@ -14,11 +15,11 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsUnique();
 
             builder.Property(d => d.Name)
-                .IsRequired()
-                .HasMaxLength(40);
+                .IsRequired();
 
             builder.Property(d => d.Recipe)
-                .IsRequired();
+                .IsRequired()
+                .IsUnicode(false);
 
             builder.Property(d => d.Time)
                 .IsRequired();

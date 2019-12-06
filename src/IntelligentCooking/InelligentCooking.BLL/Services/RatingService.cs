@@ -29,7 +29,7 @@ namespace InelligentCooking.BLL.Services
 
             if (rating != null)
             {
-                oldRate = addRatingDto.Rate;
+                oldRate = rating.Rate;
                 rating.Rate = addRatingDto.Rate;
             }
             else

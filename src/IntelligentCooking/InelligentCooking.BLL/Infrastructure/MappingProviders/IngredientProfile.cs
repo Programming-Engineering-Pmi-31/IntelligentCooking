@@ -4,7 +4,7 @@ using IntelligentCooking.Core.Entities;
 
 namespace InelligentCooking.BLL.MappingProviders
 {
-    public class IngredientProfile: Profile
+    public class IngredientProfile : Profile
     {
         public IngredientProfile()
         {
@@ -12,6 +12,10 @@ namespace InelligentCooking.BLL.MappingProviders
                 .ReverseMap();
 
             CreateMap<Ingredient, IngredientDetailedDto>()
+                .ReverseMap();
+
+            CreateMap<AddIngredientDto, Ingredient>()
+                .ForMember(x => x.Description, opts => opts.Ignore())
                 .ReverseMap();
         }
     }

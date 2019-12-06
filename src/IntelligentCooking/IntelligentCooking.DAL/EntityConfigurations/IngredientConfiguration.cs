@@ -16,8 +16,7 @@ namespace IntelligentCooking.DAL.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(30);
 
-            builder.Property(i => i.Description)
-                .IsRequired();
+            builder.Property(i => i.Description);
 
             builder.HasMany(i => i.DishIngredients)
                 .WithOne(di => di.Ingredient)

@@ -46,7 +46,8 @@ namespace IntelligentCooking.DAL.Migrations
                         new { Id = 4, ImageUrl = "https://www.untoldmorsels.com/wp-content/uploads/2018/08/thai-food-culture.jpg", Name = "Thai" },
                         new { Id = 5, ImageUrl = "https://olo-images-live.imgix.net/3a/3afe98ddcf4643a0b20c068b2c59f2ce.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=500&h=333&fit=fill&fm=png32&bg=transparent&s=862b0bcde81b3d6190fb8465f031a5cf", Name = "Breakfast" },
                         new { Id = 6, ImageUrl = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg", Name = "Quick and Easy" },
-                        new { Id = 7, ImageUrl = "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968", Name = "Vegetarian" }
+                        new { Id = 7, ImageUrl = "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968", Name = "Vegetarian" },
+                        new { Id = 8, ImageUrl = "https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1440,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1517521303/180131-wondrich-bad-cocktail-tease_wghhv8", Name = "Drinks" }
                     );
                 });
 
@@ -66,13 +67,13 @@ namespace IntelligentCooking.DAL.Migrations
                     b.Property<double>("Fats");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40);
+                        .IsRequired();
 
                     b.Property<double>("Proteins");
 
                     b.Property<string>("Recipe")
-                        .IsRequired();
+                        .IsRequired()
+                        .IsUnicode(false);
 
                     b.Property<int>("Servings");
 
@@ -94,7 +95,15 @@ namespace IntelligentCooking.DAL.Migrations
                         new { Id = 6, Calories = 268.0, Carbohydrates = 16.0, Description = "These Easy Veggie Quesadillas are 100% customizable with whatever veggies you have on hand or happen to love most.  See notes above for possible ingredient variations!", Fats = 13.0, Name = "Veggie quesadillas", Proteins = 18.0, Recipe = "Heat 1 tablespoon olive oil over medium-high heat in a large non-stick sauté pan.  Add sweet potato and sauté for 5-6 minutes, stirring occasionally, until cooked through.  Transfer to a separate plate and set aside. Add the remaining 1 tablespoon oil to the pan.  Add the veggies and jalapeño, and sauté for 4-5 minutes.  Stir in the cooked sweet potato, black beans, cumin, chili powder, a generous pinch of salt and black pepper, and sauté for 2 more minutes.  Taste and add more salt, pepper and/or cumin if needed.  Transfer the mixture to a large bowl and set aside.  Rinse (or just wipe off) the sauté pan until it is clean. Return the sauté pan to the stove, and reduce heat to medium.  Place a tortilla* in the center of the pan and immediately sprinkle your desired amount of cheese evenly over the surface of the tortilla.  Add a few large spoonfuls (about 1 cup) of the veggie mixture on one half of the tortilla, then sprinkle on some cilantro.  Fold the other side of the tortilla over to create a half moon.  Continue cooking for another 30 seconds or so, or until the bottom of the tortilla is crisp and golden.  (Just lift it up and take a peek to see when it’s ready to go.)  Then carefully flip the tortilla over and cook it for an additional 30-60 seconds on the second side. Transfer to a serving plate*, slice into triangles, then repeat with the remaining ingredients. Serve warm, along with your favorite salsa, guacamole and/or sour cream for dipping.", Servings = 7, Time = new TimeSpan(0, 0, 40, 0, 0) },
                         new { Id = 7, Calories = 345.0, Carbohydrates = 15.0, Description = "The beauty of this salad is that it keeps really well in the fridge, so feel free to prep it in advance if you’d like! ", Fats = 13.0, Name = "Roasted Broccoli and Farro Bowls", Proteins = 18.0, Recipe = "Roast the broccoli.  I detailed how to do this in yesterday’s post.  Basically, toss in oil, season with S&P and roast over high heat! Cook the farro.  On the stovetop, in veggie stock (instead of water) for extra flavor. Make the dressing.  Whisk all of the ingredients together in a small bowl (or shake together in a mason jar) until combined. Toss everything together.  Then in a large bowl, combine the broccoli, farro, arugula, chickpeas, almonds and dressing.  Toss to combine. Serve or refrigerate for later.  Then serve it up immediately, or transfer the salad to a sealed container and refrigerate for up to 3 days.", Servings = 12, Time = new TimeSpan(0, 0, 45, 0, 0) },
                         new { Id = 8, Calories = 390.0, Carbohydrates = 15.0, Description = "This easy apple crisp (apple crumble) recipe is made with a warm cinnamon apple filling and an irresistible buttery crunchy crumble topping.  Plus this no-fuss version takes less than 20 minutes to prep — no apple peeling required!", Fats = 14.0, Name = "Apple Crisp", Proteins = 19.0, Recipe = "Make the filling. Toss together the apples, lemon juice, brown sugar, flour and cinnamon until combined.  Then spread everything out in an even layer in a 9 x 13-inch baking dish. Make the topping.  Stir together the oats, flour, brown sugar, pecans, cinnamon and salt until combined.  Then drizzle with the melted butter and toss together until the dry ingredients are moistened, yet still nice and clumpy (not over-mixed). Bake. Sprinkle the topping over the apples, then pop the pan in the oven and bake for about 40-50 minutes, or until the filling is bubbly and the topping is nice and crisp. Serve.  Dish it up while the apple crisp is nice and warm, topped with a generous scoop of vanilla ice cream", Servings = 12, Time = new TimeSpan(0, 0, 20, 0, 0) },
-                        new { Id = 9, Calories = 390.0, Carbohydrates = 18.0, Description = "This Thai Basil Beef Noodle Stir-Fry recipe is easy to make and tossed with the best savory Thai basil sauce.  Feel free to sub in chicken, pork, shrimp or crispy tofu in place of the beef if you would like!", Fats = 15.0, Name = "Thai Basil Beef Noodle Stir-Fry", Proteins = 17.0, Recipe = "Prep the sauce. Whisk the sauce ingredients together in a small bowl or measuring cup until combined. Prep the noodles.  Cook the noodles according to package instructions until they are al dente.  Then drain and set aside until ready to use. Sear the beef.  Heat some cooking oil in a large sauté pan or wok over medium-high heat.  Cook the beef briefly until it is browned on both sides.  Then transfer it to a separate (clean) plate, and return the pan to the heat. Cook the veggies.  Give the veggies a quick sauté until they are cooked through. Combine everything together.  Then add the cooked noodles, sauce, beef, and Thai basil to the pan, and toss until everything is coated evenly with the sauce. Serve warm.  Serve immediately while the stir-fry is nice and hot, garnished with any of your desired toppings.", Servings = 12, Time = new TimeSpan(0, 1, 0, 0, 0) }
+                        new { Id = 9, Calories = 390.0, Carbohydrates = 18.0, Description = "This Thai Basil Beef Noodle Stir-Fry recipe is easy to make and tossed with the best savory Thai basil sauce.  Feel free to sub in chicken, pork, shrimp or crispy tofu in place of the beef if you would like!", Fats = 15.0, Name = "Thai Basil Beef Noodle Stir-Fry", Proteins = 17.0, Recipe = "Prep the sauce. Whisk the sauce ingredients together in a small bowl or measuring cup until combined. Prep the noodles.  Cook the noodles according to package instructions until they are al dente.  Then drain and set aside until ready to use. Sear the beef.  Heat some cooking oil in a large sauté pan or wok over medium-high heat.  Cook the beef briefly until it is browned on both sides.  Then transfer it to a separate (clean) plate, and return the pan to the heat. Cook the veggies.  Give the veggies a quick sauté until they are cooked through. Combine everything together.  Then add the cooked noodles, sauce, beef, and Thai basil to the pan, and toss until everything is coated evenly with the sauce. Serve warm.  Serve immediately while the stir-fry is nice and hot, garnished with any of your desired toppings.", Servings = 12, Time = new TimeSpan(0, 1, 0, 0, 0) },
+                        new { Id = 10, Calories = 380.0, Carbohydrates = 14.0, Description = "This easy Green Bean Casserole recipe is made from scratch with lightened-up ingredients, it’s nice and fresh and crispy, and it is full of the absolute best flavors.  Always a crowd fave!", Fats = 16.0, Name = "Green Bean Casserole", Proteins = 13.0, Recipe = "Preheat oven.  Heat oven to 375°F. Trim, cut and briefly boil the green beans. Heat a large stockpot of water over high-heat until boiling. Meanwhile, trim and cut the green beans.  Then add the beans to the boiling water and cook for 3-5 minutes, depending on how crispy you like your green beans. (Keep in mind that the beans will cook more in the oven, so err on the side of undercooking them to your taste during this step.)  Then use a slotted spoon or large strainer to transfer the beans immediately into a large bowl of ice water, and give them a quick stir.  This will prevent them from cooking longer.  Set aside. Prepare your crispy onion topping.  Melt 1/2 tablespoon butter (or olive oil) in a large sauté pan over medium-high heat.  Add the onion and sauté for 2-3 minutes, stirring occasionally, until the onion is partially cooked but still holds its shape.  (You don’t want the onion to get too soft.)  Transfer the onion to a clean bowl.  Add the remaining 1/2 tablespoon butter to the sauté pan, along with the panko, and stir to combine.  Cook for 2-3 minutes, stirring constantly, until the panko is lightly golden.  Remove from heat, and transfer the panko to the bowl with the onions.  Add in the Parmesan, salt and pepper, and toss the onion mixture until evenly combined.  Set aside. Prepare your mushroom alfredo sauce.  Briefly rinse and dry the sauté pan.  Then return it to the stove.  Melt the butter over medium-high heat. Then add the mushrooms and sauté for 5 minutes, stirring occasionally, until lightly browned and soft.  Add the garlic and sauté for 1-2 more minutes, stirring occasionally, until fragrant.  Stir in the flour and sauté for 1 more minute, stirring occasionally.  Then add in the vegetable stock, and stir until the flour is evenly dissolved.  Add the milk and Parmesan, and stir to combine.  Continue cooking the sauce until it reaches a simmer and thickens.  Then remove from heat, and season with salt and pepper to taste. Put it all together!  Combine the green beans and mushroom alfredo sauce in the stockpot, and stir the green bean mixture until evenly combined.  Transfer to a 9 x 13-inch baking dish, and spread the green bean mixture out in an even layer.  Sprinkle evenly with the crispy onion topping mixture. Bake.  Then bake for about 25 minutes, or until the crispy onion topping is golden and crispy.  (Keep an eye on it so that it does not burn.  If it does start to char, simply lay a piece of aluminum foil on top of the casserole.) Serve warm.  Remove from the oven and serve warm, garnished with extra freshly-cracked black pepper (plus maybe some parsley) if you’d like.", Servings = 10, Time = new TimeSpan(0, 1, 0, 0, 0) },
+                        new { Id = 11, Calories = 120.0, Carbohydrates = 10.0, Description = "Homemade mulled wine is incredibly easy to make on the stovetop (or simmer in the slow cooker), it’s easy to customize with your favorite spices and add-ins, and it is SO cozy and delicious.  Perfect for winter and holiday entertaining!", Fats = 0.0, Name = "Mulled Wine", Proteins = 2.0, Recipe = "Combine all ingredients in a saucepan and heat until the mixture just barely reaches a simmer over medium-high heat.  (Avoid boiling — you don’t want to boil off the alcohol.)  Reduce heat to medium-low, cover, and let the wine simmer for at least 15 minutes or up to 3 hours. Strain, and serve warm with your desired garnishes.", Servings = 5, Time = new TimeSpan(0, 0, 20, 0, 0) },
+                        new { Id = 12, Calories = 345.0, Carbohydrates = 10.0, Description = "This Brussels Sprouts, Cranberry and Quinoa Salad is super-easy to make with shredded fresh Brussels sprouts and a zippy orange vinaigrette.  It’s also naturally gluten-free and vegan, so that everyone at the table can enjoy it.", Fats = 8.0, Name = "Brussels Sprouts, Cranberry and Quinoa Salad", Proteins = 15.0, Recipe = "Make the vinaigrette. In a small bowl, whisk all of the vinaigrette ingredients together until combined.  (Or my preference — combine them in a mason jar, cover, and shake until combined.) Make the salad. Combine the shredded Brussels, cooked quinoa, dried cranberries, chopped pecans and shallot in a large bowl.  Drizzle evenly with the vinaigrette, then tossed until completely combined. Season.  Taste and season the salad with extra salt and pepper, as needed. Serve. Serve immediately, or refrigerate in a sealed container for up to 3 days.", Servings = 5, Time = new TimeSpan(0, 0, 15, 0, 0) },
+                        new { Id = 13, Calories = 450.0, Carbohydrates = 18.0, Description = "This savory sweet potato casserole recipe is made with a creamy garlicky mashed filling, and sprinkled with the most irresistible maple rosemary walnut topping.  It’s also naturally gluten-free and can be made vegan, if you’d like.", Fats = 15.0, Name = "Savory Sweet Potato Casserole", Proteins = 17.0, Recipe = "Boil the sweet potatoes.  Cut the sweet potatoes into evenly-sized chunks (about 1 inch thick) and boil them in a large stockpot until tender. Prepare the melted butter mixture.  Meanwhile, as the sweet potatoes are boiling, heat the butter, milk, smoked paprika, and sea salt together in a small saucepan or in the microwave until the butter is just melted.  (You want to avoid boiling the milk.) Mash the potatoes.  Drain and briefly pan-dry the sweet potatoes, to remove any excess moisture.  Then, using your preferred kind of potato masher (I recommend this one in general, or this one for extra-smooth), mash the sweet potatoes to your desired consistency.  Pour the melted butter mixture over the potatoes, and fold it in with a wooden spoon or spatula until potatoes have soaked up the liquid.  Taste and season with extra salt, pepper, and/or smoked paprika as needed, to taste. Prepare the walnut topping.  In a separate small bowl, stir together the maple rosemary walnut topping ingredients until evenly combined. Assemble and bake.  Spread the mashed sweet potatoes out in an even layer in a 9×13-inch baking dish, and top evenly with the walnut topping.  Bake for about 20-25 minutes, or until the walnuts are toasted and fragrant (but not burnt). Serve warm.  Then serve warm, garnished with fresh chives, extra black pepper, or any extra toppings that sound good!", Servings = 12, Time = new TimeSpan(0, 0, 35, 0, 0) },
+                        new { Id = 14, Calories = 375.0, Carbohydrates = 18.0, Description = "This homemade pecan pie recipe is naturally sweetened (no corn syrup!), easy to make, and so comforting and delicious!", Fats = 20.0, Name = "Pecan Pie", Proteins = 10.0, Recipe = "Blind bake the pie crust. Use parchment paper to line the inside of a chilled unbaked pie crust, then fill the bottom of the crust with pie weights or dried beans.  Bake for 15 minutes. Then remove the pie pan from the oven, carefully lift out the parchment and weights, and set them aside. Prepare the maple sauce: Whisk together three of the eggs, maple syrup, coconut sugar (or brown sugar), bourbon, cornstarch, vanilla, sea salt and ground cinnamon — followed by the melted butter — together in a large bowl until combined. Make the egg wash.  In a separate small bowl, whisk together the remaining one egg and an extra tablespoon or milk (or water) until combined.  Brush the egg wash lightly over the edges of the pie crust, which will help it to bake up nice and golden. Assemble the pie. Arrange the pecans in an even layer in the blind-baked pie crust, then pour the maple sauce evenly over the top of the pecans. Bake.  Bake the pie for 40-50 minutes, or until the top is lightly browned. After the first 20 to 25 minutes of bake time, you are welcome to loosely tent a piece of aluminum foil over the top of the whole pie if the crust or pecans seem to be browning too quickly.  The pie will be ready to go once the top is puffed up into a dome (which will sink to become flat again, once the pie has set and cooled).  Transfer the pie to a wire rack and let it rest until it reaches room temperature. Serve. Slice and serve pie at room temperature (or you can refrigerate and chill the pie, if you prefer).  Cover and store leftover pie at room temperature for 1-2 days or in the refrigerator for 4-5 days.", Servings = 12, Time = new TimeSpan(0, 1, 25, 0, 0) },
+                        new { Id = 15, Calories = 290.0, Carbohydrates = 10.0, Description = "This tahini granola recipe is easy to make, perfectly crispy and clustery, and full of the best sweet and savory flavors.", Fats = 10.0, Name = "Tahini Granola", Proteins = 18.0, Recipe = "Mix the ingredients. In one bowl, combine the base ingredients (oats and nuts).  In a second bowl, combine the tahini sauce (tahini, honey, coconut oil, vanilla, salt, cardamom, cinnamon and sesame seeds), and heat the mixture slightly until warm but not bubbly.  Pour the tahini sauce over the base ingredients, and stir to combine. Bake. Spread the granola out evenly on a large parchment-covered baking sheet.  Bake for 25 minutes, stirring once halfway through.  Then sprinkle the coconut evenly over the top of the granola (if using), bake for 5-10 more minutes until toasted, and transfer the baking sheet to a wire rack and let it cool completely to room temperature without stirring. Break it up.  At this point, you can break the granola up into your desired size of clumps.  (I love mine extra clumpy!) Serve.  Then serve it immediately or store in an airtight container at room temp for up to 1 month.", Servings = 4, Time = new TimeSpan(0, 0, 40, 0, 0) },
+                        new { Id = 16, Calories = 340.0, Carbohydrates = 9.0, Description = "100% obsessed with this creamy buttermilk ranch mashed potatoes recipe!  They’re easy to make, perfectly fluffy and creamy, and made with the tastiest fresh herb ranch seasoning.", Fats = 10.0, Name = "Ranch Mashed Potatoes", Proteins = 11.0, Recipe = "Cut the potatoes.  For even cooking, be sure to have them cut into evenly-sized chunks (about 1-inch wide). Boil the potatoes.  The usual method — place the potatoes in a large pot, cover with cold water, bring to a boil, simmer until tender, then drain. Prepare your melted butter mixture.  While the potatoes are cooking, heat the butter, buttermilk, salt and pepper together in the microwave (or a small saucepan) until the butter is just melted.  (You want to avoid boiling the buttermilk.) Pan-dry the potatoes.  Once the potatoes have been drained, immediately return them to the hot stockpot, place it back on the hot burner, and turn the heat down to low.  Using two oven mitts, carefully hold the handles on the stockpot and shake it gently on the burner for about 1 minute.  This step will help cook off some of the remaining steam within the potatoes. Mash the potatoes.  Using your preferred kind of potato masher (I recommend this one in general, or this one for extra-smooth), mash the potatoes to your desired consistency.  Then stir the herbs into the melted butter mixture until combined, then gradually fold the butter mixture and cream cheese into the mashed potatoes.  As always, try not to overmix the potatoes to prevent them from turning gummy. Taste and season.  One final time, taste the potatoes and season with extra salt and pepper as needed.  (I still usually add in quite a bit at this point.) Serve.  Serve warm, garnished with extra chopped herbs if you would like, and dig in!", Servings = 11, Time = new TimeSpan(0, 0, 45, 0, 0) },
+                        new { Id = 17, Calories = 300.0, Carbohydrates = 15.0, Description = "This Instant Pot Mac and Cheese recipe is super-easy to make with just a few simple ingredients and tastes perfectly creamy and cheesy!", Fats = 10.0, Name = "Instant Pot Mac and Cheese", Proteins = 8.0, Recipe = "Prep the pasta. Add the pasta, water, butter, mustard, garlic powder and 1 teaspoon salt to the bowl of an Instant Pot, and briefly stir to combine. Pressure cook. Cover and cook on high pressure for 4 minutes, followed by a quick release. Stir in the cheese. Stir in the milk and cheeses until they have melted into a creamy sauce.  The sauce will continue to thicken as it sits, so if it seems too thin, just let it rest for an extra minute or two.  Season with S&P. Serve warm.  Then serve while the mac and cheese is still nice and warm.  Enjoy!", Servings = 7, Time = new TimeSpan(0, 0, 25, 0, 0) }
                     );
                 });
 
@@ -113,14 +122,25 @@ namespace IntelligentCooking.DAL.Migrations
                     b.HasData(
                         new { CategoryId = 1, DishId = 1 },
                         new { CategoryId = 5, DishId = 1 },
-                        new { CategoryId = 5, DishId = 2 },
-                        new { CategoryId = 5, DishId = 3 },
-                        new { CategoryId = 5, DishId = 4 },
-                        new { CategoryId = 5, DishId = 5 },
-                        new { CategoryId = 5, DishId = 6 },
-                        new { CategoryId = 5, DishId = 7 },
+                        new { CategoryId = 2, DishId = 2 },
+                        new { CategoryId = 4, DishId = 2 },
+                        new { CategoryId = 7, DishId = 3 },
+                        new { CategoryId = 2, DishId = 4 },
+                        new { CategoryId = 1, DishId = 5 },
+                        new { CategoryId = 6, DishId = 6 },
+                        new { CategoryId = 7, DishId = 6 },
+                        new { CategoryId = 7, DishId = 7 },
                         new { CategoryId = 5, DishId = 8 },
-                        new { CategoryId = 5, DishId = 9 }
+                        new { CategoryId = 4, DishId = 9 },
+                        new { CategoryId = 5, DishId = 9 },
+                        new { CategoryId = 7, DishId = 10 },
+                        new { CategoryId = 8, DishId = 11 },
+                        new { CategoryId = 7, DishId = 12 },
+                        new { CategoryId = 7, DishId = 13 },
+                        new { CategoryId = 1, DishId = 14 },
+                        new { CategoryId = 5, DishId = 15 },
+                        new { CategoryId = 7, DishId = 16 },
+                        new { CategoryId = 6, DishId = 17 }
                     );
                 });
 
@@ -150,14 +170,102 @@ namespace IntelligentCooking.DAL.Migrations
                         new { DishId = 1, IngredientId = 8, Amount = "2 large" },
                         new { DishId = 1, IngredientId = 9, Amount = "1 teaspoon" },
                         new { DishId = 1, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 2, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 3, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 4, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 5, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 6, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 7, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 8, IngredientId = 10, Amount = "as mush as you want" },
-                        new { DishId = 9, IngredientId = 10, Amount = "as mush as you want" }
+                        new { DishId = 2, IngredientId = 11, Amount = "1 pound boneless skinless chicken breasts" },
+                        new { DishId = 2, IngredientId = 12, Amount = "1 cup" },
+                        new { DishId = 2, IngredientId = 13, Amount = "2 cups" },
+                        new { DishId = 2, IngredientId = 14, Amount = "8 ounces" },
+                        new { DishId = 2, IngredientId = 15, Amount = "4 cloves" },
+                        new { DishId = 2, IngredientId = 16, Amount = "2 small" },
+                        new { DishId = 2, IngredientId = 17, Amount = "2 medium" },
+                        new { DishId = 2, IngredientId = 18, Amount = "1 small" },
+                        new { DishId = 2, IngredientId = 19, Amount = "2 tablespoons" },
+                        new { DishId = 2, IngredientId = 20, Amount = "1 (15 ounce) can" },
+                        new { DishId = 3, IngredientId = 21, Amount = "8 ounces" },
+                        new { DishId = 3, IngredientId = 22, Amount = "1 large head" },
+                        new { DishId = 3, IngredientId = 24, Amount = "2 tablespoons" },
+                        new { DishId = 3, IngredientId = 18, Amount = "1 small" },
+                        new { DishId = 3, IngredientId = 14, Amount = "8 ounces" },
+                        new { DishId = 3, IngredientId = 15, Amount = "4 cloves" },
+                        new { DishId = 3, IngredientId = 1, Amount = "3 tablespoons" },
+                        new { DishId = 3, IngredientId = 13, Amount = "1 cup" },
+                        new { DishId = 3, IngredientId = 25, Amount = "1 1/2 cups" },
+                        new { DishId = 3, IngredientId = 26, Amount = "1 teaspoon" },
+                        new { DishId = 3, IngredientId = 5, Amount = "1/2 teaspoon" },
+                        new { DishId = 3, IngredientId = 28, Amount = "1/4 teaspoon" },
+                        new { DishId = 3, IngredientId = 27, Amount = "2 cups (8 ounces)" },
+                        new { DishId = 3, IngredientId = 11, Amount = "2 cups" },
+                        new { DishId = 3, IngredientId = 29, Amount = "2 cups" },
+                        new { DishId = 4, IngredientId = 15, Amount = "4 cloves" },
+                        new { DishId = 4, IngredientId = 17, Amount = "1" },
+                        new { DishId = 4, IngredientId = 30, Amount = "1" },
+                        new { DishId = 4, IngredientId = 31, Amount = "1 medium" },
+                        new { DishId = 4, IngredientId = 18, Amount = "1" },
+                        new { DishId = 4, IngredientId = 32, Amount = "1 sprig" },
+                        new { DishId = 4, IngredientId = 33, Amount = "1/2 teaspoon" },
+                        new { DishId = 4, IngredientId = 28, Amount = "1/4 teaspoon" },
+                        new { DishId = 4, IngredientId = 34, Amount = "1/8 teaspoon" },
+                        new { DishId = 4, IngredientId = 20, Amount = "1/2 cup" },
+                        new { DishId = 5, IngredientId = 35, Amount = "3 cups" },
+                        new { DishId = 5, IngredientId = 38, Amount = "1 tablespoon" },
+                        new { DishId = 5, IngredientId = 4, Amount = "1 1/2 teaspoons" },
+                        new { DishId = 5, IngredientId = 5, Amount = "3/4 teaspoon" },
+                        new { DishId = 5, IngredientId = 8, Amount = "2" },
+                        new { DishId = 5, IngredientId = 25, Amount = "1 cup" },
+                        new { DishId = 5, IngredientId = 39, Amount = "1 cup" },
+                        new { DishId = 5, IngredientId = 10, Amount = "1/2 cup" },
+                        new { DishId = 5, IngredientId = 40, Amount = "3 tablespoons" },
+                        new { DishId = 5, IngredientId = 9, Amount = "1 teaspoon" },
+                        new { DishId = 6, IngredientId = 24, Amount = "2 tablespoons" },
+                        new { DishId = 6, IngredientId = 41, Amount = "1 small" },
+                        new { DishId = 6, IngredientId = 42, Amount = "1 small" },
+                        new { DishId = 6, IngredientId = 43, Amount = "1 (15-ounce) can" },
+                        new { DishId = 6, IngredientId = 44, Amount = "4–6 large" },
+                        new { DishId = 6, IngredientId = 45, Amount = "3–4 cups" },
+                        new { DishId = 7, IngredientId = 29, Amount = "3 cups" },
+                        new { DishId = 7, IngredientId = 46, Amount = "1 cup" },
+                        new { DishId = 7, IngredientId = 22, Amount = "1 medium head" },
+                        new { DishId = 7, IngredientId = 24, Amount = "2 tablespoons" },
+                        new { DishId = 7, IngredientId = 47, Amount = "2 large handfuls" },
+                        new { DishId = 7, IngredientId = 48, Amount = "1 (15-ounce) can" },
+                        new { DishId = 7, IngredientId = 18, Amount = "half of a medium" },
+                        new { DishId = 7, IngredientId = 49, Amount = "1/3 cup" },
+                        new { DishId = 8, IngredientId = 30, Amount = "8 medium" },
+                        new { DishId = 8, IngredientId = 50, Amount = "1/4 cup" },
+                        new { DishId = 8, IngredientId = 2, Amount = "1/4 cup + 2/3 cup" },
+                        new { DishId = 8, IngredientId = 1, Amount = "1 tablespoon + 1 cup" },
+                        new { DishId = 8, IngredientId = 51, Amount = "1 tablespoon + 1 tablespoon" },
+                        new { DishId = 8, IngredientId = 37, Amount = "1 cup" },
+                        new { DishId = 8, IngredientId = 5, Amount = "3/4 teaspoon" },
+                        new { DishId = 8, IngredientId = 7, Amount = "1/2 cup" },
+                        new { DishId = 9, IngredientId = 52, Amount = "8 ounces" },
+                        new { DishId = 9, IngredientId = 53, Amount = "1 1/4 pounds" },
+                        new { DishId = 9, IngredientId = 14, Amount = "8 ounces" },
+                        new { DishId = 10, IngredientId = 54, Amount = "2 pounds" },
+                        new { DishId = 11, IngredientId = 55, Amount = "1 (750 ml) bottle" },
+                        new { DishId = 11, IngredientId = 56, Amount = "1" },
+                        new { DishId = 11, IngredientId = 2, Amount = "2–4 tablespoons" },
+                        new { DishId = 12, IngredientId = 57, Amount = "1 cup" },
+                        new { DishId = 12, IngredientId = 58, Amount = "2/3 cup" },
+                        new { DishId = 12, IngredientId = 59, Amount = "1 medium" },
+                        new { DishId = 13, IngredientId = 41, Amount = "4 pounds" },
+                        new { DishId = 13, IngredientId = 25, Amount = "2 tablespoons" },
+                        new { DishId = 13, IngredientId = 60, Amount = "2 teaspoons" },
+                        new { DishId = 13, IngredientId = 15, Amount = "4 cloves" },
+                        new { DishId = 14, IngredientId = 61, Amount = "1 (9-inch)" },
+                        new { DishId = 14, IngredientId = 8, Amount = "4 large" },
+                        new { DishId = 14, IngredientId = 62, Amount = "2 tablespoons" },
+                        new { DishId = 14, IngredientId = 63, Amount = "2 teaspoons" },
+                        new { DishId = 15, IngredientId = 35, Amount = "2 teaspoons" },
+                        new { DishId = 15, IngredientId = 64, Amount = "1/2 cup" },
+                        new { DishId = 15, IngredientId = 50, Amount = "1/2 cup" },
+                        new { DishId = 16, IngredientId = 65, Amount = "5 pounds" },
+                        new { DishId = 16, IngredientId = 7, Amount = "6 tablespoons" },
+                        new { DishId = 16, IngredientId = 6, Amount = "1 1/2 cups" },
+                        new { DishId = 17, IngredientId = 21, Amount = "1 pound" },
+                        new { DishId = 17, IngredientId = 66, Amount = "4 cups" },
+                        new { DishId = 17, IngredientId = 7, Amount = "2 tablespoons" },
+                        new { DishId = 17, IngredientId = 26, Amount = " 1/2 teaspoons" },
+                        new { DishId = 17, IngredientId = 67, Amount = "1/2 cup" }
                     );
                 });
 
@@ -195,7 +303,15 @@ namespace IntelligentCooking.DAL.Migrations
                         new { DishId = 6, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Healthy-Veggie-Quesadillas-Recipe-6-2.jpg" },
                         new { DishId = 7, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/07/Roasted-Broccoli-Chickpea-and-Farro-Bowls-Recipe-2-2.jpg" },
                         new { DishId = 8, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/09/Easy-Apple-Crisp-Recipe-1-3.jpg" },
-                        new { DishId = 9, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg" }
+                        new { DishId = 9, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg" },
+                        new { DishId = 10, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2018/11/Healthy-Green-Bean-Casserole-Recipe-1-2.jpg" },
+                        new { DishId = 11, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2013/10/Mulled-Wine-Recipe-1-2.jpg" },
+                        new { DishId = 12, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2014/11/Brussels-Sprouts-Cranberry-and-Quinoa-Salad-Recipe-7.jpg" },
+                        new { DishId = 13, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Savory-Sweet-Potato-Casserole-Recipe-2a-2.jpg" },
+                        new { DishId = 14, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Pecan-Pie-Recipe-4-4.jpg" },
+                        new { DishId = 15, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Tahini-Granola-Recipe-5-1.jpg" },
+                        new { DishId = 16, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Ranch-Buttermilk-Mashed-Potatoes-Recipe-1-4.jpg" },
+                        new { DishId = 17, Priority = 1, Url = "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Instant-Pot-Mac-and-Cheese-Recipe-6.jpg" }
                     );
                 });
 
@@ -205,8 +321,7 @@ namespace IntelligentCooking.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -225,11 +340,68 @@ namespace IntelligentCooking.DAL.Migrations
                         new { Id = 3, Description = "", Name = "baking powder" },
                         new { Id = 4, Description = "", Name = "baking soda" },
                         new { Id = 5, Description = "", Name = "sea salt" },
-                        new { Id = 6, Description = "at room temperature", Name = "buttermilk" },
-                        new { Id = 7, Description = "melted and cooled to room temperature, plus more for cooking", Name = "unsalted butter" },
-                        new { Id = 8, Description = "slightly beaten, at room temperature", Name = "eggs" },
+                        new { Id = 6, Description = "", Name = "buttermilk" },
+                        new { Id = 7, Description = "", Name = "butter" },
+                        new { Id = 8, Description = "", Name = "egg" },
                         new { Id = 9, Description = "", Name = "vanilla extract" },
-                        new { Id = 10, Description = "for serving", Name = "maple syrup" }
+                        new { Id = 10, Description = "", Name = "maple syrup" },
+                        new { Id = 11, Description = "", Name = "chicken" },
+                        new { Id = 12, Description = "", Name = "wild rice" },
+                        new { Id = 13, Description = "", Name = "checken stock" },
+                        new { Id = 14, Description = "", Name = "baby bella mushroom" },
+                        new { Id = 15, Description = "", Name = "garlic" },
+                        new { Id = 16, Description = "", Name = "bell pepper" },
+                        new { Id = 17, Description = "", Name = "carrot" },
+                        new { Id = 18, Description = "", Name = "onion" },
+                        new { Id = 19, Description = "f", Name = "ginger" },
+                        new { Id = 20, Description = "", Name = "coconut milk" },
+                        new { Id = 21, Description = "", Name = "pasta" },
+                        new { Id = 22, Description = "", Name = "broccoli" },
+                        new { Id = 23, Description = "", Name = "butter oil" },
+                        new { Id = 24, Description = "", Name = "olive oil" },
+                        new { Id = 25, Description = "", Name = "milk" },
+                        new { Id = 26, Description = "", Name = "Dijon mustard" },
+                        new { Id = 27, Description = "", Name = "cheddar cheese" },
+                        new { Id = 28, Description = "", Name = "black papper" },
+                        new { Id = 29, Description = "", Name = "vegetable stock" },
+                        new { Id = 30, Description = "", Name = "Granny Smith apple" },
+                        new { Id = 31, Description = "", Name = "butternut squash" },
+                        new { Id = 32, Description = "", Name = "sage" },
+                        new { Id = 33, Description = "", Name = "salt" },
+                        new { Id = 34, Description = "", Name = "cayenne" },
+                        new { Id = 35, Description = "", Name = "oats" },
+                        new { Id = 36, Description = "", Name = "pumpkin pie spice" },
+                        new { Id = 37, Description = "", Name = "other oats" },
+                        new { Id = 38, Description = "", Name = "special pumpkin pie spice" },
+                        new { Id = 39, Description = "", Name = "pumpkin puree" },
+                        new { Id = 40, Description = "", Name = "coconut oil" },
+                        new { Id = 41, Description = "", Name = "sweet potato" },
+                        new { Id = 42, Description = "", Name = "jalapeño" },
+                        new { Id = 43, Description = "", Name = "black beans" },
+                        new { Id = 44, Description = "", Name = "flour tortillas" },
+                        new { Id = 45, Description = "", Name = "Mexican-blend cheese" },
+                        new { Id = 46, Description = "", Name = "farro" },
+                        new { Id = 47, Description = "", Name = "baby arugula" },
+                        new { Id = 48, Description = "", Name = "chickpeas" },
+                        new { Id = 49, Description = "", Name = "almonds" },
+                        new { Id = 50, Description = "", Name = "lemon juice" },
+                        new { Id = 51, Description = "", Name = "cinnamon" },
+                        new { Id = 52, Description = "", Name = "rice noodles" },
+                        new { Id = 53, Description = "", Name = "flank steak" },
+                        new { Id = 54, Description = "", Name = "green beans" },
+                        new { Id = 55, Description = "", Name = "red wine" },
+                        new { Id = 56, Description = "", Name = "orange" },
+                        new { Id = 57, Description = "", Name = "cranberries" },
+                        new { Id = 58, Description = "", Name = "pecans" },
+                        new { Id = 59, Description = "", Name = "shallot" },
+                        new { Id = 60, Description = "", Name = "smoked paprika" },
+                        new { Id = 61, Description = "", Name = "pie crust" },
+                        new { Id = 62, Description = "", Name = "bourbon" },
+                        new { Id = 63, Description = "", Name = "pecan halves" },
+                        new { Id = 64, Description = "", Name = "raw pepitas" },
+                        new { Id = 65, Description = "", Name = "potato" },
+                        new { Id = 66, Description = "", Name = "water" },
+                        new { Id = 67, Description = "", Name = "Parmesan cheese" }
                     );
                 });
 

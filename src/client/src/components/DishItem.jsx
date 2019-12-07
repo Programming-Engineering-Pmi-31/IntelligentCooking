@@ -8,7 +8,7 @@ import styles from '../scss/AllRecipes.scss';
 
 class DishItem extends PureComponent {
     render() {
-        const { item, updateRecipeRequest, deleteRecipe, isAuth, rateDish, token, likeDish } = this.props;
+        const { item, updateRecipeRequest, deleteRecipe, isAuth, rateDish, token, addToFavourite, favourite, setExactRecipe,dishesRating} = this.props;
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>
@@ -29,13 +29,14 @@ class DishItem extends PureComponent {
                                             if (!isAuth) {
                                                 alert('You are not authorized !');
                                             } else {
-                                                rateDish({ id: item.id, rating: e});
+                                                rateDish({ id: item.id, rating: e, count:item.ratesCount, totalRating: item.rating})
+
                                             }
                                             console.log({ id: item.id, rating: e });
                                         }}
                                         starRatedColor="rgb(230, 67, 47)"
                                         starHoverColor="rgb(0,0,200)"
-                                        rating={item.rating}
+                                        rating={dishesRating[item.id] ? dishesRating[item.id] : item.rating}
                                         starDimension="20px"
                                         starSpacing="3px"
                                     />
@@ -43,8 +44,8 @@ class DishItem extends PureComponent {
                                 <span>{item.ratesCount}</span>
                                 {isAuth && <button className={styles.heart__btn} onClick={(e)=>{
                                     e.preventDefault();
-                                    likeDish(item.id);
-                                }}><FontAwesomeIcon icon={faHeart}/></button>}
+                                    addToFavourite(item.id);
+                                }}><FontAwesomeIcon className={favourite[item.id] && styles.activeHeart} icon={faHeart}/></button>}
 
 
                             </div>

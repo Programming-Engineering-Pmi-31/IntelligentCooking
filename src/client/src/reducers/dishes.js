@@ -11,6 +11,9 @@ const initialState = {
     sortedItem: 'all',
     error: false,
     soloDish: [],
+    loadedDishes: {},
+    dishesRating: {},
+    favourite: [],
     firstLoad: false,
     skip: 0,
     count: 0,
@@ -29,6 +32,10 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 soloDish: action.payload,
+                loadedDishes: {
+                    ...state.loadedDishes,
+                    [action.payload.id]: action.payload,
+                },
             };
         case actionTypes.dishesTypes.GET_RECOMMENDED_DISHES:
             return {
@@ -40,6 +47,11 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 firstLoad: false,
                 dishes: [],
+            };
+        case actionTypes.dishesTypes.SET_EXACT_RECIPE:
+            return {
+                ...state,
+                soloDish: action.payload,
             };
         case actionTypes.dishesTypes.SET_EXACT_RECIPE_EMPTY:
             return {
@@ -58,10 +70,13 @@ export const dishes = (state = initialState, action) => {
                 isEditing: false,
             };
         case actionTypes.dishesTypes.CHANGE_AFTER_UPDATE:
+            const updated = action.payload;
+            updated.imageUrl = updated.images.find(item => item.priority === 1).url;
+            delete updated.images;
             return {
                 ...state,
                 dishes: state.dishes.map((item, i) =>
-                    item.id === action.payload.id ? action.payload : item,
+                    item.id === action.payload.id ? updated : item,
                 ),
             };
         case actionTypes.dishesTypes.DELETE_RECIPE:
@@ -80,6 +95,52 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 noItems: true,
+            };
+
+        case actionTypes.dishesTypes.SET_FAVOURITE:
+            return {
+                ...state,
+                favourite: action.payload.reduce((obj, item) => {
+                    obj[item.id] = item;
+                    return obj;
+                }, {}),
+            };
+        case actionTypes.dishesTypes.ADD_FAVOURITE:
+            return {
+                ...state,
+                favourite: {
+                    ...state.favourite,
+                    [action.payload.id]: action.payload.dish,
+                },
+            };
+        case actionTypes.dishesTypes.DELETE_FROM_FAVOURITES:
+            const fav = { ...state.favourite };
+            delete fav[action.payload];
+            return {
+                ...state,
+                favourite: fav,
+            };
+        case actionTypes.dishesTypes.SET_RATING:
+            return {
+                ...state,
+                dishes: state.dishes.map((item, i) =>
+                    item.id === action.payload.id
+                        ? { ...item, rating: action.payload.rating, ratesCount: item.ratesCount + action.payload.toAdd }
+                        : item,
+                ),
+                dishesRating: {
+                    ...state.dishesRating,
+                    [action.payload.id] : action.payload.rating
+                },
+                // loadedDishes: {
+                //     ...state.loadedDishes,
+                //     [action.payload.id]: {...state.loadedDishes[action.payload.id], rating: action.payload.rating}
+                // },
+                // soloDish: {
+                //     ...state.soloDish,
+                //     rating: action.payload.rating,
+                //
+                // },
             };
         case actionTypes.dishesTypes.SET_SORT:
             return {
@@ -133,9 +194,7 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 dishes: [...action.payload],
-            }
-        case actionTypes.dishesTypes.RATE_DISH:
-            return {};
+            };
         default:
             return state;
     }

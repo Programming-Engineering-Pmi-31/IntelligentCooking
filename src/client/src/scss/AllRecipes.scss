@@ -153,3 +153,9 @@
 
   }
 }
+.activeHeart{
+  color: red;
+  &:hover{
+    color: black !important;
+  }
+}

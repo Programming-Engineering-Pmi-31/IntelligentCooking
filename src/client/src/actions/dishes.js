@@ -5,6 +5,9 @@ import { authApi, dishesApi } from '../services/services';
 export const setRecipesEmpty = () => dispatch => {
     dispatch({ type: actionTypes.dishesTypes.SET_RECIPES_EMPTY });
 };
+export const setExactRecipe = item => dispatch => {
+    dispatch({ type: actionTypes.dishesTypes.SET_EXACT_RECIPE, payload: item });
+};
 export const setExactRecipeEmpty = () => dispatch => {
     dispatch({ type: actionTypes.dishesTypes.SET_EXACT_RECIPE_EMPTY });
 };
@@ -110,9 +113,9 @@ export const getDishesByCategory = id => async dispatch => {
         return dishes.data;
     } catch {}
 };
-export const rateDish = ({ id, rating }) => async dispatch => {
+export const rateDish = ({ id, rating, count, totalRating }) => async dispatch => {
     const token = localStorage.getItem('token');
-    const ratedDish = await dishesApi.rateDish(id, rating, token);
+    let ratedDish = await dishesApi.rateDish(id, rating, token);
     console.log('rated', ratedDish);
     if (ratedDish.status === 401) {
         const refreshToken = localStorage.getItem('refreshToken');
@@ -120,35 +123,21 @@ export const rateDish = ({ id, rating }) => async dispatch => {
         if (newToken.status === 200) {
             localStorage.setItem('token', newToken.data.token);
             localStorage.setItem('refreshToken', newToken.data.refreshToken);
-            const ratedDish = await dishesApi.rateDish(id, rating, newToken.data.token);
+            ratedDish = await dishesApi.rateDish(id, rating, newToken.data.token);
             console.log(ratedDish);
         }
     }
-    // .catch(e => {
-    //     if (e.response.status === 401) {
-    //         return axios
-    //             .post('https://intelligentcookingweb.azurewebsites.net/api/Auth/refresh', {
-    //                 token: token,
-    //                 refreshToken: refreshToken,
-    //             })
-    //             .then(() => {
-    //                 axios
-    //                     .post(
-    //                         `https://intelligentcookingweb.azurewebsites.net/api/Rating`,
-    //                         {
-    //                             dishId: id,
-    //                             rate: rating,
-    //                         },
-    //                         {
-    //                             headers: { Authorization: `bearer ${token}` },
-    //                         },
-    //                     )
-    //                     .then(res => {
-    //                         console.log(res);
-    //                     });
-    //             });
-    //     }
-    // });
+    if (ratedDish.data.isNewRate) {
+        dispatch({
+            type: actionTypes.dishesTypes.SET_RATING,
+            payload: { id: id, rating: (count * totalRating + rating) / (count + 1), toAdd: 1 },
+        });
+    } else {
+        dispatch({
+            type: actionTypes.dishesTypes.SET_RATING,
+            payload: { id: id, rating: ((count * totalRating + rating - ratedDish.data.oldRate) / count), toAdd: 0 },
+        });
+    }
 };
 
 export const searchDish = ({ name, includeIngredients, excludeIngredients }) => async dispatch => {
@@ -156,18 +145,44 @@ export const searchDish = ({ name, includeIngredients, excludeIngredients }) => 
     const recipes = await dishesApi.searchDish(name, includeIngredients, excludeIngredients);
     dispatch({ type: actionTypes.dishesTypes.SEARCH_DISHES, payload: recipes.data });
 };
-export const likeDish = (id) => async dispatch => {
-   const likedDish = await dishesApi.likeDish(id);
-   console.log(likedDish);
+export const setFavourite = () => async dispatch => {
+    let favourite = await dishesApi.setFavourite();
+    if(favourite.status === 401){
+        const token = localStorage.getItem('token');
+        const refreshToken = localStorage.getItem('refreshToken');
+        const newToken = await authApi.refreshToken(token, refreshToken);
+        if (newToken.status === 200) {
+            localStorage.setItem('token', newToken.data.token);
+            localStorage.setItem('refreshToken', newToken.data.refreshToken);
+            favourite = await dishesApi.setFavourite();
+        }
+    }
+    dispatch({ type: actionTypes.dishesTypes.SET_FAVOURITE, payload: favourite });
+};
+export const addToFavourite = id => async dispatch => {
+    const token = localStorage.getItem('token');
+    let likedDish = await dishesApi.addToFavourite(id);
     if (likedDish.status === 401) {
         const refreshToken = localStorage.getItem('refreshToken');
         const newToken = await authApi.refreshToken(token, refreshToken);
         if (newToken.status === 200) {
             localStorage.setItem('token', newToken.data.token);
             localStorage.setItem('refreshToken', newToken.data.refreshToken);
-            const ratedDish = await dishesApi.rateDish(id, rating, newToken.data.token);
-            console.log(ratedDish);
+            likedDish = await dishesApi.getRecipe(id);
+            dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE, payload: {id:id, dish: likedDish.data} });
+            dishesApi.addToFavourite(id);
+            if(likedDish.status === 409){
+                const deleted = await dishesApi.deleteFromFavourites(id);
+                dispatch({ type: actionTypes.dishesTypes.DELETE_FROM_FAVOURITES, payload: id });
+            }
         }
+    } else if(likedDish.status === 409){
+        const deleted = await dishesApi.deleteFromFavourites(id);
+        dispatch({ type: actionTypes.dishesTypes.DELETE_FROM_FAVOURITES, payload: id });
+        console.log(deleted);
+    } else {
+        likedDish = await dishesApi.getRecipe(id);
+        dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE, payload: {id:id, dish: likedDish.data} });
     }
 };
 

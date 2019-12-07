@@ -19,9 +19,10 @@ class App extends PureComponent {
             console.log(this.props.location)
         }
 
-        const { setCategories, categories, authorizeWithStorage } = this.props;
+        const { setCategories, categories, authorizeWithStorage, setFavourite} = this.props;
         if (localStorage.getItem('token')) {
             authorizeWithStorage();
+            setFavourite();
         }
         // authorizeWithStorage();
         if (!categories.length) {

@@ -58,7 +58,7 @@ const dishesApi = {
             .then(res => res)
             .catch(e => e.response);
     },
-    likeDish(id) {
+    addToFavourite(id) {
         const token = localStorage.getItem('token');
         return baseURL
             .post(
@@ -66,10 +66,24 @@ const dishesApi = {
                 { dishId: id },
                 {
                     headers: { Authorization: `bearer ${token}` },
+                    params: { dishId: id },
                 },
             )
             .then(res => res)
             .catch(e => e.response);
+    },
+    setFavourite() {
+        const token = localStorage.getItem('token');
+        return baseURL
+            .get('Favourite/', { headers: { Authorization: `bearer ${token}` } })
+            .then(res => res.data.dishes)
+            .catch(e => e.response);
+    },
+    deleteFromFavourites(id) {
+        const token = localStorage.getItem('token');
+        return baseURL
+            .delete(`Favourite/`, { headers: { Authorization: `bearer ${token}` }, params: {dishId: id}})
+            .then(res => res);
     },
 };
 
@@ -108,11 +122,23 @@ const categoriesAPI = {
     getCategories() {
         return baseURL.get('Category/').then(res => res);
     },
+    createCategory(obj) {
+        return baseURL.post('Category/', obj).then(res => res);
+    },
+    deleteCategory(id) {
+        return baseURL.delete(`Category/${id}`).then(res => res);
+    },
 };
 
 const ingredientsAPI = {
     getIngredients() {
         return baseURL.get('Ingredient/').then(res => res);
+    },
+    createIngredient(name) {
+        return baseURL.post('Ingredient/', name).then(res => res);
+    },
+    deleteIngredient(id) {
+        return baseURL.delete(`Ingredient/${id}`).then(res => res);
     },
 };
 export { dishesApi, authApi, categoriesAPI, ingredientsAPI };

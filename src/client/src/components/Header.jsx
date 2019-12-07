@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createBrowserHistory';
 import { Link } from 'react-router-dom';
 import basicStyles from '../styles/assets/main.scss';
 import logo from '../img/logo.png';
@@ -7,6 +7,7 @@ import styles from '../scss/Header.scss';
 import { Register } from './Register';
 import { Login } from './Login';
 import { Search } from './Search';
+import { Favourites } from './Favourites';
 
 const customStyles = {
     content: {
@@ -35,15 +36,19 @@ const Header = React.memo(
         searchDish,
         Logout,
         from,
+        setFavourite,
+         favourite,
+         addToFavourite,
     }) => {
         const [registrationModalIsOpen, toggleRegistrationModal] = useState(false);
         const [loginModalIsOpen, toggleLoginModal] = useState(false);
         const [searchModalIsOpen, toggleSearchModal] = useState(false);
+        const [favouritesModalIsOpen, toggleFavouriteModal] = useState(false);
         useEffect(() => {
             if (!localStorage.getItem('token') && from !== null) {
-                const history = createHistory();
+                // const history = createHistory();
                 openLoginModal();
-                history.replace({});
+                // history.replace({});
             }
         }, [from]);
         const openRegistrationModal = () => {
@@ -64,6 +69,12 @@ const Header = React.memo(
         const closeSearchModal = () => {
             toggleSearchModal(false);
         };
+        const openFavouritesModal = () => {
+            toggleFavouriteModal(true);
+        };
+        const closeFavouritesModal = () => {
+            toggleFavouriteModal(false);
+        };
         return (
             <div className={basicStyles.wrapper}>
                 <nav className={styles.nav}>
@@ -72,10 +83,14 @@ const Header = React.memo(
                             <img src={logo} alt="Logo" />
                         </li>
                         <li>
-                            <button type="button">ingredients</button>
+                            <Link to="/allingredients">
+                                <button>ingredients</button>
+                            </Link>
                         </li>
                         <li>
-                            <button type="button">categories</button>
+                            <Link to="/allcategories">
+                                <button>categories</button>
+                            </Link>
                         </li>
                         <li>
                             <button type="button" onClick={openSearchModal}>
@@ -84,12 +99,16 @@ const Header = React.memo(
                         </li>
                         {isAuth && (
                             <li>
-                                <button type="button">likes</button>
+                                <button type="button" onClick={openFavouritesModal}>
+                                    likes
+                                </button>
                             </li>
                         )}
                         {isAuth && (
                             <li>
-                                <Link to="/create">create</Link>
+                                <Link to="/create">
+                                    <button>create</button>
+                                </Link>
                             </li>
                         )}
                         {isAuth ? (
@@ -121,6 +140,7 @@ const Header = React.memo(
                     closeModal={closeRegistrationModal}
                 />
                 <Login
+                    setFavourite={setFavourite}
                     from={from}
                     isAuth={isAuth}
                     isProccesing={isProccesing}
@@ -137,6 +157,13 @@ const Header = React.memo(
                     modalIsOpen={searchModalIsOpen}
                     customStyles={customStyles}
                     closeModal={closeSearchModal}
+                />
+                <Favourites
+                    addToFavourite={addToFavourite}
+                    favourite={favourite}
+                    customStyles={customStyles}
+                    modalIsOpen={favouritesModalIsOpen}
+                    closeModal={closeFavouritesModal}
                 />
             </div>
         );

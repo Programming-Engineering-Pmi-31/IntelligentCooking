@@ -8,7 +8,7 @@ import DishItem from './DishItem';
 const AllRecipes = React.memo(
     ({ setRecipes, count , isAscending, sortingCriteria, dishes,setSort, sortBy, isLoading,
                 firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe, dishesPages, dishesToLoad,
-                isAuth, rateDish, token, likeDish }) => {
+                isAuth, rateDish, token, likeDish, addToFavourite, favourite, setExactRecipe,dishesRating}) => {
         useEffect(() => {
             if (!firstLoad) {
                 setRecipes(0, 8, sortingCriteria, isAscending);
@@ -45,11 +45,6 @@ const AllRecipes = React.memo(
                         </button>
                     </li>
                     <li>
-                        <button type="button" onClick={() => sortBy('popular')}>
-                            Most Popular
-                        </button>
-                    </li>
-                    <li>
                         <button type="button" onClick={() => setSort('Time', true)}>
                             Lowest Time
                         </button>
@@ -68,6 +63,10 @@ const AllRecipes = React.memo(
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
                         <DishItem
+                            dishesRating={dishesRating}
+                            setExactRecipe={setExactRecipe}
+                            favourite={favourite}
+                            addToFavourite={addToFavourite}
                             likeDish={likeDish}
                             token={token}
                             rateDish={rateDish}

@@ -34,6 +34,7 @@ export class Login extends PureComponent {
             .then(res => {
                 if(this.props.isAuth){
                     this.props.closeModal();
+                    this.props.setFavourite();
                     this.setState({
                         email: '',
                         password: '',

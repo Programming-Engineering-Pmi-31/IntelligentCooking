@@ -39,6 +39,8 @@ const mapStateToProps = ({ dishes, sort, auth}) => ({
     count: dishes.count,
     dishesPages: dishes.dishesPages,
     dishesToLoad: dishes.dishesToLoad,
+    favourite: dishes.favourite,
+    dishesRating: dishes.dishesRating,
 });
 export default connect(
     mapStateToProps,

@@ -17,6 +17,7 @@ const mapStateToProps = ({ dishes, auth, ingredients}) => ({
     isProccesing: auth.isProccesing,
     isAuth: auth.isAuth,
     login: auth.unique_name,
+    favourite: dishes.favourite,
 });
 export default connect(
     mapStateToProps,

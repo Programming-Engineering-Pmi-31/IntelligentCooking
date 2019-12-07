@@ -178,6 +178,7 @@ class RecipeForm extends PureComponent {
             updateRecipe,
             sortingCriteria,
             isAscending,
+            dishesCount,
         } = this.props;
 
         let catToSend;
@@ -222,50 +223,26 @@ class RecipeForm extends PureComponent {
                         <label className={styles.label}>Description</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <div>
-                            <Select
-                                value={categories}
-                                onChange={this.categoriesChange}
-                                options={categoriesOptions}
-                                isMulti
-                            />
-                            <label className={styles.label}>Category</label>
-                        </div>
-                        <div className={styles.addBtn}>
-                            <button
-                                onClick={e => {
-                                    e.preventDefault();
-                                    this.createCategoriesOpen();
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faPlusCircle} />
-                            </button>
-                        </div>
+                        <Select
+                            value={categories}
+                            onChange={this.categoriesChange}
+                            options={categoriesOptions}
+                            isMulti
+                        />
+                        <label className={styles.label}>Category</label>
                     </div>
                     <div className={styles.input_img__block}>
                         <Previews img={img} valueChange={this.imageChange} />
                         <label className={styles.label__img}>Images</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <div>
-                            <Select
-                                value={ingredients}
-                                onChange={this.ingredientsChange}
-                                options={ingredientsOptions}
-                                isMulti
-                            />
-                            <label className={styles.label}>Ingredients</label>
-                        </div>
-                        <div className={styles.addBtn}>
-                            <button
-                                onClick={e => {
-                                    e.preventDefault();
-                                    this.createIngredientsOpen();
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faPlusCircle} />
-                            </button>
-                        </div>
+                        <Select
+                            value={ingredients}
+                            onChange={this.ingredientsChange}
+                            options={ingredientsOptions}
+                            isMulti
+                        />
+                        <label className={styles.label}>Ingredients</label>
                     </div>
                     <Modal
                         isOpen={this.state.addIngredientIsOpen}
@@ -424,7 +401,7 @@ class RecipeForm extends PureComponent {
                         onClick={() => {
                             createProduct(obj).then(res => {
                                 this.props.history.push(`/recipe/${res.data.id}`);
-                                setRecipe(skip,1,sortingCriteria,isAscending);
+                                setRecipe(dishesCount,1,sortingCriteria,isAscending);
                             });
 
                         }}

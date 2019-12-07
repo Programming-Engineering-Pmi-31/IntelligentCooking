@@ -12,6 +12,17 @@ export const categories = (state = initialState, action) => {
                 categories: action.payload,
                 isLoading: false,
             };
+        case actionTypes.categoriesTypes.CREATE_CATEGORY:
+            return {
+                ...state,
+                categories: [action.payload, ...state.categories],
+            }
+
+        case actionTypes.categoriesTypes.DELETE_CATEGORY:
+            return {
+                ...state,
+                categories: state.categories.filter(item => item.id !== action.payload),
+            };
         default:
             return state;
     }

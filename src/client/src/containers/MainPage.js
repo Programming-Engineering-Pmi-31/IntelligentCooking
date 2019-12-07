@@ -16,6 +16,7 @@ const mapStateToProps = ({ dishes, categories, sort }) => ({
     categories: categories.categories,
     dishes: dishes,
     isLoading: dishes.isLoading,
+    favourite: dishes.favourite,
 });
 export default connect(
     mapStateToProps,

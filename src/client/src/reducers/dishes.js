@@ -70,7 +70,7 @@ export const dishes = (state = initialState, action) => {
                 isEditing: false,
             };
         case actionTypes.dishesTypes.CHANGE_AFTER_UPDATE:
-            const updated = action.payload;
+            const updated = Object.assign({},action.payload);
             updated.imageUrl = updated.images.find(item => item.priority === 1).url;
             delete updated.images;
             return {
@@ -78,6 +78,11 @@ export const dishes = (state = initialState, action) => {
                 dishes: state.dishes.map((item, i) =>
                     item.id === action.payload.id ? updated : item,
                 ),
+                loadedDishes: {
+                    ...state.loadedDishes,
+                    [action.payload.id]: action.payload
+                }
+
             };
         case actionTypes.dishesTypes.DELETE_RECIPE:
             return {

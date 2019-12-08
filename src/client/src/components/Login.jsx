@@ -17,6 +17,7 @@ export class Login extends PureComponent {
         Modal.setAppElement('body');
     }
 
+
     valueChange = event => {
         const { name, value } = event.target;
         this.setState(prevState => ({
@@ -58,7 +59,10 @@ export class Login extends PureComponent {
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <p className={styles.authTitle}>Login</p>
-                <form className={styles.authForm}>
+                <form className={styles.authForm} onSubmit={(e)=> {
+                    e.preventDefault();
+                    this.LoginUser();
+                }}>
                     <input
                         placeholder="Email"
                         name="email"
@@ -97,7 +101,6 @@ export class Login extends PureComponent {
                             e.preventDefault();
                             this.LoginUser();
                         }}
-                        type="submit"
                     >
                         {isProccesing ? <p><FontAwesomeIcon spin icon={faSpinner}/> Request</p> : <p>Log In</p>}
                     </button>

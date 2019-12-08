@@ -142,8 +142,9 @@ export const rateDish = ({ id, rating, count, totalRating }) => async dispatch =
 
 export const searchDish = ({ name, includeIngredients, excludeIngredients }) => async dispatch => {
     dispatch({ type: actionTypes.dishesTypes.SET_RECIPES_EMPTY });
+    dispatch({ type: actionTypes.dishesTypes.SEARCH_DISHES_REQUEST });
     const recipes = await dishesApi.searchDish(name, includeIngredients, excludeIngredients);
-    dispatch({ type: actionTypes.dishesTypes.SEARCH_DISHES, payload: recipes.data });
+    dispatch({ type: actionTypes.dishesTypes.SEARCH_DISHES_SUCCESS, payload: recipes.data });
 };
 export const setFavourite = () => async dispatch => {
     let favourite = await dishesApi.setFavourite();

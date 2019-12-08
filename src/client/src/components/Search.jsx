@@ -33,7 +33,7 @@ export class Search extends PureComponent {
             name: this.state.name,
             includeIngredients: this.state.ingredientsInclude.map(e => e.value),
             excludeIngredients: this.state.ingredientsExclude.map(e => e.value),
-        });
+        }).then(() => this.props.closeModal())
     };
 
     comparer = otherArray => {

@@ -164,7 +164,12 @@ export const dishes = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
-        case actionTypes.dishesTypes.SEARCH_DISHES:
+        case actionTypes.dishesTypes.SEARCH_DISHES_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+            };
+        case actionTypes.dishesTypes.SEARCH_DISHES_SUCCESS:
             return {
                 ...state,
                 dishes: action.payload,

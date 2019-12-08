@@ -63,6 +63,7 @@ const AllRecipes = React.memo(
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
                         <DishItem
+                            isLoading={isLoading}
                             dishesRating={dishesRating}
                             setExactRecipe={setExactRecipe}
                             favourite={favourite}

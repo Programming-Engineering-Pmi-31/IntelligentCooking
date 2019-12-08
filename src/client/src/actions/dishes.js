@@ -163,6 +163,7 @@ export const setFavourite = () => async dispatch => {
 export const addToFavourite = id => async dispatch => {
     const token = localStorage.getItem('token');
     let likedDish = await dishesApi.addToFavourite(id);
+    dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE_REQUEST });
     if (likedDish.status === 401) {
         const refreshToken = localStorage.getItem('refreshToken');
         const newToken = await authApi.refreshToken(token, refreshToken);
@@ -170,7 +171,7 @@ export const addToFavourite = id => async dispatch => {
             localStorage.setItem('token', newToken.data.token);
             localStorage.setItem('refreshToken', newToken.data.refreshToken);
             likedDish = await dishesApi.getRecipe(id);
-            dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE, payload: {id:id, dish: likedDish.data} });
+            dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE_SUCCESS, payload: {id:id, dish: likedDish.data} });
             dishesApi.addToFavourite(id);
             if(likedDish.status === 409){
                 const deleted = await dishesApi.deleteFromFavourites(id);
@@ -183,7 +184,7 @@ export const addToFavourite = id => async dispatch => {
         console.log(deleted);
     } else {
         likedDish = await dishesApi.getRecipe(id);
-        dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE, payload: {id:id, dish: likedDish.data} });
+        dispatch({ type: actionTypes.dishesTypes.ADD_FAVOURITE_SUCCESS, payload: {id:id, dish: likedDish.data} });
     }
 };
 

@@ -8,7 +8,10 @@ import styles from '../scss/AllRecipes.scss';
 
 class DishItem extends PureComponent {
     render() {
-        const { item, updateRecipeRequest, deleteRecipe, isAuth, rateDish, token, addToFavourite, favourite, setExactRecipe,dishesRating} = this.props;
+        const { item, updateRecipeRequest, deleteRecipe, isAuth, rateDish, token, addToFavourite, favourite, setExactRecipe,dishesRating, isLoading} = this.props;
+        if(isLoading){
+            document.body.classList.add(styles.globalCursor);
+        }else {document.body.classList.remove(styles.globalCursor)}
         return (
             <li key={item.id} className={styles.cards__item}>
                 <Link to={`/recipe/${item.id}`}>

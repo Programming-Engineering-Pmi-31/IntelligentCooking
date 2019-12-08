@@ -33,6 +33,7 @@ class App extends PureComponent {
     }
 
     render() {
+
         console.log('main render');
         return (
             <div className={styles.container}>

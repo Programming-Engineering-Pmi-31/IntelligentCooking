@@ -70,7 +70,7 @@ export const dishes = (state = initialState, action) => {
                 isEditing: false,
             };
         case actionTypes.dishesTypes.CHANGE_AFTER_UPDATE:
-            const updated = Object.assign({},action.payload);
+            const updated = { ...action.payload };
             updated.imageUrl = updated.images.find(item => item.priority === 1).url;
             delete updated.images;
             return {
@@ -80,9 +80,8 @@ export const dishes = (state = initialState, action) => {
                 ),
                 loadedDishes: {
                     ...state.loadedDishes,
-                    [action.payload.id]: action.payload
-                }
-
+                    [action.payload.id]: action.payload,
+                },
             };
         case actionTypes.dishesTypes.DELETE_RECIPE:
             return {
@@ -110,9 +109,15 @@ export const dishes = (state = initialState, action) => {
                     return obj;
                 }, {}),
             };
-        case actionTypes.dishesTypes.ADD_FAVOURITE:
+        case actionTypes.dishesTypes.ADD_FAVOURITE_REQUEST:
             return {
                 ...state,
+                isLoading: true,
+            };
+        case actionTypes.dishesTypes.ADD_FAVOURITE_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
                 favourite: {
                     ...state.favourite,
                     [action.payload.id]: action.payload.dish,
@@ -124,18 +129,23 @@ export const dishes = (state = initialState, action) => {
             return {
                 ...state,
                 favourite: fav,
+                isLoading: false,
             };
         case actionTypes.dishesTypes.SET_RATING:
             return {
                 ...state,
                 dishes: state.dishes.map((item, i) =>
                     item.id === action.payload.id
-                        ? { ...item, rating: action.payload.rating, ratesCount: item.ratesCount + action.payload.toAdd }
+                        ? {
+                              ...item,
+                              rating: action.payload.rating,
+                              ratesCount: item.ratesCount + action.payload.toAdd,
+                          }
                         : item,
                 ),
                 dishesRating: {
                     ...state.dishesRating,
-                    [action.payload.id] : action.payload.rating
+                    [action.payload.id]: action.payload.rating,
                 },
                 // loadedDishes: {
                 //     ...state.loadedDishes,

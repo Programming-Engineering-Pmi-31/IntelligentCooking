@@ -73,6 +73,13 @@ namespace IntelligentCooking.DAL.Extensions
                         Name = "Vegetarian",
                         ImageUrl =
                             "https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/05/14/15/vegetarian-meal-14-05-19-0.jpg?w968"
+                    },
+                    new Category
+                    {
+                        Id = 8,
+                        Name = "Drinks",
+                        ImageUrl =
+                            "https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1440,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1517521303/180131-wondrich-bad-cocktail-tease_wghhv8"
                     }
                 );
 
@@ -394,7 +401,64 @@ namespace IntelligentCooking.DAL.Extensions
                         Url =
                             "https://www.gimmesomeoven.com/wp-content/uploads/2019/06/Thai-Basil-Beef-Noodle-Stir-Fry-Recipe-2.jpg",
                         Priority = 1
-                    });
+                    },
+                    new Image
+                    {
+                        DishId = 10,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2018/11/Healthy-Green-Bean-Casserole-Recipe-1-2.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 11,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2013/10/Mulled-Wine-Recipe-1-2.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 12,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2014/11/Brussels-Sprouts-Cranberry-and-Quinoa-Salad-Recipe-7.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 13,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Savory-Sweet-Potato-Casserole-Recipe-2a-2.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 14,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Pecan-Pie-Recipe-4-4.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 15,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Tahini-Granola-Recipe-5-1.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 16,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Ranch-Buttermilk-Mashed-Potatoes-Recipe-1-4.jpg",
+                        Priority = 1
+                    },
+                    new Image
+                    {
+                        DishId = 17,
+                        Url =
+                            "https://www.gimmesomeoven.com/wp-content/uploads/2019/11/Instant-Pot-Mac-and-Cheese-Recipe-6.jpg",
+                        Priority = 1
+                    }
+                );
 
             modelBuilder.Entity<Ingredient>()
                 .HasData(
@@ -432,19 +496,19 @@ namespace IntelligentCooking.DAL.Extensions
                     {
                         Id = 6,
                         Name = "buttermilk",
-                        Description = "at room temperature"
+                        Description = ""
                     },
                     new Ingredient
                     {
                         Id = 7,
-                        Name = "unsalted butter",
-                        Description = "melted and cooled to room temperature, plus more for cooking"
+                        Name = "butter",
+                        Description = ""
                     },
                     new Ingredient
                     {
                         Id = 8,
-                        Name = "eggs",
-                        Description = "slightly beaten, at room temperature"
+                        Name = "egg",
+                        Description = ""
                     },
                     new Ingredient
                     {
@@ -456,7 +520,349 @@ namespace IntelligentCooking.DAL.Extensions
                     {
                         Id = 10,
                         Name = "maple syrup",
-                        Description = "for serving"
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 11,
+                        Name = "chicken",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 12,
+                        Name = "wild rice",
+                        Description = ""
+                    }, 
+                    new Ingredient
+                    {
+                        Id = 13,
+                        Name = "checken stock",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 14,
+                        Name = "baby bella mushroom",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 15,
+                        Name = "garlic",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 16,
+                        Name = "bell pepper",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 17,
+                        Name = "carrot",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 18,
+                        Name = "onion",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 19,
+                        Name = "ginger",
+                        Description = "f"
+                    },
+                    new Ingredient
+                    {
+                        Id = 20,
+                        Name = "coconut milk",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 21,
+                        Name = "pasta",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 22,
+                        Name = "broccoli",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 23,
+                        Name = "butter oil",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 24,
+                        Name = "olive oil",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 25,
+                        Name = "milk",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 26,
+                        Name = "Dijon mustard",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 27,
+                        Name = "cheddar cheese",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 28,
+                        Name = "black papper",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 29,
+                        Name = "vegetable stock",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 30,
+                        Name = "Granny Smith apple",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 31,
+                        Name = "butternut squash",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 32,
+                        Name = "sage",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 33,
+                        Name = "salt",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 34,
+                        Name = "cayenne",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 35,
+                        Name = "oats",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 36,
+                        Name = "pumpkin pie spice",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 37,
+                        Name = "oats",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 38,
+                        Name = "pumpkin pie spice",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 39,
+                        Name = "pumpkin puree",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 40,
+                        Name = "coconut oil",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 41,
+                        Name = "sweet potato",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 42,
+                        Name = "jalapeño",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 43,
+                        Name = "black beans",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 44,
+                        Name = "flour tortillas",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 45,
+                        Name = "Mexican-blend cheese",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 46,
+                        Name = "farro",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 47,
+                        Name = "baby arugula",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 48,
+                        Name = "chickpeas",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 49,
+                        Name = "almonds",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 50,
+                        Name = "lemon juice",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 51,
+                        Name = "cinnamon",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 52,
+                        Name = "rice noodles",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 53,
+                        Name = "flank steak",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 54,
+                        Name = "green beans",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 55,
+                        Name = "red wine",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 56,
+                        Name = "orange",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 57,
+                        Name = "cranberries",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 58,
+                        Name = "pecans",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 59,
+                        Name = "shallot",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 60,
+                        Name = "smoked paprika",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 61,
+                        Name = "pie crust",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 62,
+                        Name = "bourbon",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 63,
+                        Name = "pecan halves",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 64,
+                        Name = "raw pepitas",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 65,
+                        Name = "potato",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 66,
+                        Name = "water",
+                        Description = ""
+                    },
+                    new Ingredient
+                    {
+                        Id = 67,
+                        Name = "Parmesan cheese",
+                        Description = ""
                     }
                 );
 
@@ -472,37 +878,45 @@ namespace IntelligentCooking.DAL.Extensions
                         DishId = 1,
                         CategoryId = 5
                     },
-
-                    //fake data
                     new DishCategory
                     {
                         DishId = 2,
-                        CategoryId = 5
+                        CategoryId = 2
+                    },
+                    new DishCategory
+                    {
+                        DishId = 2,
+                        CategoryId = 4
                     },
                     new DishCategory
                     {
                         DishId = 3,
-                        CategoryId = 5
+                        CategoryId = 7
                     },
                     new DishCategory
                     {
                         DishId = 4,
-                        CategoryId = 5
+                        CategoryId = 2
                     },
                     new DishCategory
                     {
                         DishId = 5,
-                        CategoryId = 5
+                        CategoryId = 1
                     },
                     new DishCategory
                     {
                         DishId = 6,
-                        CategoryId = 5
+                        CategoryId = 6
+                    },
+                    new DishCategory
+                    {
+                        DishId = 6,
+                        CategoryId = 7
                     },
                     new DishCategory
                     {
                         DishId = 7,
-                        CategoryId = 5
+                        CategoryId = 7
                     },
                     new DishCategory
                     {
@@ -512,7 +926,52 @@ namespace IntelligentCooking.DAL.Extensions
                     new DishCategory
                     {
                         DishId = 9,
+                        CategoryId = 4
+                    },
+                    new DishCategory
+                    {
+                        DishId = 9,
                         CategoryId = 5
+                    },
+                    new DishCategory
+                    {
+                        DishId = 10,
+                        CategoryId = 7
+                    },
+                    new DishCategory
+                    {
+                        DishId = 11,
+                        CategoryId = 8
+                    },
+                    new DishCategory
+                    {
+                        DishId = 12,
+                        CategoryId = 7
+                    },
+                    new DishCategory
+                    {
+                        DishId = 13,
+                        CategoryId = 7
+                    },
+                    new DishCategory
+                    {
+                        DishId = 14,
+                        CategoryId = 1
+                    },
+                    new DishCategory
+                    {
+                        DishId = 15,
+                        CategoryId = 5
+                    },
+                    new DishCategory
+                    {
+                        DishId = 16,
+                        CategoryId = 7
+                    },
+                    new DishCategory
+                    {
+                        DishId = 17,
+                        CategoryId = 6
                     }
                 );
 
@@ -579,54 +1038,583 @@ namespace IntelligentCooking.DAL.Extensions
                         Amount = "as mush as you want"
                     },
 
-                    //fake data
                     new DishIngredient
                     {
                         DishId = 2,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 11,
+                        Amount = "1 pound boneless skinless chicken breasts"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 12,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 13,
+                        Amount = "2 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 14,
+                        Amount = "8 ounces"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 15,
+                        Amount = "4 cloves"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 16,
+                        Amount = "2 small"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 17,
+                        Amount = "2 medium"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 18,
+                        Amount = "1 small"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 19,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 2,
+                        IngredientId = 20,
+                        Amount = "1 (15 ounce) can"
+                    },
+
+
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 21,
+                        Amount = "8 ounces"
                     },
                     new DishIngredient
                     {
                         DishId = 3,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 22,
+                        Amount = "1 large head"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 24,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 18,
+                        Amount = "1 small"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 14,
+                        Amount = "8 ounces"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 15,
+                        Amount = "4 cloves"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 1,
+                        Amount = "3 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 13,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 25,
+                        Amount = "1 1/2 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 26,
+                        Amount = "1 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 5,
+                        Amount = "1/2 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 28,
+                        Amount = "1/4 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 27,
+                        Amount = "2 cups (8 ounces)"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 3,
+                        IngredientId = 11,
+                        Amount = "2 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 29,
+                        IngredientId = 29,
+                        Amount = "2 cups"
                     },
                     new DishIngredient
                     {
                         DishId = 4,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 15,
+                        Amount = "4 cloves"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 17,
+                        Amount = "1"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 30,
+                        Amount = "1"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 31,
+                        Amount = "1 medium"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 18,
+                        Amount = "1"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 32,
+                        Amount = "1 sprig"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 33,
+                        Amount = "1/2 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 28,
+                        Amount = "1/4 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 34,
+                        Amount = "1/8 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 4,
+                        IngredientId = 20,
+                        Amount = "1/2 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 35,
+                        Amount = "3 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 38,
+                        Amount = "1 tablespoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 4,
+                        Amount = "1 1/2 teaspoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 5,
+                        Amount = "3/4 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 8,
+                        Amount = "2"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 25,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 39,
+                        Amount = "1 cup"
                     },
                     new DishIngredient
                     {
                         DishId = 5,
                         IngredientId = 10,
-                        Amount = "as mush as you want"
+                        Amount = "1/2 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 40,
+                        Amount = "3 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 5,
+                        IngredientId = 9,
+                        Amount = "1 teaspoon"
                     },
                     new DishIngredient
                     {
                         DishId = 6,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 24,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 6,
+                        IngredientId = 41,
+                        Amount = "1 small"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 6,
+                        IngredientId = 42,
+                        Amount = "1 small"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 6,
+                        IngredientId = 43,
+                        Amount = "1 (15-ounce) can"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 6,
+                        IngredientId = 44,
+                        Amount = "4–6 large"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 6,
+                        IngredientId = 45,
+                        Amount = "3–4 cups"
                     },
                     new DishIngredient
                     {
                         DishId = 7,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 29,
+                        Amount = "3 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 46,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 22,
+                        Amount = "1 medium head"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 24,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 47,
+                        Amount = "2 large handfuls"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 48,
+                        Amount = "1 (15-ounce) can"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 18,
+                        Amount = "half of a medium"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 7,
+                        IngredientId = 49,
+                        Amount = "1/3 cup"
                     },
                     new DishIngredient
                     {
                         DishId = 8,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 30,
+                        Amount = "8 medium"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 50,
+                        Amount = "1/4 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 2,
+                        Amount = "1/4 cup + 2/3 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 1,
+                        Amount = "1 tablespoon + 1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 51,
+                        Amount = "1 tablespoon + 1 tablespoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 37,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 5,
+                        Amount = "3/4 teaspoon"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 8,
+                        IngredientId = 7,
+                        Amount = "1/2 cup"
                     },
                     new DishIngredient
                     {
                         DishId = 9,
-                        IngredientId = 10,
-                        Amount = "as mush as you want"
+                        IngredientId = 52,
+                        Amount = "8 ounces"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 9,
+                        IngredientId = 53,
+                        Amount = "1 1/4 pounds"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 9,
+                        IngredientId = 14,
+                        Amount = "8 ounces"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 10,
+                        IngredientId = 54,
+                        Amount = "2 pounds"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 11,
+                        IngredientId = 55,
+                        Amount = "1 (750 ml) bottle"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 11,
+                        IngredientId = 56,
+                        Amount = "1"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 11,
+                        IngredientId = 2,
+                        Amount = "2–4 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 12,
+                        IngredientId = 57,
+                        Amount = "1 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 12,
+                        IngredientId = 58,
+                        Amount = "2/3 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 12,
+                        IngredientId = 59,
+                        Amount = "1 medium"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 13,
+                        IngredientId = 41,
+                        Amount = "4 pounds"
+                    }, 
+                    new DishIngredient
+                    {
+                        DishId = 13,
+                        IngredientId = 25,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 13,
+                        IngredientId = 60,
+                        Amount = "2 teaspoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 13,
+                        IngredientId = 15,
+                        Amount = "4 cloves"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 14,
+                        IngredientId = 61,
+                        Amount = "1 (9-inch)"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 14,
+                        IngredientId = 8,
+                        Amount = "4 large"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 14,
+                        IngredientId = 62,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 14,
+                        IngredientId = 63,
+                        Amount = "2 teaspoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 15,
+                        IngredientId = 35,
+                        Amount = "2 teaspoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 15,
+                        IngredientId = 64,
+                        Amount = "1/2 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 15,
+                        IngredientId = 50,
+                        Amount = "1/2 cup"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 16,
+                        IngredientId = 65,
+                        Amount = "5 pounds"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 16,
+                        IngredientId = 7,
+                        Amount = "6 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 16,
+                        IngredientId = 6,
+                        Amount = "1 1/2 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 17,
+                        IngredientId = 21,
+                        Amount = "1 pound"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 17,
+                        IngredientId = 66,
+                        Amount = "4 cups"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 17,
+                        IngredientId = 7,
+                        Amount = "2 tablespoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 17,
+                        IngredientId = 26,
+                        Amount = " 1/2 teaspoons"
+                    },
+                    new DishIngredient
+                    {
+                        DishId = 17,
+                        IngredientId = 67,
+                        Amount = "1/2 cup"
                     }
                 );
 

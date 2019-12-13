@@ -10,10 +10,12 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(categoriesActions, dispatch),
     ...bindActionCreators(sortActions, dispatch),
 });
-const mapStateToProps = ({ dishes, categories }) => ({
+const mapStateToProps = ({ dishes, categories, auth }) => ({
     categories: categories.categories,
     dishes: dishes,
     isLoading: dishes.isLoading,
+    isAuth: auth.isAuth,
+    dishesRating: dishes.dishesRating,
 });
 export default connect(
     mapStateToProps,

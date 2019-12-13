@@ -1,0 +1,50 @@
+
+button{
+  &:hover{
+    cursor: pointer;
+  }
+}
+.closeAuth{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+.Overlay{
+  background-color: red;
+}
+.searchForm{
+  display: flex;
+  flex-direction: column;
+  & > div{
+    margin-top: 20px;
+  }
+  input{
+    line-height: 26px;
+    font-size: 16px;
+    border: 1px solid #e6e6e6;
+    margin-top: 26px;
+  }
+  img{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+  }
+  ul{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    button{
+      border-radius: 50%;
+      background: transparent;
+    }
+  }
+  .signInBtn{
+    width: 40%;
+    display: block;
+    margin: 250px auto 0 ;
+    border: 1px solid #e6e6e6;
+  }
+}
+.authTitle {
+  text-align: center;
+}

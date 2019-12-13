@@ -1,0 +1,65 @@
+.form{
+  font-family: 'Open Sans Condensed', arial, sans;
+  position: relative;
+  width: 80%;
+  padding: 30px;
+  background: #FFFFFF;
+  margin: 20px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+  h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+  }
+  div{
+    position: relative;
+  }
+  & .createIngredient{
+    display: flex;
+    justify-content: space-around;
+    input{
+      width: 30%;
+    }
+  }
+
+  ul > li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px;
+    &:nth-child(2n){
+      background: darken(#fff,5%);
+    }
+    button{
+      background: $light-red;
+      svg{
+        transition: all 0.3s ease-in-out;
+      }
+      &:hover svg{
+        transform: rotate(90deg);
+      }
+    }
+  }
+  textarea {
+    min-height: 40px;
+    resize: vertical;
+    overflow: hidden;
+  }
+
+}
+.home__btn{
+  position: absolute !important;
+  top: 15px;
+  right: 3%;
+  svg{
+    font-size: 30px;
+    color: $light-red !important;
+  }
+}

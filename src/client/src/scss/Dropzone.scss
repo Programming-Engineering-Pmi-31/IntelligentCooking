@@ -24,9 +24,22 @@
   width: 30%;
   height: 200px;
   background: #30C9C9;
+  & .deleteImage{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: $light-red;
+    & > svg{
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover > svg{
+      transform: rotate(90deg);
+    }
+  }
   p{
     font-size: 100px;
     position: absolute;
+    z-index: -5 !important;
     transition: all 0.3s ease-in-out;
   }
   .active_img {
@@ -42,6 +55,7 @@
     background: #C6FFDD;
     cursor: pointer;
     p{
+      box-shadow: none !important;
       transform: rotate(90deg);
       color: $light-red;
     }

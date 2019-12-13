@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component,PureComponent } from 'react';
 import Select from 'react-select';
 import classNames from 'classnames';
 import Textarea from 'react-textarea-autosize';
@@ -23,7 +23,7 @@ const customStyles = {
     },
 };
 
-class RecipeForm extends Component {
+class RecipeForm extends PureComponent {
     state = {
         addIngredientIsOpen: false,
         addCategoryIsOpen: false,
@@ -55,11 +55,16 @@ class RecipeForm extends Component {
         } = this.props;
         if (isEditing) {
             getRecipe(match.params.id).then(res => {
+                console.log("res",res.images);
                 this.setState({
                     name: res.name,
                     description: res.description,
                     categories: res.categories.map(e => ({ label: e.name, value: e.id })),
                     ingredients: res.ingredients.map(e => ({ label: e.name, value: e.id })),
+                    ingredientAmounts: Object.assign(
+                        {},
+                        ...Object.entries(res.ingredients).map(([k, v]) => ({ [v.id]: v.amount })),
+                    ),
                     servings: res.servings,
                     proteins: res.proteins,
                     carbs: res.carbohydrates,
@@ -75,13 +80,32 @@ class RecipeForm extends Component {
         if (!categoriesList.length) setCategories();
     }
 
+    componentWillUnmount() {
+        const { isEditing, updateRecipeFinish } = this.props;
+        if (isEditing) {
+            updateRecipeFinish();
+        }
+    }
+
+    createCategoriesOpen = () => {
+        this.setState({
+            addCategoryIsOpen: true,
+        });
+    };
+
+    createCategoriesClose = () => {
+        this.setState({
+            addCategoryIsOpen: false,
+        });
+    };
+
     createIngredientsOpen = () => {
         this.setState({
             addIngredientIsOpen: true,
         });
     };
 
-    createIngredientsClose = (e) => {
+    createIngredientsClose = () => {
         this.setState({
             addIngredientIsOpen: false,
         });
@@ -95,10 +119,10 @@ class RecipeForm extends Component {
         const { ingredients } = this.state;
         ingredient == null ? (ingredient = []) : ingredient;
         const difference = ingredients.filter(x => !ingredient.includes(x));
-        console.log('Removed: ', difference);
         this.setState(prevState => ({
             ingredients: ingredient,
             ingredientAmounts: {
+                ...prevState.ingredientAmounts,
                 [difference.value]: undefined,
             },
         }));
@@ -127,8 +151,8 @@ class RecipeForm extends Component {
             img: images,
         });
     };
-
     render() {
+        console.log(this.state);
         const {
             categories,
             name,
@@ -150,7 +174,11 @@ class RecipeForm extends Component {
             createProduct,
             setRecipe,
             skip,
-            soloDish,
+            isEditing,
+            updateRecipe,
+            sortingCriteria,
+            isAscending,
+            dishesCount,
         } = this.props;
 
         let catToSend;
@@ -165,12 +193,12 @@ class RecipeForm extends Component {
             ingredientAmounts: Object.values(ingredientAmounts).filter(e => e !== undefined),
             categories: catToSend,
             recipe: recipe,
-            time: time,
-            cals: cals,
+            time: time.toString(),
+            calories: cals,
             servings: servings,
             fats: fats,
             proteins: proteins,
-            carbs: carbs,
+            carbohydrates : carbs,
         };
         const ingredientsOptions = [];
         const categoriesOptions = [];
@@ -195,41 +223,26 @@ class RecipeForm extends Component {
                         <label className={styles.label}>Description</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <div>
-                            <Select
-                                value={categories}
-                                onChange={this.categoriesChange}
-                                options={categoriesOptions}
-                                isMulti
-                            />
-                            <label className={styles.label}>Category</label>
-                        </div>
-                        <div className={styles.addBtn}>
-                            <FontAwesomeIcon icon={faPlusCircle} />
-                        </div>
+                        <Select
+                            value={categories}
+                            onChange={this.categoriesChange}
+                            options={categoriesOptions}
+                            isMulti
+                        />
+                        <label className={styles.label}>Category</label>
                     </div>
                     <div className={styles.input_img__block}>
                         <Previews img={img} valueChange={this.imageChange} />
                         <label className={styles.label__img}>Images</label>
                     </div>
                     <div className={styles.form__selector}>
-                        <div>
-                            <Select
-                                value={ingredients}
-                                onChange={this.ingredientsChange}
-                                options={ingredientsOptions}
-                                isMulti
-                            />
-                            <label className={styles.label}>Ingredients</label>
-                        </div>
-                        <div className={styles.addBtn}>
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                this.createIngredientsOpen();
-                            }}>
-                                <FontAwesomeIcon icon={faPlusCircle} />
-                            </button>
-                        </div>
+                        <Select
+                            value={ingredients}
+                            onChange={this.ingredientsChange}
+                            options={ingredientsOptions}
+                            isMulti
+                        />
+                        <label className={styles.label}>Ingredients</label>
                     </div>
                     <Modal
                         isOpen={this.state.addIngredientIsOpen}
@@ -238,14 +251,29 @@ class RecipeForm extends Component {
                         style={customStyles}
                         contentLabel="Example Modal"
                     >
-                        <button className={styles.closeAuth} >
+                        <button className={styles.closeAuth} onClick={this.createIngredientsClose}>
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
                         <p className={styles.authTitle}> Please sign in</p>
                         <form className={styles.authForm}>
                             <input placeholder="Login" name="login" type="email" />
                             <input placeholder="Password" type="password" />
-
+                        </form>
+                    </Modal>
+                    <Modal
+                        isOpen={this.state.addCategoryIsOpen}
+                        onRequestClose={this.createCategoriesClose}
+                        shouldCloseOnOverlayClick={false}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                    >
+                        <button className={styles.closeAuth} onClick={this.createCategoriesClose}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </button>
+                        <p className={styles.authTitle}> Please sign in</p>
+                        <form className={styles.authForm}>
+                            <input placeholder="Login" name="login" type="email" />
+                            <input placeholder="Password" type="password" />
                         </form>
                     </Modal>
                     <div>
@@ -271,6 +299,19 @@ class RecipeForm extends Component {
                                                     name={
                                                         ingredients[ingredients.length - 1 - index]
                                                             .value
+                                                    }
+                                                    value={
+                                                        ingredientAmounts[
+                                                            ingredients[
+                                                                ingredients.length - 1 - index
+                                                            ].value
+                                                        ]
+                                                            ? ingredientAmounts[
+                                                                  ingredients[
+                                                                      ingredients.length - 1 - index
+                                                                  ].value
+                                                              ]
+                                                            : ''
                                                     }
                                                     handler={this.ingredientsRecipeChange}
                                                 />
@@ -343,16 +384,30 @@ class RecipeForm extends Component {
                         <TextArea name="recipe" value={recipe} handler={this.valueChange} />
                         <label className={styles.label}>Recipe</label>
                     </div>
-                    <input
+                    {isEditing ? (
+                        <input
+                            type="button"
+                            onClick={() => {
+                                updateRecipe(this.props.match.params.id, obj).then(res => {
+                                    this.props.history.push(
+                                        `/recipe/${this.props.match.params.id}`,
+                                    );
+                                });
+                            }}
+                            value="Update Dish"
+                        />
+                    ) : ( <input
                         type="button"
                         onClick={() => {
                             createProduct(obj).then(res => {
                                 this.props.history.push(`/recipe/${res.data.id}`);
-                                setRecipe(skip);
+                                setRecipe(dishesCount,1,sortingCriteria,isAscending);
                             });
+
                         }}
                         value="Send Message"
-                    />
+                    /> )}
+
                 </form>
 
                 <div className={styles.home__btn}>
@@ -371,7 +426,7 @@ class Input extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.value != null && prevProps.value !== this.props.value) {
+        if (this.props.value !== null && this.state.value !== this.props.value && this.props.value) {
             this.setState({
                 value: this.props.value,
                 length: this.props.value.toString().length,
@@ -397,7 +452,7 @@ class Input extends Component {
             <input
                 className={inputClass}
                 name={name}
-                value={this.props.value}
+                value={value}
                 onChange={e => {
                     this.valueChange(e);
                     handler(e);
@@ -407,16 +462,14 @@ class Input extends Component {
         );
     }
 }
-class TextArea extends Component {
+class TextArea extends PureComponent {
     state = {
         length: 0,
-        value: null,
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.value != null && prevProps.value !== this.props.value) {
             this.setState({
-                value: this.props.value,
                 length: this.props.value.toString().length,
             });
         }
@@ -433,7 +486,7 @@ class TextArea extends Component {
         const { length } = this.state;
         const { name, handler, type } = this.props;
         const inputClass = classNames({
-            [styles.input__active]: length > 0,
+            [styles.input__active]: this.props.value.toString().length > 0,
         });
 
         return (
@@ -446,6 +499,7 @@ class TextArea extends Component {
                     handler(e);
                 }}
                 type={type}
+
             />
         );
     }

@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import orderBy from 'lodash/orderBy';
 import * as dishesActions from '../actions/dishes';
 import * as categoriesActions from '../actions/categories';
-import * as sortActions from '../actions/sort';
+// import * as sortActions from '../actions/sort';
+import * as authActions from '../actions/auth';
 import AllRecipes from '../components/AllRecipes';
 
 const sortBy = (dishes, sortedItem) => {
@@ -22,10 +23,13 @@ const sortBy = (dishes, sortedItem) => {
 const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(categoriesActions, dispatch),
     ...bindActionCreators(dishesActions, dispatch),
-    ...bindActionCreators(sortActions, dispatch),
+    ...bindActionCreators(authActions, dispatch),
+    // ...bindActionCreators(sortActions, dispatch),
 });
-const mapStateToProps = ({ dishes, sort }) => ({
+const mapStateToProps = ({ dishes, sort, auth}) => ({
     dishes: sortBy(dishes.dishes, sort.sortedItem),
+    isAuth: auth.isAuth,
+    token: auth.token,
     isLoading: dishes.isLoading,
     firstLoad: dishes.firstLoad,
     noItems: dishes.noItems,
@@ -33,6 +37,10 @@ const mapStateToProps = ({ dishes, sort }) => ({
     sortingCriteria: dishes.sortingCriteria,
     isAscending: dishes.isAscending,
     count: dishes.count,
+    dishesPages: dishes.dishesPages,
+    dishesToLoad: dishes.dishesToLoad,
+    favourite: dishes.favourite,
+    dishesRating: dishes.dishesRating,
 });
 export default connect(
     mapStateToProps,

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styles from '../scss/Dropzone.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
 export const Previews = React.memo(props => {
     const { img } = props;
@@ -124,19 +126,36 @@ export const Previews = React.memo(props => {
                         }
                     }}
                 />
+                {files[`${i}`]  &&
+                    <button className={styles.deleteImage} onClick={e => {
+                        e.preventDefault();
+                       setFiles({ ...files, [`${i}`]: null })
+                    }}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </button>}
+
             </div>,
         );
     }
+
     useEffect(() => {
-        if(img.length > 0){
-            img.forEach((value,i)=>  setFiles({
-                ...files,
-                [`${i}`]:value.url,
-            }));
+        let newFiles = {};
+        if(img.length > 0) {
+            img.forEach((value, i) => {
+                newFiles = {...newFiles, [`${i}`] : value.url};
+                console.log(newFiles);
+            });
+            setFiles({
+                ...files, ...newFiles
+            });
         }
+        console.log(img);
+
+    }, [img]);
+    useEffect(()=>{
+        console.log(files);
         props.valueChange(files);
-    }, [files, props]);
-    console.log("img", img);
+    },[files])
     return (
         <section className={styles.dropZone}>
             <div>

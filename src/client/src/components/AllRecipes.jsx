@@ -7,29 +7,34 @@ import DishItem from './DishItem';
 
 const AllRecipes = React.memo(
     ({ setRecipes, count , isAscending, sortingCriteria, dishes,setSort, sortBy, isLoading,
-         firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe}) => {
-        const load = 8;
+                firstLoad, noItems, skip,updateRecipeRequest, deleteRecipe, dishesPages, dishesToLoad,
+                isAuth, rateDish, token, likeDish, addToFavourite, favourite, setExactRecipe,dishesRating}) => {
         useEffect(() => {
-            console.log("First Load")
-            setRecipes(skip, load, sortingCriteria, isAscending);
-        }, [firstLoad]);
+            if (!firstLoad) {
+                setRecipes(0, 8, sortingCriteria, isAscending);
+            }
+        }, [sortingCriteria, isAscending,firstLoad]);
         useEffect(() => {
             window.onscroll = () => {
                 if (
                     !isLoading &&
                     document.documentElement.scrollHeight - 1250 <
                         document.documentElement.scrollTop &&
-                    count < 2
+                    count < dishesPages
                 ) {
-                    setRecipes(skip, 8, sortingCriteria, isAscending);
+                    setRecipes(8, 8, sortingCriteria, isAscending);
                 }
             };
             return () => {
                 window.onscroll = null;
             };
-        }, [dishes, skip, count, isLoading, noItems, firstLoad ]);
+        }, [dishes, skip, count, isLoading, noItems, firstLoad]);
         const handleLoadMore = () => {
-            setRecipes(skip, 8, sortingCriteria, isAscending);
+            if (count < dishesPages) {
+                setRecipes(skip, 8, sortingCriteria, isAscending);
+            } else if (count === dishesPages) {
+                setRecipes(skip, dishesToLoad, sortingCriteria, isAscending);
+            }
         };
         return (
             <div>
@@ -37,11 +42,6 @@ const AllRecipes = React.memo(
                     <li>
                         <button type="button" onClick={() => setSort(null, null)}>
                             All recipes
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" onClick={() => sortBy('popular')}>
-                            Most Popular
                         </button>
                     </li>
                     <li>
@@ -62,13 +62,25 @@ const AllRecipes = React.memo(
                 </ul>
                 <ul className={styles.cards}>
                     {dishes.map((item, index) => (
-                        <DishItem key={`${item.id}_dish`} item={item}
-                                  deleteRecipe={deleteRecipe}
-                                  updateRecipeRequest={updateRecipeRequest} />
+                        <DishItem
+                            isLoading={isLoading}
+                            dishesRating={dishesRating}
+                            setExactRecipe={setExactRecipe}
+                            favourite={favourite}
+                            addToFavourite={addToFavourite}
+                            likeDish={likeDish}
+                            token={token}
+                            rateDish={rateDish}
+                            isAuth={isAuth}
+                            key={`${item.id}_dish`}
+                            item={item}
+                            deleteRecipe={deleteRecipe}
+                            updateRecipeRequest={updateRecipeRequest}
+                        />
                     ))}
                 </ul>
                 {isLoading ? <LoadingIndicator /> : null}
-                {count >=2  && !isLoading ? (
+                {count <= dishesPages && !isLoading ? (
                     <LoadMore handler={handleLoadMore} noItems={noItems} />
                 ) : null}
             </div>

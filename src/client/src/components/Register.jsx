@@ -1,5 +1,5 @@
 import React, { PureComponent, useEffect, useState } from 'react';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import google from '../img/google.png';
@@ -31,21 +31,38 @@ export class Register extends PureComponent {
         if (this.state.password !== this.state.confirm) {
             alert('confirm password should be equal two password');
         } else {
-            this.props.registrate({
-                email: this.state.email,
-                login: this.state.login,
-                password: this.state.password,
-            });
+            this.props
+                .registrate({
+                    email: this.state.email,
+                    login: this.state.login,
+                    password: this.state.password,
+                })
+                .then(res => {
+                    console.log(res);
+                    this.props.closeModal();
+                    if (res.status = 200) {
+                        this.setState({
+                            email: '',
+                            login: '',
+                            password: '',
+                            confirm: '',
+                        });
+                    }
+                });
         }
+        // this.setState({
+        //     email: '',
+        //     password: '',
+        // })
     }
 
     render() {
         console.log(this.state);
-        const { modalIsOpen, closeModal, customStyles } = this.props;
+        const { modalIsOpen, closeModal, customStyles, isProccesing } = this.props;
         return (
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                onRequestClose={isProccesing ? null : closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
             >
@@ -105,7 +122,13 @@ export class Register extends PureComponent {
                         }}
                         type="submit"
                     >
-                        Register
+                        {isProccesing ? (
+                            <p>
+                                <FontAwesomeIcon spin icon={faSpinner} /> Request
+                            </p>
+                        ) : (
+                            <p>Register</p>
+                        )}
                     </button>
                 </form>
             </Modal>

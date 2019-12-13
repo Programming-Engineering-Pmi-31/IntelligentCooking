@@ -23,7 +23,7 @@ class App extends PureComponent {
         if (localStorage.getItem('token')) {
             authorizeWithStorage();
         }
-        if(!favourite){
+        if(!favourite.length){
             setFavourite();
         }
         // authorizeWithStorage();
